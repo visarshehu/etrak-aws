@@ -38,17 +38,21 @@
 									</button>
 								</span>
 							</div>
-						</form>
-					</li>
+						</form></li>
 					<li><a href="">Home</a></li>
 					<li><a href="">Clients</a></li>
 					<li><a href="">Traks</a></li>
 					<li><a href="">Reports</a></li>
-					<li><span th:utext="${userName}"
-						style="margin-top: 5px; color: white"></span><br /> <a href=""
-						style="display: inline-block; height: 15px !important; color: #2085B8">Sign
-							Out</a></li>
-
+					<li><div class="inset">
+							<img th:src="@{/images/logo2.png}">
+						</div></li>
+					<li><div style="padding-left: 3px; padding-right: 5px">
+							<label th:utext="${userName}"
+								style="padding-top: 20px; color: white"></label><br /> <a
+								th:href="@{/login?logout}"
+								style="display: inline; height: 15px !important; padding-top: 2px; color: #2085B8">Sign
+								Out</a>
+						</div></li>
 
 				</ul>
 			</div>
@@ -57,6 +61,7 @@
 		</div>
 		<!-- /.container -->
 	</nav>
+
 
 	<div class="container">
 

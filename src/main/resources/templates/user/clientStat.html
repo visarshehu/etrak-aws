@@ -10,6 +10,9 @@
 <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet">
 <link th:href="@{/css/chart.css}" rel="stylesheet">
 <link th:href="@{/css/clientStat.css}" rel="stylesheet">
+<link href='https://fonts.googleapis.com/css?family=Orbitron' rel='stylesheet'>
+
+
 </head>
 <body>
 	<!-- Navigation -->
@@ -39,17 +42,21 @@
 									</button>
 								</span>
 							</div>
-						</form>
-					</li>
+						</form></li>
 					<li><a href="">Home</a></li>
 					<li><a href="">Clients</a></li>
 					<li><a href="">Traks</a></li>
 					<li><a href="">Reports</a></li>
-					<li><span th:utext="${userName}"
-						style="margin-top: 5px; color: white"></span><br /> <a href=""
-						style="display: inline-block; height: 15px !important; color: #2085B8">Sign
-							Out</a></li>
-
+					<li><div class="inset">
+							<img th:src="@{/images/logo2.png}">
+						</div></li>
+					<li><div style="padding-left: 3px; padding-right: 5px">
+							<label th:utext="${userName}"
+								style="padding-top: 20px; color: white"></label><br /> <a
+								th:href="@{/login?logout}"
+								style="display: inline; height: 15px !important; padding-top: 2px; color: #2085B8">Sign
+								Out</a>
+						</div></li>
 
 				</ul>
 			</div>
@@ -96,8 +103,9 @@
 					</div>
 					<div class="row-fluid">
 						<div id="buttons" style="float: right">
-							<a th:href="@{assessment.html}"><button type="button" class="btn btn-primary "
-								style="background: #2085B8">New Evaluation</button> </a>
+							<a th:href="@{assessment.html}"><button type="button"
+									class="btn btn-primary " style="background: #2085B8">New
+									Evaluation</button> </a>
 							<button type="button" class="btn btn-primary"
 								style="background: #2085B8">Comparison</button>
 							<button type="button" class="btn btn-primary"
@@ -120,7 +128,7 @@
 				class="btn btn-circle-micro btn-primary" style="float: right;"><span
 				class="glyphicon glyphicon-info-sign"></span> </a>
 		</div>
-		<div class="row col-md-12 center-block">
+		<div class="row col-md-12 center-block" id="firstRow">
 
 			<div class="col-sm-6 col-md-3  ">
 				<div class="chart-wrapper">
@@ -167,7 +175,7 @@
 			</div>
 
 		</div>
-		<div class="row col-md-12 center-block">
+		<div class="row col-md-12 center-block" id="secondRow">
 			<div class="col-sm-6 col-md-3  ">
 				<div class="chart-wrapper">
 					<div class="chart-title"></div>
@@ -206,7 +214,7 @@
 				</div>
 			</div>
 		</div>
-		<div class="row col-md-12 center-block">
+		<div class="row col-md-12 center-block" id="secondRow">
 			<div class="col-sm-6 col-md-3">
 				<div class="chart-wrapper">
 					<div class="chart-title"></div>
@@ -244,7 +252,7 @@
 				</div>
 			</div>
 		</div>
-		<div class="row col-md-12 center-block">
+		<div class="row col-md-12 center-block" id="secondRow">
 			<div class="col-sm-6 col-md-3 ">
 				<div class="chart-wrapper">
 					<div class="chart-title"></div>
@@ -290,9 +298,9 @@
 					<h4 class="modal-title" id="myModalLabel">Information!</h4>
 				</div>
 				<div class="modal-body">
-					
-						<br>
-					
+
+					<br>
+
 				</div>
 				<div class="modal-footer">
 					<center>
@@ -318,10 +326,10 @@
 					<h4 class="modal-title" id="myModalLabel">Information!</h4>
 				</div>
 				<div class="modal-body">
-				
-						<br>
 
-			
+					<br>
+
+
 				</div>
 				<div class="modal-footer">
 					<center>

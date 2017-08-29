@@ -5,29 +5,34 @@ import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.inspire11.etrak.model.User;
 import com.inspire11.etrak.service.UserService;
 
-@Controller
+@RestController
 public class LoginController {
 
 	@Autowired
 	private UserService userService;
 
-	@RequestMapping(value = { "/", "/login" }, method = RequestMethod.GET)
-	public ModelAndView login() {
+	@RequestMapping(value = {"/login" }, method = RequestMethod.GET)
+	public ModelAndView login(@RequestParam(value = "error", required = false) String error,
+	@RequestParam(value = "logout", required = false) String logout)  {
 		ModelAndView modelAndView = new ModelAndView();
+	if (logout != null) {
+			modelAndView.addObject("msg", "You've been logged out successfully.");
+		}
 		modelAndView.setViewName("login");
 		return modelAndView;
 	}
 
-	@RequestMapping(value = "/registration", method = RequestMethod.GET)
+	@RequestMapping(value = { "/", "/registration"}, method = RequestMethod.GET)
 	public ModelAndView registration() {
 		ModelAndView modelAndView = new ModelAndView();
 		User user = new User();
@@ -40,20 +45,31 @@ public class LoginController {
 	public ModelAndView createNewUser(@Valid User user, BindingResult bindingResult) {
 		ModelAndView modelAndView = new ModelAndView();
 		User userExists = userService.findUserByEmail(user.getEmail());
+		User usernameExists= userService.findUserByUsername(user.getUsername());
 		if (userExists != null) {
-			bindingResult.rejectValue("email", "error.user",
-					"There is already a user registered with the email provided");
+			bindingResult
+					.rejectValue("email", "error.user",
+							"There is already a user registered with the email provided");
 		}
+		if(usernameExists != null) {
+			bindingResult
+			.rejectValue("username", "error.user",
+					"Username already in use!");
+		}
+		if(!user.getConfirmPassword().equals(user.getPassword())) {
+			bindingResult
+			.rejectValue("password", "error.user",
+					"Passwords don't match!");
+		}
+
 		if (bindingResult.hasErrors()) {
 			modelAndView.setViewName("registration");
-		}
-
-		else {
+		} else {
 			userService.saveUser(user);
-			modelAndView.addObject("successMessage", "  Your information has been registered successfully");
+			modelAndView.addObject("successMessage", "Your account has been registered successfully.Click to login!");
 			modelAndView.addObject("user", new User());
 			modelAndView.setViewName("registration");
-
+			
 		}
 		return modelAndView;
 	}

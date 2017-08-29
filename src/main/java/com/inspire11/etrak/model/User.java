@@ -1,6 +1,5 @@
 package com.inspire11.etrak.model;
 
-
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -17,8 +16,12 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 import org.springframework.data.annotation.Transient;
+import org.springframework.format.annotation.DateTimeFormat;
+
 
 @Entity
 @Table(name = "user")
@@ -38,22 +41,24 @@ public class User {
 	private String name;
 	@Column(name = "last_name")
 	private String lastName;
-	@Column(name="username")
-	private String userName;
-	@Column(name="gender")
+	@Column(name = "username")
+	private String username;
+	@Column(name = "gender")
 	private Character gender;
-	@Column(name="birthday")
+	@Column(name = "birthday")
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
+	@Temporal(TemporalType.DATE)
 	private Date birthDate;
-	@Column(name="phone_Number")
+	@Column(name = "phone_Number")
 	private String phoneNumber;
-	@Column(name="address")
+	@Column(name = "address")
 	private String address;
-	@Column(name="assessment")
+	@Column(name = "assessment")
 	private String assessment;
-	@Column(name="nutritional_Goal")
+	@Column(name = "nutritional_Goal")
 	private String nutritionalGoal;
 	@OneToMany
-	@JoinColumn(name = "survey_id", nullable = false, insertable=false, updatable=false)
+	@JoinColumn(name = "survey_id", nullable = false, insertable = false, updatable = false)
 	private List<SurveyData> surveyData = new ArrayList<>();
 
 	@Column(name = "active")
@@ -118,14 +123,6 @@ public class User {
 		this.roles = roles;
 	}
 
-	public String getUserName() {
-		return userName;
-	}
-
-	public void setUserName(String userName) {
-		this.userName = userName;
-	}
-
 	public char getGender() {
 		return gender;
 	}
@@ -181,13 +178,23 @@ public class User {
 	public void setSurveyData(List<SurveyData> surveyData) {
 		this.surveyData = surveyData;
 	}
+
 	@Transient
 	public String getConfirmPassword() {
 		return confirmPassword;
 	}
+
 	@Transient
 	public void setConfirmPassword(String confirmPassword) {
 		this.confirmPassword = confirmPassword;
+	}
+
+	public String getUsername() {
+		return username;
+	}
+
+	public void setUsername(String username) {
+		this.username = username;
 	}
 
 }

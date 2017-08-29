@@ -19,19 +19,20 @@
 					<img th:src="@{/images/logo.png}" class="img-rounded" alt="Logo" />
 				</div>
 				<br /> <br />
-				<form method="POST" th:action="@{/login}" class="form-signin">
+				
+				<form method="POST" th:action="@{/login}" class="form-signin" autocomplete="off">
 					Email
 					<div class="form-group input-group">
 						<span class="input-group-addon"> <span
 							class="glyphicon glyphicon-user"> </span>
-						</span> <input type="text" id="email" name="email" th:placeholder="Email"
+						</span> <input type="text" id="email" name="email" 
 							class="form-control input-lg" required="required" /> <br />
 					</div>
 					Password
 					<div class="form-group input-group">
 						<span class="input-group-addon"> <span
 							class="glyphicon glyphicon-lock"> </span>
-						</span> <input type="password" th:placeholder="Password" id="password"
+						</span> <input type="password"  id="password"
 							name="password" class="form-control input-lg" required="required" />
 
 					</div>
