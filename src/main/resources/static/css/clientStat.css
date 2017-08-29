@@ -1,0 +1,42 @@
+.nav {
+	background-color:0x434343 !important;
+}
+
+#navCountainer{
+	margin-left: 10px;
+}
+
+#bs-navbar-collapse-1{
+	width:1230px;
+}
+
+#form-nav{
+	width:250px;
+}
+
+#search{
+	border-top-left-radius:40px; 
+	border-bottom-left-radius:40px;
+	background-color:#666666;
+	border:1px transparent;
+}
+
+#submitButton{
+	border-top-right-radius:40px;
+	 border-bottom-right-radius:40px; 
+	 background-color:#666666; 
+	 border:1px solid #666666; 
+}
+
+.page-header{
+	 padding-top:70px;
+	 padding-left:40px;
+}
+
+#linechart{
+	padding-left:10px;
+}
+
+#stability{
+	padding-left:10px;
+}

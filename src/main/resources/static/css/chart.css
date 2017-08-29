@@ -1,0 +1,27 @@
+.progressbar__label{
+    color: #2085B8 !important;
+}
+
+
+
+.progressbar_linelabel{
+	color: black !important;
+}
+
+.chart-wrapper{
+	padding-top:40px !important;
+	padding-left:10px;
+}
+
+
+
+.btn-circle-micro {
+  width: 19px;
+  height: 19px;
+  text-align: center;
+  padding: 1px 0;
+  font-size: 13px;
+  line-height: 0.1;
+  border-radius: 30px;
+}
+
