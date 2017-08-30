@@ -1,4 +1,5 @@
 package com.inspire11.etrak.domain;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -10,25 +11,24 @@ public class ActivityLevel {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	@Column(name = "ACTIVITYLEVEL_ID")
-	private Long Id;
+	@Column(name = "activitylevel_id")
+	private Long id;
 
-	private String ActivityLevel;
+	private String activityLevel;
 
 	public Long getId() {
-		return Id;
+		return id;
 	}
 
 	public void setId(Long id) {
-		Id = id;
+		this.id = id;
 	}
 
 	public String getActivityLevel() {
-		return ActivityLevel;
+		return activityLevel;
 	}
 
 	public void setActivityLevel(String activityLevel) {
-		ActivityLevel = activityLevel;
+		this.activityLevel = activityLevel;
 	}
-
 }

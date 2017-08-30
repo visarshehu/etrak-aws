@@ -22,8 +22,7 @@ public class LoginController {
 	private UserService userService;
 
 	@RequestMapping(value = {"/login" }, method = RequestMethod.GET)
-	public ModelAndView login(@RequestParam(value = "error", required = false) String error,
-	@RequestParam(value = "logout", required = false) String logout)  {
+	public ModelAndView login(@RequestParam(value = "logout", required = false) String logout)  {
 		ModelAndView modelAndView = new ModelAndView();
 	if (logout != null) {
 			modelAndView.addObject("msg", "You've been logged out successfully.");
@@ -66,7 +65,7 @@ public class LoginController {
 			modelAndView.setViewName("registration");
 		} else {
 			userService.saveUser(user);
-			modelAndView.addObject("successMessage", "Your account has been registered successfully.Click to login!");
+			modelAndView.addObject("successMessage", "Your account has been registered successfully!");
 			modelAndView.addObject("user", new User());
 			modelAndView.setViewName("registration");
 			
