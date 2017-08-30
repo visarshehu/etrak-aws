@@ -52,7 +52,7 @@ function AnimatePower(container_id, animatePercentage,type) {
         easing: 'easeInOut',
         strokeWidth: 3,
         text: {
-            value: "<h4 style='padding-top:30px; color:black !important; 'text-align:center;'><b>"+"&nbsp &nbsp &nbsp  "+type+"</b></h4>"+ "<h4 style='text-align:center; font-size:6em; margin-top:-25px'><b>"+(animatePercentage )*10+ "</b></h1>",
+            value: "<h4 style='padding-top:30px; color:black !important; 'text-align:center;'><b>"+"&nbsp &nbsp"+type+"</b></h4>"+ "<h4 style='text-align:center; font-size:6em; margin-top:-25px'><b>"+(animatePercentage )*10+ "</b></h1>",
             className: 'progressbar__label'
         },
         // Set default step function for all animate calls
