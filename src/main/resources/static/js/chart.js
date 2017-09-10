@@ -100,9 +100,8 @@ var bar = new ProgressBar.Line(element, {
         text: {
         // Initial value for text.
         // Default: null
-        value: type+' &nbsp &nbsp &nbsp &nbsp  &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp'+animatePercentage*10+'/10',
+        value:"<p style='float:left'>"+ type+"</p><p style='padding-left:16em'>"+animatePercentage*10+"/10</p>",
 
-        // Class name for text element.
         // Default: 'progressbar-text'
         className: 'progressbar_linelabel',
           style: {
@@ -122,7 +121,6 @@ bar.path.style.strokeLinecap = 'round';
 
 bar.animate(animatePercentage);  // Number from 0.0 to 1.0
 
-
 }
 
 function AnimateLinePush(container_id, animatePercentage,type){
@@ -137,13 +135,11 @@ function AnimateLinePush(container_id, animatePercentage,type){
 	  trailWidth: 3,
 	  svgStyle: {width: '95%', height: '100%'},
 
-
 	        text: {
 	        // Initial value for text.
 	        // Default: null
-	        value: type+' &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp  &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp'+animatePercentage*10+'/10',
+	        value:"<p style='float:left'>"+ type+"</p><p style='padding-left:17em'>"+animatePercentage*10+"/10</p>",
 
-	        // Class name for text element.
 	        // Default: 'progressbar-text'
 	        className: 'progressbar_linelabel',
 	          style: {
@@ -151,7 +147,6 @@ function AnimateLinePush(container_id, animatePercentage,type){
 	            // Default: same as stroke color (options.color)
 	            color: '#f00',
 	            position: 'absolute',
-	         
 	            top: '-60%',
 	            padding: 0,
 	             }
@@ -160,10 +155,7 @@ function AnimateLinePush(container_id, animatePercentage,type){
 
 	});
 	bar.path.style.strokeLinecap = 'round';
-
 	bar.animate(animatePercentage);  // Number from 0.0 to 1.0
-
-
 	}
      
 TrakScore("shoulderL",0.5);
@@ -196,11 +188,8 @@ var bar = new ProgressBar.Line(element, {
 
 
         text: {
-        // Initial value for text.
         // Default: null
         value: animatePercentage*10+'/10',
-
-        // Class name for text element.
         // Default: 'progressbar-text'
         className: 'progressbar_linelabel',
           style: {
