@@ -1,5 +1,8 @@
 .progressbar__label{
     color: #2085B8 !important;
+    font-family: Orbitron;
+    font-weight: bold;
+
 }
 
 
@@ -25,3 +28,13 @@
   border-radius: 30px;
 }
 
+h4,h2 {
+	font-family: Orbitron;
+	font-weight: bold;
+}
+
+p{
+	
+	font-family: Orbitron;
+	
+}

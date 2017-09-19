@@ -37,7 +37,7 @@ public class UserAuthenticationSuccessHandler implements AuthenticationSuccessHa
 
 				try {
 
-					httpServletResponse.sendRedirect("/user/clientStat");
+					httpServletResponse.sendRedirect("/user/dashboard");
 				} catch (IOException e) {
 					throw new RuntimeException(e);
 				}

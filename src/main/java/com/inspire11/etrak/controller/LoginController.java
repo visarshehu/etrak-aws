@@ -49,6 +49,17 @@ public class LoginController {
 		modelAndView.setViewName("registration");
 		return modelAndView;
 	}
+	
+	@RequestMapping(value = "user/comparison" , method = RequestMethod.GET)
+	public ModelAndView comparison() {
+		ModelAndView modelAndView = new ModelAndView();
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		User user = userService.findUserByEmail(auth.getName());
+		modelAndView.addObject("userName", user.getName() + " " + user.getLastName());
+		modelAndView.addObject("userId", user.getId());
+		modelAndView.setViewName("user/comparison");
+		return modelAndView;
+	}
 
 	@RequestMapping(value = "/registration", method = RequestMethod.POST)
 	public ModelAndView createNewUser(@Valid User user, BindingResult bindingResult) {
@@ -107,10 +118,11 @@ public class LoginController {
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		User user = userService.findUserByEmail(auth.getName());
 		modelAndView.addObject("userName", user.getName() + " " + user.getLastName());
+		modelAndView.addObject("userId", user.getId());
 		modelAndView.setViewName("user/assessment");
 		return modelAndView;
 	}
-	
+
 	@RequestMapping(value = { "/user/dashboard" }, method = RequestMethod.GET)
 	public ModelAndView dashboard() {
 		ModelAndView modelAndView = new ModelAndView();
@@ -122,32 +134,28 @@ public class LoginController {
 		return modelAndView;
 	}
 
-	
-	
-	 @RequestMapping(value = "/user/clientStat", method = RequestMethod.POST,consumes = "multipart/form-data")
-	    public String handleFormUpload(@RequestParam("file") MultipartFile file)throws IOException {
-			
-		 	Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-			User user = userService.findUserByEmail(auth.getName());
-			Long userId=user.getId();
-			if (!file.isEmpty()) {
-	        	BufferedImage src = ImageIO.read(new ByteArrayInputStream(file.getBytes()));
-	        	Path p = Paths.get("upload-dir");
-	        	File destination = new File(p.resolve(userId  + ".jpg").toString());
-	        	ImageIO.write(src, "jpg",destination);
-	    		return "redirect:/user/clientStat";
-	       }
-			else
-				return "redirect:/user/clientStat";
-	    }
-	 
-	 @RequestMapping(value = "/user/clientStat/{userId}")
-	 @ResponseBody
-	 public byte[] getImage(@PathVariable(value = "userId") String userId) throws IOException {
-		 Path p = Paths.get("upload-dir");
-     	 File serverFile = new File(p.resolve(userId  + ".jpg").toString());
-	     return Files.readAllBytes(serverFile.toPath());
-	 }
+	@RequestMapping(value = "/user/clientStat", method = RequestMethod.POST, consumes = "multipart/form-data")
+	public String handleFormUpload(@RequestParam("file") MultipartFile file) throws IOException {
 
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		User user = userService.findUserByEmail(auth.getName());
+		Long userId = user.getId();
+		if (!file.isEmpty()) {
+			BufferedImage src = ImageIO.read(new ByteArrayInputStream(file.getBytes()));
+			Path p = Paths.get("upload-dir");
+			File destination = new File(p.resolve(userId + ".jpg").toString());
+			ImageIO.write(src, "jpg", destination);
+			return "redirect:/user/clientStat";
+		} else
+			return "redirect:/user/clientStat";
+	}
+
+	@RequestMapping(value = "/user/clientStat/{userId}")
+	@ResponseBody
+	public byte[] getImage(@PathVariable(value = "userId") String userId) throws IOException {
+		Path p = Paths.get("upload-dir");
+		File serverFile = new File(p.resolve(userId + ".jpg").toString());
+		return Files.readAllBytes(serverFile.toPath());
+	}
 
 }

@@ -75,15 +75,15 @@ function AnimatePower(container_id, animatePercentage,type) {
 
 }
 
-AnimateLine("linechart",0.8,"Mobility")
-AnimateLine("lower",0.6,"Lower")
-AnimateLine("absolute",0.4,"Absolute")
-AnimateLine("absolute1",0.4,"Absolute")
-AnimateLine("stability",0.8,"Stability")
-AnimateLinePush("push",0.5,"Push")
-AnimateLine("relative",0.5,"Relative")
-AnimateLine("relative1",0.2,"Relative")
-AnimateLinePush("pull",0.9,"Pull")
+AnimateLine("linechart",0.8,"MOBILITY")
+AnimateLine("lower",0.6,"LOWER")
+AnimateLine("absolute",0.4,"ABSOLUTE")
+AnimateLine("absolute1",0.4,"ABSOLUTE")
+AnimateLine("stability",0.8,"STABILITY")
+AnimateLinePush("push",0.5,"PUSH")
+AnimateLine("relative",0.5,"RELATIVE")
+AnimateLine("relative1",0.2,"RELATIVE")
+AnimateLinePush("pull",0.9,"PULL")
 function AnimateLine(container_id, animatePercentage,type){
 var element = document.getElementById(container_id);
 
