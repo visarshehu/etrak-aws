@@ -16,7 +16,7 @@ function AnimateCircle(container_id, animatePercentage,type) {
         easing: 'easeInOut',
         strokeWidth: 3,
         text: {
-            value: "<h4 style='padding-top:30px; color:black !important; 'text-align:center;'><b>"+type+"</b></h4>"+ "<h4 style='text-align:center; font-size:6em; margin-top:-25px'><b>"+(animatePercentage )*10+ "</b></h1>",
+            value: "<h4 style='padding-top:30px; color:black !important; 'text-align:center;'><b>"+type+"</b></h4>"+ "<h4 style='text-align:center; font-size:10em; margin-top:-25px'><b>"+(animatePercentage )*10+ "</b></h1>",
             className: 'progressbar__label'
         },
         // Set default step function for all animate calls
@@ -52,7 +52,7 @@ function AnimatePower(container_id, animatePercentage,type) {
         easing: 'easeInOut',
         strokeWidth: 3,
         text: {
-            value: "<h4 style='padding-top:30px; color:black !important; 'text-align:center;'><b>"+"&nbsp &nbsp"+type+"</b></h4>"+ "<h4 style='text-align:center; font-size:6em; margin-top:-25px'><b>"+(animatePercentage )*10+ "</b></h1>",
+            value: "<h4 style='padding-top:30px; color:black !important; 'text-align:center;'><b>"+"&nbsp &nbsp"+type+"</b></h4>"+ "<h4 style='text-align:center; font-size:10em; margin-top:-25px'><b>"+(animatePercentage )*10+ "</b></h1>",
             className: 'progressbar__label'
         },
         // Set default step function for all animate calls
@@ -110,7 +110,7 @@ var bar = new ProgressBar.Line(element, {
             color: '#f00',
             position: 'absolute',
          
-            top: '-60%',
+            top: '-70%',
             padding: 0,
              }
          }
@@ -138,7 +138,7 @@ function AnimateLinePush(container_id, animatePercentage,type){
 	        text: {
 	        // Initial value for text.
 	        // Default: null
-	        value:"<p style='float:left'>"+ type+"</p><p style='padding-left:17em'>"+animatePercentage*10+"/10</p>",
+	        value:"<p style='float:left'>"+ type+"</p><p style='padding-left:16em'>"+animatePercentage*10+"/10</p>",
 
 	        // Default: 'progressbar-text'
 	        className: 'progressbar_linelabel',
@@ -147,7 +147,7 @@ function AnimateLinePush(container_id, animatePercentage,type){
 	            // Default: same as stroke color (options.color)
 	            color: '#f00',
 	            position: 'absolute',
-	            top: '-60%',
+	            top: '-70%',
 	            padding: 0,
 	             }
 	         }
@@ -162,8 +162,6 @@ TrakScore("shoulderL",0.5);
 TrakScore("shoulderR",0.5);
 TrakScore("externalShoulderR",0.7);
 TrakScore("externalShoulderL",1);
-TrakScore("internalShoulderR",1);
-TrakScore("internalShoulderL",1);
 TrakScore("trunkRotationR",0.6);
 TrakScore("trunkRotationL",0.6);
 TrakScore("hipBridgeR",1);
@@ -211,3 +209,5 @@ bar.animate(animatePercentage);  // Number from 0.0 to 1.0
 
 
 }
+
+

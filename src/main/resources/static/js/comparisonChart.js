@@ -46,6 +46,7 @@ var bar = new ProgressBar.Line(element, {
             left:'85%',
             top: '20%',
             padding: 0,
+      
              }
          }
 
@@ -179,11 +180,12 @@ bar.animate(animatePercentage);  // Number from 0.0 to 1.0
 }
 
 
-compareCircle("container3","container4","MOVEMENT",0.8,0.3,"Improvement");
-compareCirclePurple("container5","container6","STRENGTH",0.7,0.5,"Decent");
-compareCircleGreen("container7","container8","POWER",0.6,0.6,"Improvement");
-compareCircleYellow("container9","container10","ENDURANCE",0.3,0.3,"Decent");
-function compareCircle(container_id,container_id2,type,animatePercentage,animatesecondPercentage,improvement){
+compareCircle("container3","container4","MOVEMENT",0.8,0.3);
+compareCirclePurple("container5","container6","STRENGTH",0.7,0.5);
+compareCircleGreen("container7","container8","POWER",0.6,0.6);
+compareCircleYellow("container9","container10","ENDURANCE",0.3,0.3);
+
+function compareCircle(container_id,container_id2,type,animatePercentage,animatesecondPercentage){
   var element = document.getElementById(container_id);
   var element2 = document.getElementById(container_id2);
        var startColor = '#FC5B3F';
@@ -202,7 +204,7 @@ function compareCircle(container_id,container_id2,type,animatePercentage,animate
         easing: 'easeInOut',
         strokeWidth: 3,
         text: {
-            value: "<h4 style='padding-top:20px;padding-left:25px;color:black !important; 'text-align:center;'><b>"+type+"</b></h4>"+ "<h4 style='text-align:center;  font-size:50px; margin-top:2px;color:#15AF43'><b>"+12+ " %</b></h1><h1 style='color:black !important; text-align:center; font-size:24px'>"+improvement+"</h1>",
+            value: "<h4 style='padding-top:20px;padding-left:20px;color:black !important; 'text-align:center;'><b>"+type+"</b></h4>"+ "<h4 style='text-align:center;  font-size:50px; margin-top:2px;color:#15AF43'><b>"+12+ " %</b></h1>",
             className: 'progressbar__label'
         },
         // Set default step function for all animate calls
@@ -254,7 +256,7 @@ var bar2 = new ProgressBar.Circle(element2, {
 
 
 
-function compareCirclePurple(container_id,container_id2,type,animatePercentage,animatesecondPercentage,improvement){
+function compareCirclePurple(container_id,container_id2,type,animatePercentage,animatesecondPercentage){
   var element = document.getElementById(container_id);
   var element2 = document.getElementById(container_id2);
        var startColor = '#FC5B3F';
@@ -270,7 +272,7 @@ function compareCirclePurple(container_id,container_id2,type,animatePercentage,a
         easing: 'easeInOut',
         strokeWidth: 3,
         text: {
-            value: "<h4 style='padding-top:17px;padding-left:25px;color:black !important; 'text-align:center;'><b>"+type+"</b></h4>"+ "<h4 style='text-align:center;  font-size:50px; margin-top:2px;color:#8A3B48'><b>"+3+ " %</b></h1><h1 style='color:black !important; text-align:center; font-size:24px'>"+improvement+"</h1>",
+            value: "<h4 style='padding-top:17px;padding-left:15px;color:black !important; 'text-align:center;'><b>"+type+"</b></h4>"+ "<h4 style='text-align:center;  font-size:50px; margin-top:2px;color:#8A3B48'><b>"+3+ " %</b></h1>",
         className: 'progressbar__label'
         },
         // Set default step function for all animate calls
@@ -322,7 +324,7 @@ var bar2 = new ProgressBar.Circle(element2, {
 }
 
 
-function compareCircleGreen(container_id,container_id2,type,animatePercentage,animatesecondPercentage,improvement){
+function compareCircleGreen(container_id,container_id2,type,animatePercentage,animatesecondPercentage){
   var element = document.getElementById(container_id);
   var element2 = document.getElementById(container_id2);
    var startColor = '#FC5B3F';
@@ -338,7 +340,7 @@ function compareCircleGreen(container_id,container_id2,type,animatePercentage,an
         easing: 'easeInOut',
         strokeWidth: 3,
         text: {
-            value: "<h4 style='padding-top:20px;padding-left:40px;color:black !important; 'text-align:center;'><b>"+type+"</b></h4>"+ "<h4 style='text-align:center;  font-size:50px; margin-top:2px;color:#15AF43'><b>"+6+ " %</b></h1><h1 style='color:black !important; text-align:center; font-size:24px'>"+improvement+"</h1>",
+            value: "<h4 style='padding-top:20px;padding-left:10px;color:black !important; 'text-align:center;'><b>"+type+"</b></h4>"+ "<h4 style='text-align:center;  font-size:50px; margin-top:2px;color:#15AF43'><b>"+6+ " %</b></h1>",
             className: 'progressbar__label'
         },
         // Set default step function for all animate calls
@@ -390,7 +392,7 @@ var bar2 = new ProgressBar.Circle(element2, {
 
 
 
-function compareCircleYellow(container_id,container_id2,type,animatePercentage,animatesecondPercentage,improvement){
+function compareCircleYellow(container_id,container_id2,type,animatePercentage,animatesecondPercentage){
   var element = document.getElementById(container_id);
   var element2 = document.getElementById(container_id2);
        var startColor = '#FC5B3F';
@@ -406,7 +408,7 @@ function compareCircleYellow(container_id,container_id2,type,animatePercentage,a
         easing: 'easeInOut',
         strokeWidth: 3,
         text: {
-            value: "<h4 style='padding-top:20px;padding-left:17px;color:black !important; 'text-align:center;'><b>"+type+"</b></h4>"+ "<h4 style='text-align:center;  font-size:50px; margin-top:2px;color:#FFD100'><b>"+0+ " %</b></h1><h1 style='color:black !important; text-align:center; font-size:24px'>"+improvement+"</h1>",
+            value: "<h4 style='padding-top:20px;padding-left:17px;color:black !important; 'text-align:center;'><b>"+type+"</b></h4>"+ "<h4 style='text-align:center;  font-size:50px; margin-top:2px;color:#FFD100'><b>"+0+ " %</b></h1>",
             className: 'progressbar__label'
         },
         // Set default step function for all animate calls

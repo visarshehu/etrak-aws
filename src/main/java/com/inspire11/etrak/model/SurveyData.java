@@ -19,8 +19,8 @@ public class SurveyData {
 	private Long Id;
 
 	@ManyToOne
-	@JoinColumn(name = "USER_ID",referencedColumnName="user_id")
-	private User UserId;
+	@JoinColumn(name = "CLIENT_ID",referencedColumnName="client_id")
+	private Client clientId;
 
 	@ManyToOne
 	@JoinColumn(name = "ACTIVITYLEVEL_ID",referencedColumnName="activitylevel_id")
@@ -256,12 +256,12 @@ public class SurveyData {
 		Id = id;
 	}
 
-	public User getUserId() {
-		return UserId;
+	public Client getClientId() {
+		return clientId;
 	}
 
-	public void setUserId(User userId) {
-		UserId = userId;
+	public void setClientId(Client clientId) {
+		this.clientId = clientId;
 	}
 
 	public ActivityLevel getActivityLevelId() {

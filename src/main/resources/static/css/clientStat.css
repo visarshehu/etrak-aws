@@ -10,6 +10,7 @@
 	width:1230px;
 }
 
+
 #form-nav{
 	width:250px;
 }
@@ -33,13 +34,7 @@
 	 padding-left:40px;
 }
 
-#linechart{
-	padding-left:10px;
-}
 
-#stability{
-	padding-left:10px;
-}
 
 .inset {
   width: 48px;
@@ -66,14 +61,6 @@
 	margin-left:5%;
 }
 
-#firstRow{
-	font-family: 'Orbitron';
-	font-size: 24px;
-}
-#secondRow{
-	font-family: 'Orbitron';
-	font-size: 14px;
-}
 
 
 
