@@ -9,6 +9,4 @@ public class EtrakAwsApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(EtrakAwsApplication.class, args);
 	}
-	
-	
 }

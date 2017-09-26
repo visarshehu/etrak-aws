@@ -23,6 +23,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 
 import com.inspire11.etrak.model.User;
+
 import com.inspire11.etrak.service.UserService;
 
 @Controller
@@ -49,8 +50,8 @@ public class LoginController {
 		modelAndView.setViewName("registration");
 		return modelAndView;
 	}
-	
-	@RequestMapping(value = "user/comparison" , method = RequestMethod.GET)
+
+	@RequestMapping(value = "user/comparison", method = RequestMethod.GET)
 	public ModelAndView comparison() {
 		ModelAndView modelAndView = new ModelAndView();
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
@@ -58,6 +59,17 @@ public class LoginController {
 		modelAndView.addObject("userName", user.getName() + " " + user.getLastName());
 		modelAndView.addObject("userId", user.getId());
 		modelAndView.setViewName("user/comparison");
+		return modelAndView;
+	}
+
+	@RequestMapping(value = "user/clients", method = RequestMethod.GET)
+	public ModelAndView allclients() {
+		ModelAndView modelAndView = new ModelAndView();
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		User user = userService.findUserByEmail(auth.getName());
+		modelAndView.addObject("userName", user.getName() + " " + user.getLastName());
+		modelAndView.addObject("userId", user.getId());
+		modelAndView.setViewName("user/clients");
 		return modelAndView;
 	}
 
@@ -111,6 +123,7 @@ public class LoginController {
 		modelAndView.setViewName("user/clientStat");
 		return modelAndView;
 	}
+	
 
 	@RequestMapping(value = { "/user/assessment" }, method = RequestMethod.GET)
 	public ModelAndView assessment() {
@@ -133,6 +146,8 @@ public class LoginController {
 		modelAndView.setViewName("user/dashboard");
 		return modelAndView;
 	}
+
+
 
 	@RequestMapping(value = "/user/clientStat", method = RequestMethod.POST, consumes = "multipart/form-data")
 	public String handleFormUpload(@RequestParam("file") MultipartFile file) throws IOException {
