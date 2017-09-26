@@ -3,136 +3,210 @@
 
 <head>
 
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Client Stats</title>
-<!-- Bootstrap Core CSS -->
-<link th:href="@{/css/bootstrap.min.css}" rel="stylesheet">
-<link th:href="@{/css/chart.css}" rel="stylesheet">
-<link th:href="@{/css/clientStat.css}" rel="stylesheet">
-<link href='https://fonts.googleapis.com/css?family=Orbitron'
-	rel='stylesheet'>
-<script th:src="@{/js/jquery-3.2.1.min.js}" type="text/javascript"></script>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Client Stats</title>
+    <!-- Bootstrap Core CSS -->
+    <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet">
+    <link th:href="@{/css/chart.css}" rel="stylesheet">
+    <link th:href="@{/css/clientStat.css}" rel="stylesheet">
+    <link href='https://fonts.googleapis.com/css?family=Orbitron' rel='stylesheet'>
+    <script th:src="@{/js/jquery-3.2.1.min.js}" type="text/javascript"></script>
 
 
-<script type="text/javascript">
-	$("#fileUpload").on("change", function() {
-		$(".avatar").removeClass("open");
-	});
-	$(".avatar").on("click", function() {
-		$(this).addClass("open");
-	});
-	// added code to close the modal if you click outside
-	$("html").click(function() {
-		$(".avatar").removeClass("open");
-	});
 
-	$(".avatar").click(function(event) {
-		event.stopPropagation();
-	});
-	
-	
-</script>
-
-<style>
-
-.avatar {
-	float: left;
-	overflow: hidden;
-	border-radius: 100%;
-	border: 6px solid #B3C9CB;
-	background-size: cover;
-	background-position: 50% 25%;
-	-webkit-transition: border 0.5s linear;
-	transition: border 0.5s linear;
-}
+    <style>
+        .avatar {
+            float: left;
+            overflow: hidden;
+            border-radius: 100%;
+            border: 6px solid #B3C9CB;
+            background-size: cover;
+            background-position: 50% 25%;
+            -webkit-transition: border 0.5s linear;
+            transition: border 0.5s linear;
+        }
 
 
-.avatar img{
-  border-radius: inherit;
- width: 10vw;
-	height: 10vw;
-  display: block;
-  position: relative;
+        .avatar img {
+            border-radius: inherit;
+            width: 10vw;
+            height: 10vw;
+            display: block;
+            position: relative;
 
-}
+        }
 
-.src {
-	font-family: raleway;
-	position: absolute;
-	display: inline-block;
-	right: 0;
-	bottom: 0;
-	padding: 0px;
-}
+        .src {
+            font-family: raleway;
+            position: absolute;
+            display: inline-block;
+            right: 0;
+            bottom: 0;
+            padding: 0px;
+        }
 
-.table-striped > tbody > tr:nth-child(2n+1) > td, .table-striped > tbody > tr:nth-child(2n+1) > th {
-   background-color: #FFFFFF;
-}
+        .table-striped>tbody>tr:nth-child(2n+1)>td,
+        .table-striped>tbody>tr:nth-child(2n+1)>th {
+            background-color: #FFFFFF;
+        }
 
-</style>
+
+
+        .arrow,
+        .arrow:before {
+            position: absolute;
+            left: 100%;
+        }
+
+        .arrow {
+            width: 30px;
+            height: 30px;
+            top: 96%;
+            left: 96.5%;
+            margin: -20px 0 0 -20px;
+            -webkit-transform: rotate(45deg);
+            border-left: none;
+            border-top: none;
+            border-right: 2px #262626 solid;
+            border-bottom: 2px #262626 solid;
+        }
+
+        .arrow:before {
+            content: "";
+            width: 20px;
+            height: 20px;
+            top: 50%;
+            left: 50%;
+            margin: -10px 0 0 -10px;
+            border-left: none;
+            border-top: none;
+            border-right: 1px #262626 solid;
+            border-bottom: 1px #262626 solid;
+            animation-duration: 2s;
+            animation-iteration-count: infinite;
+            animation-name: arrow;
+        }
+
+        @keyframes arrow {
+            0% {
+                opacity: 1;
+            }
+            100% {
+                opacity: 0;
+                transform: translate(-10px, -10px);
+            }
+        }
+
+
+        .arrowUp,
+        .arrowUp:before {
+            position: absolute;
+            left: 100%;
+        }
+
+        .arrowUp {
+            width: 30px;
+            height: 30px;
+            top: 96%;
+            left: 96.5%;
+            margin: -20px 0 0 -20px;
+            -webkit-transform: rotate(-135deg);
+            border-left: none;
+            border-top: none;
+            border-right: 2px #262626 solid;
+            border-bottom: 2px #262626 solid;
+        }
+
+        .arrowUp:before {
+            content: "";
+            width: 20px;
+            height: 20px;
+            top: 50%;
+            left: 50%;
+            margin: -10px 0 0 -10px;
+            border-left: none;
+            border-top: none;
+            border-right: 1px #262626 solid;
+            border-bottom: 1px #262626 solid;
+            animation-duration: 2s;
+            animation-iteration-count: infinite;
+            animation-name: arrow;
+        }
+
+        @keyframes arrowUp {
+            0% {
+                opacity: 1;
+            }
+            100% {
+                opacity: 0;
+                transform: translate(-10px, -10px);
+            }
+        }
+    </style>
 
 </head>
+
 <body>
-	<!-- Navigation -->
-	<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
-		<div class="container" id="navContainer">
-			<!-- Brand and toggle get grouped for better mobile display -->
-			<div class="navbar-header">
-				<button type="button" class="navbar-toggle" data-toggle="collapse"
-					data-target="#bs-navbar-collapse-1">
+    <!-- Navigation -->
+    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+        <div class="container" id="navContainer">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-navbar-collapse-1">
 					<span class="sr-only">Toggle navigation</span> <span
 						class="icon-bar"></span> <span class="icon-bar"></span> <span
 						class="icon-bar"></span>
 				</button>
-				<a href="#" class="pull-left"><img th:src="@{/images/logo2.png}"
-					style="height: 70px; width: 230px; padding-top: 15px !important;"
+                <a href="#" class="pull-left"><img th:src="@{/images/logo2.png}"
+					style="height: 70px; width: 230px; padding-top: 10px !important;"
 					class="img-responsive"></a>
-			</div>
-			<div class="collapse navbar-collapse" id="bs-navbar-collapse-1">
-				<ul class="nav navbar-nav navbar-right">
-					<li><form class="navbar-form navbar-right" role="search"
-							id="form-nav">
-							<div class="input-group">
-								<input type="text" class="form-control" placeholder="Search"
-									id="search"> <span class="input-group-btn">
+            </div>
+            <div class="collapse navbar-collapse" id="bs-navbar-collapse-1">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <form class="navbar-form navbar-right" role="search" id="form-nav">
+                            <div class="input-group">
+                                <input type="text" class="form-control" placeholder="Search" id="search"> <span class="input-group-btn">
 									<button type="submit" class="btn btn-default" id="submitButton">
 										<span class="glyphicon glyphicon-search"></span>
-									</button>
-								</span>
-							</div>
-						</form></li>
-					<li><a th:href="@{dashboard.html}">Home</a></li>
-					<li><a href="">Clients</a></li>
-					<li><a href="">Traks</a></li>
-					<li><a href="">Reports</a></li>
-					<li><div class="inset">
-						<img th:src="@{/user/clientStat/{userId}(userId=${userId})}"/> 
-						</div></li>
-					<li><div style="padding-left: 3px; padding-right: 30px">
-							<label th:utext="${userName}"
-								style="padding-top: 20px; color: white"></label><br /> <a
-								th:href="@{/login?logout}"
-								style="display: inline; height: 15px !important; padding-top: 2px; color: #2085B8">Sign
+                                </button>
+                                </span>
+                            </div>
+                        </form>
+                    </li>
+                    <li><a th:href="@{dashboard.html}">Home</a></li>
+                    <li><a href="">Clients</a></li>
+                    <li><a href="">Traks</a></li>
+                    <li><a href="">Reports</a></li>
+                    <li>
+                        <div class="inset">
+                            <img th:src="@{/user/clientStat/{userId}(userId=${userId})}" />
+                        </div>
+                    </li>
+                    <li>
+                        <div style="padding-left: 3px; padding-right: 30px">
+                            <label th:utext="${userName}" style="padding-top: 20px; color: white"></label><br /> <a th:href="@{/login?logout}" style="display: inline; height: 15px !important; padding-top: 2px; color: #2085B8">Sign
 								Out</a>
-						</div></li>
+                        </div>
+                    </li>
 
-				</ul>
-			</div>
-			<!-- /.navbar-collapse -->
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
 
-		</div>
-		<!-- /.container -->
-	</nav>
+        </div>
+        <!-- /.container -->
+    </nav>
 
-	<div class="page-header">
-		<div class="clearfix">
-			<div class="row col-md-12">
+    <div class="page-header">
+        <div class="clearfix">
+            <div class="row col-md-12">
 
-				<div class="col-sm-7 ">
-					<div class="col-sm-2">
-						<div class="avatar"> 
-						<!--  <form method="POST" th:action="@{/user/clientStat}"
+                <div class="col-sm-7 ">
+                    <div class="col-sm-2">
+                        <div class="avatar">
+                            <!--  <form method="POST" th:action="@{/user/clientStat}"
 								enctype="multipart/form-data" role="form" >
 							<input id="fileUpload" type="file"  name="file" onchange="this.form.submit();"  />
 							 <img th:src="@{/user/clientStat/{userId}(userId=${userId})}"/> 
@@ -141,392 +215,485 @@
 							</div>
 						</form>
 						-->
-						<img th:src="@{/images/user.png}"  />
-						</div>
-					</div>
-					<div class="col-sm-10" style="padding-left: 50px">
-						<div class="row">
-							<div class="col-sm-12">
-								<h4> Alban Mehmeti</h4>
-							</div>
-						</div>
-						<div class="row">
-							<div class="col-sm-3">
-								<p>
-									Evaluation <br /> Date <br /> Number <br />
-								</p>
-							</div>
-							<div class="col-sm-4"  >
-								<p>
-									TRAKScore <br /> Rank <br />
-								</p>
-							</div>
-						</div>
-					</div>
+                            <img th:src="@{/images/user.png}" />
+                        </div>
+                    </div>
+                    <div class="col-sm-10" style="padding-left: 50px">
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <h4> Alban Mehmeti</h4>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <p>
+                                    Evaluation <br /> Date <br /> Number <br />
+                                </p>
+                            </div>
+                            <div class="col-sm-4">
+                                <p>
+                                    TRAKScore <br /> Rank <br />
+                                </p>
+                            </div>
+                        </div>
+                    </div>
 
-				</div>
-				<div class="col-sm-5">
+                </div>
+                <div class="col-sm-5">
 
-					<div class="row">
-						<br />&nbsp;
-					</div>
-					<div class="row-fluid">
-						<div id="buttons" style="float: right">
-							<a th:href="@{assessment.html}"><button type="button"
+                    <div class="row">
+                        <br />&nbsp;
+                    </div>
+                    <div class="row-fluid">
+                        <div id="buttons" style="float: right">
+                            <a th:href="@{assessment.html}"><button type="button"
 									class="btn btn-primary " style="background: #2085B8">New
 									Evaluation</button> </a>
-							<a th:href="@{comparison.html}">
+                            <a th:href="@{comparison.html}">
 							<button type="button" class="btn btn-primary"
 								style="background: #2085B8">Comparison</button></a>
-							<button type="button" class="btn btn-primary"
-								style="background: #2085B8">New Group</button>
-							<button type="button" class="btn btn-default"
-								style="background: #F9F9F9">Share</button>
-						</div>
-					</div>
-				</div>
+                            <button type="button" class="btn btn-primary" style="background: #2085B8">New Group</button>
+                            <button type="button" class="btn btn-default" style="background: #F9F9F9">Share</button>
+                        </div>
+                    </div>
+                </div>
 
 
-			</div>
-			
+            </div>
 
-		</div>
-	</div>
-	<div class="container-fluid">
-		<div id="button" style="padding-right: 40px;">
-			<a href="#aboutModal" data-toggle="modal" data-target="#myModal"
-				class="btn btn-circle-micro btn-primary" style="float: right;"><span
+
+        </div>
+    </div>
+    <div class="container-fluid">
+        <div id="button" style="padding-right: 40px;">
+            <a href="#aboutModal" data-toggle="modal" data-target="#myModal" class="btn btn-circle-micro btn-primary" style="float: right;"><span
 				class="glyphicon glyphicon-info-sign"></span> </a>
-		</div>
-		<div class="row col-md-12 center-block" id="firstRow">
+        </div>
+        <div class="row col-md-12 center-block" id="firstRow">
 
-			<div class="col-sm-6 col-md-3  ">
-				<div class="chart-wrapper">
-					<div class="chart-title"></div>
-					<div class="chart-stage">
-						<div id="movement"></div>
-					</div>
-					<div class="chart-notes"></div>
-				</div>
-			</div>
-			<div class="col-sm-6 col-md-3 ">
-				<div class="chart-wrapper">
-					<div class="chart-title"></div>
-					<div class="chart-stage">
-						<div id="strength"></div>
-					</div>
-					<div class="chart-notes"></div>
-				</div>
-			</div>
-			<div class="col-sm-6 col-md-3 ">
-				<div class="chart-wrapper">
-					<div class="chart-title"></div>
-					<div class="chart-stage">
-						<div id="power"></div>
-					</div>
-					<div class="chart-notes"></div>
-				</div>
-			</div>
+            <div class="col-sm-6 col-md-3  ">
+                <div class="chart-wrapper">
+                    <div class="chart-title"></div>
+                    <div class="chart-stage">
+                        <div id="movement"></div>
+                    </div>
+                    <div class="chart-notes"></div>
+                </div>
+            </div>
+            <div class="col-sm-6 col-md-3 ">
+                <div class="chart-wrapper">
+                    <div class="chart-title"></div>
+                    <div class="chart-stage">
+                        <div id="strength"></div>
+                    </div>
+                    <div class="chart-notes"></div>
+                </div>
+            </div>
+            <div class="col-sm-6 col-md-3 ">
+                <div class="chart-wrapper">
+                    <div class="chart-title"></div>
+                    <div class="chart-stage">
+                        <div id="power"></div>
+                    </div>
+                    <div class="chart-notes"></div>
+                </div>
+            </div>
 
-			<div class="col-sm-6 col-md-3">
-				<div class="chart-wrapper">
-					<div class="chart-title"></div>
+            <div class="col-sm-6 col-md-3">
+                <div class="chart-wrapper">
+                    <div class="chart-title"></div>
 
-					<div class="chart-stage">
+                    <div class="chart-stage">
 
-						<div id="endurance"></div>
+                        <div id="endurance"></div>
 
-					</div>
+                    </div>
 
-					<div class="chart-notes"></div>
+                    <div class="chart-notes"></div>
 
-				</div>
+                </div>
 
-			</div>
+            </div>
 
-		</div>
-		<div class="row col-md-12 center-block" id="secondRow">
-			<div class="col-sm-6 col-md-3  ">
-				<div class="chart-wrapper">
-					<div class="chart-title"></div>
-					<div class="chart-stage">
-						<div id="linechart"></div>
-					</div>
-					<div class="chart-notes"></div>
-				</div>
-			</div>
-			<div class="col-sm-6  col-md-3 ">
-				<div class="chart-wrapper">
-					<div class="chart-title"></div>
-					<div class="chart-stage">
-						<div id="lower"></div>
-					</div>
+        </div>
+        <div class="row col-md-12 center-block" id="secondRow">
+            <div class="col-sm-6 col-md-3  ">
+                <div class="chart-wrapper">
+                    <div class="chart-title"></div>
+                    <div class="chart-stage">
+                        <div id="linechart"></div>
+                    </div>
+                    <div class="chart-notes"></div>
+                </div>
+            </div>
+            <div class="col-sm-6  col-md-3 ">
+                <div class="chart-wrapper">
+                    <div class="chart-title"></div>
+                    <div class="chart-stage">
+                        <div id="lower"></div>
+                    </div>
 
 
-				</div>
-			</div>
-			<div class="col-sm-6 col-md-3 ">
-				<div class="chart-wrapper">
-					<div class="chart-title"></div>
-					<div class="chart-stage">
-						<div id="absolute"></div>
-					</div>
-					<div class="chart-notes"></div>
-				</div>
-			</div>
-			<div class="col-sm-6 col-md-3 ">
-				<div class="chart-wrapper">
-					<div class="chart-title"></div>
-					<div class="chart-stage">
-						<div id="absolute1"></div>
-					</div>
-					<div class="chart-notes"></div>
-				</div>
-			</div>
-		</div>
-		<div class="row col-md-12 center-block" id="secondRow">
-			<div class="col-sm-6 col-md-3">
-				<div class="chart-wrapper">
-					<div class="chart-title"></div>
-					<div class="chart-stage">
-						<div id="stability"></div>
-					</div>
-					<div class="chart-notes"></div>
-				</div>
-			</div>
-			<div class="col-sm-6 col-md-3 ">
-				<div class="chart-wrapper">
-					<div class="chart-title"></div>
-					<div class="chart-stage">
-						<div id="push"></div>
-					</div>
-					<div class="chart-notes"></div>
-				</div>
-			</div>
-			<div class="col-sm-6 col-md-3 ">
-				<div class="chart-wrapper">
-					<div class="chart-title"></div>
-					<div class="chart-stage">
-						<div id="relative"></div>
-					</div>
-					<div class="chart-notes"></div>
-				</div>
-			</div>
-			<div class="col-sm-6 col-md-3 ">
-				<div class="chart-wrapper">
-					<div class="chart-title"></div>
-					<div class="chart-stage">
-						<div id="relative1"></div>
-					</div>
-					<div class="chart-notes"></div>
-				</div>
-			</div>
-		</div>
-		<div class="row col-md-12 center-block" id="secondRow">
-			<div class="col-sm-6 col-md-3 ">
-				<div class="chart-wrapper">
-					<div class="chart-title"></div>
-					<div class="chart-stage"></div>
-					<div class="chart-notes"></div>
-				</div>
-			</div>
-			<div class="col-sm-6 col-md-3 ">
-				<div class="chart-wrapper">
-					<div class="chart-title"></div>
-					<div class="chart-stage">
-						<div id="pull"></div>
-					</div>
-					<div class="chart-notes"></div>
-				</div>
-			</div>
-			<div class="col-sm-6 col-md-3 ">
-				<div class="chart-wrapper">
-					<div class="chart-title"></div>
-					<div class="chart-stage"></div>
-					<div class="chart-notes"></div>
-				</div>
-			</div>
-			<div class="col-sm-6 col-md-3 ">
-				<div class="chart-wrapper">
-					<div class="chart-title"></div>
-					<div class="chart-stage"></div>
-					<div class="chart-notes"></div>
-				</div>
-			</div>
-		</div>
-	</div>
+                </div>
+            </div>
+            <div class="col-sm-6 col-md-3 ">
+                <div class="chart-wrapper">
+                    <div class="chart-title"></div>
+                    <div class="chart-stage">
+                        <div id="absolute"></div>
+                    </div>
+                    <div class="chart-notes"></div>
+                </div>
+            </div>
+            <div class="col-sm-6 col-md-3 ">
+                <div class="chart-wrapper">
+                    <div class="chart-title"></div>
+                    <div class="chart-stage">
+                        <div id="absolute1"></div>
+                    </div>
+                    <div class="chart-notes"></div>
+                </div>
+            </div>
+        </div>
+        <div class="row col-md-12 center-block" id="secondRow">
+            <div class="col-sm-6 col-md-3">
+                <div class="chart-wrapper">
+                    <div class="chart-title"></div>
+                    <div class="chart-stage">
+                        <div id="stability"></div>
+                    </div>
+                    <div class="chart-notes"></div>
+                </div>
+            </div>
+            <div class="col-sm-6 col-md-3 ">
+                <div class="chart-wrapper">
+                    <div class="chart-title"></div>
+                    <div class="chart-stage">
+                        <div id="push"></div>
+                    </div>
+                    <div class="chart-notes"></div>
+                </div>
+            </div>
+            <div class="col-sm-6 col-md-3 ">
+                <div class="chart-wrapper">
+                    <div class="chart-title"></div>
+                    <div class="chart-stage">
+                        <div id="relative"></div>
+                    </div>
+                    <div class="chart-notes"></div>
+                </div>
+            </div>
+            <div class="col-sm-6 col-md-3 ">
+                <div class="chart-wrapper">
+                    <div class="chart-title"></div>
+                    <div class="chart-stage">
+                        <div id="relative1"></div>
+                    </div>
+                    <div class="chart-notes"></div>
+                </div>
+            </div>
+        </div>
 
-	<br />
-	<br />
-	<div class="modal fade" id="myModal" tabindex="-1" role="dialog"
-		aria-labelledby="myModalLabel" aria-hidden="true">
-		<div class="modal-dialog">
-			<div class="modal-content">
-				<div class="modal-header">
-					<button type="button" class="close" data-dismiss="modal"
-						aria-hidden="true">X</button>
-					<h4 class="modal-title" id="myModalLabel">Information!</h4>
-				</div>
-				<div class="modal-body">
+    </div>
 
-					<br>
+    <br />
+    <br />
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">X</button>
+                    <h4 class="modal-title" id="myModalLabel">Information!</h4>
+                </div>
+                <div class="modal-body">
 
-				</div>
-				<div class="modal-footer">
+                    <br>
 
-					<button type="button" class="btn btn-circle btn-default"
-						data-dismiss="modal">
+                </div>
+                <div class="modal-footer">
+
+                    <button type="button" class="btn btn-circle btn-default" data-dismiss="modal">
 						<span class="glyphicon glyphicon-remove"></span>
 					</button>
 
-				</div>
-			</div>
-		</div>
-	</div>
+                </div>
+            </div>
+        </div>
+    </div>
 
-	<br />
-	<br />
-	<div class="modal fade" id="myModal" tabindex="-1" role="dialog"
-		aria-labelledby="myModalLabel" aria-hidden="true">
-		<div class="modal-dialog">
-			<div class="modal-content">
-				<div class="modal-header">
-					<button type="button" class="close" data-dismiss="modal"
-						aria-hidden="true">X</button>
-					<h4 class="modal-title" id="myModalLabel">Information!</h4>
-				</div>
-				<div class="modal-body">
+    <br />
+    <br />
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">X</button>
+                    <h4 class="modal-title" id="myModalLabel">Information!</h4>
+                </div>
+                <div class="modal-body">
 
-					<br>
+                    <br>
 
 
-				</div>
-				<div class="modal-footer">
-					<button type="button" class="btn btn-circle btn-default"
-						data-dismiss="modal">
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-circle btn-default" data-dismiss="modal">
 						<span class="glyphicon glyphicon-remove"></span>
 					</button>
 
-				</div>
-			</div>
-		</div>
-	</div>
-	<div class="wrapper"
-		style="margin-left: 0px; margin-right: 0x; background-color: #F9F9F9;">
-		<div class="container-fluid" style="margin-left:2%">
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="wrapper" style="margin-left: 0px; margin-right: 0x; background-color: #F9F9F9;">
+        <div class="container-fluid" style="margin-left:2%">
 
 
-			
 
-			<div class="row col-md-12 center-block">
-			
-			<h2 style="font-family: 'Orbitron';">ANALYTICS</h2>
-				<div class="col-sm-6 col-md-6  table-responsive">
-				
-					<h4 style="color: #2085B8; font-family: 'Orbitron';">MOVEMENT
-						/ MOBILITY</h4>
-					<table class="table table-striped "
-						style="font-family: 'Orbitron'; font-size: 11px">
-						<thead>
-							<tr>
-								<th class="col-xs-6">Exercise Type</th>
-								<th class="col-xs-1">AlbanM</th>
-								<th class="col-xs-5">TRAK Score</th>
-							</tr>
-						</thead>
-						<tbody>
-							<tr>
-								<td>Deep Squat</td>
-								<td>90</td>
-								<td id="deepSquat"></td>
-							</tr>
-							<tr>
-								<td>Shoulder Flexion -L-(deg)</td>
-								<td>160</td>
-								<td id="shoulderL"></td>
-							</tr>
-							<tr>
-								<td>Shoulder Flexion -R-(deg)</td>
-								<td>160</td>
-								<td id="shoulderR"></td>
-							</tr>
-							<tr>
-								<td>Shoulder Extension -R-</td>
-								<td>115</td>
-								<td id="externalShoulderR"></td>
-							</tr>
-							<tr>
-								<td>Shoulder Extension -L-</td>
-								<td>67</td>
-								<td id="externalShoulderL"></td>
-							</tr>
-							<tr>
-								<td>Trunk Rotation -R-</td>
-								<td>128</td>
-								<td id="trunkRotationR"></td>
-							</tr>
-							<tr>
-								<td>Trunk Rotation -L-</td>
-								<td>73</td>
-								<td id="trunkRotationL"></td>
-							</tr>
-							
-						</tbody>
-					</table>
 
-				</div>
-				
-				<div class="col-sm-6 col-md-6  table-responsive">
-				<h4 style="color: #2085B8; font-family: 'Orbitron'">STABILITY</h4>
-					<table class="table table-striped"
-						style="font-family: 'Orbitron'; font-size: 11px">
-						<thead>
-							<tr>
-								<th class="col-xs-5">Exercise Type</th>
-								<th class="col-xs-2">Alban M</th>
-								<th class="col-xs-5">TRAK Score</th>
-							</tr>
-						</thead>
-						<tbody>
-							<tr>
-								<td>Pistol Squat -R-</td>
-								<td>Pass</td>
-								<td id="hipBridgeR"></td>
-							</tr>
-							<tr>
-								<td>Pistol Squat -L-</td>
-								<td>Pass</td>
-								<td id="hipBridgeL"></td>
-							</tr>
-							<tr>
-								<td>Prone RH/LF</td>
-								<td>Pass</td>
-								<td id="plank"></td>
-							</tr>
-							<tr>
-								<td>Prone LH/RF</td>
-								<td>Pass</td>
-								<td id="plankL"></td>
-							</tr>
-							<tr>
-								<td>V Sit</td>
-								<td>Pass</td>
-								<td id="trunk"></td>
-							</tr>
+            <div class="row col-md-12 center-block">
 
-						</tbody>
-					</table>
-				</div>
-				
-			
-	
+                <h2 style="font-family: 'Orbitron';">ANALYTICS</h2>
+                <div class="col-sm-6 col-md-6  table-responsive">
 
-			</div>
-		</div>
-	</div>
-	<script th:src="@{/js/progressbar.min.js}" type="text/javascript"></script>
-	<script th:src="@{/js/chart.js}" type="text/javascript"></script>
-	<script th:src="@{/js/bootstrap.min.js}" type="text/javascript"></script>
+                    <h4 style="color: #2085B8; font-family: 'Orbitron';">MOVEMENT / MOBILITY</h4>
+                    <table class="table table-striped " style="font-family: 'Orbitron'; font-size: 11px">
+                        <thead>
+                            <tr>
+                                <th class="col-xs-6">Exercise Type</th>
+                                <th class="col-xs-1">AlbanM</th>
+                                <th class="col-xs-5">TRAK Score</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Deep Squat</td>
+                                <td>90</td>
+                                <td id="deepSquat"></td>
+                            </tr>
+                            <tr>
+                                <td>Shoulder Flexion -L-(deg)</td>
+                                <td>160</td>
+                                <td id="shoulderL"></td>
+                            </tr>
+                            <tr>
+                                <td>Shoulder Flexion -R-(deg)</td>
+                                <td>160</td>
+                                <td id="shoulderR"></td>
+                            </tr>
+                            <tr>
+                                <td>Shoulder Extension -R-</td>
+                                <td>115</td>
+                                <td id="externalShoulderR"></td>
+                            </tr>
+                            <tr>
+                                <td>Shoulder Extension -L-</td>
+                                <td>67</td>
+                                <td id="externalShoulderL"></td>
+                            </tr>
+                            <tr>
+                                <td>Trunk Rotation -R-</td>
+                                <td>128</td>
+                                <td id="trunkRotationR"></td>
+                            </tr>
+                            <tr>
+                                <td>Trunk Rotation -L-</td>
+                                <td>73</td>
+                                <td id="trunkRotationL"></td>
+                            </tr>
+
+                        </tbody>
+                    </table>
+
+                </div>
+
+                <div class="col-sm-6 col-md-6  table-responsive">
+                    <h4 style="color: #2085B8; font-family: 'Orbitron'">STABILITY</h4>
+                    <table class="table table-striped" style="font-family: 'Orbitron'; font-size: 11px">
+                        <thead>
+                            <tr>
+                                <th class="col-xs-5">Exercise Type</th>
+                                <th class="col-xs-2">Alban M</th>
+                                <th class="col-xs-5">TRAK Score</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Pistol Squat -R-</td>
+                                <td>Pass</td>
+                                <td id="hipBridgeR"></td>
+                            </tr>
+                            <tr>
+                                <td>Pistol Squat -L-</td>
+                                <td>Pass</td>
+                                <td id="hipBridgeL"></td>
+                            </tr>
+                            <tr>
+                                <td>Prone RH/LF</td>
+                                <td>Pass</td>
+                                <td id="plank"></td>
+                            </tr>
+                            <tr>
+                                <td>Prone LH/RF</td>
+                                <td>Pass</td>
+                                <td id="plankL"></td>
+                            </tr>
+                            <tr>
+                                <td>V Sit</td>
+                                <td>Pass</td>
+                                <td id="trunk"></td>
+                            </tr>
+
+                        </tbody>
+                    </table>
+                </div>
+                <div class="arrow" id="arrowDown"></div>
+
+            </div>
+
+
+            <div id="myContent" class="col-md-12 center-block" style="display: none;">
+
+                <div class="col-sm-6 col-md-6 table-responsive">
+                    <h4 style="color: #2085B8; font-family: 'Orbitron';">STRENGTH</h4>
+                    <table class="table table-striped table-responsive" style="font-family: 'Orbitron'; font-size: 11px">
+                        <thead>
+                            <tr>
+                                <th class="col-xs-5">Exercise Type</th>
+                                <th class="col-xs-2">AlbanM</th>
+                                <th class="col-xs-5">TRAK Score</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Lower Absolute Force </td>
+                                <td>90</td>
+                                <td id="absolutepower"></td>
+                            </tr>
+
+                            <tr>
+                                <td>Lower Relative Force </td>
+                                <td>160</td>
+                                <td id="poweroutput"></td>
+                            </tr>
+
+                            <tr>
+                                <td>Push Absolute Force</td>
+                                <td>67</td>
+                                <td id="peakpower"></td>
+                            </tr>
+                            <tr>
+                                <td>Push Relative Force</td>
+                                <td>128</td>
+                                <td id="powerratio1"></td>
+                            </tr>
+                            <tr>
+                                <td>Pull Absolute Force</td>
+                                <td>73</td>
+                                <td id="powerratio6"></td>
+                            </tr>
+
+                            <tr>
+                                <td>Pull Relative Force</td>
+                                <td>73</td>
+                                <td id="powerratio7"></td>
+                            </tr>
+
+                        </tbody>
+                    </table>
+
+                </div>
+
+                <div class="col-sm-6 col-md-6  table-responsive">
+                    <h4 style="color: #2085B8; font-family: 'Orbitron'">POWER</h4>
+                    <table class="table table-striped" style="font-family: 'Orbitron'; font-size: 11px">
+                        <thead>
+                            <tr>
+                                <th class="col-xs-5">Exercise Type</th>
+                                <th class="col-xs-2">Alban M</th>
+                                <th class="col-xs-5">TRAK Score</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>10s Power Output</td>
+                                <td>50</td>
+                                <td id="vo2max"></td>
+                            </tr>
+                            <tr>
+                                <td>60s Relative Power</td>
+                                <td>73</td>
+                                <td id="4poweroutput"></td>
+                            </tr>
+
+
+
+                        </tbody>
+                    </table>
+
+                </div>
+
+
+
+                <div class="col-sm-6 col-md-6  table-responsive">
+                    <h4 style="color: #2085B8; font-family: 'Orbitron'">ENDURANCE</h4>
+                    <table class="table table-striped" style="font-family: 'Orbitron'; font-size: 11px">
+                        <thead>
+                            <tr>
+                                <th class="col-xs-5">Exercise Type</th>
+                                <th class="col-xs-2">Alban M</th>
+                                <th class="col-xs-5">TRAK Score</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Vo2 Max</td>
+                                <td>50</td>
+                                <td id="4powerratio"></td>
+                            </tr>
+                            <tr>
+                                <td>4min Relative Power</td>
+                                <td>73</td>
+                                <td id="5poweroutput"></td>
+                            </tr>
+
+
+
+                        </tbody>
+                    </table>
+                </div>
+                <div class="row col-md-12">
+                    <h1>&nbsp;</h1>
+                </div>
+
+                <div class="arrowUp" id="arrowUp" style="display:none;"></div>
+            </div>
+
+
+
+        </div>
+    </div>
+    <script>
+        $(document).ready(function() {
+            document.getElementById('arrowDown').style.cursor = "pointer";
+            document.getElementById('arrowUp').style.cursor = "pointer";
+            $(".arrow").click(function() {
+                $("#myContent").slideToggle();
+                document.getElementById('arrowDown').style.display = 'none';
+                document.getElementById('arrowUp').style.display = 'block';
+
+            });
+
+            $(".arrowUp").click(function() {
+                $("#myContent").slideToggle();
+                document.getElementById('arrowDown').style.display = 'block';
+                document.getElementById('arrowUp').style.display = 'none';
+            });
+        });
+    </script>
+    <script th:src="@{/js/progressbar.min.js}" type="text/javascript"></script>
+    <script th:src="@{/js/chart.js}" type="text/javascript"></script>
+    <script th:src="@{/js/bootstrap.min.js}" type="text/javascript"></script>
 
 </body>
 

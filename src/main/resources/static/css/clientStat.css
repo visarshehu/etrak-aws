@@ -2,12 +2,9 @@
 	background-color:0x434343 !important;
 }
 
-#navCountainer{
-	margin-left: 10px;
-}
 
 #bs-navbar-collapse-1{
-	width:1230px;
+	width:1280px;
 }
 
 
@@ -58,8 +55,9 @@
 }
 
 #navContainer{
-	margin-left:5%;
+	margin-left:2%;
 }
+
 
 
 

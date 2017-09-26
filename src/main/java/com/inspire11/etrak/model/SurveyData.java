@@ -1,7 +1,4 @@
 package com.inspire11.etrak.model;
-
-import java.util.Date;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -25,7 +22,12 @@ public class SurveyData {
 	@ManyToOne
 	@JoinColumn(name = "ACTIVITYLEVEL_ID",referencedColumnName="activitylevel_id")
 	private ActivityLevel activityLevelId;
+	
+	@Column(name = "nutritional_Goal")
+	private String nutritionalGoal;
 
+	private String unit; 
+	
 	private Double weight;
 
 	private Double height;
@@ -52,8 +54,6 @@ public class SurveyData {
 
 	private Integer trunkRotationL;
 
-	private Double totalStability;
-
 	private Double pistolR;
 
 	private Double pistolL;
@@ -64,189 +64,57 @@ public class SurveyData {
 
 	private Double vsit;
 
-	private Double total_1RMForce;
+	private Double lowerMaxR;
+	
+	private Double lowerMaxL;
 
-	private Double lowerBodyForce;
-
-	private Double pushForce;
-
-	private Double pullForce;
-
-	private Double lowerSW_ratio;
-
-	private Double pushSW_ratio;
-
-	private Double pullSW_ratio;
-
-	private Double totalStabilityForce;
-
-	private Double lowerStabilityForce;
-
-	private Double pushStabilityForce;
-
-	private Double pullStabilityForce;
-
-	private Double power1S;
-
-	private Double power10S;
-
-	private Double power60S;
-
-	private Double power4MIN;
-
-	private Double power1S_BWratio;
-
-	private Double power10S_BWratio;
-
-	private Double power60s_BWratio;
-
-	private Double power4MIN_BWratio;
-
-	private Double totalEfficiency;
-
-	private Double dropOff10sTo60s;
-
-	private Double dropoff60sTo4min;
-
+	private Double pushMaxR;
+	
+	private Double pushMaxL;
+	
+	private Double pullMax;
+	
+	private Double lowerAbsoluteForce;
+	
+	private Double lowerRelativeForce;
+	
+	private Double pushAbsoluteForce;
+	
+	private Double pushRelativeForce;
+	
+	private Double pullAbsoluteForce;
+	
+	private Double pullRelativeForce;
+	
+	private Double s10PowerOutput;
+	
+	private Double s60PowerOutput;
+	
+	private Double s10RelativePower;
+	
+	private Double s60RelativePower;
+	
+	private Double mileRun;
+	
+	private Double kmRun;
+	
+	private Double min4PowerOutput;
+	
+	private Double Calories;
+	
 	private Double vo2Max;
-
-	private Double calsMin;
-
-	private Double avgForce;
-
-	private String clientGoals;
-
-	private Double mobilityScore;
-
-	private Double stabilityScore;
-
-	private Double movementScore;
-
-	private Double absoluteStrength;
-
-	private Double relativeStrength;
-
-	private Double strengthScore;
-
-	private Double absolutePower;
-
-	private Double relativePower;
-
-	private Double powerScore;
-
-	private Double enduranceScore;
-
-	private Double coreScore;
-
-	private Date timeStamp;
-
-	private Double restingMetabolicRate;
-
-	private Double totalEnergyExpenditure;
-
-	private Integer dbPistolSquat_rightLeg;
-
-	private Integer dbPistolSquat_leftLeg;
-
-	private Double broatJump;
-
-	private Double benchPress5RM;
-
-	private Double pullUpsMax;
-
-	private Double rowTime1000m;
-
-	private Double rowCalories1000m;
-
-	private Double pushUpsMax;
-
-	private Double externalShoulderRotationR;
-
-	private Double externalShoulderRotationL;
-
-	private Double lowerBodyAbsoluteStrengthScore;
-
-	private Double lowerBodyRelativeStrengthScore;
-
-	private Double pushAbsoluteStrengthScore;
-
-	private Double pushRelativeStrengthScore;
-
-	private Double pullAbsoluteStrengthScore;
-
-	private Double pullRelativeStrenghScore;
-
-	private Double peakPowerRelativeScore;
-
-	private Double powerAbsoluteScore10s;
-
-	private Double powerRelativeScore10s;
-
-	private Double powerAbsoluteScore60s;
-
-	private Double powerRelativeScore60s;
-
-	private Double vo2MaxAbsoluteScore;
-
-	private Double powerAbsoluteScore4min;
-
-	private Double powerRelativeScore4min;
-
-	private Integer mealsPerDay;
-
-	private Double proteins;
-
-	private Double carbohydrates;
-
-	private Double fats;
-
-	private Double extraCalories;
-
-	private Double wallSquat;
-
-	private Double lateralHipBridgeRight;
-
-	private Double lateralHipBridgeLeft;
-
-	private Double pronePlank;
-
-	private Double seatedTrunkStability;
-
-	private Double deepWallSquat;
-
-	private Double fingerTouchTestRin_Lex;
-
-	private Double fingerTouchTest;
-
-	private Double legRaiseRight;
-
-	private Double legRaiseLeft;
-
-	private Double fingerTouchTestSecond;
-
-	private Double fmsDeepSquat;
-
-	private Double fmsHurdleStepR;
-
-	private Double fmsHurdleStepL;
-
-	private Double fmsaslrR;
-
-	private Double fmsActiveStraitLegRaise;
-
-	private Double fmsshoulderTestLeftArm;
-
-	private Double fmsshoulderTestRightArm;
-
-	private Double fmsTrunkPushups;
-
-	private Double fmsrotaryStabilityRightSide;
-
-	private Double fmsrotaryStabilityLeftSide;
-
-	private Double fmsrotaryMobilityLeftSide;
-
-	private Double fmsrotaryMobilityRightSide;
+	
+	private Double min4RelativeOutput;
+	
+	private String Notes;
+	
+	public Double movement;
+	
+	public Double strength;
+	
+	public Double power;
+	
+	public Double endurance;
 
 	public Long getId() {
 		return Id;
@@ -270,6 +138,23 @@ public class SurveyData {
 
 	public void setActivityLevelId(ActivityLevel activityLevelId) {
 		this.activityLevelId = activityLevelId;
+	}
+
+	public String getNutritionalGoal() {
+		return nutritionalGoal;
+	}
+
+	public void setNutritionalGoal(String nutritionalGoal) {
+		this.nutritionalGoal = nutritionalGoal;
+	}
+
+	
+	public String getUnit() {
+		return unit;
+	}
+
+	public void setUnit(String unit) {
+		this.unit = unit;
 	}
 
 	public Double getWeight() {
@@ -376,14 +261,6 @@ public class SurveyData {
 		this.trunkRotationL = trunkRotationL;
 	}
 
-	public Double getTotalStability() {
-		return totalStability;
-	}
-
-	public void setTotalStability(Double totalStability) {
-		this.totalStability = totalStability;
-	}
-
 	public Double getPistolR() {
 		return pistolR;
 	}
@@ -424,180 +301,156 @@ public class SurveyData {
 		this.vsit = vsit;
 	}
 
-	public Double getTotal_1RMForce() {
-		return total_1RMForce;
+	public Double getLowerMaxR() {
+		return lowerMaxR;
 	}
 
-	public void setTotal_1RMForce(Double total_1rmForce) {
-		total_1RMForce = total_1rmForce;
+	public void setLowerMaxR(Double lowerMaxR) {
+		this.lowerMaxR = lowerMaxR;
 	}
 
-	public Double getLowerBodyForce() {
-		return lowerBodyForce;
+	public Double getLowerMaxL() {
+		return lowerMaxL;
 	}
 
-	public void setLowerBodyForce(Double lowerBodyForce) {
-		this.lowerBodyForce = lowerBodyForce;
+	public void setLowerMaxL(Double lowerMaxL) {
+		this.lowerMaxL = lowerMaxL;
 	}
 
-	public Double getPushForce() {
-		return pushForce;
+	public Double getPushMaxR() {
+		return pushMaxR;
 	}
 
-	public void setPushForce(Double pushForce) {
-		this.pushForce = pushForce;
+	public void setPushMaxR(Double pushMaxR) {
+		this.pushMaxR = pushMaxR;
 	}
 
-	public Double getPullForce() {
-		return pullForce;
+	public Double getPushMaxL() {
+		return pushMaxL;
 	}
 
-	public void setPullForce(Double pullForce) {
-		this.pullForce = pullForce;
+	public void setPushMaxL(Double pushMaxL) {
+		this.pushMaxL = pushMaxL;
 	}
 
-	public Double getLowerSW_ratio() {
-		return lowerSW_ratio;
+	public Double getPullMax() {
+		return pullMax;
 	}
 
-	public void setLowerSW_ratio(Double lowerSW_ratio) {
-		this.lowerSW_ratio = lowerSW_ratio;
+	public void setPullMax(Double pullMax) {
+		this.pullMax = pullMax;
 	}
 
-	public Double getPushSW_ratio() {
-		return pushSW_ratio;
+	public Double getLowerAbsoluteForce() {
+		return lowerAbsoluteForce;
 	}
 
-	public void setPushSW_ratio(Double pushSW_ratio) {
-		this.pushSW_ratio = pushSW_ratio;
+	public void setLowerAbsoluteForce(Double lowerAbsoluteForce) {
+		this.lowerAbsoluteForce = lowerAbsoluteForce;
 	}
 
-	public Double getPullSW_ratio() {
-		return pullSW_ratio;
+	public Double getLowerRelativeForce() {
+		return lowerRelativeForce;
 	}
 
-	public void setPullSW_ratio(Double pullSW_ratio) {
-		this.pullSW_ratio = pullSW_ratio;
+	public void setLowerRelativeForce(Double lowerRelativeForce) {
+		this.lowerRelativeForce = lowerRelativeForce;
 	}
 
-	public Double getTotalStabilityForce() {
-		return totalStabilityForce;
+	public Double getPushAbsoluteForce() {
+		return pushAbsoluteForce;
 	}
 
-	public void setTotalStabilityForce(Double totalStabilityForce) {
-		this.totalStabilityForce = totalStabilityForce;
+	public void setPushAbsoluteForce(Double pushAbsoluteForce) {
+		this.pushAbsoluteForce = pushAbsoluteForce;
 	}
 
-	public Double getLowerStabilityForce() {
-		return lowerStabilityForce;
+	public Double getPushRelativeForce() {
+		return pushRelativeForce;
 	}
 
-	public void setLowerStabilityForce(Double lowerStabilityForce) {
-		this.lowerStabilityForce = lowerStabilityForce;
+	public void setPushRelativeForce(Double pushRelativeForce) {
+		this.pushRelativeForce = pushRelativeForce;
 	}
 
-	public Double getPushStabilityForce() {
-		return pushStabilityForce;
+	public Double getPullAbsoluteForce() {
+		return pullAbsoluteForce;
 	}
 
-	public void setPushStabilityForce(Double pushStabilityForce) {
-		this.pushStabilityForce = pushStabilityForce;
+	public void setPullAbsoluteForce(Double pullAbsoluteForce) {
+		this.pullAbsoluteForce = pullAbsoluteForce;
 	}
 
-	public Double getPullStabilityForce() {
-		return pullStabilityForce;
+	public Double getPullRelativeForce() {
+		return pullRelativeForce;
 	}
 
-	public void setPullStabilityForce(Double pullStabilityForce) {
-		this.pullStabilityForce = pullStabilityForce;
+	public void setPullRelativeForce(Double pullRelativeForce) {
+		this.pullRelativeForce = pullRelativeForce;
 	}
 
-	public Double getPower1S() {
-		return power1S;
+	public Double getS10PowerOutput() {
+		return s10PowerOutput;
 	}
 
-	public void setPower1S(Double power1s) {
-		power1S = power1s;
+	public void setS10PowerOutput(Double s10PowerOutput) {
+		this.s10PowerOutput = s10PowerOutput;
 	}
 
-	public Double getPower10S() {
-		return power10S;
+	public Double getS60PowerOutput() {
+		return s60PowerOutput;
 	}
 
-	public void setPower10S(Double power10s) {
-		power10S = power10s;
+	public void setS60PowerOutput(Double s60PowerOutput) {
+		this.s60PowerOutput = s60PowerOutput;
 	}
 
-	public Double getPower60S() {
-		return power60S;
+	public Double getS10RelativePower() {
+		return s10RelativePower;
 	}
 
-	public void setPower60S(Double power60s) {
-		power60S = power60s;
+	public void setS10RelativePower(Double s10RelativePower) {
+		this.s10RelativePower = s10RelativePower;
 	}
 
-	public Double getPower4MIN() {
-		return power4MIN;
+	public Double getS60RelativePower() {
+		return s60RelativePower;
 	}
 
-	public void setPower4MIN(Double power4min) {
-		power4MIN = power4min;
+	public void setS60RelativePower(Double s60RelativePower) {
+		this.s60RelativePower = s60RelativePower;
 	}
 
-	public Double getPower1S_BWratio() {
-		return power1S_BWratio;
+	public Double getMileRun() {
+		return mileRun;
 	}
 
-	public void setPower1S_BWratio(Double power1s_BWratio) {
-		power1S_BWratio = power1s_BWratio;
+	public void setMileRun(Double mileRun) {
+		this.mileRun = mileRun;
 	}
 
-	public Double getPower10S_BWratio() {
-		return power10S_BWratio;
+	public Double getKmRun() {
+		return kmRun;
 	}
 
-	public void setPower10S_BWratio(Double power10s_BWratio) {
-		power10S_BWratio = power10s_BWratio;
+	public void setKmRun(Double kmRun) {
+		this.kmRun = kmRun;
 	}
 
-	public Double getPower60s_BWratio() {
-		return power60s_BWratio;
+	public Double getMin4PowerOutput() {
+		return min4PowerOutput;
 	}
 
-	public void setPower60s_BWratio(Double power60s_BWratio) {
-		this.power60s_BWratio = power60s_BWratio;
+	public void setMin4PowerOutput(Double min4PowerOutput) {
+		this.min4PowerOutput = min4PowerOutput;
 	}
 
-	public Double getPower4MIN_BWratio() {
-		return power4MIN_BWratio;
+	public Double getCalories() {
+		return Calories;
 	}
 
-	public void setPower4MIN_BWratio(Double power4min_BWratio) {
-		power4MIN_BWratio = power4min_BWratio;
-	}
-
-	public Double getTotalEfficiency() {
-		return totalEfficiency;
-	}
-
-	public void setTotalEfficiency(Double totalEfficiency) {
-		this.totalEfficiency = totalEfficiency;
-	}
-
-	public Double getDropOff10sTo60s() {
-		return dropOff10sTo60s;
-	}
-
-	public void setDropOff10sTo60s(Double dropOff10sTo60s) {
-		this.dropOff10sTo60s = dropOff10sTo60s;
-	}
-
-	public Double getDropoff60sTo4min() {
-		return dropoff60sTo4min;
-	}
-
-	public void setDropoff60sTo4min(Double dropoff60sTo4min) {
-		this.dropoff60sTo4min = dropoff60sTo4min;
+	public void setCalories(Double calories) {
+		Calories = calories;
 	}
 
 	public Double getVo2Max() {
@@ -608,558 +461,56 @@ public class SurveyData {
 		this.vo2Max = vo2Max;
 	}
 
-	public Double getCalsMin() {
-		return calsMin;
+	public Double getMin4RelativeOutput() {
+		return min4RelativeOutput;
 	}
 
-	public void setCalsMin(Double calsMin) {
-		this.calsMin = calsMin;
+	public void setMin4RelativeOutput(Double min4RelativeOutput) {
+		this.min4RelativeOutput = min4RelativeOutput;
 	}
 
-	public Double getAvgForce() {
-		return avgForce;
+	public String getNotes() {
+		return Notes;
 	}
 
-	public void setAvgForce(Double avgForce) {
-		this.avgForce = avgForce;
+	public void setNotes(String notes) {
+		Notes = notes;
 	}
 
-	public String getClientGoals() {
-		return clientGoals;
+	public Double getMovement() {
+		return movement;
 	}
 
-	public void setClientGoals(String clientGoals) {
-		this.clientGoals = clientGoals;
+	public void setMovement(Double movement) {
+		this.movement = movement;
 	}
 
-	public Double getMobilityScore() {
-		return mobilityScore;
+	public Double getStrength() {
+		return strength;
 	}
 
-	public void setMobilityScore(Double mobilityScore) {
-		this.mobilityScore = mobilityScore;
+	public void setStrength(Double strength) {
+		this.strength = strength;
 	}
 
-	public Double getStabilityScore() {
-		return stabilityScore;
+	public Double getPower() {
+		return power;
 	}
 
-	public void setStabilityScore(Double stabilityScore) {
-		this.stabilityScore = stabilityScore;
+	public void setPower(Double power) {
+		this.power = power;
 	}
 
-	public Double getMovementScore() {
-		return movementScore;
+	public Double getEndurance() {
+		return endurance;
 	}
 
-	public void setMovementScore(Double movementScore) {
-		this.movementScore = movementScore;
-	}
-
-	public Double getAbsoluteStrength() {
-		return absoluteStrength;
-	}
-
-	public void setAbsoluteStrength(Double absoluteStrength) {
-		this.absoluteStrength = absoluteStrength;
-	}
-
-	public Double getRelativeStrength() {
-		return relativeStrength;
-	}
-
-	public void setRelativeStrength(Double relativeStrength) {
-		this.relativeStrength = relativeStrength;
-	}
-
-	public Double getStrengthScore() {
-		return strengthScore;
-	}
-
-	public void setStrengthScore(Double strengthScore) {
-		this.strengthScore = strengthScore;
-	}
-
-	public Double getAbsolutePower() {
-		return absolutePower;
-	}
-
-	public void setAbsolutePower(Double absolutePower) {
-		this.absolutePower = absolutePower;
-	}
-
-	public Double getRelativePower() {
-		return relativePower;
-	}
-
-	public void setRelativePower(Double relativePower) {
-		this.relativePower = relativePower;
-	}
-
-	public Double getPowerScore() {
-		return powerScore;
-	}
-
-	public void setPowerScore(Double powerScore) {
-		this.powerScore = powerScore;
-	}
-
-	public Double getEnduranceScore() {
-		return enduranceScore;
-	}
-
-	public void setEnduranceScore(Double enduranceScore) {
-		this.enduranceScore = enduranceScore;
-	}
-
-	public Double getCoreScore() {
-		return coreScore;
-	}
-
-	public void setCoreScore(Double coreScore) {
-		this.coreScore = coreScore;
-	}
-
-	public Date getTimeStamp() {
-		return timeStamp;
-	}
-
-	public void setTimeStamp(Date timeStamp) {
-		this.timeStamp = timeStamp;
-	}
-
-	public Double getRestingMetabolicRate() {
-		return restingMetabolicRate;
-	}
-
-	public void setRestingMetabolicRate(Double restingMetabolicRate) {
-		this.restingMetabolicRate = restingMetabolicRate;
-	}
-
-	public Double getTotalEnergyExpenditure() {
-		return totalEnergyExpenditure;
-	}
-
-	public void setTotalEnergyExpenditure(Double totalEnergyExpenditure) {
-		this.totalEnergyExpenditure = totalEnergyExpenditure;
-	}
-
-	public Integer getDbPistolSquat_rightLeg() {
-		return dbPistolSquat_rightLeg;
-	}
-
-	public void setDbPistolSquat_rightLeg(Integer dbPistolSquat_rightLeg) {
-		this.dbPistolSquat_rightLeg = dbPistolSquat_rightLeg;
-	}
-
-	public Integer getDbPistolSquat_leftLeg() {
-		return dbPistolSquat_leftLeg;
-	}
-
-	public void setDbPistolSquat_leftLeg(Integer dbPistolSquat_leftLeg) {
-		this.dbPistolSquat_leftLeg = dbPistolSquat_leftLeg;
-	}
-
-	public Double getBroatJump() {
-		return broatJump;
-	}
-
-	public void setBroatJump(Double broatJump) {
-		this.broatJump = broatJump;
-	}
-
-	public Double getBenchPress5RM() {
-		return benchPress5RM;
-	}
-
-	public void setBenchPress5RM(Double benchPress5RM) {
-		this.benchPress5RM = benchPress5RM;
-	}
-
-	public Double getPullUpsMax() {
-		return pullUpsMax;
-	}
-
-	public void setPullUpsMax(Double pullUpsMax) {
-		this.pullUpsMax = pullUpsMax;
-	}
-
-	public Double getRowTime1000m() {
-		return rowTime1000m;
-	}
-
-	public void setRowTime1000m(Double rowTime1000m) {
-		this.rowTime1000m = rowTime1000m;
-	}
-
-	public Double getRowCalories1000m() {
-		return rowCalories1000m;
-	}
-
-	public void setRowCalories1000m(Double rowCalories1000m) {
-		this.rowCalories1000m = rowCalories1000m;
-	}
-
-	public Double getPushUpsMax() {
-		return pushUpsMax;
-	}
-
-	public void setPushUpsMax(Double pushUpsMax) {
-		this.pushUpsMax = pushUpsMax;
-	}
-
-	public Double getExternalShoulderRotationR() {
-		return externalShoulderRotationR;
-	}
-
-	public void setExternalShoulderRotationR(Double externalShoulderRotationR) {
-		this.externalShoulderRotationR = externalShoulderRotationR;
-	}
-
-	public Double getExternalShoulderRotationL() {
-		return externalShoulderRotationL;
-	}
-
-	public void setExternalShoulderRotationL(Double externalShoulderRotationL) {
-		this.externalShoulderRotationL = externalShoulderRotationL;
-	}
-
-	public Double getLowerBodyAbsoluteStrengthScore() {
-		return lowerBodyAbsoluteStrengthScore;
-	}
-
-	public void setLowerBodyAbsoluteStrengthScore(Double lowerBodyAbsoluteStrengthScore) {
-		this.lowerBodyAbsoluteStrengthScore = lowerBodyAbsoluteStrengthScore;
-	}
-
-	public Double getLowerBodyRelativeStrengthScore() {
-		return lowerBodyRelativeStrengthScore;
-	}
-
-	public void setLowerBodyRelativeStrengthScore(Double lowerBodyRelativeStrengthScore) {
-		this.lowerBodyRelativeStrengthScore = lowerBodyRelativeStrengthScore;
-	}
-
-	public Double getPushAbsoluteStrengthScore() {
-		return pushAbsoluteStrengthScore;
-	}
-
-	public void setPushAbsoluteStrengthScore(Double pushAbsoluteStrengthScore) {
-		this.pushAbsoluteStrengthScore = pushAbsoluteStrengthScore;
-	}
-
-	public Double getPushRelativeStrengthScore() {
-		return pushRelativeStrengthScore;
-	}
-
-	public void setPushRelativeStrengthScore(Double pushRelativeStrengthScore) {
-		this.pushRelativeStrengthScore = pushRelativeStrengthScore;
-	}
-
-	public Double getPullAbsoluteStrengthScore() {
-		return pullAbsoluteStrengthScore;
-	}
-
-	public void setPullAbsoluteStrengthScore(Double pullAbsoluteStrengthScore) {
-		this.pullAbsoluteStrengthScore = pullAbsoluteStrengthScore;
-	}
-
-	public Double getPullRelativeStrenghScore() {
-		return pullRelativeStrenghScore;
-	}
-
-	public void setPullRelativeStrenghScore(Double pullRelativeStrenghScore) {
-		this.pullRelativeStrenghScore = pullRelativeStrenghScore;
-	}
-
-	public Double getPeakPowerRelativeScore() {
-		return peakPowerRelativeScore;
-	}
-
-	public void setPeakPowerRelativeScore(Double peakPowerRelativeScore) {
-		this.peakPowerRelativeScore = peakPowerRelativeScore;
-	}
-
-	public Double getPowerAbsoluteScore10s() {
-		return powerAbsoluteScore10s;
-	}
-
-	public void setPowerAbsoluteScore10s(Double powerAbsoluteScore10s) {
-		this.powerAbsoluteScore10s = powerAbsoluteScore10s;
-	}
-
-	public Double getPowerRelativeScore10s() {
-		return powerRelativeScore10s;
-	}
-
-	public void setPowerRelativeScore10s(Double powerRelativeScore10s) {
-		this.powerRelativeScore10s = powerRelativeScore10s;
-	}
-
-	public Double getPowerAbsoluteScore60s() {
-		return powerAbsoluteScore60s;
-	}
-
-	public void setPowerAbsoluteScore60s(Double powerAbsoluteScore60s) {
-		this.powerAbsoluteScore60s = powerAbsoluteScore60s;
-	}
-
-	public Double getPowerRelativeScore60s() {
-		return powerRelativeScore60s;
-	}
-
-	public void setPowerRelativeScore60s(Double powerRelativeScore60s) {
-		this.powerRelativeScore60s = powerRelativeScore60s;
-	}
-
-	public Double getVo2MaxAbsoluteScore() {
-		return vo2MaxAbsoluteScore;
-	}
-
-	public void setVo2MaxAbsoluteScore(Double vo2MaxAbsoluteScore) {
-		this.vo2MaxAbsoluteScore = vo2MaxAbsoluteScore;
-	}
-
-	public Double getPowerAbsoluteScore4min() {
-		return powerAbsoluteScore4min;
-	}
-
-	public void setPowerAbsoluteScore4min(Double powerAbsoluteScore4min) {
-		this.powerAbsoluteScore4min = powerAbsoluteScore4min;
-	}
-
-	public Double getPowerRelativeScore4min() {
-		return powerRelativeScore4min;
-	}
-
-	public void setPowerRelativeScore4min(Double powerRelativeScore4min) {
-		this.powerRelativeScore4min = powerRelativeScore4min;
-	}
-
-	public Integer getMealsPerDay() {
-		return mealsPerDay;
-	}
-
-	public void setMealsPerDay(Integer mealsPerDay) {
-		this.mealsPerDay = mealsPerDay;
-	}
-
-	public Double getProteins() {
-		return proteins;
-	}
-
-	public void setProteins(Double proteins) {
-		this.proteins = proteins;
-	}
-
-	public Double getCarbohydrates() {
-		return carbohydrates;
-	}
-
-	public void setCarbohydrates(Double carbohydrates) {
-		this.carbohydrates = carbohydrates;
-	}
-
-	public Double getFats() {
-		return fats;
-	}
-
-	public void setFats(Double fats) {
-		this.fats = fats;
-	}
-
-	public Double getExtraCalories() {
-		return extraCalories;
-	}
-
-	public void setExtraCalories(Double extraCalories) {
-		this.extraCalories = extraCalories;
-	}
-
-	public Double getWallSquat() {
-		return wallSquat;
-	}
-
-	public void setWallSquat(Double wallSquat) {
-		this.wallSquat = wallSquat;
-	}
-
-	public Double getLateralHipBridgeRight() {
-		return lateralHipBridgeRight;
-	}
-
-	public void setLateralHipBridgeRight(Double lateralHipBridgeRight) {
-		this.lateralHipBridgeRight = lateralHipBridgeRight;
-	}
-
-	public Double getLateralHipBridgeLeft() {
-		return lateralHipBridgeLeft;
-	}
-
-	public void setLateralHipBridgeLeft(Double lateralHipBridgeLeft) {
-		this.lateralHipBridgeLeft = lateralHipBridgeLeft;
-	}
-
-	public Double getPronePlank() {
-		return pronePlank;
-	}
-
-	public void setPronePlank(Double pronePlank) {
-		this.pronePlank = pronePlank;
-	}
-
-	public Double getSeatedTrunkStability() {
-		return seatedTrunkStability;
-	}
-
-	public void setSeatedTrunkStability(Double seatedTrunkStability) {
-		this.seatedTrunkStability = seatedTrunkStability;
-	}
-
-	public Double getDeepWallSquat() {
-		return deepWallSquat;
-	}
-
-	public void setDeepWallSquat(Double deepWallSquat) {
-		this.deepWallSquat = deepWallSquat;
-	}
-
-	public Double getFingerTouchTestRin_Lex() {
-		return fingerTouchTestRin_Lex;
-	}
-
-	public void setFingerTouchTestRin_Lex(Double fingerTouchTestRin_Lex) {
-		this.fingerTouchTestRin_Lex = fingerTouchTestRin_Lex;
-	}
-
-	public Double getFingerTouchTest() {
-		return fingerTouchTest;
-	}
-
-	public void setFingerTouchTest(Double fingerTouchTest) {
-		this.fingerTouchTest = fingerTouchTest;
-	}
-
-	public Double getLegRaiseRight() {
-		return legRaiseRight;
-	}
-
-	public void setLegRaiseRight(Double legRaiseRight) {
-		this.legRaiseRight = legRaiseRight;
-	}
-
-	public Double getLegRaiseLeft() {
-		return legRaiseLeft;
-	}
-
-	public void setLegRaiseLeft(Double legRaiseLeft) {
-		this.legRaiseLeft = legRaiseLeft;
-	}
-
-	public Double getFingerTouchTestSecond() {
-		return fingerTouchTestSecond;
-	}
-
-	public void setFingerTouchTestSecond(Double fingerTouchTestSecond) {
-		this.fingerTouchTestSecond = fingerTouchTestSecond;
-	}
-
-	public Double getFmsDeepSquat() {
-		return fmsDeepSquat;
-	}
-
-	public void setFmsDeepSquat(Double fmsDeepSquat) {
-		this.fmsDeepSquat = fmsDeepSquat;
-	}
-
-	public Double getFmsHurdleStepR() {
-		return fmsHurdleStepR;
-	}
-
-	public void setFmsHurdleStepR(Double fmsHurdleStepR) {
-		this.fmsHurdleStepR = fmsHurdleStepR;
-	}
-
-	public Double getFmsHurdleStepL() {
-		return fmsHurdleStepL;
-	}
-
-	public void setFmsHurdleStepL(Double fmsHurdleStepL) {
-		this.fmsHurdleStepL = fmsHurdleStepL;
-	}
-
-	public Double getFmsaslrR() {
-		return fmsaslrR;
-	}
-
-	public void setFmsaslrR(Double fmsaslrR) {
-		this.fmsaslrR = fmsaslrR;
-	}
-
-	public Double getFmsActiveStraitLegRaise() {
-		return fmsActiveStraitLegRaise;
-	}
-
-	public void setFmsActiveStraitLegRaise(Double fmsActiveStraitLegRaise) {
-		this.fmsActiveStraitLegRaise = fmsActiveStraitLegRaise;
-	}
-
-	public Double getFmsshoulderTestLeftArm() {
-		return fmsshoulderTestLeftArm;
-	}
-
-	public void setFmsshoulderTestLeftArm(Double fmsshoulderTestLeftArm) {
-		this.fmsshoulderTestLeftArm = fmsshoulderTestLeftArm;
-	}
-
-	public Double getFmsshoulderTestRightArm() {
-		return fmsshoulderTestRightArm;
-	}
-
-	public void setFmsshoulderTestRightArm(Double fmsshoulderTestRightArm) {
-		this.fmsshoulderTestRightArm = fmsshoulderTestRightArm;
-	}
-
-	public Double getFmsTrunkPushups() {
-		return fmsTrunkPushups;
-	}
-
-	public void setFmsTrunkPushups(Double fmsTrunkPushups) {
-		this.fmsTrunkPushups = fmsTrunkPushups;
-	}
-
-	public Double getFmsrotaryStabilityRightSide() {
-		return fmsrotaryStabilityRightSide;
-	}
-
-	public void setFmsrotaryStabilityRightSide(Double fmsrotaryStabilityRightSide) {
-		this.fmsrotaryStabilityRightSide = fmsrotaryStabilityRightSide;
-	}
-
-	public Double getFmsrotaryStabilityLeftSide() {
-		return fmsrotaryStabilityLeftSide;
-	}
-
-	public void setFmsrotaryStabilityLeftSide(Double fmsrotaryStabilityLeftSide) {
-		this.fmsrotaryStabilityLeftSide = fmsrotaryStabilityLeftSide;
-	}
-
-	public Double getFmsrotaryMobilityLeftSide() {
-		return fmsrotaryMobilityLeftSide;
-	}
-
-	public void setFmsrotaryMobilityLeftSide(Double fmsrotaryMobilityLeftSide) {
-		this.fmsrotaryMobilityLeftSide = fmsrotaryMobilityLeftSide;
-	}
-
-	public Double getFmsrotaryMobilityRightSide() {
-		return fmsrotaryMobilityRightSide;
-	}
-
-	public void setFmsrotaryMobilityRightSide(Double fmsrotaryMobilityRightSide) {
-		this.fmsrotaryMobilityRightSide = fmsrotaryMobilityRightSide;
-	}
-
+	public void setEndurance(Double endurance) {
+		this.endurance = endurance;
+	} 
+	
+}
+	
+	
 	
 
-}

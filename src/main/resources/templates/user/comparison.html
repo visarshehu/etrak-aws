@@ -1,638 +1,916 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
+
 <head>
-	 <meta charset="utf-8" />
+    <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Comparison</title>
     <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet">
-	<link th:href="@{/css/chart.css}" rel="stylesheet">
-	<link th:href="@{/css/clientStat.css}" rel="stylesheet">
-	<link href='https://fonts.googleapis.com/css?family=Orbitron'
-	rel='stylesheet'>
-<script th:src="@{/js/jquery-3.2.1.min.js}" type="text/javascript"></script>
-<link href='https://fonts.googleapis.com/css?family=Orbitron'
-  rel='stylesheet'>
+    <link th:href="@{/css/chart.css}" rel="stylesheet">
+    <link th:href="@{/css/clientStat.css}" rel="stylesheet">
+    <link href='https://fonts.googleapis.com/css?family=Orbitron' rel='stylesheet'>
+    <script th:src="@{/js/jquery-3.2.1.min.js}" type="text/javascript"></script>
+    <link href='https://fonts.googleapis.com/css?family=Orbitron' rel='stylesheet'>
 
-<style>
-
-
-table {
-    border-collapse: separate;
-    border-spacing : 0.3em 0;
-}
+    <style>
+        table {
+            border-collapse: separate;
+            border-spacing: 0.3em 0;
+        }
 
 
-.table-striped > tbody > tr:nth-child(2n+1) > td, .table-striped > tbody > tr:nth-child(2n+1) > th {
-   background-color: #FFFFFF;
-}
+        .table-striped>tbody>tr:nth-child(2n+1)>td,
+        .table-striped>tbody>tr:nth-child(2n+1)>th {
+            background-color: #FFFFFF;
+        }
 
 
 
-  
- #container3,#container5,#container7,#container9 {
-  top:0;
-  position: absolute;
-  width:300px;
-  height:300px;
-}
-#container4,#container6,#container8,#container10{
-   top:0;
-   position: absolute;
-   top:10px;
-   left:10px;
 
-   width:280px;
-  height:280px;
+        #container3,
+        #container5,
+        #container7,
+        #container9 {
+            top: 0;
+            position: absolute;
+            width: 300px;
+            height: 300px;
+        }
 
-}
+        #container4,
+        #container6,
+        #container8,
+        #container10 {
+            top: 0;
+            position: absolute;
+            top: 10px;
+            left: 10px;
+
+            width: 280px;
+            height: 280px;
+
+        }
 
 
 
-.chart-wrapper1{
+        .chart-wrapper1 {
 
-  height:30px;
-}
+            height: 30px;
+        }
 
 
-.pstyle{
-  font-family: 'Orbitron'; 
-  margin-bottom: 0px;
-  padding-bottom: 0px; 
-  font-size: 10px;
-  text-align: center;
-  
-}
+        .pstyle {
+            font-family: 'Orbitron';
+            margin-bottom: 0px;
+            padding-bottom: 0px;
+            font-size: 10px;
+            text-align: center;
 
-.hstyle{
-  font-family: 'Orbitron';
-   text-align: center; 
-   font-size: 4em; 
-   margin-top: 0px;
-   padding-top: 0px;
+        }
 
-}
+        .hstyle {
+            font-family: 'Orbitron';
+            text-align: center;
+            font-size: 4em;
+            margin-top: 0px;
+            padding-top: 0px;
 
-#improvement {
-    background-color: #15AF43;
-}
-#decent{
-	background-color:#8A3B48;
-}
-#nochange{
-	background-color: #FFD100;
-}
-.box {
-    width: 20px;
-    height: 20px;
-    display: inline-block;
-    vertical-align: middle;
-}
+        }
 
-.explanation {
-    margin-left: 5px;
-    vertical-align: middle;
-    font-family:'Orbitron';
-}
-  </style>
+        #improvement {
+            background-color: #15AF43;
+        }
+
+        #decent {
+            background-color: #8A3B48;
+        }
+
+        #nochange {
+            background-color: #FFD100;
+        }
+
+        .box {
+            width: 20px;
+            height: 20px;
+            display: inline-block;
+            vertical-align: middle;
+        }
+
+        .explanation {
+            margin-left: 5px;
+            vertical-align: middle;
+            font-family: 'Orbitron';
+        }
+
+
+
+        .arrow,
+        .arrow:before {
+            position: absolute;
+            left: 100%;
+        }
+
+        .arrow {
+            width: 30px;
+            height: 30px;
+            top: 97%;
+            left: 95.5%;
+            margin: -20px 0 0 -20px;
+            -webkit-transform: rotate(45deg);
+            border-left: none;
+            border-top: none;
+            border-right: 2px #262626 solid;
+            border-bottom: 2px #262626 solid;
+        }
+
+        .arrow:before {
+            content: "";
+            width: 20px;
+            height: 20px;
+            top: 50%;
+            left: 50%;
+            margin: -10px 0 0 -10px;
+            border-left: none;
+            border-top: none;
+            border-right: 1px #262626 solid;
+            border-bottom: 1px #262626 solid;
+            animation-duration: 2s;
+            animation-iteration-count: infinite;
+            animation-name: arrow;
+        }
+
+        @keyframes arrow {
+            0% {
+                opacity: 1;
+            }
+            100% {
+                opacity: 0;
+                transform: translate(-10px, -10px);
+            }
+        }
+
+
+        .arrowUp,
+        .arrowUp:before {
+            position: absolute;
+            left: 100%;
+        }
+
+        .arrowUp {
+            width: 30px;
+            height: 30px;
+            top: 98%;
+            left: 95.5%;
+            margin: -20px 0 0 -20px;
+            -webkit-transform: rotate(-135deg);
+            border-left: none;
+            border-top: none;
+            border-right: 2px #262626 solid;
+            border-bottom: 2px #262626 solid;
+        }
+
+        .arrowUp:before {
+            content: "";
+            width: 20px;
+            height: 20px;
+            top: 50%;
+            left: 50%;
+            margin: -10px 0 0 -10px;
+            border-left: none;
+            border-top: none;
+            border-right: 1px #262626 solid;
+            border-bottom: 1px #262626 solid;
+            animation-duration: 2s;
+            animation-iteration-count: infinite;
+            animation-name: arrow;
+        }
+
+        @keyframes arrowUp {
+            0% {
+                opacity: 1;
+            }
+            100% {
+                opacity: 0;
+                transform: translate(-10px, -10px);
+            }
+        }
+    </style>
 
 
 </head>
+
 <body>
 
-	<!-- Navigation -->
-	<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
-		<div class="container" id="navContainer">
-			<!-- Brand and toggle get grouped for better mobile display -->
-			<div class="navbar-header">
-				<button type="button" class="navbar-toggle" data-toggle="collapse"
-					data-target="#bs-navbar-collapse-1">
+    <!-- Navigation -->
+    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+        <div class="container" id="navContainer">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-navbar-collapse-1">
 					<span class="sr-only">Toggle navigation</span> <span
 						class="icon-bar"></span> <span class="icon-bar"></span> <span
 						class="icon-bar"></span>
 				</button>
-				<a href="#" class="pull-left"><img th:src="@{/images/logo2.png}"
-					style="height: 70px; width: 230px; padding-top: 15px !important;"
+                <a href="#" class="pull-left"><img th:src="@{/images/logo2.png}"
+					style="height: 70px; width: 230px; padding-top: 10px !important;"
 					class="img-responsive"></a>
-			</div>
-			<div class="collapse navbar-collapse" id="bs-navbar-collapse-1">
-				<ul class="nav navbar-nav navbar-right">
-					<li><form class="navbar-form navbar-right" role="search"
-							id="form-nav">
-							<div class="input-group">
-								<input type="text" class="form-control" placeholder="Search"
-									id="search"> <span class="input-group-btn">
+            </div>
+            <div class="collapse navbar-collapse" id="bs-navbar-collapse-1">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <form class="navbar-form navbar-right" role="search" id="form-nav">
+                            <div class="input-group">
+                                <input type="text" class="form-control" placeholder="Search" id="search"> <span class="input-group-btn">
 									<button type="submit" class="btn btn-default" id="submitButton">
 										<span class="glyphicon glyphicon-search"></span>
-									</button>
-								</span>
-							</div>
-						</form></li>
-					<li><a th:href="@{dashboard.html}">Home</a></li>
-					<li><a th:href="@{clientStat.html}">Clients</a></li>
-					<li><a href="">Traks</a></li>
-					<li><a href="">Reports</a></li>
-					<li><div class="inset">
-						<img th:src="@{/user/clientStat/{userId}(userId=${userId})}"/> 
-						</div></li>
-					<li><div style="padding-left: 3px; padding-right: 30px">
-							<label th:utext="${userName}"
-								style="padding-top: 20px; color: white"></label><br /> <a
-								th:href="@{/login?logout}"
-								style="display: inline; height: 15px !important; padding-top: 2px; color: #2085B8">Sign
+                                </button>
+                                </span>
+                            </div>
+                        </form>
+                    </li>
+                    <li><a th:href="@{dashboard.html}">Home</a></li>
+                    <li><a th:href="@{clientStat.html}">Clients</a></li>
+                    <li><a href="">Traks</a></li>
+                    <li><a href="">Reports</a></li>
+                    <li>
+                        <div class="inset">
+                            <img th:src="@{/user/clientStat/{userId}(userId=${userId})}" />
+                        </div>
+                    </li>
+                    <li>
+                        <div style="padding-left: 3px; padding-right: 30px">
+                            <label th:utext="${userName}" style="padding-top: 20px; color: white"></label><br /> <a th:href="@{/login?logout}" style="display: inline; height: 15px !important; padding-top: 2px; color: #2085B8">Sign
 								Out</a>
-						</div></li>
+                        </div>
+                    </li>
 
-				</ul>
-			</div>
-			<!-- /.navbar-collapse -->
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
 
-		</div>
-		<!-- /.container -->
-	</nav>
-	
-	
+        </div>
+        <!-- /.container -->
+    </nav>
+
+
     <div class="page-header" style="padding-top:70px;padding-left:40px">
         <div class="clearfix">
-        
+
             <div class="row col-md-12">
-            
+
                 <div class="col-sm-6 ">
-                   <div class="col-sm-2"><img th:src="@{/images/user.png}" class="img-circle" alt="User" width="80" height="80">   </div>
-                   <div class="col-sm-10"> 
-                    <div class="row">
-                        <div class="col-sm-12"><h4 style="font-family: 'Orbitron';">Alban Mehmeti</h4></div>
-                     </div>
-                      <div class="row">
-                        <div class="col-sm-3"><p style="font-family: 'Orbitron'; font-size: 10px;">Evaluation: <br/> Date: <br/> Number: <br/></p></div>
-                        <div class="col-sm-4"><p style="font-family: 'Orbitron'; font-size: 10px;">TRAKScore: <br/> Rank: <br/> </p></div>
-                     </div>
-                   </div>
+                    <div class="col-sm-2"><img th:src="@{/images/user.png}" class="img-circle" alt="User" width="80" height="80"> </div>
+                    <div class="col-sm-10 ">
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <h4 style="font-family: 'Orbitron';">Alban Mehmeti</h4>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <p style="font-family: 'Orbitron'; font-size: 10px;">Evaluation: <br/> Date: <br/> Number: <br/></p>
+                            </div>
+                            <div class="col-sm-4">
+                                <p style="font-family: 'Orbitron'; font-size: 10px;">TRAKScore: <br/> Rank: <br/> </p>
+                            </div>
+                        </div>
+                    </div>
 
                 </div>
-                 <div class="col-sm-6" >
+                <div class="col-sm-6">
 
-                   <div class="col-sm-2"><img th:src="@{/images/user.png}" class="img-circle" alt="User" width="80" height="80">   </div>
-                   <div class="col-sm-10"> 
-                    <div class="row">
-                        <div class="col-sm-12"><h4 style="font-family: 'Orbitron';">Alban Mehmeti</h4></div>
-                     </div>
-                      <div class="row">
-                        <div class="col-sm-3"><p style="font-family: 'Orbitron';font-size: 10px;">Evaluation: <br/> Date: <br/> Number: <br/></p></div>
-                        <div class="col-sm-4"><p style="font-family: 'Orbitron';font-size: 10px;">TRAKScore: <br/> Rank: <br/> </p></div>
-                     </div>
-               </div>
-              
-                
-            </div>
-            </div>
+                    <div class="col-sm-2"><img th:src="@{/images/user.png}" class="img-circle" alt="User" width="80" height="80"> </div>
+                    <div class="col-sm-10 ">
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <h4 style="font-family: 'Orbitron';">Alban Mehmeti</h4>
+                            </div>
+                        </div>
+                        <div class="row ">
+                            <div class="col-sm-3">
+                                <p style="font-family: 'Orbitron';font-size: 10px;">Evaluation: <br/> Date: <br/> Number: <br/></p>
+                            </div>
+                            <div class="col-sm-4">
+                                <p style="font-family: 'Orbitron';font-size: 10px;">TRAKScore: <br/> Rank: <br/> </p>
+                            </div>
+                        </div>
+                    </div>
 
-            <div class="row col-md-12" > 
-            <div class="col-sm-6">
-            	<div class="col-sm-3">
-            		<h2 style=" color: green"><strong>23.3%</strong></h2>
-            	</div>
 
-            	<div class="col-sm-3">
-            		<p style="text-align: left; margin-top:20px; font-family: 'Orbitron'">OVERALL<br/>DIFFERENCE</p>
-            	</div>
-
-            	
-            </div>
-
-            <div class="col-sm-6"></div>
-            <div class="col-sm-3">
-            	<button type="button" class="btn btn-lg " style="font-family: 'Orbitron'; font-size: 10px; height: 40px; width: 270px;"><span class="glyphicon glyphicon-transfer"></span>  Change comparison</button>
+                </div>
             </div>
 
-             <div class="col-sm-3">
-            	<button type="button" class="btn  btn-lg" style="font-family: 'Orbitron';font-size: 10px; height: 40px; width: 270px;"><span class="glyphicon glyphicon-remove"></span>  Close comparison</button>
+            <div class="row col-md-12">
+                <div class="col-sm-6">
+                    <div class="col-sm-3">
+                        <h2 style=" color: green"><strong>23.3%</strong></h2>
+                    </div>
+
+                    <div class="col-sm-6 ">
+                        <p style="text-align: left; margin-top:20px; font-family: 'Orbitron'">OVERALL<br/>DIFFERENCE</p>
+                    </div>
+
+
+                </div>
+
+                <div class="col-sm-6"></div>
+                <div class="col-sm-3">
+                    <button type="button" class="btn btn-lg " style="font-family: 'Orbitron'; font-size: 10px; height: 40px; width: 270px;"><span class="glyphicon glyphicon-transfer"></span>  Change comparison</button>
+                </div>
+
+                <div class="col-sm-3">
+                    <button type="button" class="btn  btn-lg" style="font-family: 'Orbitron';font-size: 10px; height: 40px; width: 270px;"><span class="glyphicon glyphicon-remove"></span>  Close comparison</button>
+                </div>
+
             </div>
-  
-            </div>
-            
-
-       
-    </div>
-    </div>
 
 
-<div class="container-fluid">
-    <div class="row">
-        <div class="col-md-5 col-md-offset-7">
-        <div class="col-md-4">
-        <div id="improvement" class="box"></div><span class="explanation">Improvement</span>
-<br></div>
-        <div class="col-md-3"><div id="decent" class="box"></div><span class="explanation">Decent</span>
-<br></div>
-        <div class="col-md-5"><div id="nochange" class="box"></div><span class="explanation">No change</span>
-<br></div>
-        </div>
-        </div>
-
-        <div class="row col-md-12 center-block" id="firstRow">
-
-      <div class="col-sm-6 col-md-3  ">
-        <div class="chart-wrapper">
-          <div class="chart-title"></div>
-          <div class="chart-stage" style="position:relative">
-              <div id="container3"></div>
-              <div id="container4"></div>
-          </div>
-          <div class="chart-notes"></div>
-        </div>
-      </div>
-      <div class="col-sm-6 col-md-3 ">
-        <div class="chart-wrapper">
-          <div class="chart-title"></div>
-          <div class="chart-stage"  style="position:relative">
-            <div id="container5"></div>
-              <div id="container6"></div>
-          </div>
-          <div class="chart-notes"></div>
-        </div>
-      </div>
-      <div class="col-sm-6 col-md-3 ">
-        <div class="chart-wrapper">
-          <div class="chart-title"></div>
-          <div class="chart-stage"  style="position:relative">
-            <div id="container7"></div>
-            <div id="container8"></div>
-          </div>
-          <div class="chart-notes"></div>
-        </div>
-      </div>
-
-      <div class="col-sm-6 col-md-3">
-        <div class="chart-wrapper">
-          <div class="chart-title"></div>
-
-          <div class="chart-stage"  style="position:relative">
-              <div id="container9"></div>
-            <div id="container10"></div>
-
-          </div>
-
-          <div class="chart-notes"></div>
 
         </div>
-
-      </div>
-
-    </div>
-   
-
-
-  </div>
-
-
-<br/><br/>
-
-<div class="wrapper" style="margin-left:0px; margin-right:0x; background-color:#F9F9F9;">
-<div class="container" >
-
-
-<div class="row col-md-12 center-bock"> 
-    <div class="col-md-6" style="background-color: white; margin-top:20px">
-
-      <div class="row col-md-12">
-        <div class="col-md-3">
-          <p class="pstyle">MOVEMENT</p>
-          <h1 class="hstyle" style="color: #15AF43"><strong>8</strong></h1>
-          <div class="chart-wrapper1">
-
-                <div class="chart-title"></div>
-                <div class="chart-stage">
-                  <div id="mobility2"></div>
-                </div>
-                <div class="chart-notes"></div>
-
-              </div>
-
-              <div class="chart-wrapper1">
-
-                <div class="chart-title"></div>
-                <div class="chart-stage">
-                  <div id="stability2"></div>
-                </div>
-                <div class="chart-notes"></div>
-                
-              </div>
-        </div>
-
-        <div class="col-md-3">
-          <p class="pstyle">STRENGTH</p>
-          <h1 class="hstyle" style="color: #972F3D"><strong>6</strong></h1>
-          <div class="chart-wrapper1">
-
-                <div class="chart-title"></div>
-                <div class="chart-stage">
-                  <div id="lower2"></div>
-                </div>
-                <div class="chart-notes"></div>
-                
-              </div>
-          
-          <div class="chart-wrapper1">
-
-                <div class="chart-title"></div>
-                <div class="chart-stage">
-                  <div id="push2"></div>
-                </div>
-                <div class="chart-notes"></div>
-                
-              </div>
-
-              <div class="chart-wrapper1">
-
-                <div class="chart-title"></div>
-                <div class="chart-stage">
-                  <div id="pull2"></div>
-                </div>
-                <div class="chart-notes"></div>
-                
-              </div>
-        </div>
-
-        <div class="col-md-3">
-
-          <p class="pstyle">POWER</p>
-          <h1 class="hstyle" style="color: #15AF43"><strong>5</strong></h1>
-          <div class="chart-wrapper1">
-
-                <div class="chart-title"></div>
-                <div class="chart-stage">
-                  <div id="absolutep2"></div>
-                </div>
-                <div class="chart-notes"></div>
-                
-              </div>
-          
-          <div class="chart-wrapper1">
-            
-                <div class="chart-title"></div>
-                <div class="chart-stage">
-                  <div id="relativep2"></div>
-                </div>
-                <div class="chart-notes"></div>
-                
-              </div>
-        </div>
-
-        <div class="col-md-3">
-          <p class="pstyle">ENDURANCE</p>
-          <h1 class="hstyle" style="color: #FFD100"><strong>3</strong></h1>
-          <div class="chart-wrapper1" style="padding-top: 0px; padding-bottom:0px; margin-top: 0px; margin-bottom: 0px;">
-
-                <div class="chart-title"></div>
-                <div class="chart-stage">
-                  <div id="absolutee2"></div>
-                </div>
-                <div class="chart-notes"></div>
-                
-              </div>
-
-              <div class="chart-wrapper1">
-
-                <div class="chart-title"></div>
-                <div class="chart-stage">
-                  <div id="relativee2"></div>
-                </div>
-                <div class="chart-notes"></div>
-                
-              </div>
-          
-        </div>
-      </div>
-      
     </div>
 
-    <div class="col-md-6"  style="background-color: white; margin-top:20px;">
-      <div class="row col-md-12" >
-        <div class="col-md-3">
-          <p class="pstyle">MOVEMENT</p>
-          <h1 class="hstyle"><strong>6</strong></h1>
-          <div class="chart-wrapper1">
 
-                <div class="chart-title"></div>
-                <div class="chart-stage">
-                  <div id="mobility1"></div>
-                </div>
-                <div class="chart-notes"></div>
-
-              </div>
-
-              <div class="chart-wrapper1">
-
-                <div class="chart-title"></div>
-                <div class="chart-stage">
-                  <div id="stability1"></div>
-                </div>
-                <div class="chart-notes"></div>
-                
-              </div>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-5 col-md-offset-7">
+                <div class="col-md-4 " style="text-align:center">
+                    <div id="improvement" class="box"></div><span class="explanation">Improvement</span>
+                    <br></div>
+                <div class="col-md-3 col-md-offset-1" style="text-align:center">
+                    <div id="decent" class="box"></div><span class="explanation">Decent</span>
+                    <br></div>
+                <div class="col-md-4 " style="text-align:right">
+                    <div id="nochange" class="box"></div><span class="explanation">No change</span>
+                    <br></div>
+            </div>
         </div>
 
-        <div class="col-md-3">
-          <p class="pstyle">STRENGTH</p>
-          <h1 class="hstyle"><strong>7</strong></h1>
-          <div class="chart-wrapper1">
+        <div class="row col-md-12 center-block">
 
-                <div class="chart-title"></div>
-                <div class="chart-stage">
-                  <div id="lower1"></div>
+            <div class="col-sm-6 col-md-3  ">
+                <div class="chart-wrapper">
+                    <div class="chart-title"></div>
+                    <div class="chart-stage" style="position:relative">
+                        <div id="container3"></div>
+                        <div id="container4"></div>
+                    </div>
+                    <div class="chart-notes"></div>
                 </div>
-                <div class="chart-notes"></div>
-                
-              </div>
-          
-          <div class="chart-wrapper1">
-
-                <div class="chart-title"></div>
-                <div class="chart-stage">
-                  <div id="push1"></div>
+            </div>
+            <div class="col-sm-6 col-md-3 ">
+                <div class="chart-wrapper">
+                    <div class="chart-title"></div>
+                    <div class="chart-stage" style="position:relative">
+                        <div id="container5"></div>
+                        <div id="container6"></div>
+                    </div>
+                    <div class="chart-notes"></div>
                 </div>
-                <div class="chart-notes"></div>
-                
-              </div>
-
-              <div class="chart-wrapper1">
-
-                <div class="chart-title"></div>
-                <div class="chart-stage">
-                  <div id="pull1"></div>
+            </div>
+            <div class="col-sm-6 col-md-3 ">
+                <div class="chart-wrapper">
+                    <div class="chart-title"></div>
+                    <div class="chart-stage" style="position:relative">
+                        <div id="container7"></div>
+                        <div id="container8"></div>
+                    </div>
+                    <div class="chart-notes"></div>
                 </div>
-                <div class="chart-notes"></div>
-                
-              </div>
+            </div>
+
+            <div class="col-sm-6 col-md-3">
+                <div class="chart-wrapper">
+                    <div class="chart-title"></div>
+
+                    <div class="chart-stage" style="position:relative">
+                        <div id="container9"></div>
+                        <div id="container10"></div>
+
+                    </div>
+
+                    <div class="chart-notes"></div>
+
+                </div>
+
+            </div>
+
         </div>
 
-        <div class="col-md-3">
 
-          <p class="pstyle">POWER</p>
-          <h1 class="hstyle"><strong>4</strong></h1>
-          <div class="chart-wrapper1">
 
-                <div class="chart-title"></div>
-                <div class="chart-stage">
-                  <div id="absolutep1"></div>
-                </div>
-                <div class="chart-notes"></div>
-                
-              </div>
-          
-          <div class="chart-wrapper1">
-            
-                <div class="chart-title"></div>
-                <div class="chart-stage">
-                  <div id="relativep1"></div>
-                </div>
-                <div class="chart-notes"></div>
-                
-              </div>
-        </div>
-
-        <div class="col-md-3">
-          <p class="pstyle">ENDURANCE</p>
-          <h1 class="hstyle"><strong>3</strong></h1>
-          <div class="chart-wrapper1">
-
-                <div class="chart-title"></div>
-                <div class="chart-stage">
-                  <div id="absolutee1"></div>
-                </div>
-                <div class="chart-notes"></div>
-                
-              </div>
-
-              <div class="chart-wrapper1">
-
-                <div class="chart-title"></div>
-                <div class="chart-stage">
-                  <div id="relativee1"></div>
-                </div>
-                <div class="chart-notes"></div>
-                
-              </div>
-          
-        </div>
-      </div>
-      
     </div>
 
-  </div>
-  
-  <br/> <br/>
+
+    <br/><br/>
+
+    <div class="wrapper" style="margin-left:0px; margin-right:0x; background-color:#F9F9F9;">
+        <div class="container-fluid" style="margin-left:2%">
+
+
+            <div class="row col-md-12 center-bock col-sm-6" style="margin-left:0.2%">
+                <div class="col-md-6" style="background-color: white; margin-top:20px">
+
+                    <div class="row col-md-12">
+                        <div class="col-md-3 col-sm-6 col-sx-6">
+                            <p class="pstyle">MOVEMENT</p>
+                            <h1 class="hstyle" style="color: #778899"><strong>8</strong></h1>
+                            <div class="chart-wrapper1">
+
+                                <div class="chart-title"></div>
+                                <div class="chart-stage">
+                                    <div id="mobility2"></div>
+                                </div>
+                                <div class="chart-notes"></div>
+
+                            </div>
+
+                            <div class="chart-wrapper1">
+
+                                <div class="chart-title"></div>
+                                <div class="chart-stage">
+                                    <div id="stability2"></div>
+                                </div>
+                                <div class="chart-notes"></div>
+
+                            </div>
+                        </div>
+
+                        <div class="col-md-3 col-sm-6 col-sx-6">
+                            <p class="pstyle">STRENGTH</p>
+                            <h1 class="hstyle" style="color: #778899"><strong>6</strong></h1>
+                            <div class="chart-wrapper1">
+
+                                <div class="chart-title"></div>
+                                <div class="chart-stage">
+                                    <div id="lower2"></div>
+                                </div>
+                                <div class="chart-notes"></div>
+
+                            </div>
+
+                            <div class="chart-wrapper1">
+
+                                <div class="chart-title"></div>
+                                <div class="chart-stage">
+                                    <div id="push2"></div>
+                                </div>
+                                <div class="chart-notes"></div>
+
+                            </div>
+
+
+                        </div>
+
+                        <div class="col-md-3 col-sm-6 col-sx-6">
+
+                            <p class="pstyle">POWER</p>
+                            <h1 class="hstyle" style="color: #778899"><strong>5</strong></h1>
+                            <div class="chart-wrapper1">
+
+                                <div class="chart-title"></div>
+                                <div class="chart-stage">
+                                    <div id="absolutep2"></div>
+                                </div>
+                                <div class="chart-notes"></div>
+
+                            </div>
+
+                            <div class="chart-wrapper1">
+
+                                <div class="chart-title"></div>
+                                <div class="chart-stage">
+                                    <div id="relativep2"></div>
+                                </div>
+                                <div class="chart-notes"></div>
+
+                            </div>
+                        </div>
+
+                        <div class="col-md-3 col-sm-6 col-sx-6">
+                            <p class="pstyle">ENDURANCE</p>
+                            <h1 class="hstyle" style="color: #778899"><strong>3</strong></h1>
+                            <div class="chart-wrapper1" style="padding-top: 0px; padding-bottom:0px; margin-top: 0px; margin-bottom: 0px;">
+
+                                <div class="chart-title"></div>
+                                <div class="chart-stage">
+                                    <div id="absolutee2"></div>
+                                </div>
+                                <div class="chart-notes"></div>
+
+                            </div>
+
+                            <div class="chart-wrapper1">
+
+                                <div class="chart-title"></div>
+                                <div class="chart-stage">
+                                    <div id="relativee2"></div>
+                                </div>
+                                <div class="chart-notes"></div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <div class="col-md-6" style="background-color: white; margin-top:20px;">
+                    <div class="row col-md-12 col-sm-12">
+                        <div class="col-md-3 col-sm-6 col-sx-6">
+                            <p class="pstyle">MOVEMENT</p>
+                            <h1 class="hstyle" style="color:#434343"><strong>6</strong></h1>
+                            <div class="chart-wrapper1">
+
+                                <div class="chart-title"></div>
+                                <div class="chart-stage">
+                                    <div id="mobility1"></div>
+                                </div>
+                                <div class="chart-notes"></div>
+
+                            </div>
+
+                            <div class="chart-wrapper1">
+
+                                <div class="chart-title"></div>
+                                <div class="chart-stage">
+                                    <div id="stability1"></div>
+                                </div>
+                                <div class="chart-notes"></div>
+
+                            </div>
+                        </div>
+
+                        <div class="col-md-3 col-sm-6 col-sx-6">
+                            <p class="pstyle">STRENGTH</p>
+                            <h1 class="hstyle" style="color:#434343"><strong>7</strong></h1>
+                            <div class="chart-wrapper1">
+
+                                <div class="chart-title"></div>
+                                <div class="chart-stage">
+                                    <div id="lower1"></div>
+                                </div>
+                                <div class="chart-notes"></div>
+
+                            </div>
+
+                            <div class="chart-wrapper1">
+
+                                <div class="chart-title"></div>
+                                <div class="chart-stage">
+                                    <div id="push1"></div>
+                                </div>
+                                <div class="chart-notes"></div>
+
+                            </div>
+
+
+                        </div>
+
+                        <div class="col-md-3 col-sm-6 col-sx-6">
+
+                            <p class="pstyle">POWER</p>
+                            <h1 class="hstyle" style="color:#434343"><strong>4</strong></h1>
+                            <div class="chart-wrapper1">
+
+                                <div class="chart-title"></div>
+                                <div class="chart-stage">
+                                    <div id="absolutep1"></div>
+                                </div>
+                                <div class="chart-notes"></div>
+
+                            </div>
+
+                            <div class="chart-wrapper1">
+
+                                <div class="chart-title"></div>
+                                <div class="chart-stage">
+                                    <div id="relativep1"></div>
+                                </div>
+                                <div class="chart-notes"></div>
+
+                            </div>
+                        </div>
+
+                        <div class="col-md-3 col-sm-6 col-sx-6">
+                            <p class="pstyle">ENDURANCE</p>
+                            <h1 class="hstyle" style="color:#434343"><strong>3</strong></h1>
+                            <div class="chart-wrapper1">
+
+                                <div class="chart-title"></div>
+                                <div class="chart-stage">
+                                    <div id="absolutee1"></div>
+                                </div>
+                                <div class="chart-notes"></div>
+
+                            </div>
+
+                            <div class="chart-wrapper1">
+
+                                <div class="chart-title"></div>
+                                <div class="chart-stage">
+                                    <div id="relativee1"></div>
+                                </div>
+                                <div class="chart-notes"></div>
+
+                            </div>
+
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+
+            <br/> <br/>
 
 
 
-    <div class="row col-md-12 center-block">
-    
-      <h2 style="font-family: 'Orbitron';" >Analytics</h2>
-        <div class="col-sm-12 col-md-12 table-responsive ">
-          <h4 style="color: #2085B8; font-family: 'Orbitron';">MOVEMENT
-            / MOBILITY</h4>
-          <table class="table table-striped" style="font-family: 'Orbitron'; font-size: 11px">
-            <thead style="background-color:#D9D9D9 ">
-              <tr>
-                <th class="col-xs-1">Alban #2</th>
-                <th class="col-xs-3">Trak Score</th>
-                <th class="col-xs-3">Exercise Type</th>
-                <th class="col-xs-1">Alban #1</th>
-                 <th class="col-xs-3">Trak Score #1</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>90</td>
-                <td id="shoulderR"></td>
-                <td>Deep Squat Hip Flexion(deg)</td>
-                <td>90</td>
-                <td id="shoulderL"></td>
-                
-              </tr>
-              <tr>
-                <td>160</td>
-                <td id="externalShoulderR"></td>
-                <td>Shoulder Flexion L(deg)</td>
-                <td>160</td>
-                <td id="externalShoulderL"></td>
-                
-              </tr>
-              <tr>
-              <td>160</td>
-                <td id="internalShoulderR"></td>
-                <td>Shoulder Flexion R(deg)</td>
-                <td>90</td>
-                <td id="internalShoulderL"></td>
-                
-              </tr>
-              <tr>
-              <td>115</td>
-                <td id="trunkRotationR"></td>
-                <td>External Shoulder Rotation-R-(deg)</td>
-                <td>115</td>
-                <td id="trunkRotationL"></td>
-                
-              </tr>
-              <tr>
-              <td>67</td>
-                <td id="hipBridgeR"></td>
-                <td>External Shoulder Rotation-L-(deg)</td>
-                <td>67</td>
-                <td id="hipBridgeL"></td>
-                
-              </tr>
-              <tr>
-              <td>128</td>
-                <td id="plank"></td>
-                <td>Internal Shoulder Rotation-R-(deg)</td>
-                <td>128</td>
-                <td id="plankL"></td>
-                
-              </tr>
-              <tr>
-              <td>73</td>
-                <td id="trunk"></td>
-                <td>Internal Shoulder Rotation-L-(deg)</td>
-                <td>73</td>
-                <td id="boraL"></td>
-               
-              </tr>
-              <tr>
-              <td>44</td>
-                <td id="florR"></td>
-                <td>Trunk Rotation-R-(deg)</td>
-                <td>44</td>
-                <td id="florL"></td>
-               
-              </tr>
-              <tr>
+            <div class="row col-md-12 col-sm-12 center-block">
 
-              <td>46</td>
-                <td id="extFloor"></td>
-                <td>Trunk Rotation-L-(deg)</td>
-                <td>46</td>
-                <td id="intFloor"></td>
-                
-              </tr>
-            </tbody>
-          </table>
+                <h2 style="font-family: 'Orbitron';">Analytics</h2>
+                <div class="col-sm-12 col-md-12 table-responsive ">
+                    <h4 style="color: #2085B8; font-family: 'Orbitron';">MOVEMENT / MOBILITY</h4>
+                    <table class="table table-striped" style="font-family: 'Orbitron'; font-size: 11px">
+                        <thead style="background-color:#D9D9D9 ">
+                            <tr>
+                                <th class="col-xs-1">Alban #2</th>
+                                <th class="col-xs-3">Trak Score</th>
+                                <th class="col-xs-3">Exercise Type</th>
+                                <th class="col-xs-1">Alban #1</th>
+                                <th class="col-xs-3">Trak Score #1</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>90</td>
+                                <td id="shoulderR"></td>
+                                <td>Deep Squat Hip Flexion(deg)</td>
+                                <td>90</td>
+                                <td id="shoulderL"></td>
+
+                            </tr>
+                            <tr>
+                                <td>160</td>
+                                <td id="externalShoulderR"></td>
+                                <td>Shoulder Flexion L(deg)</td>
+                                <td>160</td>
+                                <td id="externalShoulderL"></td>
+
+                            </tr>
+                            <tr>
+                                <td>160</td>
+                                <td id="internalShoulderR"></td>
+                                <td>Shoulder Flexion R(deg)</td>
+                                <td>90</td>
+                                <td id="internalShoulderL"></td>
+
+                            </tr>
+
+                            <tr>
+                                <td>44</td>
+                                <td id="florR"></td>
+                                <td>Trunk Rotation-R-(deg)</td>
+                                <td>44</td>
+                                <td id="florL"></td>
+
+                            </tr>
+                            <tr>
+
+                                <td>46</td>
+                                <td id="extFloor"></td>
+                                <td>Trunk Rotation-L-(deg)</td>
+                                <td>46</td>
+                                <td id="intFloor"></td>
+
+                            </tr>
+                        </tbody>
+                    </table>
+
+                </div>
+
+
+                <div class="col-sm-12 col-md-12 table-responsive " id="myContent" style="display:none">
+                    <h4 style="color: #2085B8; font-family: 'Orbitron';">STABILITY</h4>
+                    <table class="table table-striped" style="font-family: 'Orbitron'; font-size: 11px">
+                        <thead style="background-color:#D9D9D9 ">
+                            <tr>
+                                <th class="col-xs-1">Alban #2</th>
+                                <th class="col-xs-3">Trak Score</th>
+                                <th class="col-xs-3">Exercise Type</th>
+                                <th class="col-xs-1">Alban #1</th>
+                                <th class="col-xs-3">Trak Score #1</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>90</td>
+                                <td id="pistolSquatR"></td>
+                                <td>Pistol Squat -R-</td>
+                                <td>90</td>
+                                <td id="pistolSquatR1"></td>
+
+                            </tr>
+                            <tr>
+                                <td>160</td>
+                                <td id="pistolSquatL"></td>
+                                <td>Pistol Squat -L-</td>
+                                <td>160</td>
+                                <td id="pistolSquatL1"></td>
+
+                            </tr>
+                            <tr>
+                                <td>160</td>
+                                <td id="proneRH"></td>
+                                <td>Prone RH/LF</td>
+                                <td>90</td>
+                                <td id="proneRH1"></td>
+
+                            </tr>
+
+                            <tr>
+                                <td>44</td>
+                                <td id="proneLH"></td>
+                                <td>Prone LH/RF</td>
+                                <td>44</td>
+                                <td id="proneLH1"></td>
+
+                            </tr>
+                            <tr>
+
+                                <td>46</td>
+                                <td id="vSit"></td>
+                                <td>V Sit</td>
+                                <td>46</td>
+                                <td id="vSit1"></td>
+
+                            </tr>
+                        </tbody>
+                    </table>
+                    <h4 style="color: #2085B8; font-family: 'Orbitron';">STRENGTH</h4>
+                    <table class="table table-striped" style="font-family: 'Orbitron'; font-size: 11px">
+                        <thead style="background-color:#D9D9D9 ">
+                            <tr>
+                                <th class="col-xs-1">Alban #2</th>
+                                <th class="col-xs-3">Trak Score</th>
+                                <th class="col-xs-3">Exercise Type</th>
+                                <th class="col-xs-1">Alban #1</th>
+                                <th class="col-xs-3">Trak Score #1</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>90</td>
+                                <td id="lowerAbs"></td>
+                                <td>Lower Absolute Force</td>
+                                <td>90</td>
+                                <td id="lowerAbs1"></td>
+
+                            </tr>
+                            <tr>
+                                <td>160</td>
+                                <td id="lowerRel"></td>
+                                <td>Lower Relative Force</td>
+                                <td>160</td>
+                                <td id="lowerRel1"></td>
+
+                            </tr>
+                            <tr>
+                                <td>160</td>
+                                <td id="pushAbs"></td>
+                                <td>Push Absolute Force</td>
+                                <td>90</td>
+                                <td id="pushAbs1"></td>
+
+                            </tr>
+
+                            <tr>
+                                <td>44</td>
+                                <td id="pushRel"></td>
+                                <td>Push Relative Force</td>
+                                <td>44</td>
+                                <td id="pushRel1"></td>
+
+                            </tr>
+                            <tr>
+
+                                <td>46</td>
+                                <td id="pullAbs"></td>
+                                <td>Pull Absolute Force</td>
+                                <td>46</td>
+                                <td id="pullAbs1"></td>
+
+                            </tr>
+                            <tr>
+                                <td>46</td>
+                                <td id="pullRel"></td>
+                                <td>Pull Relative Force</td>
+                                <td>46</td>
+                                <td id="pullRel1"></td>
+
+                            </tr>
+                        </tbody>
+                    </table>
+                    <h4 style="color: #2085B8; font-family: 'Orbitron';">POWER</h4>
+                    <table class="table table-striped" style="font-family: 'Orbitron'; font-size: 11px">
+                        <thead style="background-color:#D9D9D9 ">
+                            <tr>
+                                <th class="col-xs-1">Alban #2</th>
+                                <th class="col-xs-3">Trak Score</th>
+                                <th class="col-xs-3">Exercise Type</th>
+                                <th class="col-xs-1">Alban #1</th>
+                                <th class="col-xs-3">Trak Score #1</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>90</td>
+                                <td id="10sRel"></td>
+                                <td>10s Relative Power</td>
+                                <td>90</td>
+                                <td id="10sRel1"></td>
+
+                            </tr>
+                            <tr>
+                                <td>160</td>
+                                <td id="60sRel"></td>
+                                <td>60s Relative Power</td>
+                                <td>160</td>
+                                <td id="60sRel1"></td>
+
+                            </tr>
+
+
+                        </tbody>
+                    </table>
+                    <h4 style="color: #2085B8; font-family: 'Orbitron';">ENDURANCE</h4>
+                    <table class="table table-striped" style="font-family: 'Orbitron'; font-size: 11px">
+                        <thead style="background-color:#D9D9D9 ">
+                            <tr>
+                                <th class="col-xs-1">Alban #2</th>
+                                <th class="col-xs-3">Trak Score</th>
+                                <th class="col-xs-3">Exercise Type</th>
+                                <th class="col-xs-1">Alban #1</th>
+                                <th class="col-xs-3">Trak Score #1</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>90</td>
+                                <td id="vo2"></td>
+                                <td>Vo2 Max</td>
+                                <td>90</td>
+                                <td id="vo21"></td>
+
+                            </tr>
+                            <tr>
+                                <td>160</td>
+                                <td id="4minRel"></td>
+                                <td>4min Relative Power</td>
+                                <td>160</td>
+                                <td id="4minRel1"></td>
+
+                            </tr>
+
+
+                        </tbody>
+                    </table>
+                    <div class="row col-md-12">
+                        <h1>&nbsp;</h1>
+                    </div>
+                </div>
+
+                <div class="arrow" id="arrowDown"></div>
+                <div class="arrowUp" id="arrowUp" style="display:none;"></div>
+            </div>
+
+
+
 
         </div>
-       
-   
-      </div>
-      
-      
-	
+    </div>
+    <script>
+        $(document).ready(function() {
+            document.getElementById('arrowDown').style.cursor = "pointer";
+            document.getElementById('arrowUp').style.cursor = "pointer";
+            $(".arrow").click(function() {
+                $("#myContent").slideToggle();
+                document.getElementById('arrowDown').style.display = 'none';
+                document.getElementById('arrowUp').style.display = 'block';
+            });
 
-</div>
-</div>
+            $(".arrowUp").click(function() {
+                $("#myContent").slideToggle();
+                document.getElementById('arrowDown').style.display = 'block';
+                document.getElementById('arrowUp').style.display = 'none';
+            });
+        });
+    </script>
+    <script th:src="@{/js/progressbar.min.js}" type="text/javascript"></script>
+    <script th:src="@{/js/comparisonChart.js}" type="text/javascript"></script>
 
-	<script th:src="@{/js/progressbar.min.js}" type="text/javascript"></script>
-	<script th:src="@{/js/comparisonChart.js}" type="text/javascript"></script>
-		
-	<script th:src="@{/js/bootstrap.min.js}" type="text/javascript"></script>
+    <script th:src="@{/js/bootstrap.min.js}" type="text/javascript"></script>
 
 </body>
+
 </html>

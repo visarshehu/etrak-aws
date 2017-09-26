@@ -39,10 +39,7 @@ public class Client {
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	@Temporal(TemporalType.DATE)
 	private Date birthDate;
-	
-	@Column(name = "nutritional_Goal")
-	private String nutritionalGoal;
-	
+		
 	@Column(name = "address")
 	private String address;
 	
@@ -98,14 +95,7 @@ public class Client {
 		this.birthDate = birthDate;
 	}
 
-	public String getNutritionalGoal() {
-		return nutritionalGoal;
-	}
-
-	public void setNutritionalGoal(String nutritionalGoal) {
-		this.nutritionalGoal = nutritionalGoal;
-	}
-
+	
 	public String getAddress() {
 		return address;
 	}
@@ -121,8 +111,5 @@ public class Client {
 	public void setSurveyData(List<SurveyData> surveyData) {
 		this.surveyData = surveyData;
 	}
-
-	
-	
 
 }
