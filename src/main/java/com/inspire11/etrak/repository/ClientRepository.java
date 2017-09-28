@@ -9,4 +9,5 @@ import com.inspire11.etrak.model.Client;
 @Repository("clientRepository")
 public interface ClientRepository extends JpaRepository<Client,Long> {
 	 Client findByEmail(String email);
+	 
 }

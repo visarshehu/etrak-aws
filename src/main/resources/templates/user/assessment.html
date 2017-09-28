@@ -96,7 +96,7 @@
                     <li><a href="">Reports</a></li>
                     <li>
                         <div class="inset">
-                            <img th:src="@{/user/clientStat/{userId}(userId=${userId})}" alt="" />
+                            <img th:src="@{/images/user.png}" />
                         </div>
                     </li>
                     <li>
@@ -809,28 +809,48 @@
 
                                     <div class="form-group">
                                         <div class="row">
-                                            <div class="col-md-4 nopadding" id="mileRun">
+                                            <div class="col-md-3 nopadding" id="mileRun">
                                                 <label class="control-label">1 Mile Run</label>
                                                 <input class="form-control  input-lg" name="60sRowWatts" type="text" />
 
                                             </div>
+                                              <div class="col-md-3 nopadding" id="mileRun">
+                                                <label class="control-label">&nbsp;</label>
+                                                <input class="form-control  input-lg" name="60sRowWatts" type="text" />
+
+                                            </div>
+                                           
                                             <div class="col-md-4 nopadding" id="metersRun" style="display:none">
                                                 <label class="control-label">1000 Meters Run</label>
                                                 <input class="form-control  input-lg" name="60sRowWatts" type="text" />
 
                                             </div>
-                                            <div class="col-md-4 nopadding">
-                                                <label class="control-label">4min Power Output</label>
-                                                <input class="form-control  input-lg" name="4minWatts" type="text" />
+                                            
+                                             <div class="col-md-4 nopadding" id="metersRun" style="display:none">
+                                                <label class="control-label">&nbsp;</label>
+                                                <input class="form-control  input-lg" name="60sRowWatts" type="text" />
 
                                             </div>
+                           
 
-                                            <div class="col-md-4 nopadding">
-                                                <label class="control-label">Calories</label>
-                                                <input class="form-control  input-lg" name="1000mRowTime" type="text" />
 
+                                        </div>
+                                        <br/>
+                                       
+                                        <div class="row">
+                                        <div class="col-md-6 col-md-offset-3 nopadding">
+                                        <label class="control-label">1000m Row Time</label>
+                                        <div class="row">
+                                            <div class="col-md-5">
+                                                <input class="form-control  input-lg" name="1000mRowTime" type="number" min="0" max="60"  placeholder="0" /> 
+                                            </div>
+                                        
+                                            <div  class="col-md-5">
+                                                <input class="form-control  input-lg" name="1000mRowTime" type="number" min="0" max="60" placeholder="00" />
                                             </div>
                                         </div>
+                                        </div>
+										</div>
 
 
                                     </div>
