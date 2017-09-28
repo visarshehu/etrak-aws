@@ -6,6 +6,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 
 @Entity
 public class SurveyData {
@@ -16,15 +18,18 @@ public class SurveyData {
 	private Long Id;
 
 	@ManyToOne
-	@JoinColumn(name = "CLIENT_ID",referencedColumnName="client_id")
-	private Client clientId;
-
+	@JsonBackReference
+	@JoinColumn(name = "client_id")
+	public Client client;
+	
 	@ManyToOne
-	@JoinColumn(name = "ACTIVITYLEVEL_ID",referencedColumnName="activitylevel_id")
+	@JoinColumn(name = "ACTIVITYLEVEL_ID")
 	private ActivityLevel activityLevelId;
 	
 	@Column(name = "nutritional_Goal")
 	private String nutritionalGoal;
+	
+	private Double etrakScore;
 
 	private String unit; 
 	
@@ -123,15 +128,16 @@ public class SurveyData {
 	public void setId(Long id) {
 		Id = id;
 	}
+	
 
-	public Client getClientId() {
-		return clientId;
+	public Client getClient() {
+		return client;
 	}
 
-	public void setClientId(Client clientId) {
-		this.clientId = clientId;
+	public void setClient(Client client) {
+		this.client = client;
 	}
-
+	
 	public ActivityLevel getActivityLevelId() {
 		return activityLevelId;
 	}
@@ -507,6 +513,14 @@ public class SurveyData {
 
 	public void setEndurance(Double endurance) {
 		this.endurance = endurance;
+	}
+
+	public Double getEtrakScore() {
+		return etrakScore;
+	}
+
+	public void setEtrakScore(Double etrakScore) {
+		this.etrakScore = etrakScore;
 	} 
 	
 }

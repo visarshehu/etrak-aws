@@ -71,10 +71,6 @@ public class LoginController {
 	public ModelAndView allclients() {
 		ModelAndView modelAndView = new ModelAndView();
 
-		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-		User user = userService.findUserByEmail(auth.getName());
-		modelAndView.addObject("userName", user.getName() + " " + user.getLastName());
-		modelAndView.addObject("userId", user.getId());
 		modelAndView.setViewName("user/clients");
 		return modelAndView;
 	}
@@ -106,6 +102,9 @@ public class LoginController {
 		}
 		return modelAndView;
 	}
+
+	
+	
 
 	@RequestMapping(value = "/admin/home", method = RequestMethod.GET)
 	public ModelAndView home() {
@@ -168,7 +167,7 @@ public class LoginController {
 	@RequestMapping(value = "/user/clientStat", method = RequestMethod.GET, params = {"getId"})
 	@ResponseBody
 	public ModelAndView getClientStat(@RequestParam(value="getId", required = true) String getId) {
-
+	
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		User user = userService.findUserByEmail(auth.getName());
 		 long clientId=0;

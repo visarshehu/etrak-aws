@@ -147,7 +147,7 @@
                         </div>
                     </div>
 
-                    <form action="#" method="post" name="assessment1" role="form">
+                    <form action="" method="post" name="assessment1" role="form" >
                         <!--    <div class="row setup-content" id="step-1">
                      
                             <div class="col-md-12">
@@ -809,48 +809,37 @@
 
                                     <div class="form-group">
                                         <div class="row">
-                                            <div class="col-md-3 nopadding" id="mileRun">
+                                            <div class="col-md-6 nopadding" id="mileRun">
                                                 <label class="control-label">1 Mile Run</label>
-                                                <input class="form-control  input-lg" name="60sRowWatts" type="text" />
+                                                <input class="form-control  input-lg time" name="1000m" type="text" placeholder="__ min : __ sec" />
 
                                             </div>
-                                              <div class="col-md-3 nopadding" id="mileRun">
-                                                <label class="control-label">&nbsp;</label>
-                                                <input class="form-control  input-lg" name="60sRowWatts" type="text" />
+                                            <div class="col-md-6 nopadding" id="mileRun">
+                                                <label class="control-label">1000 Meter Row</label>
+                                                <input class="form-control  input-lg time" name="1000m" type="text" placeholder="__ min : __ sec" />
 
                                             </div>
-                                           
-                                            <div class="col-md-4 nopadding" id="metersRun" style="display:none">
-                                                <label class="control-label">1000 Meters Run</label>
-                                                <input class="form-control  input-lg" name="60sRowWatts" type="text" />
+                                            <div class="col-md-6 nopadding" id="metersRun" style="display:none">
+                                                <label class="control-label">1600 Meters Run</label>
+                                                <input class="form-control  input-lg time" name="1000m" type="text" placeholder="__ min : __ sec" />
 
                                             </div>
-                                            
-                                             <div class="col-md-4 nopadding" id="metersRun" style="display:none">
-                                                <label class="control-label">&nbsp;</label>
-                                                <input class="form-control  input-lg" name="60sRowWatts" type="text" />
-
-                                            </div>
-                           
-
 
                                         </div>
                                         <br/>
-                                       
                                         <div class="row">
-                                        <div class="col-md-6 col-md-offset-3 nopadding">
-                                        <label class="control-label">1000m Row Time</label>
-                                        <div class="row">
-                                            <div class="col-md-5">
-                                                <input class="form-control  input-lg" name="1000mRowTime" type="number" min="0" max="60"  placeholder="0" /> 
+                                            <div class="col-md-6 nopadding">
+                                                <label class="control-label">4min Power Output</label>
+                                                <input class="form-control  input-lg" name="4minWatts" type="text" />
+
                                             </div>
-                                        
-                                            <div  class="col-md-5">
-                                                <input class="form-control  input-lg" name="1000mRowTime" type="number" min="0" max="60" placeholder="00" />
+
+                                            <div class="col-md-6 nopadding">
+                                                <label class="control-label">Calories</label>
+                                                <input class="form-control  input-lg" name="1000mRowTime" type="text" />
+
                                             </div>
                                         </div>
-                                        </div>
-										</div>
 
 
                                     </div>
@@ -883,7 +872,14 @@
 
     <script th:src="@{/js/jquery-3.2.1.min.js}" type="text/javascript"></script>
     <script th:src="@{/js/bootstrap.min.js}" type="text/javascript"></script>
+    <script type="text/javascript" th:src="@{/js/jquery.maskedinput.min.js}"></script>
+    <script type="text/javascript" th:src="@{/js/jquery.maskedinput.js}"></script>
     <script type="text/javascript">
+        $(document).ready(function($) {
+            $(".time").mask("99 min : 99 sec", {
+                placeholder: "__ min : __sec"
+            });
+        });
         var navListItems = $('div.setup-panel div a'),
             allWells = $('.setup-content'),
             allNextBtn = $('.nextBtn');
