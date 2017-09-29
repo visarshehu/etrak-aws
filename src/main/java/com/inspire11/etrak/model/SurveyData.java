@@ -1,4 +1,7 @@
 package com.inspire11.etrak.model;
+
+
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -6,8 +9,9 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import com.fasterxml.jackson.annotation.JsonBackReference;
 
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
 
 @Entity
 public class SurveyData {
@@ -21,21 +25,27 @@ public class SurveyData {
 	@JsonBackReference
 	@JoinColumn(name = "client_id")
 	public Client client;
-	
-	@ManyToOne
-	@JoinColumn(name = "ACTIVITYLEVEL_ID")
-	private ActivityLevel activityLevelId;
-	
+
+	private String activityLevel;
+
 	@Column(name = "nutritional_Goal")
 	private String nutritionalGoal;
+
 	
+
 	private Double etrakScore;
 
-	private String unit; 
-	
+	private String unit;
+
 	private Double weight;
 
-	private Double height;
+	private Double weightKg;
+
+	private Double heightFeet;
+
+	private Double heightInches;
+
+	private Double heightCm;
 
 	private Double bodyFat;
 
@@ -70,55 +80,67 @@ public class SurveyData {
 	private Double vsit;
 
 	private Double lowerMaxR;
-	
+
+	private Double lowerMaxRKg;
+
 	private Double lowerMaxL;
 
+	private Double lowerMaxLKg;
+
 	private Double pushMaxR;
-	
+
+	private Double pushMaxRKg;
+
 	private Double pushMaxL;
-	
+
+	private Double pushMaxLKg;
+
 	private Double pullMax;
-	
+
+	private Double pullMaxKg;
+
 	private Double lowerAbsoluteForce;
-	
+
 	private Double lowerRelativeForce;
-	
+
 	private Double pushAbsoluteForce;
-	
+
 	private Double pushRelativeForce;
-	
+
 	private Double pullAbsoluteForce;
-	
+
 	private Double pullRelativeForce;
-	
+
 	private Double s10PowerOutput;
-	
+
 	private Double s60PowerOutput;
-	
+
 	private Double s10RelativePower;
-	
+
 	private Double s60RelativePower;
-	
-	private Double mileRun;
-	
-	private Double kmRun;
-	
+
+	private String mileRun;
+
+	private String kmRow;
+
+	private String m1600Run;
+
 	private Double min4PowerOutput;
-	
+
 	private Double Calories;
-	
+
 	private Double vo2Max;
-	
+
 	private Double min4RelativeOutput;
-	
-	private String Notes;
-	
+
+	private String notes;
+
 	public Double movement;
-	
+
 	public Double strength;
-	
+
 	public Double power;
-	
+
 	public Double endurance;
 
 	public Long getId() {
@@ -128,7 +150,6 @@ public class SurveyData {
 	public void setId(Long id) {
 		Id = id;
 	}
-	
 
 	public Client getClient() {
 		return client;
@@ -137,14 +158,16 @@ public class SurveyData {
 	public void setClient(Client client) {
 		this.client = client;
 	}
-	
-	public ActivityLevel getActivityLevelId() {
-		return activityLevelId;
+
+	public String getActivityLevel() {
+		return activityLevel;
 	}
 
-	public void setActivityLevelId(ActivityLevel activityLevelId) {
-		this.activityLevelId = activityLevelId;
+	public void setActivityLevel(String activityLevel) {
+		this.activityLevel = activityLevel;
 	}
+
+
 
 	public String getNutritionalGoal() {
 		return nutritionalGoal;
@@ -154,7 +177,6 @@ public class SurveyData {
 		this.nutritionalGoal = nutritionalGoal;
 	}
 
-	
 	public String getUnit() {
 		return unit;
 	}
@@ -171,12 +193,28 @@ public class SurveyData {
 		this.weight = weight;
 	}
 
-	public Double getHeight() {
-		return height;
+	public Double getHeightFeet() {
+		return heightFeet;
 	}
 
-	public void setHeight(Double height) {
-		this.height = height;
+	public void setHeightFeet(Double heightFeet) {
+		this.heightFeet = heightFeet;
+	}
+
+	public Double getHeightInches() {
+		return heightInches;
+	}
+
+	public void setHeightInches(Double heightInches) {
+		this.heightInches = heightInches;
+	}
+
+	public Double getHeightCm() {
+		return heightCm;
+	}
+
+	public void setHeightCm(Double heightCm) {
+		this.heightCm = heightCm;
 	}
 
 	public Double getBodyFat() {
@@ -427,21 +465,7 @@ public class SurveyData {
 		this.s60RelativePower = s60RelativePower;
 	}
 
-	public Double getMileRun() {
-		return mileRun;
-	}
-
-	public void setMileRun(Double mileRun) {
-		this.mileRun = mileRun;
-	}
-
-	public Double getKmRun() {
-		return kmRun;
-	}
-
-	public void setKmRun(Double kmRun) {
-		this.kmRun = kmRun;
-	}
+	
 
 	public Double getMin4PowerOutput() {
 		return min4PowerOutput;
@@ -473,14 +497,6 @@ public class SurveyData {
 
 	public void setMin4RelativeOutput(Double min4RelativeOutput) {
 		this.min4RelativeOutput = min4RelativeOutput;
-	}
-
-	public String getNotes() {
-		return Notes;
-	}
-
-	public void setNotes(String notes) {
-		Notes = notes;
 	}
 
 	public Double getMovement() {
@@ -521,10 +537,89 @@ public class SurveyData {
 
 	public void setEtrakScore(Double etrakScore) {
 		this.etrakScore = etrakScore;
-	} 
-	
-}
-	
-	
-	
+	}
 
+	public Double getWeightKg() {
+		return weightKg;
+	}
+
+	public void setWeightKg(Double weightKg) {
+		this.weightKg = weightKg;
+	}
+
+	public Double getLowerMaxRKg() {
+		return lowerMaxRKg;
+	}
+
+	public void setLowerMaxRKg(Double lowerMaxRKg) {
+		this.lowerMaxRKg = lowerMaxRKg;
+	}
+
+	public Double getLowerMaxLKg() {
+		return lowerMaxLKg;
+	}
+
+	public void setLowerMaxLKg(Double lowerMaxLKg) {
+		this.lowerMaxLKg = lowerMaxLKg;
+	}
+
+	public Double getPushMaxRKg() {
+		return pushMaxRKg;
+	}
+
+	public void setPushMaxRKg(Double pushMaxRKg) {
+		this.pushMaxRKg = pushMaxRKg;
+	}
+
+	public Double getPushMaxLKg() {
+		return pushMaxLKg;
+	}
+
+	public void setPushMaxLKg(Double pushMaxLKg) {
+		this.pushMaxLKg = pushMaxLKg;
+	}
+
+	public Double getPullMaxKg() {
+		return pullMaxKg;
+	}
+
+	public void setPullMaxKg(Double pullMaxKg) {
+		this.pullMaxKg = pullMaxKg;
+	}
+
+
+
+
+	public String getNotes() {
+		return notes;
+	}
+
+	public void setNotes(String notes) {
+		this.notes = notes;
+	}
+
+	public String getMileRun() {
+		return mileRun;
+	}
+
+	public void setMileRun(String mileRun) {
+		this.mileRun = mileRun;
+	}
+
+	public String getKmRow() {
+		return kmRow;
+	}
+
+	public void setKmRow(String kmRow) {
+		this.kmRow = kmRow;
+	}
+
+	public String getM1600Run() {
+		return m1600Run;
+	}
+
+	public void setM1600Run(String m1600Run) {
+		this.m1600Run = m1600Run;
+	}
+
+}

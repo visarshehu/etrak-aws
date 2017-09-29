@@ -53,13 +53,13 @@
 
 
 
-        .arrow,
-        .arrow:before {
+        .arrowDown,
+        .arrowDown:before {
             position: absolute;
             left: 100%;
         }
 
-        .arrow {
+        .arrowDown {
             width: 30px;
             height: 30px;
             top: 96%;
@@ -72,7 +72,7 @@
             border-bottom: 2px #262626 solid;
         }
 
-        .arrow:before {
+        .arrowDown:before {
             content: "";
             width: 20px;
             height: 20px;
@@ -88,7 +88,7 @@
             animation-name: arrow;
         }
 
-        @keyframes arrow {
+        @keyframes arrowDown {
             0% {
                 opacity: 1;
             }
@@ -143,6 +143,15 @@
                 transform: translate(-10px, -10px);
             }
         }
+
+
+        .sastable #head th {
+            background-color: #D5D5D5;
+            font-size:16px;
+            font-family:'Arial'
+        }
+
+       
     </style>
 
 </head>
@@ -198,10 +207,67 @@
         </div>
         <!-- /.container -->
     </nav>
-
+    <div class='row' style="display:none">
+        <div class='col-md-6'>
+            <div id='versiontable' class='table-responsive'>
+                <table class='sastable table-striped table-bordered'  data-toggle='table' data-height='150' data-classes='table-striped table-bordered'>
+                    <thead id='head'>
+                        <tr>
+                            <th>Degrees</th>
+                            <th>Pts</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>0</td>
+                            <td>1</td>
+                        </tr>
+                        <tr>
+                            <td>64</td>
+                            <td>2</td>
+                        </tr>
+                        <tr>
+                            <td>71</td>
+                            <td>3</td>
+                        </tr>
+                        <tr>
+                            <td>78</td>
+                            <td>4</td>
+                        </tr>
+                        <tr>
+                            <td>85</td>
+                            <td>5</td>
+                        </tr>
+                        <tr>
+                            <td>92</td>
+                            <td>6</td>
+                        </tr>
+                        <tr>
+                            <td>99</td>
+                            <td>7</td>
+                        </tr>
+                        <tr>
+                            <td>106</td>
+                            <td>8</td>
+                        </tr>
+                        <tr>
+                            <td>113</td>
+                            <td>9</td>
+                        </tr>
+                        <tr>
+                            <td>120</td>
+                            <td>10</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
     <div class="page-header">
         <div class="clearfix">
             <div class="row col-md-12">
+
+
 
                 <div class="col-sm-7 ">
                     <div class="col-sm-2">
@@ -221,7 +287,7 @@
                     <div class="col-sm-10" style="padding-left: 50px">
                         <div class="row">
                             <div class="col-sm-12">
-                                <h4 th:utext="${id}" ></h4>
+                                <h4 th:utext="${id}"></h4>
                             </div>
                         </div>
                         <div class="row">
@@ -246,7 +312,7 @@
                     </div>
                     <div class="row-fluid">
                         <div id="buttons" style="float: right">
-                            <a th:href="@{assessment.html}"><button type="button"
+                            <a th:href="@{/user/assessment/{clientId}(clientId=${clientId})}"><button type="button"
 									class="btn btn-primary " style="background: #2085B8">New
 									Evaluation</button> </a>
                             <a th:href="@{comparison.html}">
@@ -469,7 +535,59 @@
                             <tr>
                                 <td>Deep Squat</td>
                                 <td>90</td>
-                                <td id="deepSquat"></td>
+                                <td id="deepSquat" data-trigger='hover' data-container="body" data-toggle="popover"  data-content=" 
+                                                                                                 <div class='table-responsive'>
+                <table class='sastable table-striped table-bordered' data-toggle='table' data-height='150' data-classes='table  table-striped table-bordered'>
+                    <thead id='head'>
+                        <tr>
+                            <th class='col-md-6'>Degrees</th>
+                            <th class='col-md-6'>Pts</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class='col-md-6'>0</td>
+                            <td class='col-md-6'>1</td>
+                        </tr>
+                        <tr>
+                            <td class='col-md-6'>64</td>
+                            <td class='col-md-6'>2</td>
+                        </tr>
+                        <tr>
+                            <td class='col-md-6'>71</td>
+                            <td class='col-md-6'>3</td>
+                        </tr>
+                        <tr>
+                            <td class='col-md-6'>78</td>
+                            <td class='col-md-6'>4</td>
+                        </tr>
+                        <tr>
+                            <td class='col-md-6'>85</td>
+                            <td class='col-md-6'>5</td>
+                        </tr>
+                        <tr>
+                            <td class='col-md-6'>92</td>
+                            <td class='col-md-6'>6</td>
+                        </tr>
+                        <tr>
+                            <td class='col-md-6'>99</td>
+                            <td class='col-md-6'>7</td>
+                        </tr>
+                        <tr>
+                            <td class='col-md-6'>106</td>
+                            <td class='col-md-6'>8</td>
+                        </tr>
+                        <tr>
+                            <td class='col-md-6'>113</td>
+                            <td class='col-md-6'>9</td>
+                        </tr>
+                        <tr>
+                            <td class='col-md-6'>120</td>
+                            <td class='col-md-6'>10</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>" data-html="true"></td>
                             </tr>
                             <tr>
                                 <td>Shoulder Flexion -L-(deg)</td>
@@ -547,7 +665,7 @@
                         </tbody>
                     </table>
                 </div>
-                <div class="arrow" id="arrowDown"></div>
+                <div class="arrowDown" id="arrowDown"></div>
 
             </div>
 
@@ -674,10 +792,16 @@
         </div>
     </div>
     <script>
+        $(function() {
+            $('#deepSquat').popover({
+                container: 'body'
+            });
+        });
+
         $(document).ready(function() {
             document.getElementById('arrowDown').style.cursor = "pointer";
             document.getElementById('arrowUp').style.cursor = "pointer";
-            $(".arrow").click(function() {
+            $(".arrowDown").click(function() {
                 $("#myContent").slideToggle();
                 document.getElementById('arrowDown').style.display = 'none';
                 document.getElementById('arrowUp').style.display = 'block';

@@ -1,6 +1,7 @@
 package com.inspire11.etrak.model;
 
 
+
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
@@ -13,7 +14,6 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
-
 
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -32,16 +32,16 @@ public class Client {
 	@Column(name = "last_name")
 	private String lastName;
 	
+	@Column(name = "birthday")
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
+	@Temporal(TemporalType.DATE)
+	private Date birthDate;
+	
 	@Column(name = "email")
 	private String email;
 	
 	@Column(name = "gender")
 	private Character gender;
-	
-	@Column(name = "birthday")
-	@DateTimeFormat(pattern = "yyyy-MM-dd")
-	@Temporal(TemporalType.DATE)
-	private Date birthDate;
 		
 	@Column(name = "address")
 	private String address;
@@ -91,15 +91,7 @@ public class Client {
 		this.gender = gender;
 	}
 
-	public Date getBirthDate() {
-		return birthDate;
-	}
 
-	public void setBirthDate(Date birthDate) {
-		this.birthDate = birthDate;
-	}
-
-	
 	public String getAddress() {
 		return address;
 	}
@@ -114,6 +106,14 @@ public class Client {
 
 	public void setSurvey(Set<SurveyData> survey) {
 		this.survey = survey;
+	}
+
+	public Date getBirthDate() {
+		return birthDate;
+	}
+
+	public void setBirthDate(Date birthDate) {
+		this.birthDate = birthDate;
 	}
 
 

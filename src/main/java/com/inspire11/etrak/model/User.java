@@ -36,12 +36,13 @@ public class User {
 	
 	@Transient
 	private String confirmPassword;
+	
 	@Column(name = "name")
-	
 	private String name;
-	@Column(name = "last_name")
 	
+	@Column(name = "last_name")
 	private String lastName;
+	
 	@Column(name = "username")
 	private String username;
 	

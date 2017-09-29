@@ -90,8 +90,8 @@
                             </div>
                         </form>
                     </li>
-                    <li><a th:href="@{dashboard.html}">Home</a></li>
-                    <li><a th:href="@{clients.html}">Clients</a></li>
+                    <li><a th:href="@{/user/dashboard.html}">Home</a></li>
+                    <li><a th:href="@{/user/clients.html}">Clients</a></li>
                     <li><a href="">Traks</a></li>
                     <li><a href="">Reports</a></li>
                     <li>
@@ -101,7 +101,7 @@
                     </li>
                     <li>
                         <div style="padding-left: 3px; padding-right: 30px">
-                            <label th:utext="${userName}" style="padding-top: 20px; color: white"></label><br /> <a th:href="@{/login?logout}" style="display: inline; height: 15px !important; padding-top: 2px; color: #2085B8">Sign
+                            <label th:utext="${userName}"  style="padding-top: 20px; color: white"></label><br /> <a th:href="@{/login?logout}" style="display: inline; height: 15px !important; padding-top: 2px; color: #2085B8">Sign
                                 Out</a>
                         </div>
                     </li>
@@ -146,8 +146,8 @@
 
                         </div>
                     </div>
-
-                    <form action="" method="post" name="assessment1" role="form" >
+ 
+                    <form th:action="@{/user/assessment}" autocomplete="off" method="POST" name="assessment1" role="form" th:object="${survey_data}"  >
                         <!--    <div class="row setup-content" id="step-1">
                      
                             <div class="col-md-12">
@@ -213,6 +213,8 @@
                         <div class="row setup-content" id="step-1">
 
                             <div class="col-md-12">
+                            
+                            	<label style="padding-left: 15%" th:utext="${successMessage}"></label><br />
                                 <div class="btn-group btn-group-justified" data-toggle="buttons">
                                     <label class="btn btn-primary active">
                  <input type="radio" name="options" id="option1"  value="Existing" >Imperial System
@@ -222,24 +224,14 @@
                  </label>
                                 </div>
                                 <br />
-                                <div class="form-group">
-                                    <label for="birthDate" class="control-label ">Date
-                            of Birth</label>
-
-
-                                    <div class='input-group date ' id='datetimepicker1'>
-                                        <input type='text' class="form-control input-lg" /> <span class="input-group-addon"> <span
-                                    class="glyphicon glyphicon-calendar"></span>
-                                        </span>
-                                    </div>
-
-                                </div>
+                   
                                 <div id="imperial">
                                     <div class="form-group">
+                                    <input type="hidden" name="client" th:value=${clientId} id="client"/>
                                         <label class="control-label" for="height">Height</label>
                                         <div class="row">
                                             <div class="col-md-6 nopadding">
-                                                <select class="form-control  input-lg " id="height">
+                                                <select class="form-control  input-lg " id="heightFeet" name="heightFeet">
                                                 <option th:disabled="disabled" th:selected="selected" value="">Feet</option>
 
                                                 <option value="3">3</option>
@@ -254,7 +246,7 @@
 
                                             <div class="col-md-6 nopadding">
 
-                                                <select class="form-control  input-lg  ">
+                                                <select class="form-control  input-lg  " id="heightInches" name="heightInches">
                                                 <option th:disabled="disabled" th:selected="selected" value="">Inches</option>
                                                 <option value="1"> 1 </option>
                                                 <option value="2"> 2 </option>
@@ -279,11 +271,11 @@
                                 </div>
                                 <div class="row" style="display:none" id="metric">
                                     <div class="col-md-6 nopadding">
-                                        <div class="form-group"><label class="control-label" for="weight">Height (cm)</label> <input class="form-control  input-lg" id="height" name="height" placeholder="" type="text" value="" />
+                                        <div class="form-group"><label class="control-label" for="heightCm">Height (cm)</label> <input class="form-control  input-lg" id="heightCm" name="heightCm" placeholder="" type="text" value="" />
                                         </div>
                                     </div>
                                     <div class="col-md-6 nopadding">
-                                        <div class="form-group"><label class="control-label" for="weight">Weight (kg)</label> <input class="form-control  input-lg" id="weight" name="weight" placeholder="" type="text" value="" />
+                                        <div class="form-group"><label class="control-label" for="weightKg">Weight (kg)</label> <input class="form-control  input-lg" id="weightKg" name="weightKg" placeholder="" type="text" value="" />
                                         </div>
                                     </div>
                                 </div>
@@ -299,21 +291,21 @@
                                 -->
 
                                 <div class="form-group">
-                                    <label class="control-label">Activity Level</label> <select class="form-control  input-lg">
+                                    <label class="control-label">Activity Level</label> <select class="form-control  input-lg" id="activityLevel" name="activityLevel">
                                         <option value="none"> &nbsp; </option>
-                                        <option value="gain"> Sedentary (No physical activity)</option>
-                                        <option value="lose"> Lightly active (< 30 minutes of activity per day)</option>
-                                        <option value="maintain">Moderately active (60-120min of exercise per week)</option>
-                                        <option value="maintain">Very active (30 to 60min of exercise per day)</option>
-                                        <option value="maintain">Athlete (>60 minutes of exercise per day)</option>
+                                        <option value="Sedentary (No physical activity)"> Sedentary (No physical activity)</option>
+                                        <option value="Lightly active (< 30 minutes of activity per day)"> Lightly active (< 30 minutes of activity per day)</option>
+                                        <option value="Moderately active (60-120min of exercise per week)">Moderately active (60-120min of exercise per week)</option>
+                                        <option value="Very active (30 to 60min of exercise per day)">Very active (30 to 60min of exercise per day)</option>
+                                        <option value="Athlete (>60 minutes of exercise per day)">Athlete (>60 minutes of exercise per day)</option>
                                     </select>
                                 </div>
 
                                 <div class="form-group">
-                                    <label for="nutritionGoal" class=" control-label">Nutrition
+                                    <label for="nutritionalGoal" class=" control-label">Nutrition
                             Goal</label>
 
-                                    <select class="form-control  input-lg" required="required">
+                                    <select class="form-control  input-lg" required="required" id="nutritionalGoal" name="nutritionalGoal">
                                 <option value="" selected th:disabled="disabled"></option>
                                 <option value="gain"> Gain </option>
                                 <option value="lose"> Lose </option>
@@ -327,7 +319,7 @@
                                     <div class="row">
 
                                         <div class="col-md-6 nopadding">
-                                            <label class="control-label" for="bodyfat">BodyFat %</label> <input class="form-control  input-lg" id="bodyfat" name="bodyfat" type="text" />
+                                            <label class="control-label" for="bodyFat">BodyFat %</label> <input class="form-control  input-lg" id="bodyFat" name="bodyFat" type="text" />
                                         </div>
 
                                         <div class="col-md-6 nopadding">
@@ -489,14 +481,14 @@
                                         <div class="row">
 
                                             <div class="col-md-4 nopadding">
-                                                <label class="control-label">Deep Squat (degrees)</label> <input class="form-control  input-lg" name="deepSquat" type="text" />
+                                                <label class="control-label">Deep Squat (degrees)</label> <input class="form-control  input-lg" name="deepSquatHipFlexion" type="text" />
                                             </div>
 
                                             <div class="col-md-4 nopadding">
-                                                <label class="control-label">Shoulder Flexion Right (degrees)</label> <input class="form-control  input-lg" name="RHR" type="text" />
+                                                <label class="control-label">Shoulder Flexion Right (degrees)</label> <input class="form-control  input-lg" name="shoulderFlexionR" type="text" />
                                             </div>
                                             <div class="col-md-4 nopadding">
-                                                <label class="control-label">Shoulder Flexion Left  (degrees)</label> <input class="form-control  input-lg" name="RHR" type="text" />
+                                                <label class="control-label">Shoulder Flexion Left  (degrees)</label> <input class="form-control  input-lg" name="shoulderFlexionL" type="text" />
                                             </div>
 
 
@@ -505,14 +497,14 @@
                                     <div class="form-group">
                                         <div class="row">
                                             <div class="col-md-4 nopadding">
-                                                <label class="control-label">Shoulder Extension Right (degrees)</label> <input class="form-control  input-lg" name="extR" type="text" />
+                                                <label class="control-label">Shoulder Extension Right (degrees)</label> <input class="form-control  input-lg" name="shoulderExtensionR" type="text" />
                                             </div>
                                             <div class="col-md-4 nopadding">
-                                                <label class="control-label">Shoulder Extension Left (degrees)</label> <input class="form-control  input-lg" name="extL" type="text" />
+                                                <label class="control-label">Shoulder Extension Left (degrees)</label> <input class="form-control  input-lg" name="shoulderExtensionL" type="text" />
                                             </div>
 
                                             <div class="col-md-4 nopadding">
-                                                <label class="control-label">Trunk Rotation Right (degrees)</label> <input class="form-control  input-lg" name="trunkRotR" type="text" />
+                                                <label class="control-label">Trunk Rotation Right (degrees)</label> <input class="form-control  input-lg" name="trunkRotationR" type="text" />
                                             </div>
 
                                         </div>
@@ -522,7 +514,7 @@
                                         <div class="row">
                                             <div class="col-md-4 nopadding"></div>
                                             <div class="col-md-4 nopadding">
-                                                <label class="control-label">Trunk Rotation Left (degrees)</label> <input class="form-control  input-lg" name="RHR" type="text" />
+                                                <label class="control-label">Trunk Rotation Left (degrees)</label> <input class="form-control  input-lg" name="trunkRotationL" type="text" />
                                             </div>
 
                                             <div class="col-md-4 nopadding"></div>
@@ -536,7 +528,7 @@
                                         <br />
                                         <div class="row">
                                             <div class="col-md-6 nopadding">
-                                                <label>Pistol Squat Right (g’s)</label> <select class="form-control  input-lg ">
+                                                <label>Pistol Squat Right</label> <select class="form-control  input-lg " name="pistolR">
                                                     <option th:disabled="disabled" th:selected="selected" value=""> &nbsp; </option>
                                                     <option value="0">0</option>
                                                     <option value="1">1</option>
@@ -546,7 +538,7 @@
                                             </div>
 
                                             <div class="col-md-6 nopadding">
-                                                <label>Pistol Squat Left (g’s)</label> <select class="form-control  input-lg  ">
+                                                <label>Pistol Squat Left</label> <select class="form-control  input-lg  " name="pistolL">
                                                     <option th:disabled="disabled" th:selected="selected" value=""> &nbsp; </option>
                                                     <option value="0"> 0 </option>
                                                     <option value="1"> 1 </option>
@@ -560,7 +552,7 @@
                                         <br />
                                         <div class="row">
                                             <div class="col-md-6 nopadding">
-                                                <label>Bird Dog RH/LF (g’s)</label> <select class="form-control  input-lg ">
+                                                <label>Bird Dog RH/LF</label> <select class="form-control  input-lg " name="proneRH_LF">
                                                     <option th:disabled="disabled" th:selected="selected" value=""> &nbsp; </option>
                                                     <option value="0">0</option>
                                                     <option value="1">1</option>
@@ -570,7 +562,7 @@
                                             </div>
 
                                             <div class="col-md-6 nopadding">
-                                                <label>Bird Dog LF/RH (g’s)</label> <select class="form-control  input-lg  ">
+                                                <label>Bird Dog LF/RH </label> <select class="form-control  input-lg  " name="proneRF_RH">
                                                     <option th:disabled="disabled" th:selected="selected" value=""> &nbsp; </option>
                                                     <option value="0"> 0 </option>
                                                     <option value="1"> 1 </option>
@@ -584,7 +576,7 @@
                                         <div class="row">
                                             <div class="col-md-3 nopadding"></div>
                                             <div class="col-md-6 nopadding">
-                                                <label>V Sit (g’s)</label> <select class="form-control  input-lg  ">
+                                                <label>V Sit</label> <select class="form-control  input-lg  " name="vsit">
                                                     <option th:disabled="disabled" th:selected="selected" value=""> &nbsp; </option>
                                                     <option value="0"> 0 </option>
                                                     <option value="1"> 1 </option>
@@ -725,14 +717,14 @@
                                         <div class="form-group">
                                             <div class="row">
                                                 <div class="col-md-4 nopadding">
-                                                    <label class="control-label">Lower Max Right (lbs)</label> <input class="form-control  input-lg" name="RHR" type="text" />
+                                                    <label class="control-label">Lower Max Right (lbs)</label> <input class="form-control  input-lg" name="lowerMaxR" type="text" />
                                                 </div>
                                                 <div class="col-md-4 nopadding">
-                                                    <label class="control-label">Lower Max Left (lbs)</label> <input class="form-control  input-lg" name="RHR" type="text" />
+                                                    <label class="control-label">Lower Max Left (lbs)</label> <input class="form-control  input-lg" name="lowerMaxL" type="text" />
                                                 </div>
 
                                                 <div class="col-md-4 nopadding">
-                                                    <label class="control-label">Push Max Right (lbs)</label> <input class="form-control  input-lg" name="RHR" type="text" />
+                                                    <label class="control-label">Push Max Right (lbs)</label> <input class="form-control  input-lg" name="pushMaxR" type="text" />
                                                 </div>
 
                                             </div>
@@ -742,10 +734,10 @@
                                         <div class="form-group">
                                             <div class="row">
                                                 <div class="col-md-4 nopadding col-md-offset-2">
-                                                    <label class="control-label">Push Max Left (lbs)</label> <input class="form-control  input-lg" name="RHR" type="text" />
+                                                    <label class="control-label">Push Max Left (lbs)</label> <input class="form-control  input-lg" name="pushMaxL" type="text" />
                                                 </div>
                                                 <div class="col-md-4 nopadding">
-                                                    <label class="control-label">Pull Max (lbs)</label> <input class="form-control  input-lg" name="RHR" type="text" />
+                                                    <label class="control-label">Pull Max (lbs)</label> <input class="form-control  input-lg" name="pullMax" type="text" />
                                                 </div>
                                             </div>
                                         </div>
@@ -755,14 +747,14 @@
                                         <div class="form-group">
                                             <div class="row">
                                                 <div class="col-md-4 nopadding">
-                                                    <label class="control-label">Lower Max Right (kg)</label> <input class="form-control  input-lg" name="RHR" type="text" />
+                                                    <label class="control-label">Lower Max Right (kg)</label> <input class="form-control  input-lg" name="lowerMaxRKg" type="text" />
                                                 </div>
                                                 <div class="col-md-4 nopadding">
-                                                    <label class="control-label">Lower Max Left (kg)</label> <input class="form-control  input-lg" name="RHR" type="text" />
+                                                    <label class="control-label">Lower Max Left (kg)</label> <input class="form-control  input-lg" name="lowerMaxLKg" type="text" />
                                                 </div>
 
                                                 <div class="col-md-4 nopadding">
-                                                    <label class="control-label">Push Max Right (kg)</label> <input class="form-control  input-lg" name="RHR" type="text" />
+                                                    <label class="control-label">Push Max Right (kg)</label> <input class="form-control  input-lg" name="pushMaxRKg" type="text" />
                                                 </div>
 
                                             </div>
@@ -772,10 +764,10 @@
                                         <div class="form-group">
                                             <div class="row">
                                                 <div class="col-md-4 nopadding col-md-offset-2">
-                                                    <label class="control-label">Push Max Left (kg)</label> <input class="form-control  input-lg" name="RHR" type="text" />
+                                                    <label class="control-label">Push Max Left (kg)</label> <input class="form-control  input-lg" name="pushMaxLKg" type="text" />
                                                 </div>
                                                 <div class="col-md-4 nopadding">
-                                                    <label class="control-label">Pull Max (kg)</label> <input class="form-control  input-lg" name="RHR" type="text" />
+                                                    <label class="control-label">Pull Max (kg)</label> <input class="form-control  input-lg" name="pullMaxKg" type="text" />
                                                 </div>
                                             </div>
                                         </div>
@@ -790,12 +782,12 @@
                                         <div class="row">
                                             <div class="col-md-6 nopadding">
                                                 <label class="control-label">10s Power Output</label>
-                                                <input class="form-control  input-lg" name="60sRowWatts" type="text" />
+                                                <input class="form-control  input-lg" name="s10PowerOutput" type="text" />
 
                                             </div>
                                             <div class="col-md-6 nopadding">
                                                 <label class="control-label">60s Power Output</label>
-                                                <input class="form-control  input-lg" name="4minWatts" type="text" />
+                                                <input class="form-control  input-lg" name="s60PowerOutput" type="text" />
 
                                             </div>
 
@@ -811,17 +803,17 @@
                                         <div class="row">
                                             <div class="col-md-6 nopadding" id="mileRun">
                                                 <label class="control-label">1 Mile Run</label>
-                                                <input class="form-control  input-lg time" name="1000m" type="text" placeholder="__ min : __ sec" />
+                                                <input class="form-control  input-lg time" name="mileRun" type="text" placeholder="__ min : __ sec" />
 
                                             </div>
                                             <div class="col-md-6 nopadding" id="mileRun">
                                                 <label class="control-label">1000 Meter Row</label>
-                                                <input class="form-control  input-lg time" name="1000m" type="text" placeholder="__ min : __ sec" />
+                                                <input class="form-control  input-lg time" name="kmRow" type="text" placeholder="__ min : __ sec" />
 
                                             </div>
                                             <div class="col-md-6 nopadding" id="metersRun" style="display:none">
                                                 <label class="control-label">1600 Meters Run</label>
-                                                <input class="form-control  input-lg time" name="1000m" type="text" placeholder="__ min : __ sec" />
+                                                <input class="form-control  input-lg time" name="m1600Run" type="text" placeholder="__ min : __ sec" />
 
                                             </div>
 
@@ -830,13 +822,13 @@
                                         <div class="row">
                                             <div class="col-md-6 nopadding">
                                                 <label class="control-label">4min Power Output</label>
-                                                <input class="form-control  input-lg" name="4minWatts" type="text" />
+                                                <input class="form-control  input-lg" name="min4PowerOutput" type="text" />
 
                                             </div>
 
                                             <div class="col-md-6 nopadding">
                                                 <label class="control-label">Calories</label>
-                                                <input class="form-control  input-lg" name="1000mRowTime" type="text" />
+                                                <input class="form-control  input-lg" name="Calories" type="text" />
 
                                             </div>
                                         </div>
@@ -847,9 +839,9 @@
                                     <br />
                                     <div class="form-group">
                                         <label>Notes:</label>
-                                        <textarea class="form-control" id="notes" rows="5"></textarea>
+                                        <textarea class="form-control" id="notes" rows="5" name="notes" id="notes"></textarea>
                                     </div>
-
+									
                                     <button class="btn btn-success btn-lg pull-right" type="submit">Submit</button>
                                 </div>
 

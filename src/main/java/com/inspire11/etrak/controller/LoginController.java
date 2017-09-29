@@ -11,6 +11,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -20,8 +21,10 @@ import org.springframework.web.servlet.ModelAndView;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import com.inspire11.etrak.model.Client;
+import com.inspire11.etrak.model.SurveyData;
 import com.inspire11.etrak.model.User;
 import com.inspire11.etrak.service.ClientService;
+import com.inspire11.etrak.service.SurveyService;
 import com.inspire11.etrak.service.UserService;
 
 @Controller
@@ -32,6 +35,9 @@ public class LoginController {
 	
 	@Autowired
 	private ClientService clientService;
+	
+	@Autowired
+	private SurveyService surveyService;
 	
 	
 
@@ -70,10 +76,31 @@ public class LoginController {
 	@RequestMapping(value = "user/clients", method = RequestMethod.GET)
 	public ModelAndView allclients() {
 		ModelAndView modelAndView = new ModelAndView();
-
 		modelAndView.setViewName("user/clients");
 		return modelAndView;
 	}
+	
+	@RequestMapping(value="/user/clients", method=RequestMethod.POST)
+	public ModelAndView addNewClient(@Valid Client client, BindingResult bindingResult) {
+		ModelAndView modelAndView = new ModelAndView();
+		clientService.saveClient(client);
+		modelAndView.addObject("successMessage", "New client has been registered!");
+		modelAndView.addObject("client", new Client());
+		modelAndView.setViewName("user/clients");
+		return modelAndView;
+		
+	}
+	
+	@RequestMapping(value = "/user/assessment", method = RequestMethod.POST)
+	public ModelAndView createNewSurvey(@Valid SurveyData survey_data, BindingResult bindingResult) {
+		ModelAndView modelAndView = new ModelAndView();
+		surveyService.saveSurvey(survey_data);
+		modelAndView.addObject("successMessage", "Your client's data has been registered successfully!");
+		modelAndView.addObject("survey", new SurveyData());
+		modelAndView.setViewName("user/assessment");
+		return modelAndView;
+	}
+	
 
 	@RequestMapping(value = "/registration", method = RequestMethod.POST)
 	public ModelAndView createNewUser(@Valid User user, BindingResult bindingResult) {
@@ -120,20 +147,21 @@ public class LoginController {
 	}
 
 	
-	@RequestMapping(value = { "/user/assessment" }, method = RequestMethod.GET)
-	public ModelAndView assessment() {
-		ModelAndView modelAndView = new ModelAndView();
 
+	
+	@RequestMapping(value = "/user/assessment/{clientId}")
+	 @ResponseBody
+	 public ModelAndView openSurvey(@PathVariable(value = "clientId") String clientId) {
+		ModelAndView modelAndView = new ModelAndView();
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		User user = userService.findUserByEmail(auth.getName());
 		modelAndView.addObject("userName", user.getName() + " " + user.getLastName());
 		modelAndView.addObject("userId", user.getId());
+		modelAndView.addObject("clientId",clientId);
 		modelAndView.setViewName("user/assessment");
 		return modelAndView;
 	}
 	
-	
-
 	@RequestMapping(value = { "/user/dashboard" }, method = RequestMethod.GET)
 	public ModelAndView dashboard() {
 		ModelAndView modelAndView = new ModelAndView();
@@ -160,22 +188,21 @@ public class LoginController {
 			return "redirect:/user/clientStat";
 		} else
 			return "redirect:/user/clientStat";
+	
 	}
-
-
 
 	@RequestMapping(value = "/user/clientStat", method = RequestMethod.GET, params = {"getId"})
 	@ResponseBody
 	public ModelAndView getClientStat(@RequestParam(value="getId", required = true) String getId) {
-	
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		User user = userService.findUserByEmail(auth.getName());
-		 long clientId=0;
+		long clientId=0;
 	    clientId=Long.parseLong(getId);
 		Client client=clientService.getClientById(clientId);
 		ModelAndView modelAndView = new ModelAndView();
         modelAndView.addObject("userName", user.getName() + " " + user.getLastName());
         modelAndView.addObject("userId", user.getId());
+        modelAndView.addObject("clientId", getId);        
         modelAndView.addObject("id", client.getName()+ " " + client.getLastName());
         modelAndView.setViewName("user/clientStat");
         return modelAndView;

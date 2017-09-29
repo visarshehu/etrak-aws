@@ -7,8 +7,9 @@ import com.inspire11.etrak.model.SurveyData;
 import com.inspire11.etrak.repository.SurveyDataRepository;
 
 
-@Service("surveyData")
-public class SurveyServiceImpl {
+@Service("surveyService")
+public class SurveyServiceImpl implements SurveyService {
+	
 	@Autowired
 	private SurveyDataRepository surveyRepository;
 	
