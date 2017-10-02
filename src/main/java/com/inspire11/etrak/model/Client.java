@@ -46,6 +46,9 @@ public class Client {
 	@Column(name = "address")
 	private String address;
 	
+	@Column(name = "phone_Number")
+	private String phoneNumber;
+	
 	@OneToMany(mappedBy = "client", cascade = CascadeType.ALL)
 	@JsonManagedReference  
 	private Set<SurveyData> survey= new HashSet<SurveyData>();
@@ -114,6 +117,14 @@ public class Client {
 
 	public void setBirthDate(Date birthDate) {
 		this.birthDate = birthDate;
+	}
+
+	public String getPhoneNumber() {
+		return phoneNumber;
+	}
+
+	public void setPhoneNumber(String phoneNumber) {
+		this.phoneNumber = phoneNumber;
 	}
 
 

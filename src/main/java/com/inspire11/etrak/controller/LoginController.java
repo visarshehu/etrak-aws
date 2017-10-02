@@ -76,6 +76,10 @@ public class LoginController {
 	@RequestMapping(value = "user/clients", method = RequestMethod.GET)
 	public ModelAndView allclients() {
 		ModelAndView modelAndView = new ModelAndView();
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		User user = userService.findUserByEmail(auth.getName());
+		modelAndView.addObject("userName", user.getName() + " " + user.getLastName());
+		modelAndView.addObject("userId", user.getId());
 		modelAndView.setViewName("user/clients");
 		return modelAndView;
 	}
@@ -83,6 +87,7 @@ public class LoginController {
 	@RequestMapping(value="/user/clients", method=RequestMethod.POST)
 	public ModelAndView addNewClient(@Valid Client client, BindingResult bindingResult) {
 		ModelAndView modelAndView = new ModelAndView();
+		
 		clientService.saveClient(client);
 		modelAndView.addObject("successMessage", "New client has been registered!");
 		modelAndView.addObject("client", new Client());
@@ -94,7 +99,9 @@ public class LoginController {
 	@RequestMapping(value = "/user/assessment", method = RequestMethod.POST)
 	public ModelAndView createNewSurvey(@Valid SurveyData survey_data, BindingResult bindingResult) {
 		ModelAndView modelAndView = new ModelAndView();
-		surveyService.saveSurvey(survey_data);
+		SurveyData newSurvey=surveyService.saveSurvey(survey_data);
+		newSurvey.getId();
+		
 		modelAndView.addObject("successMessage", "Your client's data has been registered successfully!");
 		modelAndView.addObject("survey", new SurveyData());
 		modelAndView.setViewName("user/assessment");

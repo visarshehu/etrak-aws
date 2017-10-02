@@ -14,7 +14,7 @@ public class SurveyServiceImpl implements SurveyService {
 	private SurveyDataRepository surveyRepository;
 	
 
-	public void saveSurvey(SurveyData survey) {
-		surveyRepository.save(survey);
+	public SurveyData saveSurvey(SurveyData survey) {
+		return surveyRepository.save(survey);
 	}
 }

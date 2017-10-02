@@ -2,6 +2,10 @@ package com.inspire11.etrak.model;
 
 
 
+import java.util.HashSet;
+import java.util.Set;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -9,9 +13,10 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-
+import javax.persistence.OneToMany;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
 public class SurveyData {
@@ -30,10 +35,6 @@ public class SurveyData {
 
 	@Column(name = "nutritional_Goal")
 	private String nutritionalGoal;
-
-	
-
-	private Double etrakScore;
 
 	private String unit;
 
@@ -134,14 +135,12 @@ public class SurveyData {
 	private Double min4RelativeOutput;
 
 	private String notes;
+	
+	@OneToMany(mappedBy = "surveydataresults", cascade = CascadeType.ALL)
+	@JsonManagedReference  
+	private Set<SurveyDataResults> survey= new HashSet<SurveyDataResults>();
 
-	public Double movement;
-
-	public Double strength;
-
-	public Double power;
-
-	public Double endurance;
+	
 
 	public Long getId() {
 		return Id;
@@ -499,45 +498,7 @@ public class SurveyData {
 		this.min4RelativeOutput = min4RelativeOutput;
 	}
 
-	public Double getMovement() {
-		return movement;
-	}
-
-	public void setMovement(Double movement) {
-		this.movement = movement;
-	}
-
-	public Double getStrength() {
-		return strength;
-	}
-
-	public void setStrength(Double strength) {
-		this.strength = strength;
-	}
-
-	public Double getPower() {
-		return power;
-	}
-
-	public void setPower(Double power) {
-		this.power = power;
-	}
-
-	public Double getEndurance() {
-		return endurance;
-	}
-
-	public void setEndurance(Double endurance) {
-		this.endurance = endurance;
-	}
-
-	public Double getEtrakScore() {
-		return etrakScore;
-	}
-
-	public void setEtrakScore(Double etrakScore) {
-		this.etrakScore = etrakScore;
-	}
+	
 
 	public Double getWeightKg() {
 		return weightKg;
@@ -586,9 +547,6 @@ public class SurveyData {
 	public void setPullMaxKg(Double pullMaxKg) {
 		this.pullMaxKg = pullMaxKg;
 	}
-
-
-
 
 	public String getNotes() {
 		return notes;
