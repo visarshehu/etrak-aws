@@ -22,6 +22,7 @@ public class ClientRestController {
 	public List<Client> getAllClients(){
 		return clientService.getAllClients();
 	}
+	
     @RequestMapping(value = "clients/{id}", method = RequestMethod.GET)
 	public Client getClientById(@PathVariable("id") long id){
 		return clientService.getClientById(id);

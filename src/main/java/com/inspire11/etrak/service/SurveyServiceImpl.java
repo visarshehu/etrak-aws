@@ -14,7 +14,20 @@ public class SurveyServiceImpl implements SurveyService {
 	private SurveyDataRepository surveyRepository;
 	
 
+	@Override
 	public SurveyData saveSurvey(SurveyData survey) {
 		return surveyRepository.save(survey);
 	}
+
+
+	@Override
+	public SurveyData getSurveyById(long id) {
+		return surveyRepository.findOne(id);
+	}
+
+
+
+
+
+	
 }

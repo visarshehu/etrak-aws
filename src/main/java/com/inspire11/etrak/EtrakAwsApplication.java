@@ -10,3 +10,4 @@ public class EtrakAwsApplication {
 		SpringApplication.run(EtrakAwsApplication.class, args);
 	}
 }
+	

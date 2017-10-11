@@ -733,11 +733,14 @@
                                         <br />
                                         <div class="form-group">
                                             <div class="row">
-                                                <div class="col-md-4 nopadding col-md-offset-2">
+                                                <div class="col-md-4 nopadding">
                                                     <label class="control-label">Push Max Left (lbs)</label> <input class="form-control  input-lg" name="pushMaxL" type="text" />
                                                 </div>
                                                 <div class="col-md-4 nopadding">
-                                                    <label class="control-label">Pull Max (lbs)</label> <input class="form-control  input-lg" name="pullMax" type="text" />
+                                                    <label class="control-label">Pull Max Right(lbs)</label> <input class="form-control  input-lg" name="pullMaxR" type="text" />
+                                                </div>
+                                                <div class="col-md-4 nopadding">
+                                                    <label class="control-label">Pull Max Left(lbs)</label> <input class="form-control  input-lg" name="pullMaxL" type="text" />
                                                 </div>
                                             </div>
                                         </div>
@@ -803,17 +806,17 @@
                                         <div class="row">
                                             <div class="col-md-6 nopadding" id="mileRun">
                                                 <label class="control-label">1 Mile Run</label>
-                                                <input class="form-control  input-lg time" name="mileRun" type="text" placeholder="__ min : __ sec" />
+                                                <input class="form-control  input-lg time" name="mileRun" id="convertMin" type="text" placeholder="__ min : __ sec" />
 
                                             </div>
                                             <div class="col-md-6 nopadding" id="mileRun">
                                                 <label class="control-label">1000 Meter Row</label>
-                                                <input class="form-control  input-lg time" name="kmRow" type="text" placeholder="__ min : __ sec" />
+                                                <input class="form-control  input-lg time" name="kmRow" type="text" id="convertKm" placeholder="__ min : __ sec" />
 
                                             </div>
                                             <div class="col-md-6 nopadding" id="metersRun" style="display:none">
                                                 <label class="control-label">1600 Meters Run</label>
-                                                <input class="form-control  input-lg time" name="m1600Run" type="text" placeholder="__ min : __ sec" />
+                                                <input class="form-control  input-lg time" name="m1600Run" type="text" id="convertM" placeholder="__ min : __ sec" />
 
                                             </div>
 
@@ -842,7 +845,7 @@
                                         <textarea class="form-control" id="notes" rows="5" name="notes" id="notes"></textarea>
                                     </div>
 									
-                                    <button class="btn btn-success btn-lg pull-right" type="submit">Submit</button>
+                                    <button class="btn btn-success btn-lg pull-right postForm" type="submit">Submit</button>
                                 </div>
 
 
@@ -868,10 +871,50 @@
     <script type="text/javascript" th:src="@{/js/jquery.maskedinput.js}"></script>
     <script type="text/javascript">
         $(document).ready(function($) {
-            $(".time").mask("99 min : 99 sec", {
+            $("#convertMin").mask("99 min : 99 sec", {
                 placeholder: "__ min : __sec"
+            }).change(function(){
+                // Find contiguous numbers in pairs
+                var pairs = this.value.match(/\d{2}/g);
+                // You expect two pairs
+                if(pairs.length === 2){
+                    var result=Number(pairs[0])*60+Number(pairs[1]);
+                    document.getElementById("convertMin").value=result;
+                  
+                    
+                }
+            });
+            
+            $("#convertKm").mask("99 min : 99 sec", {
+                placeholder: "__ min : __sec"
+            }).change(function(){
+                // Find contiguous numbers in pairs
+                var pairs = this.value.match(/\d{2}/g);
+                // You expect two pairs
+                if(pairs.length === 2){
+                    var result=Number(pairs[0])*60+Number(pairs[1]);
+                    document.getElementById("convertKm").value=result;
+                    document.getElementById("convertM").value=result;
+                }
+            });
+            
+            $("#convertM").mask("99 min : 99 sec", {
+                placeholder: "__ min : __sec"
+            }).change(function(){
+                // Find contiguous numbers in pairs
+                var pairs = this.value.match(/\d{2}/g);
+                // You expect two pairs
+                if(pairs.length === 2){
+                    var result=Number(pairs[0])*60+Number(pairs[1]);
+                    document.getElementById("convertM").value=result;
+
+                }
             });
         });
+        
+        
+        
+        
         var navListItems = $('div.setup-panel div a'),
             allWells = $('.setup-content'),
             allNextBtn = $('.nextBtn');

@@ -1,10 +1,11 @@
+
 package com.inspire11.etrak.model;
 
 
 
+import java.util.ArrayList;
 import java.util.Date;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -51,7 +52,7 @@ public class Client {
 	
 	@OneToMany(mappedBy = "client", cascade = CascadeType.ALL)
 	@JsonManagedReference  
-	private Set<SurveyData> survey= new HashSet<SurveyData>();
+	private List<SurveyData> survey= new ArrayList<SurveyData>();
 
 
 	public Long getId() {
@@ -103,11 +104,13 @@ public class Client {
 		this.address = address;
 	}
 
-	public Set<SurveyData> getSurvey() {
+	
+
+	public List<SurveyData> getSurvey() {
 		return survey;
 	}
 
-	public void setSurvey(Set<SurveyData> survey) {
+	public void setSurvey(List<SurveyData> survey) {
 		this.survey = survey;
 	}
 

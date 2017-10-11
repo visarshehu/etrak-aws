@@ -1,10 +1,6 @@
 package com.inspire11.etrak.model;
 
 
-
-import java.util.HashSet;
-import java.util.Set;
-
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -13,7 +9,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
+
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
@@ -35,6 +32,11 @@ public class SurveyData {
 
 	@Column(name = "nutritional_Goal")
 	private String nutritionalGoal;
+	
+	@OneToOne(cascade = CascadeType.ALL)
+	@JsonManagedReference  
+	@JoinColumn(name="surveyresult_id")
+	private SurveyDataResults surveyDataResults;
 
 	private String unit;
 
@@ -96,52 +98,33 @@ public class SurveyData {
 
 	private Double pushMaxLKg;
 
-	private Double pullMax;
+	private Double pullMaxL;
+	
+	private Double pullMaxR;
 
 	private Double pullMaxKg;
 
-	private Double lowerAbsoluteForce;
+	private Integer s10PowerOutput;
+	
+	private Integer s60PowerOutput;
 
-	private Double lowerRelativeForce;
+	private Integer mileRun;
 
-	private Double pushAbsoluteForce;
+	private Integer kmRow;
 
-	private Double pushRelativeForce;
+	private Integer m1600Run;
 
-	private Double pullAbsoluteForce;
-
-	private Double pullRelativeForce;
-
-	private Double s10PowerOutput;
-
-	private Double s60PowerOutput;
-
-	private Double s10RelativePower;
-
-	private Double s60RelativePower;
-
-	private String mileRun;
-
-	private String kmRow;
-
-	private String m1600Run;
-
-	private Double min4PowerOutput;
+	private Integer min4PowerOutput;
 
 	private Double Calories;
 
-	private Double vo2Max;
-
-	private Double min4RelativeOutput;
-
 	private String notes;
 	
-	@OneToMany(mappedBy = "surveydataresults", cascade = CascadeType.ALL)
-	@JsonManagedReference  
-	private Set<SurveyDataResults> survey= new HashSet<SurveyDataResults>();
-
 	
-
+	/*@Column(name="submitedTime", columnDefinition="TIMESTAMP DEFAULT CURRENT_TIMESTAMP",insertable=false, updatable=false)
+	@Temporal(TemporalType.TIMESTAMP)
+	private Date submitedTime;
+*/
 	public Long getId() {
 		return Id;
 	}
@@ -165,8 +148,6 @@ public class SurveyData {
 	public void setActivityLevel(String activityLevel) {
 		this.activityLevel = activityLevel;
 	}
-
-
 
 	public String getNutritionalGoal() {
 		return nutritionalGoal;
@@ -376,101 +357,29 @@ public class SurveyData {
 		this.pushMaxL = pushMaxL;
 	}
 
-	public Double getPullMax() {
-		return pullMax;
-	}
-
-	public void setPullMax(Double pullMax) {
-		this.pullMax = pullMax;
-	}
-
-	public Double getLowerAbsoluteForce() {
-		return lowerAbsoluteForce;
-	}
-
-	public void setLowerAbsoluteForce(Double lowerAbsoluteForce) {
-		this.lowerAbsoluteForce = lowerAbsoluteForce;
-	}
-
-	public Double getLowerRelativeForce() {
-		return lowerRelativeForce;
-	}
-
-	public void setLowerRelativeForce(Double lowerRelativeForce) {
-		this.lowerRelativeForce = lowerRelativeForce;
-	}
-
-	public Double getPushAbsoluteForce() {
-		return pushAbsoluteForce;
-	}
-
-	public void setPushAbsoluteForce(Double pushAbsoluteForce) {
-		this.pushAbsoluteForce = pushAbsoluteForce;
-	}
-
-	public Double getPushRelativeForce() {
-		return pushRelativeForce;
-	}
-
-	public void setPushRelativeForce(Double pushRelativeForce) {
-		this.pushRelativeForce = pushRelativeForce;
-	}
-
-	public Double getPullAbsoluteForce() {
-		return pullAbsoluteForce;
-	}
-
-	public void setPullAbsoluteForce(Double pullAbsoluteForce) {
-		this.pullAbsoluteForce = pullAbsoluteForce;
-	}
-
-	public Double getPullRelativeForce() {
-		return pullRelativeForce;
-	}
-
-	public void setPullRelativeForce(Double pullRelativeForce) {
-		this.pullRelativeForce = pullRelativeForce;
-	}
-
-	public Double getS10PowerOutput() {
+	
+	public Integer getS10PowerOutput() {
 		return s10PowerOutput;
 	}
 
-	public void setS10PowerOutput(Double s10PowerOutput) {
+	public void setS10PowerOutput(Integer s10PowerOutput) {
 		this.s10PowerOutput = s10PowerOutput;
 	}
 
-	public Double getS60PowerOutput() {
+	public Integer getS60PowerOutput() {
 		return s60PowerOutput;
 	}
 
-	public void setS60PowerOutput(Double s60PowerOutput) {
+	public void setS60PowerOutput(Integer s60PowerOutput) {
 		this.s60PowerOutput = s60PowerOutput;
 	}
 
-	public Double getS10RelativePower() {
-		return s10RelativePower;
-	}
-
-	public void setS10RelativePower(Double s10RelativePower) {
-		this.s10RelativePower = s10RelativePower;
-	}
-
-	public Double getS60RelativePower() {
-		return s60RelativePower;
-	}
-
-	public void setS60RelativePower(Double s60RelativePower) {
-		this.s60RelativePower = s60RelativePower;
-	}
-
 	
-
-	public Double getMin4PowerOutput() {
+	public Integer getMin4PowerOutput() {
 		return min4PowerOutput;
 	}
 
-	public void setMin4PowerOutput(Double min4PowerOutput) {
+	public void setMin4PowerOutput(Integer min4PowerOutput) {
 		this.min4PowerOutput = min4PowerOutput;
 	}
 
@@ -481,24 +390,8 @@ public class SurveyData {
 	public void setCalories(Double calories) {
 		Calories = calories;
 	}
-
-	public Double getVo2Max() {
-		return vo2Max;
-	}
-
-	public void setVo2Max(Double vo2Max) {
-		this.vo2Max = vo2Max;
-	}
-
-	public Double getMin4RelativeOutput() {
-		return min4RelativeOutput;
-	}
-
-	public void setMin4RelativeOutput(Double min4RelativeOutput) {
-		this.min4RelativeOutput = min4RelativeOutput;
-	}
-
 	
+
 
 	public Double getWeightKg() {
 		return weightKg;
@@ -556,28 +449,54 @@ public class SurveyData {
 		this.notes = notes;
 	}
 
-	public String getMileRun() {
+	public Integer getMileRun() {
 		return mileRun;
 	}
 
-	public void setMileRun(String mileRun) {
+	public void setMileRun(Integer mileRun) {
 		this.mileRun = mileRun;
 	}
 
-	public String getKmRow() {
+	public Integer getKmRow() {
 		return kmRow;
 	}
 
-	public void setKmRow(String kmRow) {
+	public void setKmRow(Integer kmRow) {
 		this.kmRow = kmRow;
 	}
 
-	public String getM1600Run() {
+	public Integer getM1600Run() {
 		return m1600Run;
 	}
 
-	public void setM1600Run(String m1600Run) {
+	public void setM1600Run(Integer m1600Run) {
 		this.m1600Run = m1600Run;
 	}
+
+	public SurveyDataResults getSurveyDataResults() {
+		return surveyDataResults;
+	}
+
+	public void setSurveyDataResults(SurveyDataResults surveyDataResults) {
+		this.surveyDataResults = surveyDataResults;
+	}
+
+	public Double getPullMaxL() {
+		return pullMaxL;
+	}
+
+	public void setPullMaxL(Double pullMaxL) {
+		this.pullMaxL = pullMaxL;
+	}
+
+	public Double getPullMaxR() {
+		return pullMaxR;
+	}
+
+	public void setPullMaxR(Double pullMaxR) {
+		this.pullMaxR = pullMaxR;
+	}
+
+
 
 }

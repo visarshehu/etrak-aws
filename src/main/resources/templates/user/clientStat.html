@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 
@@ -185,7 +186,7 @@ class="img-responsive"></a>
                         </form>
                     </li>
                     <li><a th:href="@{dashboard.html}">Home</a></li>
-                    <li><a href="@{clients.html}">Clients</a></li>
+                    <li><a th:href="@{clients.html}">Clients</a></li>
                     <li><a href="">Traks</a></li>
                     <li><a href="">Reports</a></li>
                     <li>
@@ -207,62 +208,7 @@ Out</a>
         </div>
         <!-- /.container -->
     </nav>
-    <div class='row' style="display:none">
-        <div class='col-md-6'>
-            <div id='versiontable' class='table-responsive'>
-                <table class='sastable table-striped table-bordered'  data-toggle='table' data-height='150' data-classes='table-striped table-bordered'>
-                    <thead id='head'>
-                        <tr>
-                            <th>Degrees</th>
-                            <th>Pts</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>0</td>
-                            <td>1</td>
-                        </tr>
-                        <tr>
-                            <td>64</td>
-                            <td>2</td>
-                        </tr>
-                        <tr>
-                            <td>71</td>
-                            <td>3</td>
-                        </tr>
-                        <tr>
-                            <td>78</td>
-                            <td>4</td>
-                        </tr>
-                        <tr>
-                            <td>85</td>
-                            <td>5</td>
-                        </tr>
-                        <tr>
-                            <td>92</td>
-                            <td>6</td>
-                        </tr>
-                        <tr>
-                            <td>99</td>
-                            <td>7</td>
-                        </tr>
-                        <tr>
-                            <td>106</td>
-                            <td>8</td>
-                        </tr>
-                        <tr>
-                            <td>113</td>
-                            <td>9</td>
-                        </tr>
-                        <tr>
-                            <td>120</td>
-                            <td>10</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-        </div>
-    </div>
+  
     <div class="page-header">
         <div class="clearfix">
             <div class="row col-md-12">
@@ -290,16 +236,24 @@ enctype="multipart/form-data" role="form" >
                                 <h4 th:utext="${id}"></h4>
                             </div>
                         </div>
-                        <div class="row">
+                        <div class="row" style="padding-left:14px">
                             <div class="col-sm-3">
-                                <p>
-                                    Evaluation <br /> Date <br /> Number <br />
-                                </p>
+                            <div class="row">
+                            <p id="date">Date: </p>
+                            </div>
+                            <div class="row">
+                            <p id="number">Number: </p>
+                            </div>
+                                
                             </div>
                             <div class="col-sm-4">
-                                <p>
-                                    TRAKScore <br /> Rank <br />
-                                </p>
+                            <div class="row">
+                            <p id="trakscore"></p>
+                            </div>
+                            <div class="row">
+                            <p id="rank">Rank: </p>
+                            </div>
+                             
                             </div>
                         </div>
                     </div>
@@ -331,6 +285,7 @@ style="background: #2085B8">Comparison</button></a>
         </div>
     </div>
     <div class="container-fluid">
+    <input type="hidden" id="yourId" th:value="${clientId}"/>
         <div id="button" style="padding-right: 40px;">
             <a href="#aboutModal" data-toggle="modal" data-target="#myModal" class="btn btn-circle-micro btn-primary" style="float: right;"><span
 class="glyphicon glyphicon-info-sign"></span> </a>
@@ -527,14 +482,14 @@ class="glyphicon glyphicon-info-sign"></span> </a>
                         <thead>
                             <tr>
                                 <th class="col-xs-6">Exercise Type</th>
-                                <th class="col-xs-1">AlbanM</th>
+                                <th class="col-xs-1" id="name"></th>
                                 <th class="col-xs-5">TRAK Score</th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr>
                                 <td>Deep Squat</td>
-                                <td>90</td>
+                                <td id="squat">90</td>
                                 <td id="deepSquat" data-trigger='hover' data-container="body" data-toggle="popover"  data-content=" 
                                                                                                  <div class='table-responsive'>
                 <table class='sastable table-striped table-bordered' data-toggle='table' data-height='150' data-classes='table  table-striped table-bordered'>
@@ -591,7 +546,7 @@ class="glyphicon glyphicon-info-sign"></span> </a>
                             </tr>
                             <tr>
                                 <td>Shoulder Flexion -L-(deg)</td>
-                                <td>160</td>
+                                <td id="shoulder">160</td>
                                 <td id="shoulderL" data-trigger='hover' data-container="body" data-toggle="popover"  data-content=" 
                                                                                                  <div class='table-responsive'>
                 <table class='sastable table-striped table-bordered' data-toggle='table' data-height='150' data-classes='table  table-striped table-bordered'>
@@ -648,7 +603,7 @@ class="glyphicon glyphicon-info-sign"></span> </a>
                             </tr>
                             <tr>
                                 <td>Shoulder Flexion -R-(deg)</td>
-                                <td>160</td>
+                                <td id="rshoulder">160</td>
                                 <td id="shoulderR" data-trigger='hover' data-container="body" data-toggle="popover"  data-content=" 
                                                                                                  <div class='table-responsive'>
                 <table class='sastable table-striped table-bordered' data-toggle='table' data-height='150' data-classes='table  table-striped table-bordered'>
@@ -704,7 +659,7 @@ class="glyphicon glyphicon-info-sign"></span> </a>
                             </tr>
                             <tr>
                                 <td>Shoulder Extension -R-</td>
-                                <td>115</td>
+                                <td id="extension">115</td>
                                 <td id="externalShoulderR" data-trigger='hover' data-container="body" data-toggle="popover"  data-content=" 
                                                                                                  <div class='table-responsive'>
                 <table class='sastable table-striped table-bordered' data-toggle='table' data-height='150' data-classes='table  table-striped table-bordered'>
@@ -761,7 +716,7 @@ class="glyphicon glyphicon-info-sign"></span> </a>
                             </tr>
                             <tr>
                                 <td>Shoulder Extension -L-</td>
-                                <td>67</td>
+                                <td id="Lextension">67</td>
                                 <td id="externalShoulderL" data-trigger='hover' data-container="body" data-toggle="popover"  data-content=" 
                                                                                                  <div class='table-responsive'>
                 <table class='sastable table-striped table-bordered' data-toggle='table' data-height='150' data-classes='table  table-striped table-bordered'>
@@ -818,7 +773,7 @@ class="glyphicon glyphicon-info-sign"></span> </a>
                             </tr>
                             <tr>
                                 <td>Trunk Rotation -R-</td>
-                                <td>128</td>
+                                <td id="trunkr">128</td>
                                 <td id="trunkRotationR" data-trigger='hover' data-container="body" data-toggle="popover"  data-content=" 
                                                                                                  <div class='table-responsive'>
                 <table class='sastable table-striped table-bordered' data-toggle='table' data-height='150' data-classes='table  table-striped table-bordered'>
@@ -875,7 +830,7 @@ class="glyphicon glyphicon-info-sign"></span> </a>
                             </tr>
                             <tr>
                                 <td>Trunk Rotation -L-</td>
-                                <td>73</td>
+                                <td id="trunkl">73</td>
                                 <td id="trunkRotationL" data-trigger='hover' data-container="body" data-toggle="popover"  data-content=" 
                                                                                                  <div class='table-responsive'>
                 <table class='sastable table-striped table-bordered' data-toggle='table' data-height='150' data-classes='table  table-striped table-bordered'>
@@ -942,14 +897,14 @@ class="glyphicon glyphicon-info-sign"></span> </a>
                         <thead>
                             <tr>
                                 <th class="col-xs-5">Exercise Type</th>
-                                <th class="col-xs-2">Alban M</th>
+                                <th class="col-xs-2" id="name1"></th>
                                 <th class="col-xs-5">TRAK Score</th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr>
                                 <td>Pistol Squat -R-</td>
-                                <td>Pass</td>
+                                <td id="pistol">Pass</td>
                                 <td id="hipBridgeR" data-trigger='hover' data-container="body" data-toggle="popover" data-placement="top" data-content=" 
                                                                                                  <div class='table-responsive'>
                 <table class='sastable table-striped table-bordered' data-toggle='table' data-height='150' data-classes='table  table-striped table-bordered'>
@@ -1006,7 +961,7 @@ class="glyphicon glyphicon-info-sign"></span> </a>
                             </tr>
                             <tr>
                                 <td>Pistol Squat -L-</td>
-                                <td>Pass</td>
+                                <td id="pistolL">Pass</td>
                                 <td id="hipBridgeL" data-trigger='hover' data-container="body" data-toggle="popover" data-placement="top" data-content=" 
                                                                                                  <div class='table-responsive'>
                 <table class='sastable table-striped table-bordered' data-toggle='table' data-height='150' data-classes='table  table-striped table-bordered'>
@@ -1063,7 +1018,7 @@ class="glyphicon glyphicon-info-sign"></span> </a>
                             </tr>
                             <tr>
                                 <td>Prone RH/LF</td>
-                                <td>Pass</td>
+                                <td id="prone">Pass</td>
                                 <td id="plank" data-trigger='hover' data-container="body" data-toggle="popover" data-placement="top" data-content=" 
                                                                                                  <div class='table-responsive'>
                 <table class='sastable table-striped table-bordered' data-toggle='table' data-height='150' data-classes='table  table-striped table-bordered'>
@@ -1120,7 +1075,7 @@ class="glyphicon glyphicon-info-sign"></span> </a>
                             </tr>
                             <tr>
                                 <td>Prone LH/RF</td>
-                                <td>Pass</td>
+                                <td id="pronel">Pass</td>
                                 <td id="plankL" data-trigger='hover' data-container="body" data-toggle="popover" data-placement="top" data-content=" 
                                                                                                  <div class='table-responsive'>
                 <table class='sastable table-striped table-bordered' data-toggle='table' data-height='150' data-classes='table  table-striped table-bordered'>
@@ -1177,7 +1132,7 @@ class="glyphicon glyphicon-info-sign"></span> </a>
                             </tr>
                             <tr>
                                 <td>V Sit</td>
-                                <td>Pass</td>
+                                <td id="sit">Pass</td>
                                 <td id="trunk" data-trigger='hover' data-container="body" data-toggle="popover" data-placement="top" data-content=" 
                                                                                                  <div class='table-responsive'>
                 <table class='sastable table-striped table-bordered' data-toggle='table' data-height='150' data-classes='table  table-striped table-bordered'>
@@ -1249,20 +1204,20 @@ class="glyphicon glyphicon-info-sign"></span> </a>
                         <thead>
                             <tr>
                                 <th class="col-xs-5">Exercise Type</th>
-                                <th class="col-xs-2">AlbanM</th>
+                                <th class="col-xs-2" id="name2"></th>
                                 <th class="col-xs-5">TRAK Score</th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr>
                                 <td>Lower Absolute Force </td>
-                                <td>90</td>
+                                <td id="lowerA">90</td>
                                 <td id="absolutepower" data-trigger='hover' data-container="body" data-toggle="popover"  data-content=" 
                                                                                                  <div class='table-responsive'>
                 <table class='sastable table-striped table-bordered' data-toggle='table' data-height='150' data-classes='table  table-striped table-bordered'>
                     <thead id='head'>
                         <tr>
-                            <th class='col-md-6'>Degrees</th>
+                            <th class='col-md-6'>Pounds</th>
                             <th class='col-md-6'>Pts</th>
                         </tr>
                     </thead>
@@ -1314,55 +1269,55 @@ class="glyphicon glyphicon-info-sign"></span> </a>
 
                             <tr>
                                 <td>Lower Relative Force </td>
-                                <td>160</td>
+                                <td id="lowerR">160</td>
                                 <td id="poweroutput" data-trigger='hover' data-container="body" data-toggle="popover"  data-content=" 
                                                                                                  <div class='table-responsive'>
                 <table class='sastable table-striped table-bordered' data-toggle='table' data-height='150' data-classes='table  table-striped table-bordered'>
                     <thead id='head'>
                         <tr>
-                            <th class='col-md-6'>Degrees</th>
+                            <th class='col-md-6'>Ratio</th>
                             <th class='col-md-6'>Pts</th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr>
-                            <td class='col-md-6'>0</td>
+                            <td class='col-md-6'>0.00</td>
                             <td class='col-md-6'>1</td>
                         </tr>
                         <tr>
-                            <td class='col-md-6'>64</td>
+                            <td class='col-md-6'>0.90</td>
                             <td class='col-md-6'>2</td>
                         </tr>
                         <tr>
-                            <td class='col-md-6'>71</td>
+                            <td class='col-md-6'>1.10</td>
                             <td class='col-md-6'>3</td>
                         </tr>
                         <tr>
-                            <td class='col-md-6'>78</td>
+                            <td class='col-md-6'>1.30</td>
                             <td class='col-md-6'>4</td>
                         </tr>
                         <tr>
-                            <td class='col-md-6'>85</td>
+                            <td class='col-md-6'>1.50</td>
                             <td class='col-md-6'>5</td>
                         </tr>
                         <tr>
-                            <td class='col-md-6'>92</td>
+                            <td class='col-md-6'>1.70</td>
                             <td class='col-md-6'>6</td>
                         </tr>
                         <tr>
-                            <td class='col-md-6'>99</td>
+                            <td class='col-md-6'>1.90</td>
                             <td class='col-md-6'>7</td>
                         </tr>
                         <tr>
-                            <td class='col-md-6'>106</td>
+                            <td class='col-md-6'>2.10</td>
                             <td class='col-md-6'>8</td>
                         </tr>
                         <tr>
-                            <td class='col-md-6'>113</td>
+                            <td class='col-md-6'>2.30</td>
                             <td class='col-md-6'>9</td>
                         </tr>
                         <tr>
-                            <td class='col-md-6'>120</td>
+                            <td class='col-md-6'>2.50</td>
                             <td class='col-md-6'>10</td>
                         </tr>
                     </tbody>
@@ -1372,13 +1327,13 @@ class="glyphicon glyphicon-info-sign"></span> </a>
 
                             <tr>
                                 <td>Push Absolute Force</td>
-                                <td>67</td>
+                                <td id="pushA">67</td>
                                 <td id="peakpower" data-trigger='hover' data-container="body" data-toggle="popover"  data-content=" 
                                                                                                  <div class='table-responsive'>
                 <table class='sastable table-striped table-bordered' data-toggle='table' data-height='150' data-classes='table  table-striped table-bordered'>
                     <thead id='head'>
                         <tr>
-                            <th class='col-md-6'>Degrees</th>
+                            <th class='col-md-6'>Pounds</th>
                             <th class='col-md-6'>Pts</th>
                         </tr>
                     </thead>
@@ -1429,134 +1384,19 @@ class="glyphicon glyphicon-info-sign"></span> </a>
                             </tr>
                             <tr>
                                 <td>Push Relative Force</td>
-                                <td>128</td>
+                                <td id="pushL">128</td>
                                 <td id="powerratio1" data-trigger='hover' data-container="body" data-toggle="popover"  data-content=" 
                                                                                                  <div class='table-responsive'>
                 <table class='sastable table-striped table-bordered' data-toggle='table' data-height='150' data-classes='table  table-striped table-bordered'>
                     <thead id='head'>
                         <tr>
-                            <th class='col-md-6'>Degrees</th>
+                            <th class='col-md-6'>Ratio</th>
                             <th class='col-md-6'>Pts</th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr>
-                            <td class='col-md-6'>0</td>
-                            <td class='col-md-6'>1</td>
-                        </tr>
-                        <tr>
-                            <td class='col-md-6'>64</td>
-                            <td class='col-md-6'>2</td>
-                        </tr>
-                        <tr>
-                            <td class='col-md-6'>71</td>
-                            <td class='col-md-6'>3</td>
-                        </tr>
-                        <tr>
-                            <td class='col-md-6'>78</td>
-                            <td class='col-md-6'>4</td>
-                        </tr>
-                        <tr>
-                            <td class='col-md-6'>85</td>
-                            <td class='col-md-6'>5</td>
-                        </tr>
-                        <tr>
-                            <td class='col-md-6'>92</td>
-                            <td class='col-md-6'>6</td>
-                        </tr>
-                        <tr>
-                            <td class='col-md-6'>99</td>
-                            <td class='col-md-6'>7</td>
-                        </tr>
-                        <tr>
-                            <td class='col-md-6'>106</td>
-                            <td class='col-md-6'>8</td>
-                        </tr>
-                        <tr>
-                            <td class='col-md-6'>113</td>
-                            <td class='col-md-6'>9</td>
-                        </tr>
-                        <tr>
-                            <td class='col-md-6'>120</td>
-                            <td class='col-md-6'>10</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>" data-html="true"></td>
-                            </tr>
-                            <tr>
-                                <td>Pull Absolute Force</td>
-                                <td>73</td>
-                                <td id="powerratio6" data-trigger='hover' data-container="body" data-toggle="popover"  data-content=" 
-                                                                                                 <div class='table-responsive'>
-                <table class='sastable table-striped table-bordered' data-toggle='table' data-height='150' data-classes='table  table-striped table-bordered'>
-                    <thead id='head'>
-                        <tr>
-                            <th class='col-md-6'>Degrees</th>
-                            <th class='col-md-6'>Pts</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td class='col-md-6'>0</td>
-                            <td class='col-md-6'>1</td>
-                        </tr>
-                        <tr>
-                            <td class='col-md-6'>160</td>
-                            <td class='col-md-6'>2</td>
-                        </tr>
-                        <tr>
-                            <td class='col-md-6'>190</td>
-                            <td class='col-md-6'>3</td>
-                        </tr>
-                        <tr>
-                            <td class='col-md-6'>220</td>
-                            <td class='col-md-6'>4</td>
-                        </tr>
-                        <tr>
-                            <td class='col-md-6'>250</td>
-                            <td class='col-md-6'>5</td>
-                        </tr>
-                        <tr>
-                            <td class='col-md-6'></td>
-                            <td class='col-md-6'>6</td>
-                        </tr>
-                        <tr>
-                            <td class='col-md-6'>99</td>
-                            <td class='col-md-6'>7</td>
-                        </tr>
-                        <tr>
-                            <td class='col-md-6'>106</td>
-                            <td class='col-md-6'>8</td>
-                        </tr>
-                        <tr>
-                            <td class='col-md-6'>113</td>
-                            <td class='col-md-6'>9</td>
-                        </tr>
-                        <tr>
-                            <td class='col-md-6'>120</td>
-                            <td class='col-md-6'>10</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>" data-html="true"></td>
-                            </tr>
-
-                            <tr>
-                                <td>Pull Relative Force</td>
-                                <td>73</td>
-                                <td id="powerratio7" data-trigger='hover' data-container="body" data-toggle="popover"  data-content=" 
-                                                                                                 <div class='table-responsive'>
-                <table class='sastable table-striped table-bordered' data-toggle='table' data-height='150' data-classes='table  table-striped table-bordered'>
-                    <thead id='head'>
-                        <tr>
-                            <th class='col-md-6'>Degrees</th>
-                            <th class='col-md-6'>Pts</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td class='col-md-6'>0</td>
+                            <td class='col-md-6'>0.00</td>
                             <td class='col-md-6'>1</td>
                         </tr>
                         <tr>
@@ -1584,7 +1424,122 @@ class="glyphicon glyphicon-info-sign"></span> </a>
                             <td class='col-md-6'>7</td>
                         </tr>
                         <tr>
-                            <td class='col-md-6'>1.50</td>
+                            <td class='col-md-6'>1.40</td>
+                            <td class='col-md-6'>8</td>
+                        </tr>
+                        <tr>
+                            <td class='col-md-6'>1.60</td>
+                            <td class='col-md-6'>9</td>
+                        </tr>
+                        <tr>
+                            <td class='col-md-6'>1.70</td>
+                            <td class='col-md-6'>10</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>" data-html="true"></td>
+                            </tr>
+                            <tr>
+                                <td>Pull Absolute Force</td>
+                                <td id="pullA">73</td>
+                                <td id="powerratio6" data-trigger='hover' data-container="body" data-toggle="popover"  data-content=" 
+                                                                                                 <div class='table-responsive'>
+                <table class='sastable table-striped table-bordered' data-toggle='table' data-height='150' data-classes='table  table-striped table-bordered'>
+                    <thead id='head'>
+                        <tr>
+                            <th class='col-md-6'>Pounds</th>
+                            <th class='col-md-6'>Pts</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class='col-md-6'>0</td>
+                            <td class='col-md-6'>1</td>
+                        </tr>
+                        <tr>
+                            <td class='col-md-6'>160</td>
+                            <td class='col-md-6'>2</td>
+                        </tr>
+                        <tr>
+                            <td class='col-md-6'>190</td>
+                            <td class='col-md-6'>3</td>
+                        </tr>
+                        <tr>
+                            <td class='col-md-6'>220</td>
+                            <td class='col-md-6'>4</td>
+                        </tr>
+                        <tr>
+                            <td class='col-md-6'>250</td>
+                            <td class='col-md-6'>5</td>
+                        </tr>
+                        <tr>
+                            <td class='col-md-6'>280</td>
+                            <td class='col-md-6'>6</td>
+                        </tr>
+                        <tr>
+                            <td class='col-md-6'>310</td>
+                            <td class='col-md-6'>7</td>
+                        </tr>
+                        <tr>
+                            <td class='col-md-6'>340</td>
+                            <td class='col-md-6'>8</td>
+                        </tr>
+                        <tr>
+                            <td class='col-md-6'>370</td>
+                            <td class='col-md-6'>9</td>
+                        </tr>
+                        <tr>
+                            <td class='col-md-6'>400</td>
+                            <td class='col-md-6'>10</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>" data-html="true"></td>
+                            </tr>
+
+                            <tr>
+                                <td>Pull Relative Force</td>
+                                <td id="pullR">73</td>
+                                <td id="powerratio7" data-trigger='hover' data-container="body" data-toggle="popover"  data-content=" 
+                                                                                                 <div class='table-responsive'>
+                <table class='sastable table-striped table-bordered' data-toggle='table' data-height='150' data-classes='table  table-striped table-bordered'>
+                    <thead id='head'>
+                        <tr>
+                            <th class='col-md-6'>Ratio</th>
+                            <th class='col-md-6'>Pts</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class='col-md-6'>0.00</td>
+                            <td class='col-md-6'>1</td>
+                        </tr>
+                        <tr>
+                            <td class='col-md-6'>0.90</td>
+                            <td class='col-md-6'>2</td>
+                        </tr>
+                        <tr>
+                            <td class='col-md-6'>1.00</td>
+                            <td class='col-md-6'>3</td>
+                        </tr>
+                        <tr>
+                            <td class='col-md-6'>1.10</td>
+                            <td class='col-md-6'>4</td>
+                        </tr>
+                        <tr>
+                            <td class='col-md-6'>1.20</td>
+                            <td class='col-md-6'>5</td>
+                        </tr>
+                        <tr>
+                            <td class='col-md-6'>1.30</td>
+                            <td class='col-md-6'>6</td>
+                        </tr>
+                        <tr>
+                            <td class='col-md-6'>1.40</td>
+                            <td class='col-md-6'>7</td>
+                        </tr>
+                        <tr>
+                            <td class='col-md-6'>1.40</td>
                             <td class='col-md-6'>8</td>
                         </tr>
                         <tr>
@@ -1611,20 +1566,20 @@ class="glyphicon glyphicon-info-sign"></span> </a>
                         <thead>
                             <tr>
                                 <th class="col-xs-5">Exercise Type</th>
-                                <th class="col-xs-2">Alban M</th>
+                                <th class="col-xs-2" id="name3"></th>
                                 <th class="col-xs-5">TRAK Score</th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr>
                                 <td>10s Power Output</td>
-                                <td>50</td>
+                                <td id="power10">50</td>
                                 <td id="vo2max" data-trigger='hover' data-container="body" data-toggle="popover" data-placement="top"  data-content=" 
                                                                                                  <div class='table-responsive'>
                 <table class='sastable table-striped table-bordered' data-toggle='table' data-height='150' data-classes='table  table-striped table-bordered'>
                     <thead id='head'>
                         <tr>
-                            <th class='col-md-6'>Degrees</th>
+                            <th class='col-md-6'>Watts</th>
                             <th class='col-md-6'>Pts</th>
                         </tr>
                     </thead>
@@ -1651,7 +1606,121 @@ class="glyphicon glyphicon-info-sign"></span> </a>
                         </tr>
                         <tr>
                             <td class='col-md-6'>700</td>
-                            <td class='col-md-6'>6/td>
+                            <td class='col-md-6'>6</td>
+                        </tr>
+                        <tr>
+                            <td class='col-md-6'>800</td>
+                            <td class='col-md-6'>7</td>
+                        </tr>
+                        <tr>
+                            <td class='col-md-6'>900</td>
+                            <td class='col-md-6'>8</td>
+                        </tr>
+                        <tr>
+                            <td class='col-md-6'>1000</td>
+                            <td class='col-md-6'>9</td>
+                        </tr>
+                        <tr>
+                            <td class='col-md-6'>1100</td>
+                            <td class='col-md-6'>10</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>" data-html="true"></td>
+                            </tr>
+                              <tr>
+                                <td>10s Relative Power</td>
+                                <td></td>
+                                <td data-trigger='hover' data-container="body" data-toggle="popover" data-placement="top"  data-content=" 
+                                                                                                 <div class='table-responsive'>
+                <table class='sastable table-striped table-bordered' data-toggle='table' data-height='150' data-classes='table  table-striped table-bordered'>
+                    <thead id='head'>
+                        <tr>
+                            <th class='col-md-6'>Ratio</th>
+                            <th class='col-md-6'>Pts</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class='col-md-6'>0.00</td>
+                            <td class='col-md-6'>1</td>
+                        </tr>
+                        <tr>
+                            <td class='col-md-6'>1.25</td>
+                            <td class='col-md-6'>2</td>
+                        </tr>
+                        <tr>
+                            <td class='col-md-6'>1.75</td>
+                            <td class='col-md-6'>3</td>
+                        </tr>
+                        <tr>
+                            <td class='col-md-6'>2.25</td>
+                            <td class='col-md-6'>4</td>
+                        </tr>
+                        <tr>
+                            <td class='col-md-6'>2.75</td>
+                            <td class='col-md-6'>5</td>
+                        </tr>
+                        <tr>
+                            <td class='col-md-6'>3.25</td>
+                            <td class='col-md-6'>6</td>
+                        </tr>
+                        <tr>
+                            <td class='col-md-6'>3.75</td>
+                            <td class='col-md-6'>7</td>
+                        </tr>
+                        <tr>
+                            <td class='col-md-6'>4.25</td>
+                            <td class='col-md-6'>8</td>
+                        </tr>
+                        <tr>
+                            <td class='col-md-6'>4.75</td>
+                            <td class='col-md-6'>9</td>
+                        </tr>
+                        <tr>
+                            <td class='col-md-6'>5.25</td>
+                            <td class='col-md-6'>10</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>" data-html="true"></td>
+                            </tr>
+                              <tr>
+                                <td>60s Power Output</td>
+                                <td ></td>
+                                <td  data-trigger='hover' data-container="body" data-toggle="popover" data-placement="top"  data-content=" 
+                                                                                                 <div class='table-responsive'>
+                <table class='sastable table-striped table-bordered' data-toggle='table' data-height='150' data-classes='table  table-striped table-bordered'>
+                    <thead id='head'>
+                        <tr>
+                            <th class='col-md-6'>Watts</th>
+                            <th class='col-md-6'>Pts</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class='col-md-6'>0</td>
+                            <td class='col-md-6'>1</td>
+                        </tr>
+                        <tr>
+                            <td class='col-md-6'>300</td>
+                            <td class='col-md-6'>2</td>
+                        </tr>
+                        <tr>
+                            <td class='col-md-6'>400</td>
+                            <td class='col-md-6'>3</td>
+                        </tr>
+                        <tr>
+                            <td class='col-md-6'>500</td>
+                            <td class='col-md-6'>4</td>
+                        </tr>
+                        <tr>
+                            <td class='col-md-6'>600</td>
+                            <td class='col-md-6'>5</td>
+                        </tr>
+                        <tr>
+                            <td class='col-md-6'>700</td>
+                            <td class='col-md-6'>6</td>
                         </tr>
                         <tr>
                             <td class='col-md-6'>800</td>
@@ -1674,14 +1743,15 @@ class="glyphicon glyphicon-info-sign"></span> </a>
             </div>" data-html="true"></td>
                             </tr>
                             <tr>
+                            
                                 <td>60s Relative Power</td>
-                                <td>73</td>
+                                <td id="power60">73</td>
                                 <td id="4poweroutput" data-trigger='hover' data-container="body" data-toggle="popover" data-placement="top" data-content=" 
                                                                                                  <div class='table-responsive'>
                 <table class='sastable table-striped table-bordered' data-toggle='table' data-height='150' data-classes='table  table-striped table-bordered'>
                     <thead id='head'>
                         <tr>
-                            <th class='col-md-6'>Degrees</th>
+                            <th class='col-md-6'>Ratio</th>
                             <th class='col-md-6'>Pts</th>
                         </tr>
                     </thead>
@@ -1746,20 +1816,20 @@ class="glyphicon glyphicon-info-sign"></span> </a>
                         <thead>
                             <tr>
                                 <th class="col-xs-5">Exercise Type</th>
-                                <th class="col-xs-2">Alban M</th>
+                                <th class="col-xs-2" id="name4"></th>
                                 <th class="col-xs-5">TRAK Score</th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr>
                                 <td>Vo2 Max</td>
-                                <td>50</td>
+                                <td id="vmax">50</td>
                                 <td id="4powerratio" data-trigger='hover' data-container="body" data-toggle="popover" data-placement="top" data-content=" 
                                                                                                  <div class='table-responsive'>
                 <table class='sastable table-striped table-bordered' data-toggle='table' data-height='150' data-classes='table  table-striped table-bordered'>
                     <thead id='head'>
                         <tr>
-                            <th class='col-md-6'>Degrees</th>
+                            <th class='col-md-6'>Ratio</th>
                             <th class='col-md-6'>Pts</th>
                         </tr>
                     </thead>
@@ -1810,13 +1880,13 @@ class="glyphicon glyphicon-info-sign"></span> </a>
                             </tr>
                             <tr>
                                 <td>4min Relative Power</td>
-                                <td>73</td>
+                                <td id="rel4">73</td>
                                 <td id="5poweroutput" data-trigger='hover' data-container="body" data-toggle="popover"  data-placement="top" data-content=" 
                                                                                                  <div class='table-responsive'>
                 <table class='sastable table-striped table-bordered' data-toggle='table' data-height='150' data-classes='table  table-striped table-bordered'>
                     <thead id='head'>
                         <tr>
-                            <th class='col-md-6'>Degrees</th>
+                            <th class='col-md-6'>Ratio</th>
                             <th class='col-md-6'>Pts</th>
                         </tr>
                     </thead>
