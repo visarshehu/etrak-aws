@@ -114,6 +114,58 @@ public class LookUpRelative {
 		peakRelativeWomen.put(2.75, 9);
 		peakRelativeWomen.put(3.00, 10);
 		relative.put("PeakRelativeWomen", peakRelativeWomen);
+		
+		TreeMap<Double, Integer> s10women = new TreeMap<Double, Integer>();
+		s10women.put(0.00, 1);
+		s10women.put(1.00, 2);
+		s10women.put(1.40, 3);
+		s10women.put(1.80, 4);
+		s10women.put(2.20, 5);
+		s10women.put(2.60, 6);
+		s10women.put(3.00, 7);
+		s10women.put(3.40, 8);
+		s10women.put(3.80, 9);
+		s10women.put(4.20, 10);
+		relative.put("s10RelativePowerWomen", s10women);
+		
+		TreeMap<Double, Integer> s60women = new TreeMap<Double, Integer>();
+		s60women.put(0.00, 1);
+		s60women.put(1.00, 2);
+		s60women.put(1.25, 3);
+		s60women.put(1.50, 4);
+		s60women.put(1.75, 5);
+		s60women.put(2.00, 6);
+		s60women.put(2.25, 7);
+		s60women.put(2.50, 8);
+		s60women.put(2.75, 9);
+		s60women.put(3.00, 10);
+		relative.put("s60RelativePowerWomen", s60women);
+		
+		TreeMap<Double, Integer> s10men = new TreeMap<Double, Integer>();
+		s10men.put(0.00, 1);
+		s10men.put(1.25, 2);
+		s10men.put(1.75, 3);
+		s10men.put(2.25, 4);
+		s10men.put(2.75, 5);
+		s10men.put(3.25, 6);
+		s10men.put(3.75, 7);
+		s10men.put(4.25, 8);
+		s10men.put(4.75, 9);
+		s10men.put(5.25, 10);
+		relative.put("s10RelativePowerMen", s10men);
+		
+		TreeMap<Double, Integer> s60men = new TreeMap<Double, Integer>();
+		s60men.put(0.00, 1);
+		s60men.put(1.25, 2);
+		s60men.put(1.75, 3);
+		s60men.put(2.25, 4);
+		s60men.put(2.75, 5);
+		s60men.put(3.25, 6);
+		s60men.put(3.75, 7);
+		s60men.put(4.25, 8);
+		s60men.put(4.75, 9);
+		s60men.put(5.25, 10);
+		relative.put("s60RelativePowerMen", s60men);
 
 	}
 

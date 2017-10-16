@@ -11,5 +11,6 @@ public interface ClientService {
 	public Client getClientById(long id);
 	public Client findClientByEmail(String email);
 	public void saveClient(Client client);
+	public List<Client> findByNameContainsOrLastNameContainsAllIgnoreCase(String query,String query1);
 
 }

@@ -12,18 +12,18 @@ public class LookUp {
 	
 	public LookUp(){
 		
-		TreeMap<Integer,Integer> scores=new TreeMap<Integer,Integer>();
-		scores.put(0, 1);
-		scores.put(64, 2);
-		scores.put(71, 3);
-		scores.put(78, 4);
-		scores.put(85, 5);
-		scores.put(92, 6);
-		scores.put(99, 7);
-		scores.put(106, 8);
-		scores.put(113, 9);
-		scores.put(120, 10);
-		tm.put("DeepSquatHipFlexion",scores);
+			TreeMap<Integer,Integer> scores=new TreeMap<Integer,Integer>();
+			scores.put(0, 1);
+			scores.put(64, 2);
+			scores.put(71, 3);
+			scores.put(78, 4);
+			scores.put(85, 5);
+			scores.put(92, 6);
+			scores.put(99, 7);
+			scores.put(106, 8);
+			scores.put(113, 9);
+			scores.put(120, 10);
+			tm.put("DeepSquatHipFlexion",scores);
 		
 		TreeMap<Integer,Integer> scoresShoulderFlexion=new TreeMap<Integer,Integer>();
 		scoresShoulderFlexion.put(0	, 1);

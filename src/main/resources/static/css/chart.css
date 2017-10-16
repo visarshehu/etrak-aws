@@ -1,6 +1,8 @@
+@import url('https://fonts.googleapis.com/css?family=Orbitron');
+
 .progressbar__label{
     color: #2085B8 !important;
-    font-family: Orbitron;
+    font-family: Orbitron !important;
     font-weight: bold;
 
 }
@@ -8,7 +10,9 @@
 
 
 .progressbar_linelabel{
+	
 	color: black !important;
+	font-family: Orbitron !important;
 }
 
 .chart-wrapper{
@@ -33,8 +37,3 @@ h4,h2 {
 	font-weight: bold;
 }
 
-p{
-	
-	font-family: Orbitron;
-	
-}

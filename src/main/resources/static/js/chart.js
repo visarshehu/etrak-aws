@@ -1,5 +1,12 @@
 var id = $("#yourId").val();
 
+/*function fillPopup(type){
+	var url="/scores/"+type;
+	$.getJSON(url, function(tables){
+		
+		
+	});
+}*/
 function getClientResults(id) {
     var url = "/clients/" + id;
     $.getJSON(url, function(data) {
@@ -39,6 +46,8 @@ function getClientResults(id) {
         TrakScore("4poweroutput", results.surveyDataResults["s60RelativePower"]/10);
         TrakScore("4powerratio", results.surveyDataResults["vo2Max"]/10);
         TrakScore("5poweroutput",results.surveyDataResults["min4RelativePower"]/10);
+        TrakScore("s10Relative",results.surveyDataResults["s10RelativePowerResults"]/10);
+        TrakScore("power60Output",results.surveyDataResults["s60PowerOutputResults"]/10);
         document.getElementById("squat").innerHTML=results.deepSquatHipFlexion;
         document.getElementById("shoulder").innerHTML=results.shoulderFlexionL;
         document.getElementById("rshoulder").innerHTML=results.shoulderFlexionR;
@@ -52,13 +61,20 @@ function getClientResults(id) {
         document.getElementById("pronel").innerHTML=results.proneRF_RH;
         document.getElementById("sit").innerHTML=results.vsit;
         document.getElementById("lowerA").innerHTML=results.surveyDataResults["lowerAbs"];
-        document.getElementById("lowerR").innerHTML=results.surveyDataResults["lowerRel"];
+        var lowerRel=parseFloat(results.surveyDataResults["lowerRel"]).toFixed(2);
+        document.getElementById("lowerR").innerHTML=results.surveyDataResults[lowerRel];
         document.getElementById("pushA").innerHTML=results.surveyDataResults["pushAbs"];
-        document.getElementById("pushL").innerHTML=results.surveyDataResults["pushRel"];
+        var pushRel=parseFloat(results.surveyDataResults["pushRel"]).toFixed(2);
+        document.getElementById("pushL").innerHTML=results.surveyDataResults[pushRel];
         document.getElementById("pullA").innerHTML=results.surveyDataResults["pullAbs"];
+        var pullRel=parseFloat(results.surveyDataResults["pullRel"]).toFixed(2);
         document.getElementById("pullR").innerHTML=results.surveyDataResults["pullRel"];
+        var rel=parseFloat(results.surveyDataResults["s10RelativePower"]).toFixed(2);
+        document.getElementById("s10Rel").innerHTML=rel;
+        var res=parseFloat(results.surveyDataResults["s60RelativePowerCalc"]).toFixed(2);
+        document.getElementById("power60").innerHTML=res;
+        document.getElementById("power60Out").innerHTML=results.s60PowerOutput;
         document.getElementById("power10").innerHTML=results.s10PowerOutput;
-        document.getElementById("power60").innerHTML=results.s60PowerOutput;
         document.getElementById("vmax").innerHTML=results.deepSquatHipFlexion;
         document.getElementById("rel4").innerHTML=results.min4PowerOutput;
         document.getElementById("name").innerHTML=data.name;
@@ -66,36 +82,12 @@ function getClientResults(id) {
         document.getElementById("name2").innerHTML=data.name;
         document.getElementById("name3").innerHTML=data.name;
         document.getElementById("name4").innerHTML=data.name;
-        //document.getElementById("date").innerHTML=data.name;
+        var submitedDate=new Date(results.submittedDate).toDateString();
+        document.getElementById("date").innerHTML="Date: <strong>"+submitedDate +"</strong>";
+        document.getElementById("number").innerHTML="Number: <strong> " +data.survey.length+"</strong>";
         document.getElementById("trakscore").innerHTML="TRAKScore: <strong>"+results.surveyDataResults["etrakScore"]+"</strong>";
-
-
-
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
+ 
     });
-
-
 }
 
 getClientResults(id);
@@ -136,9 +128,6 @@ function AnimateCircle(container_id, animatePercentage, type) {
 
 }
 
-
-
-
 function AnimateLine(container_id, animatePercentage, type) {
     var element = document.getElementById(container_id);
 
@@ -174,7 +163,6 @@ function AnimateLine(container_id, animatePercentage, type) {
     bar.animate(animatePercentage);
 
 }
-
 
 function TrakScore(container_id, animatePercentage) {
     var element = document.getElementById(container_id);

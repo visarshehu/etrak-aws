@@ -23,11 +23,10 @@ public class CalculateServiceImpl implements CalculateService {
 	private LookUpRelative lookupRelative;
 
 	private double etrak;
-	
-	private Integer  power, strength, endurance, movement;
+
+	private Integer power, strength, endurance, movement;
 
 	SurveyDataResults surveyresults = new SurveyDataResults();
-	
 
 	@Override
 	public void CalculateMovement(Long id) {
@@ -49,7 +48,7 @@ public class CalculateServiceImpl implements CalculateService {
 
 		double rangeScore = (deepSquat + shoulderFlexionR + shoulderFlexionL + shoulderExtensionR + shoulderExtensionL
 				+ trunkRotationL + trunkRotationR) / (7.0);
-		int range=(int)Math.round((rangeScore));
+		int range = (int) Math.round((rangeScore));
 
 		double pistolSquatR = Math.round((survey.getPistolR() / 3) * 10);
 
@@ -62,9 +61,9 @@ public class CalculateServiceImpl implements CalculateService {
 		double vSit = Math.round((survey.getVsit() / (3.0)) * 10);
 
 		double controlScore = ((pistolSquatR + pistolSquatL + proneRH_LF + proneLF_RH + vSit) / 5);
-		int control=(int)Math.round(controlScore);
-		double movementScore=((range+control)/2.0);
-		movement =(int)Math.round(movementScore) ;
+		int control = (int) Math.round(controlScore);
+		double movementScore = ((range + control) / 2.0);
+		movement = (int) Math.round(movementScore);
 		surveyresults.setMovement(movement);
 		surveyresults.setRangeScore(range);
 		surveyresults.setControlScore(control);
@@ -90,7 +89,7 @@ public class CalculateServiceImpl implements CalculateService {
 	public void CalculateStrength(Long id) {
 		SurveyData survey = surveyDataRepository.findOne(id);
 		int scoreAbsForce, scoreRelForce, scorePushAbs, scorePushRel, scorePullAbs, scorePullRel;
-		int lowerAbsoluteForce = (int)(survey.getLowerMaxL() + survey.getLowerMaxR());
+		int lowerAbsoluteForce = (int) (survey.getLowerMaxL() + survey.getLowerMaxR());
 		double lowerRelativeForce = (survey.getLowerMaxL() + survey.getLowerMaxR()) / survey.getWeight();
 		int pushAbsoluteForce = (int) (survey.getPushMaxR() + survey.getPushMaxL());
 		double pushRelativeForce = (survey.getPushMaxR() + survey.getPushMaxL()) / survey.getWeight();
@@ -114,17 +113,17 @@ public class CalculateServiceImpl implements CalculateService {
 			scorePullRel = lookupRelative.getScore("PushPullRelative", pullRelativeForce);
 		}
 
-		int absoluteStrength=(int)Math.round((scoreAbsForce+scorePushAbs+scorePullAbs)/3);
-		int relativeStrength=(int)Math.round((scoreRelForce+scorePushRel+scorePullRel)/3);
-		double strengthScore=(absoluteStrength+relativeStrength)/2.0;
-		strength = (int)Math.round(strengthScore);
+		int absoluteStrength = (int) Math.round((scoreAbsForce + scorePushAbs + scorePullAbs) / 3);
+		int relativeStrength = (int) Math.round((scoreRelForce + scorePushRel + scorePullRel) / 3);
+		double strengthScore = (absoluteStrength + relativeStrength) / 2.0;
+		strength = (int) Math.round(strengthScore);
 		surveyresults.setLowerAbs(lowerAbsoluteForce);
 		surveyresults.setLowerRel(lowerRelativeForce);
 		surveyresults.setPushAbs(pushAbsoluteForce);
 		surveyresults.setPushRel(pushRelativeForce);
 		surveyresults.setPullAbs(pullAbsoluteForce);
 		surveyresults.setPullRel(pullRelativeForce);
-		
+
 		surveyresults.setLowerAbsoluteForce(scoreAbsForce);
 		surveyresults.setAbsoluteStrength(absoluteStrength);
 		surveyresults.setRelativeStrength(relativeStrength);
@@ -132,7 +131,7 @@ public class CalculateServiceImpl implements CalculateService {
 		surveyresults.setPushAbsoluteForce(scorePushAbs);
 		surveyresults.setPushRelativeForce(scorePushRel);
 		surveyresults.setPullAbsoluteForce(scorePullAbs);
-        surveyresults.setPullRelativeForce(scorePullRel);
+		surveyresults.setPullRelativeForce(scorePullRel);
 		surveyresults.setStrength(strength);
 		surveyServiceResults.saveSurveyResults(surveyresults);
 	}
@@ -147,21 +146,26 @@ public class CalculateServiceImpl implements CalculateService {
 			s60PowerOutput = lookupTable.getScore("AbsolutePowerWomen60", survey.getS60PowerOutput());
 			s10RelativePower = survey.getS10PowerOutput() / survey.getWeight();
 			s60RelativePower = survey.getS60PowerOutput() / survey.getWeight();
-			s10RelativePowerResult = lookupRelative.getScore("PeakRelativeWomen", s10RelativePower);
-			s60RelativePowerResult = lookupRelative.getScore("PeakRelativeWomen", s60RelativePower);
+			s10RelativePowerResult = lookupRelative.getScore("s10RelativePowerWomen", s10RelativePower);
+			s60RelativePowerResult = lookupRelative.getScore("s60RelativePowerWomen", s60RelativePower);
 		} else {
 			s10PowerOutput = lookupTable.getScore("AbsolutePowerMen10", survey.getS10PowerOutput());
 			s60PowerOutput = lookupTable.getScore("AbsolutePowerMen60", survey.getS60PowerOutput());
 			s10RelativePower = survey.getS10PowerOutput() / survey.getWeight();
 			s60RelativePower = survey.getS60PowerOutput() / survey.getWeight();
-			s10RelativePowerResult = lookupRelative.getScore("PeakRelativeWomen", s10RelativePower);
-			s60RelativePowerResult = lookupRelative.getScore("PeakRelativeMen", s60RelativePower);
+			s10RelativePowerResult = lookupRelative.getScore("s10RelativePowerMen", s10RelativePower);
+			s60RelativePowerResult = lookupRelative.getScore("s60RelativePowerMen", s60RelativePower);
 		}
-		int absPower=(int)Math.round((s10PowerOutput+s60PowerOutput)/2.0);
-		int relPower=(int)Math.round((s10RelativePowerResult+s60RelativePowerResult)/2.0);
-		double powerScore = (absPower+relPower) / (2.0);
-		power=(int)Math.round(powerScore);
+		int absPower = (int) Math.round((s10PowerOutput + s60PowerOutput) / 2.0);
+		int relPower = (int) Math.round((s10RelativePowerResult + s60RelativePowerResult) / 2.0);
+		double powerScore = (absPower + relPower) / (2.0);
+		power = (int) Math.round(powerScore);
+		surveyresults.setS10RelativePowerResults(s10RelativePowerResult);
+		surveyresults.setS60PowerOutputResults(s60PowerOutput);
+		
+		surveyresults.setS10PowerOutputResults(s10PowerOutput);
 		surveyresults.setS10RelativePower(s10RelativePower);
+		surveyresults.setS60RelativePowerCalc(s60RelativePower);
 		surveyresults.setAbsolutePower(absPower);
 		surveyresults.setRelativePower(relPower);
 		surveyresults.setS60RelativePower(s60RelativePowerResult);
@@ -172,14 +176,14 @@ public class CalculateServiceImpl implements CalculateService {
 	@Override
 	public void CalculateEndurance(Long id) {
 
-		double vo2Max,  min4RelativePower;
-		int scoremin4Relative,vo2Score,vo2Result,min4PowerOutput;
-	
+		double vo2Max, min4RelativePower;
+		int scoremin4Relative, vo2Score, vo2Result, min4PowerOutput;
+
 		SurveyData survey = surveyDataRepository.findOne(id);
 		if (survey.getClient().getGender() == 'F') {
 			vo2Max = ((survey.getCalories() / survey.getKmRow() / 5) * 1000) / (survey.getWeight() / (2.2));
-			vo2Result=(int)Math.round(vo2Max);
-			vo2Score=lookupTable.getScore("VO2", vo2Result);
+			vo2Result = (int) Math.round(vo2Max);
+			vo2Score = lookupTable.getScore("VO2", vo2Result);
 			min4PowerOutput = lookupTable.getScore("PowerOutput4min", survey.getMin4PowerOutput());
 			min4RelativePower = (survey.getMin4PowerOutput()) / survey.getWeight();
 			scoremin4Relative = lookupRelative.getScore("PowerRatio", min4RelativePower);
@@ -187,20 +191,21 @@ public class CalculateServiceImpl implements CalculateService {
 		}
 
 		else {
-			vo2Max = ((survey.getCalories() / survey.getKmRow() / 5) * 1000) / survey.getWeight() / (2.2);
-			vo2Result=(int)Math.round(vo2Max);
-			vo2Score=lookupTable.getScore("VO2", vo2Result);
+			vo2Max = ((survey.getCalories() / (survey.getKmRow()*60) / 5) * 1000) / survey.getWeight() / (2.2);
+			vo2Result = (int) Math.round(vo2Max);
+			vo2Score = lookupTable.getScore("VO2", vo2Result);
 			min4PowerOutput = lookupTable.getScore("AbsolutePower4Min", survey.getMin4PowerOutput());
 			min4RelativePower = (survey.getMin4PowerOutput()) / survey.getWeight();
 			scoremin4Relative = lookupRelative.getScore("PowerRatio", min4RelativePower);
 		}
 
 		double enduranceScore = (vo2Score + scoremin4Relative) / 2.0;
-	    int enduranceAbsolute=(int)Math.round(vo2Score);
-	    int relativeEndurance=(int)Math.round(scoremin4Relative);
-		endurance=(int)Math.round(enduranceScore);
+		int enduranceAbsolute = (int) Math.round(vo2Score);
+		int relativeEndurance = (int) Math.round(scoremin4Relative);
+		endurance = (int) Math.round(enduranceScore);
 		etrak = (movement + power + strength + endurance) / 4.0;
 		surveyresults.setVo2Max(vo2Max);
+		surveyresults.setVo2Score(vo2Score);
 		surveyresults.setMin4powerOutput(min4PowerOutput);
 		surveyresults.setAbsoluteEndurance(enduranceAbsolute);
 		surveyresults.setRelativeEndurance(relativeEndurance);

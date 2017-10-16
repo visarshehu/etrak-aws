@@ -1,6 +1,8 @@
 package com.inspire11.etrak.model;
 
 
+import java.util.Date;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -10,7 +12,9 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
-
+import javax.persistence.PrePersist;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
@@ -120,6 +124,14 @@ public class SurveyData {
 
 	private String notes;
 	
+	@Column(name="submitedTime",insertable=false, updatable=false)
+	@Temporal(TemporalType.TIMESTAMP)
+	private Date submittedDate;
+	
+	 @PrePersist
+	  protected void onCreate() {
+	    submittedDate = new Date();
+	  }
 	
 	/*@Column(name="submitedTime", columnDefinition="TIMESTAMP DEFAULT CURRENT_TIMESTAMP",insertable=false, updatable=false)
 	@Temporal(TemporalType.TIMESTAMP)
@@ -495,6 +507,14 @@ public class SurveyData {
 
 	public void setPullMaxR(Double pullMaxR) {
 		this.pullMaxR = pullMaxR;
+	}
+
+	public Date getSubmittedDate() {
+		return submittedDate;
+	}
+
+	public void setSubmittedDate(Date submittedDate) {
+		this.submittedDate = submittedDate;
 	}
 
 

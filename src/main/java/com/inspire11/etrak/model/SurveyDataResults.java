@@ -103,8 +103,33 @@ public class SurveyDataResults {
 	
 	private Double pullRel;
 	
+	private Integer s10RelativePowerResults;
+	
+	private Integer s60PowerOutputResults;
+	
+	private Double s60RelativePowerCalc;
+	
+	private Integer s10PowerOutputResults;
+	
+	private Integer vo2Score;
 	
 	
+
+	public Integer getS10RelativePowerResults() {
+		return s10RelativePowerResults;
+	}
+
+	public void setS10RelativePowerResults(Integer s10RelativePowerResults) {
+		this.s10RelativePowerResults = s10RelativePowerResults;
+	}
+
+	public Integer getS60PowerOutputResults() {
+		return s60PowerOutputResults;
+	}
+
+	public void setS60PowerOutputResults(Integer s60PowerOutputResults) {
+		this.s60PowerOutputResults = s60PowerOutputResults;
+	}
 
 	@OneToOne(mappedBy = "surveyDataResults")
 	@JsonBackReference
@@ -465,6 +490,30 @@ public class SurveyDataResults {
 
 	public void setPullRel(Double pullRel) {
 		this.pullRel = pullRel;
+	}
+
+	public Double getS60RelativePowerCalc() {
+		return s60RelativePowerCalc;
+	}
+
+	public void setS60RelativePowerCalc(Double s60RelativePowerCalc) {
+		this.s60RelativePowerCalc = s60RelativePowerCalc;
+	}
+
+	public Integer getS10PowerOutputResults() {
+		return s10PowerOutputResults;
+	}
+
+	public void setS10PowerOutputResults(Integer s10PowerOutputResults) {
+		this.s10PowerOutputResults = s10PowerOutputResults;
+	}
+
+	public Integer getVo2Score() {
+		return vo2Score;
+	}
+
+	public void setVo2Score(Integer vo2Score) {
+		this.vo2Score = vo2Score;
 	}
 
 }

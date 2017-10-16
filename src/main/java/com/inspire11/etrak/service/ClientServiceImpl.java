@@ -32,4 +32,10 @@ public class ClientServiceImpl implements ClientService {
 	public void saveClient(Client client) {
 		clientRepository.save(client);
 	}
+	
+	@Override
+	public List<Client> findByNameContainsOrLastNameContainsAllIgnoreCase(String query,String query1) {
+		return clientRepository.findByNameContainsOrLastNameContainsAllIgnoreCase(query,query1);
+		
+	}
 }
