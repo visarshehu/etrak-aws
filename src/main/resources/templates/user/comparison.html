@@ -265,7 +265,10 @@
 
     <div class="page-header" style="padding-top:70px;padding-left:40px">
         <div class="clearfix">
-
+		<input type="hidden" id="firstId" th:value="${firstSurvey}" />
+		<input type="hidden" id="secondId" th:value="${secondSurvey}" />
+		<input type="hidden" id="surveyId" th:value="${surveyId}" />
+		
             <div class="row col-md-12">
 
                 <div class="col-sm-6 ">
@@ -273,7 +276,7 @@
                     <div class="col-sm-10 ">
                         <div class="row">
                             <div class="col-sm-12">
-                                <h4 style="font-family: 'Orbitron';">Alban Mehmeti</h4>
+                                <h4 th:utext="${first}"></h4>
                             </div>
                         </div>
                         <div class="row">
@@ -293,7 +296,7 @@
                     <div class="col-sm-10 ">
                         <div class="row">
                             <div class="col-sm-12">
-                                <h4 style="font-family: 'Orbitron';">Alban Mehmeti</h4>
+                                <h4 th:utext="${second}"></h4>
                             </div>
                         </div>
                         <div class="row ">
@@ -347,7 +350,7 @@
                     <div id="improvement" class="box"></div><span class="explanation">Improvement</span>
                     <br></div>
                 <div class="col-md-3 col-md-offset-1" style="text-align:center">
-                    <div id="decent" class="box"></div><span class="explanation">Decent</span>
+                    <div id="decent" class="box"></div><span class="explanation">Descend</span>
                     <br></div>
                 <div class="col-md-4 " style="text-align:right">
                     <div id="nochange" class="box"></div><span class="explanation">No change</span>

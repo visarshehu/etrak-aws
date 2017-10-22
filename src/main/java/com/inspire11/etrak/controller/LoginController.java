@@ -19,13 +19,18 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import com.inspire11.etrak.model.Client;
+import com.inspire11.etrak.model.CompareInfo;
 import com.inspire11.etrak.model.SurveyData;
 import com.inspire11.etrak.model.User;
+import com.inspire11.etrak.service.CalculateComparison;
 import com.inspire11.etrak.service.CalculateService;
 import com.inspire11.etrak.service.ClientService;
+
 import com.inspire11.etrak.service.SurveyService;
 import com.inspire11.etrak.service.UserService;
 
@@ -35,14 +40,21 @@ public class LoginController {
 	@Autowired
 	private UserService userService;
 
+
 	@Autowired
 	private ClientService clientService;
+	
 
 	@Autowired
 	private SurveyService surveyService;
+	
 
 	@Autowired
 	private CalculateService calculateService;
+	
+
+	@Autowired
+	private CalculateComparison calculateComparisonService;
 
 	@RequestMapping(value = { "/login" }, method = RequestMethod.GET)
 	public ModelAndView login(@RequestParam(value = "logout", required = false) String logout) {
@@ -54,6 +66,7 @@ public class LoginController {
 		return modelAndView;
 	}
 
+	
 	@RequestMapping(value = { "/", "/registration" }, method = RequestMethod.GET)
 	public ModelAndView registration() {
 		ModelAndView modelAndView = new ModelAndView();
@@ -63,10 +76,16 @@ public class LoginController {
 		return modelAndView;
 	}
 
-	@RequestMapping(value = "user/comparison", method = RequestMethod.GET)
-	public ModelAndView comparison() {
+	@RequestMapping(value = "user/comparison", method = RequestMethod.GET, params = { "firstId", "secondId" })
+	public ModelAndView comparison(@RequestParam(value = "firstId", required = true) String firstId,
+	@RequestParam(value = "secondId", required = true) String secondId) {
 		ModelAndView modelAndView = new ModelAndView();
-
+		modelAndView.addObject("firstClient", firstId);
+		modelAndView.addObject("secondClient", secondId);
+		Client clientData = clientService.getClientById(Long.parseLong(firstId));
+		modelAndView.addObject("first", clientData.getName() + " " + clientData.getLastName());
+		Client clientData1 = clientService.getClientById(Long.parseLong(secondId));
+		modelAndView.addObject("second", clientData1.getName() + " " + clientData1.getLastName());
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		User user = userService.findUserByEmail(auth.getName());
 		modelAndView.addObject("userName", user.getName() + " " + user.getLastName());
@@ -82,6 +101,7 @@ public class LoginController {
 		User user = userService.findUserByEmail(auth.getName());
 		modelAndView.addObject("userName", user.getName() + " " + user.getLastName());
 		modelAndView.addObject("userId", user.getId());
+		modelAndView.addObject("client", new Client());
 		modelAndView.setViewName("user/clients");
 		return modelAndView;
 	}
@@ -97,22 +117,19 @@ public class LoginController {
 
 	}
 
+	
 	@RequestMapping(value = "/user/assessment", method = RequestMethod.POST)
 	public ModelAndView createNewSurvey(@Valid SurveyData survey_data, BindingResult bindingResult) {
-		ModelAndView modelAndView = new ModelAndView();
-		long clientId=survey_data.client.getId();
+		long clientId = survey_data.client.getId();
 		SurveyData newSurvey = surveyService.saveSurvey(survey_data);
 		Long surveyId = newSurvey.getId();
 		calculateService.CalculateMovement(surveyId);
 		calculateService.CalculatePower(surveyId);
 		calculateService.CalculateStrength(surveyId);
 		calculateService.CalculateEndurance(surveyId);
-		modelAndView.addObject("successMessage", "Your client's data has been registered successfully!");
-		/*modelAndView.addObject("survey", new SurveyData());
-		modelAndView.setViewName("user/assessment");
-		return modelAndView;*/
-		return new ModelAndView("redirect:/user/clientStat?getId="+clientId);
+		return new ModelAndView("redirect:/user/clientStat?getId=" + clientId);
 	}
+
 
 	@RequestMapping(value = "/registration", method = RequestMethod.POST)
 	public ModelAndView createNewUser(@Valid User user, BindingResult bindingResult) {
@@ -163,15 +180,14 @@ public class LoginController {
 		modelAndView.addObject("userName", user.getName() + " " + user.getLastName());
 		modelAndView.addObject("userId", user.getId());
 		modelAndView.addObject("clientId", clientId);
+		modelAndView.addObject("survey_data", new SurveyData());
 		modelAndView.setViewName("user/assessment");
 		return modelAndView;
 	}
 
-	
 	@RequestMapping(value = { "/user/dashboard" }, method = RequestMethod.GET)
 	public ModelAndView dashboard() {
 		ModelAndView modelAndView = new ModelAndView();
-
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		User user = userService.findUserByEmail(auth.getName());
 		modelAndView.addObject("userName", user.getName() + " " + user.getLastName());
@@ -195,6 +211,29 @@ public class LoginController {
 		} else
 			return "redirect:/user/clientStat";
 
+	}
+
+	@RequestMapping(value = "/user/compare", method = RequestMethod.POST )
+	public ModelAndView compareClients(@Valid CompareInfo compare, BindingResult bindingResult,RedirectAttributes redir) {
+		
+		long firstSurvey = compare.getFirstSurvey();
+		long secondSurvey = compare.getSecondSurvey();
+		
+		SurveyData survey = surveyService.getSurveyById(firstSurvey);
+		Long firstClient = survey.getClient().getId();
+		SurveyData second = surveyService.getSurveyById(secondSurvey);
+		Long secondClient = second.getClient().getId();
+		calculateComparisonService.MovementComparison(firstSurvey, secondSurvey);
+		calculateComparisonService.PowerComparison(firstSurvey, secondSurvey);
+		calculateComparisonService.StrengthComparison(firstSurvey, secondSurvey);
+		Long id=calculateComparisonService.EnduranceComparison(firstSurvey, secondSurvey);
+		ModelAndView modelAndView = new ModelAndView(
+				"redirect:/user/comparison?firstId=" + firstClient + "&secondId=" + secondClient);
+		redir.addFlashAttribute("firstSurvey",firstSurvey);
+		redir.addFlashAttribute("secondSurvey",secondSurvey);
+		redir.addFlashAttribute("surveyId",id);
+
+		return modelAndView;
 	}
 
 	@RequestMapping(value = "/user/clientStat", method = RequestMethod.GET, params = { "getId" })

@@ -1,3 +1,52 @@
+var firstId=$("#firstId").val();
+var secondId=$("#secondId").val();
+var surveyId=$('#surveyId').val();
+var requestY,requestX,requestZ;
+
+var firstSurvey,secondSurvey,surveyResults;
+
+function getFirstClient(id){
+var url = "/survey/" + id;
+requestX=$.getJSON(url,function(data){
+	firstSurvey=data;
+});
+}
+
+function getSecondClient(id){
+
+var url = "/survey/" + id;
+requestY=$.getJSON(url,function(data){
+	secondSurvey=data;
+});
+}
+
+function getSurveyResults(id){
+	var url="/comparisonResults/"+id;
+	requestZ=$.getJSON(url,function(data){
+		surveyResults=data;
+	});
+}
+
+
+
+getFirstClient(firstId);
+getSecondClient(secondId);
+getSurveyResults(surveyId);
+
+$.when(requestX,requestY,requestZ).then(function(){
+
+    var movement=parseFloat(surveyResults.movementComparison).toFixed(1);
+    var strength=parseFloat(surveyResults.strengthComparison).toFixed(1);
+    var power=parseFloat(surveyResults.powerComparison).toFixed(2);
+    var endurance=parseFloat(surveyResults.enduranceComparison).toFixed(2);
+	compareCircle("container3", "container4", "MOVEMENT", firstSurvey.surveyDataResults.movement/10, secondSurvey.surveyDataResults.movement/10,movement);
+	compareCirclePurple("container5", "container6", "STRENGTH",firstSurvey.surveyDataResults.strength/10, secondSurvey.surveyDataResults.strength/10,power);
+	compareCircleGreen("container7", "container8", "POWER", firstSurvey.surveyDataResults.power/10, secondSurvey.surveyDataResults.power/10,strength);
+	compareCircleYellow("container9", "container10", "ENDURANCE",firstSurvey.surveyDataResults.endurance/10, secondSurvey.surveyDataResults.endurance/10,endurance);
+	
+});
+
+
 TrakScoreBlack("shoulderL", 0.5);
 TrakScore("shoulderR", 0.5);
 TrakScore("externalShoulderR", 0.7);
@@ -7,7 +56,6 @@ TrakScoreBlack("internalShoulderL", 1);
 TrakScoreBlack("florL", 0.8);
 TrakScore("florR", 0.5);
 TrakScore("extFloor", 0.3);
-
 TrakScoreBlack("intFloor", 0.2);
 TrakScore("pistolSquatR", 0.5);
 TrakScoreBlack("pistolSquatR1", 0.7);
@@ -19,7 +67,6 @@ TrakScore("proneLH", 0.9);
 TrakScoreBlack("proneLH1", 0.9);
 TrakScore("vSit", 0.9);
 TrakScoreBlack("vSit1", 0.9);
-
 TrakScore("lowerAbs", 0.9);
 TrakScoreBlack("lowerAbs1", 0.9);
 TrakScore("lowerRel", 0.9);
@@ -32,16 +79,12 @@ TrakScore("pullAbs", 0.9);
 TrakScoreBlack("lowerRel1", 0.9);
 TrakScore("pullRel", 0.9);
 TrakScoreBlack("pullRel1", 0.9);
-
 TrakScore("10sRel", 0.9);
 TrakScoreBlack("10sRel1", 0.9);
-
 TrakScore("60sRel", 0.9);
 TrakScoreBlack("60sRel1", 0.9);
-
 TrakScore("vo2", 0.9);
 TrakScoreBlack("vo21", 0.9);
-
 TrakScore("4minRel", 0.9);
 TrakScoreBlack("4minRel1", 0.9);
 
@@ -124,13 +167,8 @@ function TrakScoreBlack(container_id, animatePercentage) {
 
 }
 
-compareCircle("container3", "container4", "MOVEMENT", 0.8, 0.3);
-compareCirclePurple("container5", "container6", "STRENGTH", 0.7, 0.5);
-compareCircleGreen("container7", "container8", "POWER", 0.6, 0.6);
-compareCircleYellow("container9", "container10", "ENDURANCE", 0.3, 0.3);
-
 function compareCircle(container_id, container_id2, type, animatePercentage,
-		animatesecondPercentage) {
+		animatesecondPercentage,percentageDifference) {
 	var element = document.getElementById(container_id);
 	var element2 = document.getElementById(container_id2);
 	var startColor = '#FC5B3F';
@@ -154,7 +192,7 @@ function compareCircle(container_id, container_id2, type, animatePercentage,
 							+ type
 							+ "</b></h4>"
 							+ "<h4 style='text-align:center;  font-size:50px; margin-top:2px;color:#15AF43'><b>"
-							+ 12 + " %</b></h1>",
+							+ percentageDifference + " %</b></h1>",
 					className : 'progressbar__label'
 				},
 				// Set default step function for all animate calls
@@ -203,7 +241,7 @@ function compareCircle(container_id, container_id2, type, animatePercentage,
 }
 
 function compareCirclePurple(container_id, container_id2, type,
-		animatePercentage, animatesecondPercentage) {
+		animatePercentage, animatesecondPercentage,percentageDifference) {
 	var element = document.getElementById(container_id);
 	var element2 = document.getElementById(container_id2);
 	var startColor = '#FC5B3F';
@@ -224,7 +262,7 @@ function compareCirclePurple(container_id, container_id2, type,
 							+ type
 							+ "</b></h4>"
 							+ "<h4 style='text-align:center;  font-size:50px; margin-top:2px;color:#8A3B48'><b>"
-							+ 3 + " %</b></h1>",
+							+ percentageDifference + " %</b></h1>",
 					className : 'progressbar__label'
 				},
 				// Set default step function for all animate calls
@@ -274,7 +312,7 @@ function compareCirclePurple(container_id, container_id2, type,
 }
 
 function compareCircleGreen(container_id, container_id2, type,
-		animatePercentage, animatesecondPercentage) {
+		animatePercentage, animatesecondPercentage,percentageDifference) {
 	var element = document.getElementById(container_id);
 	var element2 = document.getElementById(container_id2);
 	var startColor = '#FC5B3F';
@@ -295,7 +333,7 @@ function compareCircleGreen(container_id, container_id2, type,
 							+ type
 							+ "</b></h4>"
 							+ "<h4 style='text-align:center;  font-size:50px; margin-top:2px;color:#15AF43'><b>"
-							+ 6 + " %</b></h1>",
+							+ percentageDifference+ " %</b></h1>",
 					className : 'progressbar__label'
 				},
 				// Set default step function for all animate calls
@@ -344,7 +382,7 @@ function compareCircleGreen(container_id, container_id2, type,
 }
 
 function compareCircleYellow(container_id, container_id2, type,
-		animatePercentage, animatesecondPercentage) {
+		animatePercentage, animatesecondPercentage,percentageDifference) {
 	var element = document.getElementById(container_id);
 	var element2 = document.getElementById(container_id2);
 	var startColor = '#FC5B3F';
@@ -365,7 +403,7 @@ function compareCircleYellow(container_id, container_id2, type,
 							+ type
 							+ "</b></h4>"
 							+ "<h4 style='text-align:center;  font-size:50px; margin-top:2px;color:#FFD100'><b>"
-							+ 0 + " %</b></h1>",
+							+ percentageDifference+ " %</b></h1>",
 					className : 'progressbar__label'
 				},
 				// Set default step function for all animate calls

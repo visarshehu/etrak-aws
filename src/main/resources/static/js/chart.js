@@ -1,12 +1,6 @@
 var id = $("#yourId").val();
 
-/*function fillPopup(type){
-	var url="/scores/"+type;
-	$.getJSON(url, function(tables){
-		
-		
-	});
-}*/
+
 function getClientResults(id) {
     var url = "/clients/" + id;
     $.getJSON(url, function(data) {

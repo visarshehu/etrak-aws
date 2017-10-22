@@ -14,8 +14,12 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.inspire11.etrak.model.Client;
 import com.inspire11.etrak.model.LookUpTables;
+import com.inspire11.etrak.model.SurveyComparison;
+import com.inspire11.etrak.model.SurveyData;
 import com.inspire11.etrak.service.ClientService;
 import com.inspire11.etrak.service.LookUpService;
+import com.inspire11.etrak.service.SurveyComparisonService;
+import com.inspire11.etrak.service.SurveyService;
 
 @RestController
 public class ClientRestController {
@@ -25,6 +29,12 @@ public class ClientRestController {
 	
 	@Autowired
 	private LookUpService lookupService;
+	
+	@Autowired
+	private SurveyService surveyService;
+	
+	@Autowired
+	private SurveyComparisonService comparisonService;
 	
 	@RequestMapping(path="clients", method=RequestMethod.GET)
 	public List<Client> getAllClients(){
@@ -36,6 +46,16 @@ public class ClientRestController {
 		return clientService.getClientById(id);
 	}
     
+    @RequestMapping(value = "survey/{id}", method = RequestMethod.GET)
+   	public SurveyData getSurveyById(@PathVariable("id") long id){
+   		return surveyService.getSurveyById(id);
+   	}
+    
+    @RequestMapping(value = "comparisonResults/{id}", method = RequestMethod.GET)
+   	public SurveyComparison getComparisonResultById(@PathVariable("id") long id){
+   		return comparisonService.getSurveyById(id);
+   	}
+       
     @RequestMapping(value = "scores/{name}", method = RequestMethod.GET)
   	public LookUpTables getLookUp(@PathVariable("name") String name){
   		return lookupService.findByName(name);

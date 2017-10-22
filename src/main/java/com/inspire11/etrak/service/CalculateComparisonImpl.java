@@ -9,75 +9,204 @@ import com.inspire11.etrak.repository.SurveyDataRepository;
 
 @Service("comparisonService")
 public class CalculateComparisonImpl implements CalculateComparison {
-	
+
 	@Autowired
 	private SurveyDataRepository surveyDataRepository;
-	
-	SurveyComparison surveyCompare=new SurveyComparison();
 
-	private double movementComparison,strengthComparison,enduranceComparison,powerComparison;
+	@Autowired
+	private SurveyComparisonService surveyComparisonService;
 
-	public void MovementComparison(Long id1,Long id2) {
+	SurveyComparison surveyCompare = new SurveyComparison();
+
+	private double movementComparison, strengthComparison, enduranceComparison, powerComparison;
+	private Long clientId, secondId;
+
+	public void MovementComparison(Long id1, Long id2) {
 		SurveyData firstClient = surveyDataRepository.findOne(id1);
-		SurveyData secondClient=surveyDataRepository.findOne(id2);
-		
-		double deepSquat=((firstClient.getSurveyDataResults().getDeepSquatScore()-secondClient.getSurveyDataResults().getDeepSquatScore())/firstClient.getSurveyDataResults().getDeepSquatScore())*100;
-		double shoulderFlexionR=((firstClient.getSurveyDataResults().getShoulderFlexionRScore()-secondClient.getSurveyDataResults().getShoulderFlexionRScore())/firstClient.getSurveyDataResults().getShoulderFlexionRScore())*100;
-		double shoulderFlexionL=((firstClient.getSurveyDataResults().getShoulderFlexionLScore()-secondClient.getSurveyDataResults().getShoulderFlexionLScore())/firstClient.getSurveyDataResults().getShoulderFlexionLScore())*100;
-		double shoulderExtensionR=((firstClient.getSurveyDataResults().getShoulderExtensionRScore()-secondClient.getSurveyDataResults().getShoulderExtensionRScore())/firstClient.getSurveyDataResults().getShoulderExtensionRScore())*100;
-		double shoulderExtensionL=((firstClient.getSurveyDataResults().getShoulderExtensionLScore()-secondClient.getSurveyDataResults().getShoulderExtensionLScore())/firstClient.getSurveyDataResults().getShoulderExtensionLScore())*100;
-		double trunkRotationR=((firstClient.getSurveyDataResults().getTrunkRotationRScore()-secondClient.getSurveyDataResults().getTrunkRotationRScore())/firstClient.getSurveyDataResults().getTrunkRotationRScore())*100;
-		double trunkRotationL=((firstClient.getSurveyDataResults().getTrunkRotationLScore()-secondClient.getSurveyDataResults().getTrunkRotationLScore())/firstClient.getSurveyDataResults().getTrunkRotationLScore())*100;
-		double pistolSquatL=((firstClient.getSurveyDataResults().getPistolSquatLScore()-secondClient.getSurveyDataResults().getPistolSquatLScore())/firstClient.getSurveyDataResults().getPistolSquatLScore())*100;
-		double pistolSquatR=((firstClient.getSurveyDataResults().getPistolSquatRScore()-secondClient.getSurveyDataResults().getPistolSquatRScore())/firstClient.getSurveyDataResults().getPistolSquatRScore())*100;
-		double proneLH_RF=((firstClient.getSurveyDataResults().getProneLH_RFScore()-secondClient.getSurveyDataResults().getProneLH_RFScore())/firstClient.getSurveyDataResults().getProneLH_RFScore())*100;
-		double proneRH_LF=((firstClient.getSurveyDataResults().getProneRH_LFScore()-secondClient.getSurveyDataResults().getProneRH_LFScore())/firstClient.getSurveyDataResults().getProneRH_LFScore())*100;
-		double v_sit=((firstClient.getSurveyDataResults().getvSitScore()-secondClient.getSurveyDataResults().getvSitScore())/firstClient.getSurveyDataResults().getvSitScore())*100;
-		
-		movementComparison=(deepSquat+shoulderFlexionR+shoulderFlexionL+shoulderExtensionR+shoulderExtensionL+trunkRotationR+trunkRotationL+pistolSquatL+pistolSquatR+proneRH_LF+proneLH_RF+v_sit);
+		SurveyData secondClient = surveyDataRepository.findOne(id2);
+		clientId = firstClient.getClient().getId();
+		secondId = secondClient.getClient().getId();
+		double firstSquat = (firstClient.getSurveyDataResults().getDeepSquatScore());
+		double secondSquat = (secondClient.getSurveyDataResults().getDeepSquatScore());
+
+		double deepSquat = ((firstSquat - secondSquat) / firstSquat) * 100;
+
+		double firstShoulderFlexion = (firstClient.getSurveyDataResults().getShoulderFlexionRScore());
+		double secondShoulderFlexion = (secondClient.getSurveyDataResults().getShoulderFlexionRScore());
+
+		double shoulderFlexionR = ((firstShoulderFlexion - secondShoulderFlexion) / firstShoulderFlexion) * 100;
+
+		double firstShoulderL = (firstClient.getSurveyDataResults().getShoulderFlexionLScore());
+		double secondShoulderL = (secondClient.getSurveyDataResults().getShoulderFlexionLScore());
+
+		double shoulderFlexionL = ((firstShoulderL - secondShoulderL) / firstShoulderL) * 100;
+
+		double firstShoulderExtension = (firstClient.getSurveyDataResults().getShoulderExtensionRScore());
+		double secondShoulderExtension = (secondClient.getSurveyDataResults().getShoulderExtensionRScore());
+
+		double shoulderExtensionR = ((firstShoulderExtension - secondShoulderExtension) / firstShoulderExtension) * 100;
+
+		double firstShoulderExtensionL = (firstClient.getSurveyDataResults().getShoulderExtensionLScore());
+		double secondShoulderExtensionL = (secondClient.getSurveyDataResults().getShoulderExtensionLScore());
+
+		double shoulderExtensionL = ((firstShoulderExtensionL - secondShoulderExtensionL) / firstShoulderExtensionL)
+				* 100;
+
+		double firstTrunkRotationR = (firstClient.getSurveyDataResults().getTrunkRotationRScore());
+		double secondTrunkRotationR = (secondClient.getSurveyDataResults().getTrunkRotationRScore());
+
+		double trunkRotationR = ((firstTrunkRotationR - secondTrunkRotationR) / firstTrunkRotationR) * 100;
+
+		double firstTrunkRotationL = (firstClient.getSurveyDataResults().getTrunkRotationLScore());
+		double secondTrunkRotationL = (secondClient.getSurveyDataResults().getTrunkRotationLScore());
+
+		double trunkRotationL = ((firstTrunkRotationL - secondTrunkRotationL) / firstTrunkRotationL) * 100;
+
+		double firstPistolSquatL = (firstClient.getSurveyDataResults().getPistolSquatLScore());
+		double secondPistolSquatL = (secondClient.getSurveyDataResults().getPistolSquatLScore());
+		double pistolSquatL;
+		if (firstPistolSquatL == 0) {
+			pistolSquatL = 100;
+		} else {
+			pistolSquatL = ((firstPistolSquatL - secondPistolSquatL) / firstPistolSquatL) * 100;
+		}
+
+		double firstPistolSquatR = (firstClient.getSurveyDataResults().getPistolSquatRScore());
+		double secondPistolSquatR = (secondClient.getSurveyDataResults().getPistolSquatRScore());
+		double pistolSquatR;
+		if (firstPistolSquatR == 0) {
+			pistolSquatR = 100;
+		} else {
+			pistolSquatR = ((firstPistolSquatR - secondPistolSquatR) / firstPistolSquatR) * 100;
+		}
+
+		double firstproneLH_RF = (firstClient.getSurveyDataResults().getProneLH_RFScore());
+		double secondproneLH_RF = (secondClient.getSurveyDataResults().getProneLH_RFScore());
+		double proneLH_RF;
+		if (firstproneLH_RF == 0) {
+			proneLH_RF = 100;
+		} else {
+			proneLH_RF = ((firstproneLH_RF - secondproneLH_RF) / firstproneLH_RF) * 100;
+		}
+
+		double firstproneRH_LF = (firstClient.getSurveyDataResults().getProneRH_LFScore());
+		double secondproneRH_LF = (secondClient.getSurveyDataResults().getProneRH_LFScore());
+		double proneRH_LF;
+		if (firstproneRH_LF == 0) {
+			proneRH_LF = 100;
+		} else {
+			proneRH_LF = ((firstproneRH_LF - secondproneRH_LF) / firstproneRH_LF) * 100;
+		}
+
+		double firstVsit = (firstClient.getSurveyDataResults().getvSitScore());
+		double secondVsit = (secondClient.getSurveyDataResults().getvSitScore());
+		double v_sit;
+		if (firstVsit == 0) {
+			v_sit = 100;
+		} else {
+			v_sit = ((firstVsit - secondVsit) / firstVsit) * 100;
+		}
+
+		movementComparison = (deepSquat + shoulderFlexionR + shoulderFlexionL + shoulderExtensionR + shoulderExtensionL
+				+ trunkRotationR + trunkRotationL + pistolSquatL + pistolSquatR + proneRH_LF + proneLH_RF + v_sit);
 		surveyCompare.setMovementComparison(movementComparison);
-	
+
 	};
-	
-	public void StrengthComparison(Long id1,Long id2) {
+
+	public void StrengthComparison(Long id1, Long id2) {
 		SurveyData firstClient = surveyDataRepository.findOne(id1);
-		SurveyData secondClient=surveyDataRepository.findOne(id2);
-		
-		double lowerAbsForce=((firstClient.getSurveyDataResults().getLowerAbsoluteForce()-secondClient.getSurveyDataResults().getLowerAbsoluteForce())/firstClient.getSurveyDataResults().getLowerAbsoluteForce())*100;
-		double pushAbsForce=((firstClient.getSurveyDataResults().getPushAbsoluteForce()-secondClient.getSurveyDataResults().getPushAbsoluteForce())/firstClient.getSurveyDataResults().getPushAbsoluteForce())*100;
-		double pullAbsForce=((firstClient.getSurveyDataResults().getPullAbsoluteForce()-secondClient.getSurveyDataResults().getPullAbsoluteForce())/firstClient.getSurveyDataResults().getPullAbsoluteForce())*100;
-		double lowerRelForce=((firstClient.getSurveyDataResults().getLowerRelativeForce()-secondClient.getSurveyDataResults().getLowerRelativeForce())/firstClient.getSurveyDataResults().getLowerRelativeForce())*100;
-		double pushRelForce=((firstClient.getSurveyDataResults().getPushRelativeForce()-secondClient.getSurveyDataResults().getPushRelativeForce())/firstClient.getSurveyDataResults().getPushRelativeForce())*100;
-		double pullRelForce=((firstClient.getSurveyDataResults().getPullRelativeForce()-secondClient.getSurveyDataResults().getPullRelativeForce())/firstClient.getSurveyDataResults().getPullRelativeForce())*100;
-		
-		strengthComparison=(lowerAbsForce+pushAbsForce+pullAbsForce+lowerRelForce+pushRelForce+pullRelForce);
+		SurveyData secondClient = surveyDataRepository.findOne(id2);
+
+		double firstLowerAbs = (firstClient.getSurveyDataResults().getLowerAbsoluteForce());
+		double secondLowerAbs = (secondClient.getSurveyDataResults().getLowerAbsoluteForce());
+
+		double lowerAbsForce = ((firstLowerAbs - secondLowerAbs) / firstLowerAbs) * 100;
+
+		double firstPushAbs = (firstClient.getSurveyDataResults().getPushAbsoluteForce());
+		double secondPushAbs = (secondClient.getSurveyDataResults().getPushAbsoluteForce());
+
+		double pushAbsForce = ((firstPushAbs - secondPushAbs) / firstPushAbs) * 100;
+
+		double firstPullAbs = (firstClient.getSurveyDataResults().getPullAbsoluteForce());
+		double secondPullAbs = (secondClient.getSurveyDataResults().getPullAbsoluteForce());
+
+		double pullAbsForce = ((firstPullAbs - secondPullAbs) / firstPullAbs) * 100;
+
+		double firstLowerRel = (firstClient.getSurveyDataResults().getLowerRelativeForce());
+		double secondLowerRel = (secondClient.getSurveyDataResults().getLowerRelativeForce());
+
+		double lowerRelForce = ((firstLowerRel - secondLowerRel) / firstLowerRel) * 100;
+
+		double firstPushRel = (firstClient.getSurveyDataResults().getPushRelativeForce());
+		double secondPushRel = (secondClient.getSurveyDataResults().getPushRelativeForce());
+
+		double pushRelForce = ((firstPushRel - secondPushRel) / firstPushRel) * 100;
+
+		double firstPullRel = (firstClient.getSurveyDataResults().getPullRelativeForce());
+		double secondPullRel = (secondClient.getSurveyDataResults().getPullRelativeForce());
+
+		double pullRelForce = ((firstPullRel - secondPullRel) / firstPullRel) * 100;
+
+		strengthComparison = (lowerAbsForce + pushAbsForce + pullAbsForce + lowerRelForce + pushRelForce
+				+ pullRelForce);
 		surveyCompare.setStrengthComparison(strengthComparison);
 	};
-	
-	public void PowerComparison(Long id1,Long id2) {
+
+	public void PowerComparison(Long id1, Long id2) {
 		SurveyData firstClient = surveyDataRepository.findOne(id1);
-		SurveyData secondClient=surveyDataRepository.findOne(id2);
-		
-		double s10Power=((firstClient.getSurveyDataResults().getS10PowerOutputResults()-secondClient.getSurveyDataResults().getS10PowerOutputResults())/firstClient.getSurveyDataResults().getS10PowerOutputResults())*100;
-		double s60Power=((firstClient.getSurveyDataResults().getS60PowerOutputResults()-secondClient.getSurveyDataResults().getS60PowerOutputResults())/firstClient.getSurveyDataResults().getS60PowerOutputResults())*100;
-		double s10RelativePower=((firstClient.getSurveyDataResults().getS10RelativePowerResults()-secondClient.getSurveyDataResults().getS10RelativePowerResults())/firstClient.getSurveyDataResults().getS10RelativePowerResults())*100;
-		double s60RelativePower=((firstClient.getSurveyDataResults().getS60RelativePower()-secondClient.getSurveyDataResults().getS60RelativePower())/firstClient.getSurveyDataResults().getS60RelativePower())*100;
-		
-		powerComparison=(s10Power+s60Power+s10RelativePower+s60RelativePower);
+		SurveyData secondClient = surveyDataRepository.findOne(id2);
+
+		double firsts10Power = (firstClient.getSurveyDataResults().getS10PowerOutputResults());
+		double seconds10Power = (secondClient.getSurveyDataResults().getS10PowerOutputResults());
+
+		double s10Power = ((firsts10Power - seconds10Power) / firsts10Power) * 100;
+
+		double firsts60Power = (firstClient.getSurveyDataResults().getS60PowerOutputResults());
+		double seconds60Power = (secondClient.getSurveyDataResults().getS60PowerOutputResults());
+
+		double s60Power = ((firsts60Power - seconds60Power) / firsts60Power) * 100;
+
+		double firsts10Rel = (firstClient.getSurveyDataResults().getS10RelativePowerResults());
+		double seconds10Rel = (secondClient.getSurveyDataResults().getS10RelativePowerResults());
+
+		double s10RelativePower = ((firsts10Rel - seconds10Rel) / firsts10Rel) * 100;
+
+		double firsts60Rel = (firstClient.getSurveyDataResults().getS60RelativePower());
+		double seconds60Rel = (secondClient.getSurveyDataResults().getS60RelativePower());
+
+		double s60RelativePower = ((firsts60Rel - seconds60Rel) / firsts60Rel) * 100;
+
+		powerComparison = (s10Power + s60Power + s10RelativePower + s60RelativePower);
 		surveyCompare.setPowerComparison(powerComparison);
 	};
-	
-	public void EnduranceComparison(Long id1,Long id2) {
+
+	public Long EnduranceComparison(Long id1, Long id2) {
 		SurveyData firstClient = surveyDataRepository.findOne(id1);
-		SurveyData secondClient=surveyDataRepository.findOne(id2);
-		
-		double vo2Max=((firstClient.getSurveyDataResults().getVo2Score()-secondClient.getSurveyDataResults().getVo2Score())/firstClient.getSurveyDataResults().getVo2Score())*100;
-		double min4Power=((firstClient.getSurveyDataResults().getMin4powerOutput()-secondClient.getSurveyDataResults().getMin4powerOutput())/firstClient.getSurveyDataResults().getMin4powerOutput())*100;
-		double min4RelativePower=((firstClient.getSurveyDataResults().getMin4RelativePower()-secondClient.getSurveyDataResults().getMin4RelativePower())/firstClient.getSurveyDataResults().getMin4RelativePower())*100;
-		
-		enduranceComparison=(vo2Max+min4Power+min4RelativePower);
+		SurveyData secondClient = surveyDataRepository.findOne(id2);
+
+		double firstVo2 = (firstClient.getSurveyDataResults().getVo2Score());
+		double secondVo2 = (secondClient.getSurveyDataResults().getVo2Score());
+
+		double vo2Max = ((firstVo2 - secondVo2) / firstVo2) * 100;
+
+		double firstMin4 = (firstClient.getSurveyDataResults().getMin4powerOutput());
+		double secondMin4 = (secondClient.getSurveyDataResults().getMin4powerOutput());
+
+		double min4Power = ((firstMin4 - secondMin4) / firstMin4) * 100;
+
+		double firstMin4Rel = (firstClient.getSurveyDataResults().getMin4RelativePower());
+		double secondMin4Rel = (secondClient.getSurveyDataResults().getMin4RelativePower());
+
+		double min4RelativePower = ((firstMin4Rel - secondMin4Rel) / firstMin4Rel) * 100;
+
+		enduranceComparison = (vo2Max + min4Power + min4RelativePower);
 		surveyCompare.setEnduranceComparison(enduranceComparison);
-		double overrallDifference=movementComparison+powerComparison+strengthComparison+enduranceComparison;
+		double overrallDifference = movementComparison + powerComparison + strengthComparison + enduranceComparison;
 		surveyCompare.setOverrallDifference(overrallDifference);
+		surveyCompare.setFirstClient(clientId);
+		surveyCompare.setSecondClient(secondId);
+		SurveyComparison survey =surveyComparisonService.save(surveyCompare);
+		return survey.getId();
+
 	};
 }

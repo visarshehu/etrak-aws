@@ -144,15 +144,15 @@ public class CalculateServiceImpl implements CalculateService {
 		if (survey.getClient().getGender() == 'F') {
 			s10PowerOutput = lookupTable.getScore("AbsolutePowerWomen10", survey.getS10PowerOutput());
 			s60PowerOutput = lookupTable.getScore("AbsolutePowerWomen60", survey.getS60PowerOutput());
-			s10RelativePower = survey.getS10PowerOutput() / survey.getWeight();
-			s60RelativePower = survey.getS60PowerOutput() / survey.getWeight();
+			s10RelativePower = survey.getS10PowerOutput() / (survey.getWeight()/2.2);
+			s60RelativePower = survey.getS60PowerOutput() / (survey.getWeight()/2.2);
 			s10RelativePowerResult = lookupRelative.getScore("s10RelativePowerWomen", s10RelativePower);
 			s60RelativePowerResult = lookupRelative.getScore("s60RelativePowerWomen", s60RelativePower);
 		} else {
 			s10PowerOutput = lookupTable.getScore("AbsolutePowerMen10", survey.getS10PowerOutput());
 			s60PowerOutput = lookupTable.getScore("AbsolutePowerMen60", survey.getS60PowerOutput());
-			s10RelativePower = survey.getS10PowerOutput() / survey.getWeight();
-			s60RelativePower = survey.getS60PowerOutput() / survey.getWeight();
+			s10RelativePower = survey.getS10PowerOutput() / (survey.getWeight()/2.2);
+			s60RelativePower = survey.getS60PowerOutput() / (survey.getWeight()/2.2);
 			s10RelativePowerResult = lookupRelative.getScore("s10RelativePowerMen", s10RelativePower);
 			s60RelativePowerResult = lookupRelative.getScore("s60RelativePowerMen", s60RelativePower);
 		}
