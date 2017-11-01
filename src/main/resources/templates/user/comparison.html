@@ -10,6 +10,9 @@
     <link th:href="@{/css/clientStat.css}" rel="stylesheet">
     <link href='https://fonts.googleapis.com/css?family=Orbitron' rel='stylesheet'>
     <script th:src="@{/js/jquery-3.2.1.min.js}" type="text/javascript"></script>
+     <link th:href="@{/css/easy-autocomplete.css}" rel="stylesheet">
+    <link th:href="@{/css/easy-autocomplete.min.css}" rel="stylesheet">
+    <link th:href="@{/css/easy-autocomplete.themes.min.css}" rel="stylesheet">
     <link href='https://fonts.googleapis.com/css?family=Orbitron' rel='stylesheet'>
     <link href='https://fonts.googleapis.com/css?family=Montserrat'
 	rel='stylesheet'>
@@ -27,7 +30,9 @@
         }
 
 
-
+	    .table>tbody{
+	    font-family:'Montserrat';
+	    font-size:12px}
 
         #container3,
         #container5,
@@ -204,6 +209,10 @@
                 transform: translate(-10px, -10px);
             }
         }
+        
+        .page-header{
+        font-family:Montserrat;
+        font-size:11px}
     </style>
 
 
@@ -263,7 +272,7 @@
     </nav>
 
 
-    <div class="page-header" style="padding-top:70px;padding-left:40px">
+    <div class="page-header" style="padding-top:70px;padding-left:40px;" >
         <div class="clearfix">
 		<input type="hidden" id="firstId" th:value="${firstSurvey}" />
 		<input type="hidden" id="secondId" th:value="${secondSurvey}" />
@@ -276,15 +285,15 @@
                     <div class="col-sm-10 ">
                         <div class="row">
                             <div class="col-sm-12">
-                                <h4 th:utext="${first}"></h4>
+                                <h4 th:utext="${first}" style="font-family:'Montserrat'"></h4>
                             </div>
                         </div>
                         <div class="row">
-                            <div class="col-sm-3">
-                                <p style="font-family: 'Orbitron'; font-size: 10px;">Evaluation: <br/> Date: <br/> Number: <br/></p>
+                            <div class="col-sm-4" style="font-family:Montserrat;font-size:12px">
+                                <p id="eval1"> Date: <br/>Rank: <br/> </p>
                             </div>
-                            <div class="col-sm-4">
-                                <p style="font-family: 'Orbitron'; font-size: 10px;">TRAKScore: <br/> Rank: <br/> </p>
+                            <div class="col-sm-4"  style="font-family:Montserrat;font-size:12px">
+                                <p id="score1">TRAKScore: <br/>  </p>
                             </div>
                         </div>
                     </div>
@@ -296,15 +305,15 @@
                     <div class="col-sm-10 ">
                         <div class="row">
                             <div class="col-sm-12">
-                                <h4 th:utext="${second}"></h4>
+                                <h4 th:utext="${second}" style="font-family:'Montserrat'"></h4>
                             </div>
                         </div>
-                        <div class="row ">
-                            <div class="col-sm-3">
-                                <p style="font-family: 'Orbitron';font-size: 10px;">Evaluation: <br/> Date: <br/> Number: <br/></p>
+                         <div class="row " style="font-family:Montserrat;font-size:12px">
+                            <div class="col-sm-4"  >
+                                <p id="eval2"> Date: <br/> Rank: <br/>  </p>
                             </div>
-                            <div class="col-sm-4">
-                                <p style="font-family: 'Orbitron';font-size: 10px;">TRAKScore: <br/> Rank: <br/> </p>
+                             <div class="col-sm-4">
+                                <p id="score2">TRAKScore: <br/> </p>
                             </div>
                         </div>
                     </div>
@@ -314,29 +323,30 @@
             </div>
 
             <div class="row col-md-12">
-                <div class="col-sm-6">
-                    <div class="col-sm-3">
-                        <h2 style=" color: green"><strong>23.3%</strong></h2>
+                <div class="col-sm-5">
+                    <div class="col-sm-4">
+                        <h2 id="overallDif"><strong></strong></h2>
                     </div>
 
                     <div class="col-sm-6 ">
-                        <p style="text-align: left; margin-top:20px; font-family: 'Orbitron'">OVERALL<br/>DIFFERENCE</p>
+                        <h5 style="padding-top:14px"><strong>OVERALL<br/>DIFFERENCE</strong></h5>
                     </div>
 
 
                 </div>
 
-                <div class="col-sm-6"></div>
-                <div class="col-sm-3">
-                    <button type="button" class="btn btn-lg " style="font-family: 'Orbitron'; font-size: 10px; height: 40px; width: 270px;"><span class="glyphicon glyphicon-transfer"></span>  Change comparison</button>
+			
+                <div class="col-sm-6 col-sm-offset-1">
+                <div class="col-sm-6">
+                    <button type="button" class="btn btn-lg " style="font-size:11px; height: 40px; width: 270px; margin-top:20px" data-title="CompareClients" data-toggle="modal" data-target="#compare"><span class="glyphicon glyphicon-transfer" ></span>  Change comparison</button>
                 </div>
 
-                <div class="col-sm-3">
-                    <button type="button" class="btn  btn-lg" style="font-family: 'Orbitron';font-size: 10px; height: 40px; width: 270px;"><span class="glyphicon glyphicon-remove"></span>  Close comparison</button>
+                <div class="col-sm-6">
+                    <button type="button" class="btn  btn-lg" style="font-size:11px; height: 40px; width: 270px;margin-top:20px" onclick="location.href='clients';"><span class="glyphicon glyphicon-remove"></span>  Close comparison</button>
                 </div>
 
             </div>
-
+</div>
 
 
         </div>
@@ -426,7 +436,7 @@
                     <div class="row col-md-12">
                         <div class="col-md-3 col-sm-6 col-sx-6">
                             <p class="pstyle">MOVEMENT</p>
-                            <h1 class="hstyle" style="color: #778899"><strong>8</strong></h1>
+                            <h1 class="hstyle" style="color: #778899" id="movement"><strong>8</strong></h1>
                             <div class="chart-wrapper1">
 
                                 <div class="chart-title"></div>
@@ -450,7 +460,7 @@
 
                         <div class="col-md-3 col-sm-6 col-sx-6">
                             <p class="pstyle">STRENGTH</p>
-                            <h1 class="hstyle" style="color: #778899"><strong>6</strong></h1>
+                            <h1 class="hstyle" style="color: #778899" id="strength"><strong>6</strong></h1>
                             <div class="chart-wrapper1">
 
                                 <div class="chart-title"></div>
@@ -477,7 +487,7 @@
                         <div class="col-md-3 col-sm-6 col-sx-6">
 
                             <p class="pstyle">POWER</p>
-                            <h1 class="hstyle" style="color: #778899"><strong>5</strong></h1>
+                            <h1 class="hstyle" style="color: #778899" id="power"><strong>5</strong></h1>
                             <div class="chart-wrapper1">
 
                                 <div class="chart-title"></div>
@@ -501,7 +511,7 @@
 
                         <div class="col-md-3 col-sm-6 col-sx-6">
                             <p class="pstyle">ENDURANCE</p>
-                            <h1 class="hstyle" style="color: #778899"><strong>3</strong></h1>
+                            <h1 class="hstyle" style="color: #778899" id="endurance"><strong>3</strong></h1>
                             <div class="chart-wrapper1" style="padding-top: 0px; padding-bottom:0px; margin-top: 0px; margin-bottom: 0px;">
 
                                 <div class="chart-title"></div>
@@ -532,7 +542,7 @@
                     <div class="row col-md-12 col-sm-12">
                         <div class="col-md-3 col-sm-6 col-sx-6">
                             <p class="pstyle">MOVEMENT</p>
-                            <h1 class="hstyle" style="color:#434343"><strong>6</strong></h1>
+                            <h1 class="hstyle" style="color:#434343" id="secondMovement"><strong>6</strong></h1>
                             <div class="chart-wrapper1">
 
                                 <div class="chart-title"></div>
@@ -556,7 +566,7 @@
 
                         <div class="col-md-3 col-sm-6 col-sx-6">
                             <p class="pstyle">STRENGTH</p>
-                            <h1 class="hstyle" style="color:#434343"><strong>7</strong></h1>
+                            <h1 class="hstyle" style="color:#434343" id="secondStrength"><strong>7</strong></h1>
                             <div class="chart-wrapper1">
 
                                 <div class="chart-title"></div>
@@ -583,7 +593,7 @@
                         <div class="col-md-3 col-sm-6 col-sx-6">
 
                             <p class="pstyle">POWER</p>
-                            <h1 class="hstyle" style="color:#434343"><strong>4</strong></h1>
+                            <h1 class="hstyle" style="color:#434343" id="secondPower"><strong>4</strong></h1>
                             <div class="chart-wrapper1">
 
                                 <div class="chart-title"></div>
@@ -607,7 +617,7 @@
 
                         <div class="col-md-3 col-sm-6 col-sx-6">
                             <p class="pstyle">ENDURANCE</p>
-                            <h1 class="hstyle" style="color:#434343"><strong>3</strong></h1>
+                            <h1 class="hstyle" style="color:#434343" id="secondEndurance"><strong>3</strong></h1>
                             <div class="chart-wrapper1">
 
                                 <div class="chart-title"></div>
@@ -641,226 +651,362 @@
 
             <div class="row col-md-12 col-sm-12 center-block">
 				<div class="col-md-5"> <h2 style="font-family: 'Orbitron';">Analytics</h2></div>
+           
+           <div class="col-md-12 table-responsive">
+           <h4 style="color: #2085B8; font-family: 'Orbitron';">DEMOGRAPHICS
+           </h4>
+          <table class="table table-striped" >
+            <thead style="background-color:#D9D9D9 ">
+              <tr>
+                 <th class="col-xs-3">Test</th>
+                  <th class="col-xs-1" th:utext="${first}" ></th>
+                <th class="col-xs-1" th:utext="${second}"></th>
+                <th class="col-xs-3">Difference</th>               
                
-                <div class="col-sm-12 col-md-12 table-responsive ">
-                    <div class="col-md-5"><h4 style="color: #2085B8; font-family: 'Orbitron';">MOVEMENT / MOBILITY</h4></div>
-                   
-              <div class="col-md-4 col-md-offset-3">
-                  <div class="col-md-5 " style="text-align:right; float:right">
-                    <div id="user1" class="box"></div><span class="explanation">Alban #1</span>
-                    <br></div>
-                    
-                <div class="col-md-5 " style="text-align:right; float:right">
-                    <div id="user2" class="box"></div><span class="explanation">Alban #2</span>
-                    <br></div>
-                    </div>
-                    
-                    <table class="table table-striped" style="font-family: 'Montserrat'; font-size: 12px">
-                        <thead style="background-color:#D9D9D9 ">
-                            <tr>
-                                <th class="col-xs-1">Alban #2</th>
-                                <th class="col-xs-3">Trak Score</th>
-                                <th class="col-xs-3">Exercise Type</th>
-                                <th class="col-xs-1">Alban #1</th>
-                                <th class="col-xs-3">Trak Score #1</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>90</td>
-                                <td id="shoulderR"></td>
-                                <td>Deep Squat Hip Flexion(deg)</td>
-                                <td>90</td>
-                                <td id="shoulderL"></td>
-
-                            </tr>
-                            <tr>
-                                <td>160</td>
-                                <td id="externalShoulderR"></td>
-                                <td>Shoulder Flexion L(deg)</td>
-                                <td>160</td>
-                                <td id="externalShoulderL"></td>
-
-                            </tr>
-                            <tr>
-                                <td>160</td>
-                                <td id="internalShoulderR"></td>
-                                <td>Shoulder Flexion R(deg)</td>
-                                <td>90</td>
-                                <td id="internalShoulderL"></td>
-
-                            </tr>
-
-                            <tr>
-                                <td>44</td>
-                                <td id="florR"></td>
-                                <td>Trunk Rotation-R-(deg)</td>
-                                <td>44</td>
-                                <td id="florL"></td>
-
-                            </tr>
-                            <tr>
-
-                                <td>46</td>
-                                <td id="extFloor"></td>
-                                <td>Trunk Rotation-L-(deg)</td>
-                                <td>46</td>
-                                <td id="intFloor"></td>
-
-                            </tr>
-                        </tbody>
-                    </table>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                  <td>Height(in)</td>
+                <td id="height1"></td>
+                <td id="height2"></td>
+                 <td id="heightDiff"></td>
+            
+                
+              </tr>
+              <tr>
+                <td>Weight</td>
+                <td id="weight1"></td>
+                <td id="weight2"></td>
+                <td id="weightDiff"></td>
+             
+                
+              </tr>
+              <tr>
+                  <td>Systolic Blood Press</td>
+              <td id="sbp1"></td>
+                <td id="sbp2"></td>
+                <td id="sbpDiff"></td>
+              
+                
+              </tr>
+              <tr>
+              <td>Diastolic Blood Pressure</td>
+              <td id="dbp1"></td>
+                <td id="dbp2"></td>
+                <td id="dbpDiff"></td>
+               
+              </tr>
+              <tr>
+                 <td>Resting Heart Rate</td>
+              <td id="rhr1"></td>
+                <td id="rhr2"></td>
+                <td id="rhrDiff"></td>
+             
+              </tr>
+              <tr>
+                <td>Bodyfat %</td>
+              <td id="bodyfat1"></td>
+                <td id="bodyfat2"></td>
+                <td id="bodyfatDiff"></td>
+                
+                
+              </tr>
+              
+               <tr>
+                <td>BMI</td>
+              <td id="bmi1"></td>
+                <td id="bmi2"></td>
+                <td id="bmiDiff"></td>
+                
+                
+              </tr>
+            
+            </tbody>
+          </table>
+        </div>
+                 
+     <div id="myContent" style="display:none">
+            <div class="col-sm-12 col-md-12  ">
+                 <h4 style="color: #2085B8; font-family: 'Orbitron';">NUTRITION
+           </h4>
+          <table class="table table-striped" >
+            <thead style="background-color:#D9D9D9 ">
+              <tr>
+                 <th class="col-xs-3">Test</th>
+                  <th class="col-xs-1" th:utext="${first}" ></th>
+                <th class="col-xs-1" th:utext="${second}" ></th>
+                <th class="col-xs-3">Difference</th>               
+               
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                  <td>Resting Metabolic Rate</td>
+                <td id="rmr1"></td>
+                <td id="rmr2"></td>
+                 <td id="rmr"></td>
+            
+                
+              </tr>
+              <tr>
+                <td>Total Daily Energy Intake(Cals)</td>
+                <td id="totalDailyEnergy1"></td>
+                <td id="totalDailyEnergy2"></td>
+                <td id="totalDailyEnergy"></td>
+             
+                
+              </tr>
+              <tr>
+                  <td>Protein(g)/Day</td>
+              	<td id="protein1"></td>
+                <td id="protein2"></td>
+                <td id="protein"></td>
+              
+                
+              </tr>
+              <tr>
+              <td>Carbohydrates(g)/Day</td>
+              <td id="carbohydrates1"></td>
+                <td id="carbohydrates2"></td>
+                <td id="carbohydrates"></td>
+               
+              </tr>
+              <tr>
+                 <td>Total Fat(g)/Day</td>
+              <td id="totalFat1"></td>
+                <td id="totalFat2"></td>
+                <td id="totalFat"></td>
+             
+              </tr>
+             
+            
+            </tbody>
+          </table>
+</div>
+        
+                <div class="col-sm-12 col-md-12 table-responsive " >
+                    <h4 style="color: #2085B8; font-family: 'Orbitron';">MOVEMENT / MOBILITY</h4>
+    
+            <table class="table table-striped" >
+            <thead style="background-color:#D9D9D9 ">
+              <tr>
+                 <th class="col-xs-3">Exercise Type</th>
+                  <th class="col-xs-1" th:utext="${first}" ></th>
+                <th class="col-xs-1" th:utext="${second}" ></th>
+                <th class="col-xs-3">Trak Score</th>               
+               
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                  <td>Deep Squat Hip Flexion(deg)</td>
+                <td id="deep1"></td>
+                <td id="deep2"></td>
+                 <td id="deepSquatHip"></td>
+            
+                
+              </tr>
+              <tr>
+                <td>Shoulder Flexion L(deg)</td>
+                <td id="shoulderL1"></td>
+                <td id="shoulderL2"></td>
+                <td id="shoulderL"></td>
+             
+                
+              </tr>
+              <tr>
+                  <td>Shoulder Flexion R(deg)</td>
+              <td id="shoulderR1"></td>
+                <td id="shoulderR2"></td>
+                <td id="shoulderR"></td>
+              
+                
+              </tr>
+              <tr>
+              <td>Shoulder Extension R</td>
+              <td id="extensionR1"></td>
+                <td id="extensionR2"></td>
+                
+                <td id="extensionR"></td>
+               
+              </tr>
+              <tr>
+                <td>Shoulder Extension L</td>
+              	<td id="extensionL1"></td>
+                <td id="extensionL2"></td>
+                <td id="extensionL"></td>
+             
+              </tr>
+            
+              <tr>
+                 <td>Trunk Rotation-R-(deg)</td>
+              	 <td id="trunkR1"></td>
+                 <td id="trunkR2"></td>
+                 <td id="trunkRotationR"></td>
+            
+               
+              </tr>
+              <tr>
+                  <td>Trunk Rotation-L-(deg)</td>
+              	  <td id="trunkL1"></td>
+                  <td id="trunkL2"></td>
+                 <td id="trunkRotationL"></td>
+             
+                
+              </tr>
+            </tbody>
+          </table>
 
                 </div>
 
 
-                <div class="col-sm-12 col-md-12 table-responsive " id="myContent" style="display:none">
+                <div class="col-sm-12 col-md-12 table-responsive " >
                     <h4 style="color: #2085B8; font-family: 'Orbitron';">STABILITY</h4>
-                    <table class="table table-striped" style="font-family: 'Montserrat'; font-size: 12px">
+                    <table class="table table-striped" >
                         <thead style="background-color:#D9D9D9 ">
                             <tr>
-                                <th class="col-xs-1">Alban #2</th>
-                                <th class="col-xs-3">Trak Score</th>
-                                <th class="col-xs-3">Exercise Type</th>
-                                <th class="col-xs-1">Alban #1</th>
-                                <th class="col-xs-3">Trak Score #1</th>
+                               <th class="col-xs-3">Exercise Type</th>
+                  				<th class="col-xs-1" th:utext="${first}" ></th>
+                				<th class="col-xs-1" th:utext="${second}" ></th>
+                				<th class="col-xs-3">Trak Score</th>       
                             </tr>
                         </thead>
                         <tbody>
                             <tr>
-                                <td>90</td>
-                                <td id="pistolSquatR"></td>
                                 <td>Pistol Squat -R-</td>
-                                <td>90</td>
-                                <td id="pistolSquatR1"></td>
+                                <td id="pistolR1"></td>
+                                <td id="pistolR2"></td>
+                                <td id="pistolSquatR"></td>
 
                             </tr>
                             <tr>
-                                <td>160</td>
-                                <td id="pistolSquatL"></td>
                                 <td>Pistol Squat -L-</td>
-                                <td>160</td>
-                                <td id="pistolSquatL1"></td>
+                                <td id="pistolL1"></td>
+                                <td id="pistolL2"></td>
+                              	<td id="pistolSquatL"></td>
 
                             </tr>
                             <tr>
-                                <td>160</td>
-                                <td id="proneRH"></td>
                                 <td>Prone RH/LF</td>
-                                <td>90</td>
                                 <td id="proneRH1"></td>
+                                <td id="proneRH2"></td>
+                                <td id="proneRH"></td>
 
                             </tr>
 
                             <tr>
-                                <td>44</td>
-                                <td id="proneLH"></td>
                                 <td>Prone LH/RF</td>
-                                <td>44</td>
                                 <td id="proneLH1"></td>
+                                <td id="proneLH2"></td>
+                                <td id="proneLH"></td>
 
                             </tr>
                             <tr>
 
-                                <td>46</td>
-                                <td id="vSit"></td>
                                 <td>V Sit</td>
-                                <td>46</td>
-                                <td id="vSit1"></td>
+                                <td id="vsit1"></td>
+                                <td id="vsit2"></td>
+                                <td id="vSit"></td>
 
                             </tr>
                         </tbody>
                     </table>
                     <h4 style="color: #2085B8; font-family: 'Orbitron';">STRENGTH</h4>
-                    <table class="table table-striped" style="font-family: 'Montserrat'; font-size: 12px">
+                    <table class="table table-striped">
                         <thead style="background-color:#D9D9D9 ">
                             <tr>
-                                <th class="col-xs-1">Alban #2</th>
-                                <th class="col-xs-3">Trak Score</th>
                                 <th class="col-xs-3">Exercise Type</th>
-                                <th class="col-xs-1">Alban #1</th>
-                                <th class="col-xs-3">Trak Score #1</th>
+                  				<th class="col-xs-1" th:utext="${first}" ></th>
+                				<th class="col-xs-1" th:utext="${second}" ></th>
+               					<th class="col-xs-3">Trak Score</th>       
                             </tr>
                         </thead>
                         <tbody>
                             <tr>
-                                <td>90</td>
-                                <td id="lowerAbs"></td>
                                 <td>Lower Absolute Force</td>
-                                <td>90</td>
+                                
                                 <td id="lowerAbs1"></td>
+                                <td id="lowerAbs2"></td>
+                                <td id="lowerAbs"></td>
 
                             </tr>
                             <tr>
-                                <td>160</td>
-                                <td id="lowerRel"></td>
                                 <td>Lower Relative Force</td>
-                                <td>160</td>
                                 <td id="lowerRel1"></td>
+                                <td id="lowerRel2"></td>
+                                <td id="lowerRel"></td>
 
                             </tr>
                             <tr>
-                                <td>160</td>
-                                <td id="pushAbs"></td>
                                 <td>Push Absolute Force</td>
-                                <td>90</td>
                                 <td id="pushAbs1"></td>
+                                <td id="pushAbs2"></td>
+                                <td id="pushAbs"></td>
 
                             </tr>
 
                             <tr>
-                                <td>44</td>
-                                <td id="pushRel"></td>
                                 <td>Push Relative Force</td>
-                                <td>44</td>
                                 <td id="pushRel1"></td>
+                                <td id="pushRel2"></td>
+                                <td id="pushRel"></td>
 
                             </tr>
                             <tr>
 
-                                <td>46</td>
-                                <td id="pullAbs"></td>
                                 <td>Pull Absolute Force</td>
-                                <td>46</td>
-                                <td id="pullAbs1"></td>
+								<td id="pullAbs1"></td>
+                                <td id="pullAbs2"></td>
+                                <td id="pullAbs"></td>
 
                             </tr>
                             <tr>
-                                <td>46</td>
-                                <td id="pullRel"></td>
                                 <td>Pull Relative Force</td>
-                                <td>46</td>
                                 <td id="pullRel1"></td>
+                                <td id="pullRel2"></td>
+                                <td id="pullRel"></td>
 
                             </tr>
                         </tbody>
                     </table>
                     <h4 style="color: #2085B8; font-family: 'Orbitron';">POWER</h4>
-                    <table class="table table-striped" style="font-family: 'Montserrat'; font-size: 12px">
+                    <table class="table table-striped" >
                         <thead style="background-color:#D9D9D9 ">
                             <tr>
-                                <th class="col-xs-1">Alban #2</th>
-                                <th class="col-xs-3">Trak Score</th>
-                                <th class="col-xs-3">Exercise Type</th>
-                                <th class="col-xs-1">Alban #1</th>
-                                <th class="col-xs-3">Trak Score #1</th>
+                               <th class="col-xs-3">Exercise Type</th>
+                  				<th class="col-xs-1" th:utext="${first}" ></th>
+                				<th class="col-xs-1" th:utext="${second}" ></th>
+               					 <th class="col-xs-3">Trak Score</th>       
                             </tr>
                         </thead>
                         <tbody>
+                        <tr>
+                                <td>10s Power Output</td>                                
+                                <td id="10sPower1"></td>
+                                <td id="10sPower2"></td>
+                                <td id="10sPower"></td>
+
+                         </tr>
                             <tr>
-                                <td>90</td>
-                                <td id="10sRel"></td>
-                                <td>10s Relative Power</td>
-                                <td>90</td>
+                                <td>10s Relative Power</td>                                
                                 <td id="10sRel1"></td>
+                                <td id="10sRel2"></td>
+                                <td id="10sRel"></td>
+
+                            </tr>
+                              <tr>
+                                <td>60s Power Output</td>
+                                <td id="60sPower1"></td>
+                                <td id="60sPower2"></td>
+                                <td id="60sPower"></td>
 
                             </tr>
                             <tr>
-                                <td>160</td>
-                                <td id="60sRel"></td>
                                 <td>60s Relative Power</td>
-                                <td>160</td>
                                 <td id="60sRel1"></td>
+                                <td id="60sRel2"></td>
+                                <td id="60sRel"></td>
 
                             </tr>
 
@@ -868,42 +1014,42 @@
                         </tbody>
                     </table>
                     <h4 style="color: #2085B8; font-family: 'Orbitron';">ENDURANCE</h4>
-                    <table class="table table-striped" style="font-family: 'Montserrat'; font-size: 12px">
+                    <table class="table table-striped" >
                         <thead style="background-color:#D9D9D9 ">
                             <tr>
-                                <th class="col-xs-1">Alban #2</th>
-                                <th class="col-xs-3">Trak Score</th>
                                 <th class="col-xs-3">Exercise Type</th>
-                                <th class="col-xs-1">Alban #1</th>
-                                <th class="col-xs-3">Trak Score #1</th>
+                  				<th class="col-xs-1" th:utext="${first}" ></th>
+                				<th class="col-xs-1" th:utext="${second}" ></th>
+               					 <th class="col-xs-3">Trak Score</th>       
                             </tr>
                         </thead>
                         <tbody>
                             <tr>
-                                <td>90</td>
-                                <td id="vo2"></td>
                                 <td>Vo2 Max</td>
-                                <td>90</td>
                                 <td id="vo21"></td>
+                                <td id="vo22"></td>
+                                <td id="vo2"></td>
 
                             </tr>
                             <tr>
-                                <td>160</td>
-                                <td id="4minRel"></td>
                                 <td>4min Relative Power</td>
-                                <td>160</td>
                                 <td id="4minRel1"></td>
+                                <td id="4minRel2"></td>
+                                <td id="4minRel"></td>
 
                             </tr>
 
 
                         </tbody>
                     </table>
+                    
+                       
+                    
                     <div class="row col-md-12">
                         <h1>&nbsp;</h1>
                     </div>
                 </div>
-
+</div>
                 <div class="arrow" id="arrowDown"></div>
                 <div class="arrowUp" id="arrowUp" style="display:none;"></div>
             </div>
@@ -913,6 +1059,73 @@
 
         </div>
     </div>
+          <div class="modal fade" id="compare" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content"></div>
+            </div>
+            <div class="modal-dialog">
+                <div class="modal-content"></div>
+            </div>
+            <div class="modal-dialog">
+                <div class="modal-content">
+                <form method="POST" autocomplete="off" th:action="@{/user/comparison}"  th:object="${compare}">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal"> <span aria-hidden="true" class="">× </span><span class="sr-only">Close</span>
+
+                </button>
+
+                        <h4 class="modal-title" id="myModalLabel" style="font-family:Montserrat">Compare two clients</h4>
+                        <div class="col-md-10 col-md-offset-1">
+                            <br/>
+                            <div class="col-md-6">
+                                <div class="row">
+                                    <div class="form-group col-md-12">
+                                        <label for="client1" class=" control-label">First Client</label> <input type="text" name="firstName" value="" class="form-control  input-lg " id="basics" />
+                                        <div id="suggestionBox"></div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="form-group col-md-12   ">
+                                        <label for="sel1">Select survey:</label>
+                                        <select class="form-control input-lg" id="sel1" name="FirstSurvey">
+    					<option></option>
+    					
+  						</select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="row">
+                                    <div class="form-group col-md-12 col-md-offset-1">
+                                        <label for="client2" class=" control-label">Second Client</label> <input type="text" name="secondName" value="" class="form-control  input-lg " id="secondClient" />
+
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="form-group col-md-12 col-md-offset-1 ">
+                                        <label for="sel1">Select survey:</label>
+                                        <select class="form-control input-lg" id="sel2" name="SecondSurvey">
+    					<option></option>
+    					
+  						</select>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+
+
+                    </div>
+
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary">Compare</button>
+
+                    </div>
+				</form>
+                </div>
+            </div>
+        </div>
     <script>
         $(document).ready(function() {
             document.getElementById('arrowDown').style.cursor = "pointer";
@@ -933,6 +1146,10 @@
     <script th:src="@{/js/progressbar.min.js}" type="text/javascript"></script>
     <script th:src="@{/js/comparisonChart.js}" type="text/javascript"></script>
     <script th:src="@{/js/bootstrap.min.js}" type="text/javascript"></script>
+        <script th:src="@{/js/comparison.js}" type="text/javascript"></script>
+    <script th:src="@{/js/jquery.easy-autocomplete.js}" type="text/javascript"></script>
+    <script th:src="@{/js/jquery.easy-autocomplete.min.js}" type="text/javascript"></script>
+    
 
 </body>
 

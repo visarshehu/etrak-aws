@@ -1,6 +1,5 @@
 package com.inspire11.etrak.model;
 
-
 import java.util.Date;
 
 import javax.persistence.CascadeType;
@@ -11,10 +10,13 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.PrePersist;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+
+import org.hibernate.annotations.CreationTimestamp;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
@@ -32,17 +34,16 @@ public class SurveyData {
 	@JoinColumn(name = "client_id")
 	public Client client;
 
-	private String activityLevel;
+	private String activityLevel_id;
 
-	@Column(name = "nutritional_Goal")
 	private String nutritionalGoal;
-	
-	@OneToOne(cascade = CascadeType.ALL)
-	@JsonManagedReference  
-	@JoinColumn(name="surveyresult_id")
-	private SurveyDataResults surveyDataResults;
 
-	private String unit;
+	@OneToOne(cascade=CascadeType.ALL)
+	@JsonManagedReference
+	@JoinColumn(name = "surveyresult_id")
+	private SurveyDataResults surveyDataResults;
+	
+	private Character unit;
 
 	private Double weight;
 
@@ -103,13 +104,13 @@ public class SurveyData {
 	private Double pushMaxLKg;
 
 	private Double pullMaxL;
-	
+
 	private Double pullMaxR;
 
 	private Double pullMaxKg;
 
 	private Integer s10PowerOutput;
-	
+
 	private Integer s60PowerOutput;
 
 	private Integer mileRun;
@@ -123,20 +124,29 @@ public class SurveyData {
 	private Double Calories;
 
 	private String notes;
-	
-	@Column(name="submitedTime",insertable=false, updatable=false)
+
+	private Double restingMetabolicRateNutrition;
+
+	private Double totalEnergyIntakeNutrition;
+
+	private Double proteinNutrition;
+
+	private Double carbohydratesNutrition;
+
+	private Double totalFatNutrition;
+
+	private Double BMI;
+
+	@CreationTimestamp
+	@Column(name = "submitedTime",nullable=false)
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date submittedDate;
-	
-	 @PrePersist
-	  protected void onCreate() {
-	    submittedDate = new Date();
-	  }
-	
-	/*@Column(name="submitedTime", columnDefinition="TIMESTAMP DEFAULT CURRENT_TIMESTAMP",insertable=false, updatable=false)
-	@Temporal(TemporalType.TIMESTAMP)
-	private Date submitedTime;
-*/
+
+	/*@PrePersist
+	protected void onCreate() {
+		submittedDate = new Date();
+	}*/
+
 	public Long getId() {
 		return Id;
 	}
@@ -153,14 +163,6 @@ public class SurveyData {
 		this.client = client;
 	}
 
-	public String getActivityLevel() {
-		return activityLevel;
-	}
-
-	public void setActivityLevel(String activityLevel) {
-		this.activityLevel = activityLevel;
-	}
-
 	public String getNutritionalGoal() {
 		return nutritionalGoal;
 	}
@@ -169,13 +171,6 @@ public class SurveyData {
 		this.nutritionalGoal = nutritionalGoal;
 	}
 
-	public String getUnit() {
-		return unit;
-	}
-
-	public void setUnit(String unit) {
-		this.unit = unit;
-	}
 
 	public Double getWeight() {
 		return weight;
@@ -369,7 +364,6 @@ public class SurveyData {
 		this.pushMaxL = pushMaxL;
 	}
 
-	
 	public Integer getS10PowerOutput() {
 		return s10PowerOutput;
 	}
@@ -386,7 +380,6 @@ public class SurveyData {
 		this.s60PowerOutput = s60PowerOutput;
 	}
 
-	
 	public Integer getMin4PowerOutput() {
 		return min4PowerOutput;
 	}
@@ -402,8 +395,6 @@ public class SurveyData {
 	public void setCalories(Double calories) {
 		Calories = calories;
 	}
-	
-
 
 	public Double getWeightKg() {
 		return weightKg;
@@ -513,9 +504,75 @@ public class SurveyData {
 		return submittedDate;
 	}
 
+	public Double getRestingMetabolicRateNutrition() {
+		return restingMetabolicRateNutrition;
+	}
+
+	public void setRestingMetabolicRateNutrition(Double restingMetabolicRateNutrition) {
+		this.restingMetabolicRateNutrition = restingMetabolicRateNutrition;
+	}
+
+	public Double getTotalEnergyIntakeNutrition() {
+		return totalEnergyIntakeNutrition;
+	}
+
+	public void setTotalEnergyIntakeNutrition(Double totalEnergyIntakeNutrition) {
+		this.totalEnergyIntakeNutrition = totalEnergyIntakeNutrition;
+	}
+
+	public Double getProteinNutrition() {
+		return proteinNutrition;
+	}
+
+	public void setProteinNutrition(Double proteinNutrition) {
+		this.proteinNutrition = proteinNutrition;
+	}
+
+	public Double getCarbohydratesNutrition() {
+		return carbohydratesNutrition;
+	}
+
+	public void setCarbohydratesNutrition(Double carbohydratesNutrition) {
+		this.carbohydratesNutrition = carbohydratesNutrition;
+	}
+
+	public Double getTotalFatNutrition() {
+		return totalFatNutrition;
+	}
+
+	public void setTotalFatNutrition(Double totalFatNutrition) {
+		this.totalFatNutrition = totalFatNutrition;
+	}
+
+	public Double getBMI() {
+		return BMI;
+	}
+
+	public void setBMI(Double bMI) {
+		BMI = bMI;
+	}
+
 	public void setSubmittedDate(Date submittedDate) {
 		this.submittedDate = submittedDate;
 	}
+
+	public String getActivityLevel_id() {
+		return activityLevel_id;
+	}
+
+	public void setActivityLevel_id(String activityLevel_id) {
+		this.activityLevel_id = activityLevel_id;
+	}
+
+	public Character getUnit() {
+		return unit;
+	}
+
+	public void setUnit(Character unit) {
+		this.unit = unit;
+	}
+
+
 
 
 

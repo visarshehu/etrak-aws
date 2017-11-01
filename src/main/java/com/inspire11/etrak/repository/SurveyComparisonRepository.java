@@ -8,4 +8,6 @@ import com.inspire11.etrak.model.SurveyComparison;
 @Repository
 public interface SurveyComparisonRepository extends JpaRepository<SurveyComparison, Long> {
 
+	SurveyComparison findByFirstSurveyIdAndSecondSurveyId(long firstId, long secondId);
+
 }

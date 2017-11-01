@@ -38,15 +38,16 @@ function getClientResults(id) {
         TrakScore("powerratio7", results.surveyDataResults["pullRelativeForce"]/10);
         TrakScore("vo2max", results.surveyDataResults["absolutePower"]/10);
         TrakScore("4poweroutput", results.surveyDataResults["s60RelativePower"]/10);
-        TrakScore("4powerratio", results.surveyDataResults["vo2Max"]/10);
+      
+        TrakScore("4powerratio", results.surveyDataResults["vo2Score"]/10);
         TrakScore("5poweroutput",results.surveyDataResults["min4RelativePower"]/10);
         TrakScore("s10Relative",results.surveyDataResults["s10RelativePowerResults"]/10);
         TrakScore("power60Output",results.surveyDataResults["s60PowerOutputResults"]/10);
         document.getElementById("squat").innerHTML=results.deepSquatHipFlexion;
         document.getElementById("shoulder").innerHTML=results.shoulderFlexionL;
         document.getElementById("rshoulder").innerHTML=results.shoulderFlexionR;
-        document.getElementById("extension").innerHTML=results.shoulderFlexionL;
-        document.getElementById("Lextension").innerHTML=results.shoulderFlexionR;
+        document.getElementById("extension").innerHTML=results.shoulderExtensionR;
+        document.getElementById("Lextension").innerHTML=results.shoulderExtensionL;
         document.getElementById("trunkr").innerHTML=results.trunkRotationR;
         document.getElementById("trunkl").innerHTML=results.trunkRotationL;
         document.getElementById("pistol").innerHTML=results.pistolR;
@@ -54,23 +55,47 @@ function getClientResults(id) {
         document.getElementById("prone").innerHTML=results.proneRH_LF;
         document.getElementById("pronel").innerHTML=results.proneRF_RH;
         document.getElementById("sit").innerHTML=results.vsit;
+        document.getElementById("height").innerHTML=(results.heightFeet*12+results.heightInches);
+        document.getElementById("weight").innerHTML=results.weight;
+        document.getElementById("sbp").innerHTML=results.sbp;
+        document.getElementById("dbp").innerHTML=results.dbp;
+        document.getElementById("rhr").innerHTML=results.rhr;
+        var BMI=parseFloat(results.bmi).toFixed(2);
+        document.getElementById("bmi").innerHTML=BMI;
+        document.getElementById("bodyfat").innerHTML=results.bodyFat;
+        var RMR=parseFloat(results.restingMetabolicRateNutrition).toFixed(2);
+        document.getElementById("rmr").innerHTML=RMR;
+        
+        var totalEnergy=parseFloat(results.totalEnergyIntakeNutrition).toFixed(2);
+        document.getElementById("totalDailyEnergy").innerHTML=totalEnergy;
+        
+        var protein=parseFloat(results.proteinNutrition).toFixed(2);
+        document.getElementById("protein").innerHTML=protein;
+        
+        var carbohydrate=parseFloat(results.carbohydratesNutrition).toFixed(2);
+        document.getElementById("carbohydrate").innerHTML=carbohydrate;
+        
+        var totalFat=parseFloat(results.totalFatNutrition).toFixed(2);
+        document.getElementById("totalFat").innerHTML=totalFat;
         document.getElementById("lowerA").innerHTML=results.surveyDataResults["lowerAbs"];
         var lowerRel=parseFloat(results.surveyDataResults["lowerRel"]).toFixed(2);
-        document.getElementById("lowerR").innerHTML=results.surveyDataResults[lowerRel];
+        document.getElementById("lowerR").innerHTML=lowerRel;
         document.getElementById("pushA").innerHTML=results.surveyDataResults["pushAbs"];
         var pushRel=parseFloat(results.surveyDataResults["pushRel"]).toFixed(2);
-        document.getElementById("pushL").innerHTML=results.surveyDataResults[pushRel];
+        document.getElementById("pushL").innerHTML=pushRel;
         document.getElementById("pullA").innerHTML=results.surveyDataResults["pullAbs"];
         var pullRel=parseFloat(results.surveyDataResults["pullRel"]).toFixed(2);
-        document.getElementById("pullR").innerHTML=results.surveyDataResults["pullRel"];
+        document.getElementById("pullR").innerHTML=pullRel;
         var rel=parseFloat(results.surveyDataResults["s10RelativePower"]).toFixed(2);
         document.getElementById("s10Rel").innerHTML=rel;
         var res=parseFloat(results.surveyDataResults["s60RelativePowerCalc"]).toFixed(2);
         document.getElementById("power60").innerHTML=res;
         document.getElementById("power60Out").innerHTML=results.s60PowerOutput;
         document.getElementById("power10").innerHTML=results.s10PowerOutput;
-        document.getElementById("vmax").innerHTML=results.deepSquatHipFlexion;
-        document.getElementById("rel4").innerHTML=results.min4PowerOutput;
+        var vo2=parseFloat(results.surveyDataResults["vo2Max"]).toFixed(2);
+        document.getElementById("vmax").innerHTML=vo2;
+        var min4=parseFloat(results.surveyDataResults["min4RelativePowerScored"]).toFixed(2);
+        document.getElementById("rel4").innerHTML=min4;
         document.getElementById("name").innerHTML=data.name;
         document.getElementById("name1").innerHTML=data.name;
         document.getElementById("name2").innerHTML=data.name;
@@ -78,7 +103,8 @@ function getClientResults(id) {
         document.getElementById("name4").innerHTML=data.name;
         var submitedDate=new Date(results.submittedDate).toDateString();
         document.getElementById("date").innerHTML="Date: <strong>"+submitedDate +"</strong>";
-        document.getElementById("number").innerHTML="Number: <strong> " +data.survey.length+"</strong>";
+        document.getElementById("notes").innerHTML=results.notes;
+
         document.getElementById("trakscore").innerHTML="TRAKScore: <strong>"+results.surveyDataResults["etrakScore"]+"</strong>";
  
     });

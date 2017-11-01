@@ -217,10 +217,10 @@
                             	<label style="padding-left: 15%" th:utext="${successMessage}"></label><br />
                                 <div class="btn-group btn-group-justified" data-toggle="buttons">
                                     <label class="btn btn-primary active">
-                 <input type="radio" name="options" id="option1"  value="Existing" >Imperial System
+                 <input type="radio" name="unit" id="option1"  value="I" th:selected="selected" checked>Imperial System
                 </label>
                                     <label class="btn btn-primary ">
-                 <input type="radio" name="options" id="option2"  value="New" > Metric System
+                 <input type="radio" name="unit" id="option2"  value="M" > Metric System
                  </label>
                                 </div>
                                 <br />
@@ -246,7 +246,7 @@
 
                                             <div class="col-md-6 nopadding">
 
-                                                <select class="form-control  input-lg  " id="heightInches" name="heightInches">
+                                                <select class="form-control  input-lg" id="heightInches" name="heightInches">
                                                 <option th:disabled="disabled" th:selected="selected" value="">Inches</option>
                                                 <option value="1"> 1 </option>
                                                 <option value="2"> 2 </option>
@@ -291,13 +291,13 @@
                                 -->
 
                                 <div class="form-group">
-                                    <label class="control-label">Activity Level</label> <select class="form-control  input-lg" id="activityLevel" name="activityLevel">
+                                    <label class="control-label">Activity Level</label> <select class="form-control  input-lg" id="activityLevel_id" name="activityLevel_id">
                                         <option value="none"> &nbsp; </option>
-                                        <option value="Sedentary (No physical activity)"> Sedentary (No physical activity)</option>
-                                        <option value="Lightly active (< 30 minutes of activity per day)"> Lightly active (< 30 minutes of activity per day)</option>
-                                        <option value="Moderately active (60-120min of exercise per week)">Moderately active (60-120min of exercise per week)</option>
-                                        <option value="Very active (30 to 60min of exercise per day)">Very active (30 to 60min of exercise per day)</option>
-                                        <option value="Athlete (>60 minutes of exercise per day)">Athlete (>60 minutes of exercise per day)</option>
+                                        <option value="1"> Sedentary (No physical activity)</option>
+                                        <option value="2"> Lightly active (< 30 minutes of activity per day)</option>
+                                        <option value="3">Moderately active (60-120min of exercise per week)</option>
+                                        <option value="4">Very active (30 to 60min of exercise per day)</option>
+                                        <option value="5">Athlete (>60 minutes of exercise per day)</option>
                                     </select>
                                 </div>
 
@@ -951,7 +951,7 @@
                     .find("input[type='text'],input[type='url']"),
                     isValid = true;
 
-                if (assessment1.options.value == 'New') {
+                if (assessment1.unit.value == 'M') {
                     nextStepWizard = $(
                         'div.setup-panel div a[href="#' + curStepBtn +
                         '"]').parent().next().children("a");
@@ -980,13 +980,13 @@
         $('div.setup-panel div a.btn-primary').trigger('click');
 
 
-        $("input[name=options]").on("change", function() {
-            if ($("input[value='New']").is(':checked')) {
+        $("input[name=unit]").on("change", function() {
+            if ($("input[value='M']").is(':checked')) {
                 document.getElementById('imperial').style.display = 'none';
                 document.getElementById('metric').style.display = 'block';
 
 
-            } else if ($("input[value='Existing']").is(':checked')) {
+            } else if ($("input[value='I']").is(':checked')) {
                 document.getElementById('imperial').style.display = 'block';
                 document.getElementById('metric').style.display = 'none';
             }

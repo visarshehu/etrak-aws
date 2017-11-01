@@ -113,7 +113,7 @@ public class SurveyDataResults {
 	
 	private Integer vo2Score;
 	
-	
+	private Double min4RelativePowerScored;
 
 	public Integer getS10RelativePowerResults() {
 		return s10RelativePowerResults;
@@ -514,6 +514,14 @@ public class SurveyDataResults {
 
 	public void setVo2Score(Integer vo2Score) {
 		this.vo2Score = vo2Score;
+	}
+
+	public Double getMin4RelativePowerScored() {
+		return min4RelativePowerScored;
+	}
+
+	public void setMin4RelativePowerScored(Double min4RelativePowerScored) {
+		this.min4RelativePowerScored = min4RelativePowerScored;
 	}
 
 }

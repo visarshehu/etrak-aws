@@ -9,17 +9,25 @@
 <title>Client Stats</title>
 <!-- Bootstrap Core CSS -->
 <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet">
+<link th:href="@{/css/easy-autocomplete.css}" rel="stylesheet">
+<link th:href="@{/css/easy-autocomplete.min.css}" rel="stylesheet">
+<link th:href="@{/css/easy-autocomplete.themes.min.css}"
+	rel="stylesheet">
 <link th:href="@{/css/chart.css}" rel="stylesheet">
 <link th:href="@{/css/clientStat.css}" rel="stylesheet">
 <link href='https://fonts.googleapis.com/css?family=Orbitron'
 	rel='stylesheet'>
-	<link href='https://fonts.googleapis.com/css?family=Montserrat'
+<link href='https://fonts.googleapis.com/css?family=Montserrat'
 	rel='stylesheet'>
 <script th:src="@{/js/jquery-3.2.1.min.js}" type="text/javascript"></script>
 
 
 
 <style>
+a:focus, a:hover {
+	text-decoration: none;
+}
+
 .avatar {
 	float: left;
 	overflow: hidden;
@@ -95,20 +103,43 @@ keyframes arrowDown { 0% {
 100%
 {
 opacity
+
+
+
+
 :
+
+
  
+
+
 0;
 transform
+
+
+
+
 :
+
+
  
+
+
 translate
-(-10px
+
+
+
+
+(-10
+px
 ,
 -10
 px
-);
 
-            
+
+
+
+);
 }
 }
 .arrowUp, .arrowUp:before {
@@ -153,20 +184,43 @@ keyframes arrowUp { 0% {
 100%
 {
 opacity
+
+
+
+
 :
+
+
  
+
+
 0;
 transform
+
+
+
+
 :
+
+
  
+
+
 translate
-(-10px
+
+
+
+
+(-10
+px
 ,
 -10
 px
-);
 
-            
+
+
+
+);
 }
 }
 .sastable #head th {
@@ -256,28 +310,42 @@ enctype="multipart/form-data" role="form" >
 							<img th:src="@{/images/user.png}" />
 						</div>
 					</div>
-					<div class="col-sm-10" style="padding-left: 50px; font-family:Orbitron">
-						<div class="row" ">
+					<div class="col-sm-10"
+						style="padding-left: 50px; font-family: Orbitron">
+						<div class="row">
 							<div class="col-sm-12">
-								<h4 th:utext="${id}"></h4>
+								<div class="col-sm-12">
+									<h4 th:utext="${id}" style=""></h4>
+								</div>
 							</div>
 						</div>
-						<div class="row" style="padding-left: 14px;font-family:Montserrat">
+						<div class="row"
+							style="padding-left: 14px; font-family: Montserrat">
 							<div class="col-sm-5">
 								<div class="row">
-									<p id="date">Date:</p>
+									<div class="col-sm-12">
+										<p id="date">Date:</p>
+									</div>
 								</div>
 								<div class="row">
-									<p id="number">Number:</p>
+
+									<div class="col-sm-9">
+										<select class="form-control input-sm">
+											<option th:disabled="disabled" th:selected="selected"
+												value="">Select a Survey</option>
+
+
+										</select>
+									</div>
 								</div>
 
 							</div>
 							<div class="col-sm-7">
-								<div class="row" style="font-family:Montserrat">
+								<div class="row" style="font-family: Montserrat">
 									<p id="trakscore"></p>
 								</div>
 								<div class="row">
-									<p id="rank">Rank:</p>
+									<p id="rank" style="padding-top: 5px">Rank:</p>
 								</div>
 
 							</div>
@@ -294,11 +362,12 @@ enctype="multipart/form-data" role="form" >
 						<div id="buttons" style="float: right">
 							<a th:href="@{/user/assessment/{clientId}(clientId=${clientId})}"><button
 									type="button" class="btn btn-primary "
-									style="background: #2085B8">New Evaluation</button> </a> <a
-								th:href="@{comparison.html}">
-								<button type="button" class="btn btn-primary"
-									style="background: #2085B8">Comparison</button>
-							</a>
+									style="background: #2085B8">New Evaluation</button> </a>
+
+							<button type="button" class="btn btn-primary"
+								style="background: #2085B8" data-title="CompareClients"
+								data-toggle="modal" data-target="#compare">Comparison</button>
+
 							<button type="button" class="btn btn-primary"
 								style="background: #2085B8">New Group</button>
 							<button type="button" class="btn btn-default"
@@ -512,8 +581,114 @@ enctype="multipart/form-data" role="form" >
 			<div class="row col-md-12 center-block">
 
 				<h2 style="font-family: 'Orbitron';">ANALYTICS</h2>
-		
-		
+
+				<div class="col-sm-6 col-md-6  table-responsive">
+
+					<h4 style="color: #2085B8; font-family: 'Orbitron';">DEMOGRAPHICS</h4>
+					<table class="table table-striped "
+						style="font-family: 'Montserrat'; font-size: 12px">
+						<thead>
+							<tr>
+								<th class="col-xs-6">Test</th>
+
+								<th class="col-xs-5">Score</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td>Height(in)</td>
+
+								<td id="height"></td>
+							</tr>
+							<tr>
+								<td>Weight (lbs)</td>
+
+								<td id="weight"></td>
+							</tr>
+							<tr>
+								<td>Systolic Blood Pressure</td>
+
+								<td id="sbp"></td>
+							</tr>
+							<tr>
+								<td>Diastolic Blood Pressure</td>
+
+								<td id="dbp"></td>
+							</tr>
+							<tr>
+								<td>Resting Heart Rate</td>
+
+								<td id="rhr"></td>
+							</tr>
+							<tr>
+								<td>Bodyfat %</td>
+
+								<td id="bodyfat"></td>
+							</tr>
+							<tr>
+								<td>Body Mass Index(BMI)</td>
+
+								<td id="bmi"></td>
+							</tr>
+
+						</tbody>
+					</table>
+
+				</div>
+				<div class="col-sm-6 col-md-6  table-responsive">
+
+					<h4 style="color: #2085B8; font-family: 'Orbitron';">NUTRITION</h4>
+					<table class="table table-striped "
+						style="font-family: 'Montserrat'; font-size: 12px">
+						<thead>
+							<tr>
+								<th class="col-xs-6">Test</th>
+
+								<th class="col-xs-5">Score</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td>Resting Metabolic Rate</td>
+
+								<td id="rmr"></td>
+							</tr>
+							<tr>
+								<td>Total Daily Energy Intake (Cals)</td>
+
+								<td id="totalDailyEnergy"></td>
+							</tr>
+							<tr>
+								<td>Protein (g)/ Day</td>
+
+								<td id="protein"></td>
+							</tr>
+							<tr>
+								<td>Carbohydrates(g)/ Day</td>
+
+								<td id="carbohydrate"></td>
+							</tr>
+							<tr>
+								<td>Total Fat(g) /Day</td>
+
+								<td id="totalFat"></td>
+							</tr>
+							<tr>
+								<td>&nbsp;</td>
+
+								<td></td>
+							</tr>
+							<tr>
+								<td style="background-color: #F9F9F9">&nbsp;</td>
+
+								<td style="background-color: #F9F9F9"></td>
+							</tr>
+
+
+						</tbody>
+					</table>
+
+				</div>
 				<div class="col-sm-6 col-md-6  table-responsive">
 
 					<h4 style="color: #2085B8; font-family: 'Orbitron';">MOVEMENT
@@ -1793,8 +1968,9 @@ enctype="multipart/form-data" role="form" >
 							<tr>
 								<td>60s Power Output</td>
 								<td id="power60Out"></td>
-								<td id="power60Output" data-trigger='hover' data-container="body"
-									data-toggle="popover" data-placement="top"
+								<td id="power60Output" data-trigger='hover'
+									data-container="body" data-toggle="popover"
+									data-placement="top"
 									data-content=" 
                                                                                                  <div class='table-responsive'>
                 <table class='sastable table-striped table-bordered' data-toggle='table' data-height='150' data-classes='table  table-striped table-bordered'>
@@ -1920,25 +2096,25 @@ enctype="multipart/form-data" role="form" >
 				</div>
 
 
-
-				<div class="col-sm-6 col-md-6  table-responsive">
-					<h4 style="color: #2085B8; font-family: 'Orbitron'">ENDURANCE</h4>
-					<table class="table table-striped"
-						style="font-family: 'Montserrat'; font-size: 12px">
-						<thead>
-							<tr>
-								<th class="col-xs-5">Exercise Type</th>
-								<th class="col-xs-2" id="name4"></th>
-								<th class="col-xs-5">TRAK Score</th>
-							</tr>
-						</thead>
-						<tbody>
-							<tr>
-								<td>Vo2 Max</td>
-								<td id="vmax">50</td>
-								<td id="4powerratio" data-trigger='hover' data-container="body"
-									data-toggle="popover" data-placement="top"
-									data-content=" 
+				<div class="row col-md-12">
+					<div class="col-sm-6 col-md-6  table-responsive">
+						<h4 style="color: #2085B8; font-family: 'Orbitron'">ENDURANCE</h4>
+						<table class="table table-striped"
+							style="font-family: 'Montserrat'; font-size: 12px">
+							<thead>
+								<tr>
+									<th class="col-xs-5">Exercise Type</th>
+									<th class="col-xs-2" id="name4"></th>
+									<th class="col-xs-5">TRAK Score</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
+									<td>Vo2 Max</td>
+									<td id="vmax">50</td>
+									<td id="4powerratio" data-trigger='hover' data-container="body"
+										data-toggle="popover" data-placement="top"
+										data-content=" 
                                                                                                  <div class='table-responsive'>
                 <table class='sastable table-striped table-bordered' data-toggle='table' data-height='150' data-classes='table  table-striped table-bordered'>
                     <thead id='head'>
@@ -1991,14 +2167,15 @@ enctype="multipart/form-data" role="form" >
                     </tbody>
                 </table>
             </div>"
-									data-html="true"></td>
-							</tr>
-							<tr>
-								<td>4min Relative Power</td>
-								<td id="rel4">73</td>
-								<td id="5poweroutput" data-trigger='hover' data-container="body"
-									data-toggle="popover" data-placement="top"
-									data-content=" 
+										data-html="true"></td>
+								</tr>
+								<tr>
+									<td>4min Relative Power</td>
+									<td id="rel4">73</td>
+									<td id="5poweroutput" data-trigger='hover'
+										data-container="body" data-toggle="popover"
+										data-placement="top"
+										data-content=" 
                                                                                                  <div class='table-responsive'>
                 <table class='sastable table-striped table-bordered' data-toggle='table' data-height='150' data-classes='table  table-striped table-bordered'>
                     <thead id='head'>
@@ -2051,13 +2228,36 @@ enctype="multipart/form-data" role="form" >
                     </tbody>
                 </table>
             </div>"
-									data-html="true"></td>
-							</tr>
+										data-html="true"></td>
+								</tr>
 
 
 
-						</tbody>
-					</table>
+							</tbody>
+						</table>
+					</div>
+
+					<div class="col-sm-6 col-md-6  table-responsive">
+						<div class="col-sm-12">
+							<h4 style="color: #2085B8; font-family: 'Orbitron'">NOTES</h4>
+
+
+							<table class="table table-striped"
+								style="font-family: 'Montserrat'; font-size: 12px">
+
+								<tbody>
+									<tr>
+										<td id="notes"></td>
+
+									</tr>
+
+
+
+
+								</tbody>
+							</table>
+						</div>
+					</div>
 				</div>
 				<div class="row col-md-12">
 					<h1>&nbsp;</h1>
@@ -2068,6 +2268,80 @@ enctype="multipart/form-data" role="form" >
 
 
 
+		</div>
+	</div>
+	<div class="modal fade" id="compare" tabindex="-1" role="dialog"
+		aria-labelledby="myModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content"></div>
+		</div>
+		<div class="modal-dialog">
+			<div class="modal-content"></div>
+		</div>
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<form method="POST" autocomplete="off"
+					th:action="@{/user/comparison}" th:object="${compare}">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal">
+							<span aria-hidden="true" class="">× </span><span class="sr-only">Close</span>
+
+						</button>
+
+						<h4 class="modal-title" id="myModalLabel"  style="font-family:Montserrat">Compare two clients</h4>
+						<div class="col-md-10 col-md-offset-1">
+							<br />
+							<div class="col-md-6">
+								<div class="row">
+									<div class="form-group col-md-12">
+										<label for="client1" class=" control-label">First
+											Client</label> <input type="text" name="firstName" value=""
+											class="form-control  input-lg " id="basics" />
+										<div id="suggestionBox"></div>
+									</div>
+								</div>
+								<div class="row">
+									<div class="form-group col-md-12   ">
+										<label for="sel1">Select survey:</label> <select
+											class="form-control input-lg" id="sel1" name="FirstSurvey">
+											<option></option>
+
+										</select>
+									</div>
+								</div>
+							</div>
+							<div class="col-md-6">
+								<div class="row">
+									<div class="form-group col-md-12 col-md-offset-1">
+										<label for="client2" class=" control-label">Second
+											Client</label> <input type="text" name="secondName" value=""
+											class="form-control  input-lg " id="secondClient" />
+
+									</div>
+								</div>
+								<div class="row">
+									<div class="form-group col-md-12 col-md-offset-1 ">
+										<label for="sel1">Select survey:</label> <select
+											class="form-control input-lg" id="sel2" name="SecondSurvey">
+											<option></option>
+
+										</select>
+									</div>
+								</div>
+
+							</div>
+						</div>
+
+
+					</div>
+
+					<div class="modal-footer">
+						<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+						<button type="submit" class="btn btn-primary">Compare</button>
+
+					</div>
+				</form>
+			</div>
 		</div>
 	</div>
 	<script>
@@ -2099,6 +2373,11 @@ enctype="multipart/form-data" role="form" >
 	<script th:src="@{/js/progressbar.min.js}" type="text/javascript"></script>
 	<script th:src="@{/js/chart.js}" type="text/javascript"></script>
 	<script th:src="@{/js/bootstrap.min.js}" type="text/javascript"></script>
+	<script th:src="@{/js/comparison.js}" type="text/javascript"></script>
+	<script th:src="@{/js/jquery.easy-autocomplete.js}"
+		type="text/javascript"></script>
+	<script th:src="@{/js/jquery.easy-autocomplete.min.js}"
+		type="text/javascript"></script>
 
 </body>
 

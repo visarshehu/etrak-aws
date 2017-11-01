@@ -10,4 +10,6 @@ public interface CalculateService {
 	
 	public void CalculateEndurance(Long id);
 	
+	public void CalculateNutrition(Long id);
+	
 }

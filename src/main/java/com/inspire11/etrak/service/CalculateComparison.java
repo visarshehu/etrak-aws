@@ -9,5 +9,9 @@ public interface CalculateComparison {
 	public void PowerComparison(Long id1,Long id2);
 	
 	public Long EnduranceComparison(Long id1,Long id2);
+	
+	public void NutritionComparison(Long id1, Long id2);
+	
+	public void EveryComparison(Long id1, Long id2);
 
 }

@@ -2,6 +2,8 @@ package com.inspire11.etrak.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletResponse;
+
 import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.web.bind.annotation.PathVariable;
@@ -49,11 +51,13 @@ public class ClientRestController {
     @RequestMapping(value = "survey/{id}", method = RequestMethod.GET)
    	public SurveyData getSurveyById(@PathVariable("id") long id){
    		return surveyService.getSurveyById(id);
+   			
    	}
     
     @RequestMapping(value = "comparisonResults/{id}", method = RequestMethod.GET)
-   	public SurveyComparison getComparisonResultById(@PathVariable("id") long id){
-   		return comparisonService.getSurveyById(id);
+   	public SurveyComparison getComparisonResultById(@PathVariable("id") long id, final HttpServletResponse response){
+    	response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate");
+    	return comparisonService.getSurveyById(id);
    	}
        
     @RequestMapping(value = "scores/{name}", method = RequestMethod.GET)

@@ -105,16 +105,68 @@ public class LookUp {
 		
 		TreeMap<Integer,Integer> scoresPushPullWomen=new TreeMap<Integer,Integer>();
 		scoresPushPullWomen.put(0, 1);
-		scoresPushPullWomen.put(75, 2);
-		scoresPushPullWomen.put(100, 3);
-		scoresPushPullWomen.put(125, 4);
-		scoresPushPullWomen.put(150, 5);
-		scoresPushPullWomen.put(175, 6);
-		scoresPushPullWomen.put(200, 7);
-		scoresPushPullWomen.put(225, 8);
-		scoresPushPullWomen.put(250, 9);
-		scoresPushPullWomen.put(275, 10);
+		scoresPushPullWomen.put(20, 2);
+		scoresPushPullWomen.put(45, 3);
+		scoresPushPullWomen.put(70, 4);
+		scoresPushPullWomen.put(95, 5);
+		scoresPushPullWomen.put(120, 6);
+		scoresPushPullWomen.put(145, 7);
+		scoresPushPullWomen.put(170, 8);
+		scoresPushPullWomen.put(195, 9);
+		scoresPushPullWomen.put(220, 10);
 		tm.put("PushPullWomen", scoresPushPullWomen);
+		
+		TreeMap<Integer,Integer> scoresLowerBodyMetric=new TreeMap<Integer,Integer>();
+		scoresLowerBody.put(0, 1);
+		scoresLowerBody.put(200, 2);
+		scoresLowerBody.put(250, 3);
+		scoresLowerBody.put(300, 4);
+		scoresLowerBody.put(350, 5);
+		scoresLowerBody.put(400, 6);
+		scoresLowerBody.put(450, 7);
+		scoresLowerBody.put(500, 8);
+		scoresLowerBody.put(550, 9);
+		scoresLowerBody.put(600, 10);
+		tm.put("LowerBodyForceMenMetric", scoresLowerBodyMetric);
+		
+		TreeMap<Integer,Integer> scoresLowerBodyWomenMetric=new TreeMap<Integer,Integer>();
+		scoresLowerBodyWomen.put(0	, 1);
+		scoresLowerBodyWomen.put(160, 2);
+		scoresLowerBodyWomen.put(190, 3);
+		scoresLowerBodyWomen.put(220, 4);
+		scoresLowerBodyWomen.put(250, 5);
+		scoresLowerBodyWomen.put(280, 6);
+		scoresLowerBodyWomen.put(310, 7);
+		scoresLowerBodyWomen.put(340, 8);
+		scoresLowerBodyWomen.put(370, 9);
+		scoresLowerBodyWomen.put(400, 10);
+		tm.put("LowerBodyForceWomenMetric", scoresLowerBodyWomenMetric);
+		
+		TreeMap<Integer,Integer> scoresPushPullMetric=new TreeMap<Integer,Integer>();
+		scoresPushPull.put(0, 1);
+		scoresPushPull.put(160, 2);
+		scoresPushPull.put(190, 3);
+		scoresPushPull.put(220, 4);
+		scoresPushPull.put(250, 5);
+		scoresPushPull.put(280, 6);
+		scoresPushPull.put(310, 7);
+		scoresPushPull.put(340, 8);
+		scoresPushPull.put(370, 9);
+		scoresPushPull.put(400, 10);
+		tm.put("PushPullMenMetric", scoresPushPullMetric);
+		
+		TreeMap<Integer,Integer> scoresPushPullWomenMetric=new TreeMap<Integer,Integer>();
+		scoresPushPullWomen.put(0, 1);
+		scoresPushPullWomen.put(20, 2);
+		scoresPushPullWomen.put(45, 3);
+		scoresPushPullWomen.put(70, 4);
+		scoresPushPullWomen.put(95, 5);
+		scoresPushPullWomen.put(120, 6);
+		scoresPushPullWomen.put(145, 7);
+		scoresPushPullWomen.put(170, 8);
+		scoresPushPullWomen.put(195, 9);
+		scoresPushPullWomen.put(220, 10);
+		tm.put("PushPullWomenMetric", scoresPushPullWomenMetric);
 		
 		TreeMap<Integer,Integer> scorevo2=new TreeMap<Integer,Integer>();
 		scorevo2.put(0, 1);
@@ -142,6 +194,8 @@ public class LookUp {
 		scoresAbsPower.put(400, 10);
 		tm.put("AbsolutePower4Min", scoresAbsPower);
 		
+	
+		
 		TreeMap<Integer,Integer> scoresPowerOutput=new TreeMap<Integer,Integer>();
 		scoresPowerOutput.put(0, 1);
 		scoresPowerOutput.put(54, 2);
@@ -153,7 +207,35 @@ public class LookUp {
 		scoresPowerOutput.put(216, 8);
 		scoresPowerOutput.put(243, 9);
 		scoresPowerOutput.put(300, 10);
-		tm.put("PowerOutput4min", scoresPowerOutput);
+		tm.put("PowerOutput4minWomen", scoresPowerOutput);
+		
+		TreeMap<Integer,Integer> scoresAbsPowerMetric=new TreeMap<Integer,Integer>();
+		scoresAbsPower.put(0, 1);
+		scoresAbsPower.put(99, 2);
+		scoresAbsPower.put(132, 3);
+		scoresAbsPower.put(165, 4);
+		scoresAbsPower.put(198, 5);
+		scoresAbsPower.put(231, 6);
+		scoresAbsPower.put(264, 7);
+		scoresAbsPower.put(297, 8);
+		scoresAbsPower.put(330, 9);
+		scoresAbsPower.put(400, 10);
+		tm.put("AbsolutePower4MinMetric", scoresAbsPowerMetric);
+		
+	
+		
+		TreeMap<Integer,Integer> scoresPowerOutputMetric=new TreeMap<Integer,Integer>();
+		scoresPowerOutput.put(0, 1);
+		scoresPowerOutput.put(50, 2);
+		scoresPowerOutput.put(74, 3);
+		scoresPowerOutput.put(99, 4);
+		scoresPowerOutput.put(124, 5);
+		scoresPowerOutput.put(149, 6);
+		scoresPowerOutput.put(173,7);
+		scoresPowerOutput.put(198, 8);
+		scoresPowerOutput.put(223, 9);
+		scoresPowerOutput.put(300, 10);
+		tm.put("PowerOutput4minWomenMetric", scoresPowerOutputMetric);
 		
 		TreeMap<Integer,Integer> scoresAbsolutePower=new TreeMap<Integer,Integer>();
 		scoresAbsolutePower.put(0, 1);
@@ -178,7 +260,7 @@ public class LookUp {
 		scoresAbsolutePowerWomen.put(525, 7);
 		scoresAbsolutePowerWomen.put(600, 8);
 		scoresAbsolutePowerWomen.put(675, 9);
-		scoresAbsolutePowerWomen.put(700, 10);
+		scoresAbsolutePowerWomen.put(750, 10);
 		tm.put("AbsolutePowerWomen10", scoresAbsolutePowerWomen);
 		
 		TreeMap<Integer,Integer> scoresAbsolute60=new TreeMap<Integer,Integer>();
@@ -207,6 +289,57 @@ public class LookUp {
 		scoresAbsoluteWomen60.put(450, 10);
 		tm.put("AbsolutePowerWomen60", scoresAbsoluteWomen60);
 		
+		TreeMap<Integer,Integer> scoresAbsolutePowerMetric=new TreeMap<Integer,Integer>();
+		scoresAbsolutePower.put(0, 1);
+		scoresAbsolutePower.put(300, 2);
+		scoresAbsolutePower.put(400, 3);
+		scoresAbsolutePower.put(500, 4);
+		scoresAbsolutePower.put(600, 5);
+		scoresAbsolutePower.put(700, 6);
+		scoresAbsolutePower.put(800, 7);
+		scoresAbsolutePower.put(900, 8);
+		scoresAbsolutePower.put(1000, 9);
+		scoresAbsolutePower.put(1100, 10);
+		tm.put("AbsolutePowerMen10Metric", scoresAbsolutePowerMetric);
+		
+		TreeMap<Integer,Integer> scoresAbsolutePowerWomenMetric=new TreeMap<Integer,Integer>();
+		scoresAbsolutePowerWomen.put(0, 1);
+		scoresAbsolutePowerWomen.put(150, 2);
+		scoresAbsolutePowerWomen.put(225, 3);
+		scoresAbsolutePowerWomen.put(300, 4);
+		scoresAbsolutePowerWomen.put(375, 5);
+		scoresAbsolutePowerWomen.put(450, 6);
+		scoresAbsolutePowerWomen.put(525, 7);
+		scoresAbsolutePowerWomen.put(600, 8);
+		scoresAbsolutePowerWomen.put(675, 9);
+		scoresAbsolutePowerWomen.put(750, 10);
+		tm.put("AbsolutePowerWomen10Metric", scoresAbsolutePowerWomenMetric);
+		
+		TreeMap<Integer,Integer> scoresAbsolute60Metric=new TreeMap<Integer,Integer>();
+		scoresAbsolute60.put(0, 1);
+		scoresAbsolute60.put(165, 2);
+		scoresAbsolute60.put(220, 3);
+		scoresAbsolute60.put(275, 4);
+		scoresAbsolute60.put(330, 5);
+		scoresAbsolute60.put(385, 6);
+		scoresAbsolute60.put(440, 7);
+		scoresAbsolute60.put(495, 8);
+		scoresAbsolute60.put(550, 9);
+		scoresAbsolute60.put(605, 10);
+		tm.put("AbsolutePowerMen60Metric", scoresAbsolute60Metric);
+		
+		TreeMap<Integer,Integer> scoresAbsoluteWomen60Metric=new TreeMap<Integer,Integer>();
+		scoresAbsoluteWomen60.put(0, 1);
+		scoresAbsoluteWomen60.put(83, 2);
+		scoresAbsoluteWomen60.put(124, 3);
+		scoresAbsoluteWomen60.put(165, 4);
+		scoresAbsoluteWomen60.put(206, 5);
+		scoresAbsoluteWomen60.put(248, 6);
+		scoresAbsoluteWomen60.put(289, 7);
+		scoresAbsoluteWomen60.put(330, 8);
+		scoresAbsoluteWomen60.put(371, 9);
+		scoresAbsoluteWomen60.put(413, 10);
+		tm.put("AbsolutePowerWomen60Metric", scoresAbsoluteWomen60Metric);
 		
 		
 	}

@@ -22,4 +22,11 @@ public class SurveyComparisonServiceImpl implements SurveyComparisonService {
 	public SurveyComparison getSurveyById(long id) {
 		return surveyComparisonRepository.findOne(id);
 	}
+
+	@Override
+	public SurveyComparison findByFirstSurveyIdAndSecondSurveyId(long firstId, long secondId) {
+		
+		return surveyComparisonRepository.findByFirstSurveyIdAndSecondSurveyId(firstId, secondId);
+	}
+
 }

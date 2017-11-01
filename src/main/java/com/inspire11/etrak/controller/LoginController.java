@@ -10,13 +10,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-
+import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -26,6 +28,7 @@ import java.nio.file.Paths;
 import com.inspire11.etrak.model.Client;
 import com.inspire11.etrak.model.CompareInfo;
 import com.inspire11.etrak.model.SurveyData;
+import com.inspire11.etrak.model.SurveyInfoSession;
 import com.inspire11.etrak.model.User;
 import com.inspire11.etrak.service.CalculateComparison;
 import com.inspire11.etrak.service.CalculateService;
@@ -35,6 +38,7 @@ import com.inspire11.etrak.service.SurveyService;
 import com.inspire11.etrak.service.UserService;
 
 @Controller
+@SessionAttributes("surveyInfo")
 public class LoginController {
 
 	@Autowired
@@ -78,10 +82,13 @@ public class LoginController {
 
 	@RequestMapping(value = "user/comparison", method = RequestMethod.GET, params = { "firstId", "secondId" })
 	public ModelAndView comparison(@RequestParam(value = "firstId", required = true) String firstId,
-	@RequestParam(value = "secondId", required = true) String secondId) {
+	@RequestParam(value = "secondId", required = true) String secondId,@ModelAttribute("surveyInfo") SurveyInfoSession info) {
 		ModelAndView modelAndView = new ModelAndView();
 		modelAndView.addObject("firstClient", firstId);
 		modelAndView.addObject("secondClient", secondId);
+		modelAndView.addObject("firstSurvey",info.getFirstSurvey());
+		modelAndView.addObject("secondSurvey",info.getSecondSurvey());
+		modelAndView.addObject("surveyId",info.getSurveyId());
 		Client clientData = clientService.getClientById(Long.parseLong(firstId));
 		modelAndView.addObject("first", clientData.getName() + " " + clientData.getLastName());
 		Client clientData1 = clientService.getClientById(Long.parseLong(secondId));
@@ -120,6 +127,7 @@ public class LoginController {
 	
 	@RequestMapping(value = "/user/assessment", method = RequestMethod.POST)
 	public ModelAndView createNewSurvey(@Valid SurveyData survey_data, BindingResult bindingResult) {
+		
 		long clientId = survey_data.client.getId();
 		SurveyData newSurvey = surveyService.saveSurvey(survey_data);
 		Long surveyId = newSurvey.getId();
@@ -127,6 +135,8 @@ public class LoginController {
 		calculateService.CalculatePower(surveyId);
 		calculateService.CalculateStrength(surveyId);
 		calculateService.CalculateEndurance(surveyId);
+		calculateService.CalculateNutrition(surveyId);
+		
 		return new ModelAndView("redirect:/user/clientStat?getId=" + clientId);
 	}
 
@@ -213,8 +223,9 @@ public class LoginController {
 
 	}
 
-	@RequestMapping(value = "/user/compare", method = RequestMethod.POST )
-	public ModelAndView compareClients(@Valid CompareInfo compare, BindingResult bindingResult,RedirectAttributes redir) {
+	
+	@RequestMapping(value = "/user/comparison", method = RequestMethod.POST )
+	public String compareClients(@Valid CompareInfo compare, BindingResult bindingResult, Model model) {
 		
 		long firstSurvey = compare.getFirstSurvey();
 		long secondSurvey = compare.getSecondSurvey();
@@ -225,15 +236,23 @@ public class LoginController {
 		Long secondClient = second.getClient().getId();
 		calculateComparisonService.MovementComparison(firstSurvey, secondSurvey);
 		calculateComparisonService.PowerComparison(firstSurvey, secondSurvey);
-		calculateComparisonService.StrengthComparison(firstSurvey, secondSurvey);
+		calculateComparisonService.StrengthComparison(firstSurvey, secondSurvey);		
+		calculateComparisonService.EveryComparison(firstSurvey, secondSurvey);
+		calculateComparisonService.NutritionComparison(firstSurvey, secondSurvey);
 		Long id=calculateComparisonService.EnduranceComparison(firstSurvey, secondSurvey);
-		ModelAndView modelAndView = new ModelAndView(
-				"redirect:/user/comparison?firstId=" + firstClient + "&secondId=" + secondClient);
-		redir.addFlashAttribute("firstSurvey",firstSurvey);
-		redir.addFlashAttribute("secondSurvey",secondSurvey);
-		redir.addFlashAttribute("surveyId",id);
+		ModelAndView modelAndView=new ModelAndView();
+		modelAndView.addObject("firstSurvey",firstSurvey);
+		modelAndView.addObject("secondSurvey",secondSurvey);
+		modelAndView.addObject("surveyId",id);
+		if(!model.containsAttribute("surveyInfo")) {
+			SurveyInfoSession surveyInfo=new SurveyInfoSession();
+			surveyInfo.setFirstSurvey(String.valueOf(firstSurvey));
+			surveyInfo.setSecondSurvey(String.valueOf(secondSurvey));
+			surveyInfo.setSurveyId(String.valueOf(id));
+			model.addAttribute("surveyInfo",surveyInfo);
+		}
 
-		return modelAndView;
+		return "redirect:/user/comparison?firstId=" + firstClient + "&secondId=" + secondClient;
 	}
 
 	@RequestMapping(value = "/user/clientStat", method = RequestMethod.GET, params = { "getId" })

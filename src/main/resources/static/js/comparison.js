@@ -17,6 +17,7 @@ $(document).ready(function() {
                     list: {
 
                         onClickEvent: function() {
+                        	$("#sel1").empty();
                             var value = $("#basics").getSelectedItemData();
                                              
                            
@@ -58,6 +59,8 @@ $(document).ready(function() {
                     list: {
 
                         onClickEvent: function() {
+                        	$("#sel2").empty();
+                        	
                             var value = $("#secondClient").getSelectedItemData();
                                              
                            
