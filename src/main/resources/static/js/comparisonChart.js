@@ -20,6 +20,20 @@ requestY=$.getJSON(url,function(data){
 });
 }
 
+function getSurveyRank(vid){
+	 var url = "/getAllSurveys";
+	  $.getJSON(url, function(data){
+		  var rank;
+		  for (var i = 0; i < data.length; i++){
+			  if(data[i].id==vid){
+				 rank=i+1;
+				 break;
+			  }}
+		return rank;
+	  });
+	
+}
+
 function getSurveyResults(id){
 	var url="/comparisonResults/"+id;
 	requestZ=$.getJSON(url,function(data){
@@ -32,7 +46,8 @@ function getSurveyResults(id){
 getFirstClient(firstId);
 getSecondClient(secondId);
 getSurveyResults(surveyId);
-
+var rank1=getSurveyRank(firstId);
+var rank2=getSurveyRank(secondId);
 $.when(requestX,requestY,requestZ).then(function(){
 
     var movement=parseFloat(surveyResults.movementComparison).toFixed(1);
@@ -42,7 +57,7 @@ $.when(requestX,requestY,requestZ).then(function(){
     var overallDif=parseFloat(surveyResults.overrallDifference).toFixed(2);
     var overallCol;
     if(overallDif>0){
-    	overallCol = '#15AF43';
+    	overallCol = '#2E7D32';
 		
 	}
 	else if(overallDif<0){
@@ -53,16 +68,17 @@ $.when(requestX,requestY,requestZ).then(function(){
 		overallCol='#FFD100';
 	
 	}
-	compareCircle("container3", "container4", "MOVEMENT", firstSurvey.surveyDataResults.movement/10, secondSurvey.surveyDataResults.movement/10,movement);
-	compareCircle("container5", "container6", "STRENGTH",firstSurvey.surveyDataResults.strength/10, secondSurvey.surveyDataResults.strength/10,power);
-	compareCircle("container7", "container8", "POWER", firstSurvey.surveyDataResults.power/10, secondSurvey.surveyDataResults.power/10,strength);
-	compareCircle("container9", "container10", "ENDURANCE",firstSurvey.surveyDataResults.endurance/10, secondSurvey.surveyDataResults.endurance/10,endurance);
+
+	compareCircle("container3", "container4", "MOVEMENT",  firstSurvey.surveyDataResults.movement/10,secondSurvey.surveyDataResults.movement/10,movement);
+	compareCircle("container5", "container6", "STRENGTH", firstSurvey.surveyDataResults.strength/10,secondSurvey.surveyDataResults.strength/10,power);
+	compareCircle("container7", "container8", "POWER", firstSurvey.surveyDataResults.power/10,secondSurvey.surveyDataResults.power/10, strength);
+	compareCircle("container9", "container10", "ENDURANCE", firstSurvey.surveyDataResults.endurance/10,secondSurvey.surveyDataResults.endurance/10,endurance);
     var submitedDate=new Date(firstSurvey.submittedDate).toDateString();
     document.getElementById("overallDif").innerHTML="<h2 style='color:"+overallCol+"'><strong>"+overallDif+"%</strong></h2>";
-	document.getElementById("eval1").innerHTML=" <p>Date:<strong> "+submitedDate+"</strong><br/>Rank: <br/> </p>";
+	document.getElementById("eval1").innerHTML=" <p>Date:<strong> "+submitedDate+"</strong><br/>Rank:"+rank1+" <br/> </p>";
     document.getElementById("score1").innerHTML=" <p>TRAKScore: <strong>"+firstSurvey.surveyDataResults["etrakScore"] +"</strong><br/> </p>";
     var secondDate=new Date(secondSurvey.submittedDate).toDateString();
-	document.getElementById("eval2").innerHTML=" <p>Date:<strong> "+secondDate+"</strong><br/>Rank: <br/> </p>";
+	document.getElementById("eval2").innerHTML=" <p>Date:<strong> "+secondDate+"</strong><br/>Rank:"+rank2+" <br/> </p>";
     document.getElementById("score2").innerHTML=" <p>TRAKScore: <strong>"+secondSurvey.surveyDataResults["etrakScore"] +"</strong><br/> </p>";
     AnimateLine1("mobility2", firstSurvey.surveyDataResults.rangeScore/10, "MOBILITY");
     AnimateLine1("stability2", firstSurvey.surveyDataResults.controlScore/10, "STABILITY");
@@ -94,12 +110,12 @@ $.when(requestX,requestY,requestZ).then(function(){
 	document.getElementById("height2").innerHTML=(secondSurvey.heightFeet*12+secondSurvey.heightInches);
 	document.getElementById("weight1").innerHTML=firstSurvey.weight;
 	document.getElementById("weight2").innerHTML=secondSurvey.weight;
-	document.getElementById("sbp1").innerHTML=firstSurvey.sbp;
-	document.getElementById("sbp2").innerHTML=secondSurvey.sbp;
-	document.getElementById("dbp1").innerHTML=firstSurvey.dbp;
-	document.getElementById("dbp2").innerHTML=secondSurvey.dbp;
-	document.getElementById("rhr1").innerHTML=firstSurvey.rhr;
-	document.getElementById("rhr2").innerHTML=secondSurvey.rhr;
+	document.getElementById("sbp1").innerHTML=firstSurvey.SBP;
+	document.getElementById("sbp2").innerHTML=secondSurvey.SBP;
+	document.getElementById("dbp1").innerHTML=firstSurvey.DBP;
+	document.getElementById("dbp2").innerHTML=secondSurvey.DBP;
+	document.getElementById("rhr1").innerHTML=firstSurvey.RHR;
+	document.getElementById("rhr2").innerHTML=secondSurvey.RHR;
 	document.getElementById("bodyfat1").innerHTML=firstSurvey.bodyFat;
 	document.getElementById("bodyfat2").innerHTML=secondSurvey.bodyFat;
 	
@@ -174,10 +190,10 @@ $.when(requestX,requestY,requestZ).then(function(){
 	document.getElementById("4minRel2").innerHTML=m4minRel2;
 	
 	
-	var BMI=parseFloat(firstSurvey.bmi).toFixed(2);
+	var BMI=parseFloat(firstSurvey.BMI).toFixed(2);
 	document.getElementById("bmi1").innerHTML=BMI;
 	
-	var BMI2=parseFloat(secondSurvey.bmi).toFixed(2);
+	var BMI2=parseFloat(secondSurvey.BMI).toFixed(2);
 	document.getElementById("bmi2").innerHTML=BMI2;
 	
     document.getElementById("bodyfat1").innerHTML=firstSurvey.bodyFat;
@@ -248,59 +264,60 @@ $.when(requestX,requestY,requestZ).then(function(){
     var totalFat=parseFloat(surveyResults.totalFatComparison).toFixed(2);
     document.getElementById("totalFat").innerHTML=totalFat;
 
-    var deepSquatHip=parseFloat(surveyResults.deepSquatComparison).toFixed(2);
-    TrakScoreBlack("deepSquatHip", deepSquatHip/100);
+    var deepSquatHip=parseFloat((surveyResults.deepSquatComparison)/100).toFixed(1);
+    TrakScoreBlack("deepSquatHip", deepSquatHip);
     
-    var shoulderL=parseFloat(surveyResults.shoulderFlexionComparisonL).toFixed(2);
-    TrakScoreBlack("shoulderL", shoulderL/100);
-    var shoulderR=parseFloat(surveyResults.shoulderFlexionComparisonR).toFixed(2);
-    TrakScoreBlack("shoulderR", shoulderR/100);
-    var extensionR=parseFloat(surveyResults.shoulderExensionComparisonR).toFixed(2);
-    TrakScoreBlack("extensionR", extensionR/100);
-    var extensionL=parseFloat(surveyResults.shoulderExtensionComparisonL).toFixed(2);
-    TrakScoreBlack("extensionL", extensionL/100);
-    var trunkRotationR=parseFloat(surveyResults.trunkRotationComparisonR).toFixed(2);
-    TrakScoreBlack("trunkRotationR", trunkRotationR/100);
-    var trunkRotationL=parseFloat(surveyResults.trunkRotationComparisonL).toFixed(2);
-    TrakScoreBlack("trunkRotationL", trunkRotationL/100);
+    var shoulderL=parseFloat((surveyResults.shoulderFlexionComparisonL)/100).toFixed(1);
+    TrakScoreBlack("shoulderL", shoulderL);
+    var shoulderR=parseFloat((surveyResults.shoulderFlexionComparisonR)/100).toFixed(1);
+    TrakScoreBlack("shoulderR", shoulderR);
+    var extensionR=parseFloat((surveyResults.shoulderExensionComparisonR)/100).toFixed(1);
+    TrakScoreBlack("extensionR", extensionR);
+    var extensionL=parseFloat((surveyResults.shoulderExtensionComparisonL)/100).toFixed(1);
+    TrakScoreBlack("extensionL", extensionL);
+    var trunkRotationR=parseFloat((surveyResults.trunkRotationComparisonR)/100).toFixed(1);
+    TrakScoreBlack("trunkRotationR", trunkRotationR);
+    var trunkRotationL=parseFloat((surveyResults.trunkRotationComparisonL)/100).toFixed(1);
+    TrakScoreBlack("trunkRotationL", trunkRotationL);
     
-    var pistolSquatR=parseFloat(surveyResults.pistolSquatComparisonR).toFixed(2);
-    TrakScoreBlack("pistolSquatR", pistolSquatR/100);
-    var pistolSquatL=parseFloat(surveyResults.pistolSquatComparisonL).toFixed(2);
-    TrakScoreBlack("pistolSquatL", pistolSquatL/100);
-    var proneRH=parseFloat(surveyResults.proneRHComparison).toFixed(2);
-    TrakScoreBlack("proneRH", proneRH/100);
-    var proneLH=parseFloat(surveyResults.proneLHComparison).toFixed(2);
-    TrakScoreBlack("proneLH", proneLH/100);
-    var vSit=parseFloat(surveyResults.vsitComparison).toFixed(2);
-    TrakScoreBlack("vSit", vSit/100);
+    var pistolSquatR=parseFloat((surveyResults.pistolSquatComparisonR)/100).toFixed(1);
+    TrakScoreBlack("pistolSquatR", pistolSquatR);
+    var pistolSquatL=parseFloat((surveyResults.pistolSquatComparisonL)/100).toFixed(1);
+    TrakScoreBlack("pistolSquatL", pistolSquatL);
+    var proneRH=parseFloat((surveyResults.proneRHComparison)/100).toFixed(1);
+    TrakScoreBlack("proneRH", proneRH);
+    var proneLH=parseFloat((surveyResults.proneLHComparison)/100).toFixed(1);
+    TrakScoreBlack("proneLH", proneLH);
+    var vSit=parseFloat((surveyResults.vsitComparison)/100).toFixed(1);
+    TrakScoreBlack("vSit", vSit);
     
-    var lowerAbs=parseFloat(surveyResults.lowerAbsComparison).toFixed(2);
-    TrakScoreBlack("lowerAbs", lowerAbs/100);
-    var lowerRel=parseFloat(surveyResults.lowerRelComparison).toFixed(2);
-    TrakScoreBlack("lowerRel", lowerRel/100);
-    var pushAbs=parseFloat(surveyResults.pushAbsComparison).toFixed(2);
-    TrakScoreBlack("pushAbs", pushAbs/100);
-    var pushRel=parseFloat(surveyResults.pushRelComparison).toFixed(2);
-    TrakScoreBlack("pushRel", pushRel/100);
-    var pullAbs=parseFloat(surveyResults.pullAbsComparison).toFixed(2);
-    TrakScoreBlack("pullAbs", pullAbs/100);
-    var pullRel=parseFloat(surveyResults.pullRelComparison).toFixed(2);
-    TrakScoreBlack("pullRel", pullRel/100);
+    var lowerAbs=parseFloat((surveyResults.lowerAbsComparison)/100).toFixed(1);
+    TrakScoreBlack("lowerAbs", lowerAbs);
+    var lowerRel=parseFloat((surveyResults.lowerRelComparison)/100).toFixed(1);
+    TrakScoreBlack("lowerRel", lowerRel);
+    var pushAbs=parseFloat((surveyResults.pushAbsComparison)/100).toFixed(1);
+    TrakScoreBlack("pushAbs", pushAbs);
+    var pushRel=parseFloat((surveyResults.pushRelComparison)/100).toFixed(1);
+    TrakScoreBlack("pushRel", pushRel);
+    var pullAbs=parseFloat((surveyResults.pullAbsComparison)/100).toFixed(1);
+    TrakScoreBlack("pullAbs", pullAbs);
+    var pullRel=parseFloat((surveyResults.pullRelComparison)/100).toFixed(1);
+    TrakScoreBlack("pullRel", pullRel);
     
-    var s10sPower=parseFloat(surveyResults.s10PowerComparison).toFixed(2);
-    TrakScoreBlack("10sPower", s10sPower/100);
-    var s10sRel=parseFloat(surveyResults.s10RelComparison).toFixed(2);
-    TrakScoreBlack("10sRel", s10sRel/100);
-    var s60sPower=parseFloat(surveyResults.s60PowerComparison).toFixed(2);
-    TrakScoreBlack("60sPower", s60sPower/100);
-    var s60sRel=parseFloat(surveyResults.s60RelComparison).toFixed(2);
-    TrakScoreBlack("60sRel", s60sRel/100);
-    var vo2=parseFloat(surveyResults.vo2Max).toFixed(2);
-    TrakScoreBlack("vo2", vo2/100);
-    var s4minRel=parseFloat(surveyResults.min4RelPower).toFixed(2);
-    TrakScoreBlack("4minRel", s4minRel/100);
+    var s10sPower=parseFloat((surveyResults.s10PowerComparison)/100).toFixed(1);
+    TrakScoreBlack("10sPower", s10sPower);
+    var s10sRel=parseFloat((surveyResults.s10RelComparison)/100).toFixed(1);
+    TrakScoreBlack("10sRel", s10sRel);
+    var s60sPower=parseFloat((surveyResults.s60PowerComparison)/100).toFixed(1);
+    TrakScoreBlack("60sPower", s60sPower);
+    var s60sRel=parseFloat((surveyResults.s60RelComparison)/100).toFixed(1);
+    TrakScoreBlack("60sRel", s60sRel);
+    var vo2=parseFloat((surveyResults.vo2Max)/100).toFixed(1);
+    TrakScoreBlack("vo2", vo2);
+    var s4minRel=parseFloat((surveyResults.min4RelPower)/100).toFixed(1);
+    TrakScoreBlack("4minRel", s4minRel);
 
+    
     
 
 });
@@ -376,12 +393,17 @@ function TrakScoreBlack(container_id, animatePercentage) {
 	var endColor,animateChart;
 	if(animatePercentage>1 || animatePercentage ==1) {
 		animateChart=1;
-		endColor = '#15AF43'
+		endColor = '#2E7D32'
 		}
-	else{
+	else if(animatePercentage>0){
+		animateChart=animatePercentage;
+		 endColor = '#2E7D32';
+	}
+	else if(animatePercentage<0){
 		animateChart=animatePercentage;
 		 endColor = '#8A3B48';
 	}
+
 
 	var bar = new ProgressBar.Line(element, {
 
@@ -425,7 +447,8 @@ function compareCircle(container_id, container_id2, type, animatePercentage,
 	var element2 = document.getElementById(container_id2);
 	var endColor;
 	if(percentageDifference>0){
-		endColor = '#15AF43';
+		endColor = '#2E7D32';
+		
 		
 	}
 	else if(percentageDifference<0){
@@ -481,7 +504,7 @@ function compareCircle(container_id, container_id2, type, animatePercentage,
 
 	});
 
-	bar.animate(animatePercentage, {
+	bar.animate(animatesecondPercentage, {
 		from : {
 			color : startColor
 		},
@@ -493,7 +516,7 @@ function compareCircle(container_id, container_id2, type, animatePercentage,
 
 	bar.path.style.strokeLinecap = 'round';
 
-	bar2.animate(animatesecondPercentage, {
+	bar2.animate(animatePercentage, {
 		from : {
 			color : startColor
 		},

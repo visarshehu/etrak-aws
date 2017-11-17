@@ -16,8 +16,8 @@ public class CalculateServiceImpl implements CalculateService {
 	@Autowired
 	private SurveyDataRepository surveyDataRepository;
 
-	@Autowired
-	private SurveyServiceResults surveyServiceResults;
+	//@Autowired
+	//private SurveyServiceResults surveyServiceResults;
 
 	@Autowired
 	private LookUp lookupTable;
@@ -36,9 +36,7 @@ public class CalculateServiceImpl implements CalculateService {
 	@Override
 	public void CalculateMovement(Long id) {
 		SurveyData survey = surveyDataRepository.findOne(id);
-		//SurveyDataResults surveyresults = new SurveyDataResults();
-
-
+	
 		int deepSquat = lookupTable.getScore("DeepSquatHipFlexion", survey.getDeepSquatHipFlexion());
 
 		int shoulderFlexionR = lookupTable.getScore("ShoulderFlexion", survey.getShoulderFlexionR());
@@ -94,10 +92,7 @@ public class CalculateServiceImpl implements CalculateService {
 		surveyresults.setProneRH_LFScore(proneRH_LF);
 		surveyresults.setvSitScore(vSit);
 		
-		
-		//survey.setSurveyDataResults(surveyresults);
-		
-		//surveyServiceResults.saveSurveyResults(surveyresults);
+	
 		surveyDataRepository.save(survey);
 
 	}
@@ -209,19 +204,22 @@ public class CalculateServiceImpl implements CalculateService {
 		if(survey.getUnit()=='I') {
 		
 		if (survey.getClient().getGender() == 'F') {
-			s10PowerOutput = lookupTable.getScore("AbsolutePowerWomen10Metric", survey.getS10PowerOutput());
-			s60PowerOutput = lookupTable.getScore("AbsolutePowerWomen60Metric", survey.getS60PowerOutput());
+			
+			int output=survey.getS10PowerOutput();
+			s10PowerOutput = lookupTable.getScore("AbsolutePowerWomen10", output);
+			s60PowerOutput = lookupTable.getScore("AbsolutePowerWomen60", survey.getS60PowerOutput());
 			s10RelativePower = survey.getS10PowerOutput() / (survey.getWeight() / 2.2);
 			s60RelativePower = survey.getS60PowerOutput() / (survey.getWeight() / 2.2);
-			s10RelativePowerResult = lookupRelative.getScore("s10RelativePowerWomenMetric", s10RelativePower);
-			s60RelativePowerResult = lookupRelative.getScore("s60RelativePowerWomenMetric", s60RelativePower);
+			s10RelativePowerResult = lookupRelative.getScore("s10RelativePowerWomen", s10RelativePower);
+			s60RelativePowerResult = lookupRelative.getScore("s60RelativePowerWomen", s60RelativePower);
 		} else {
-			s10PowerOutput = lookupTable.getScore("AbsolutePowerMen10Metric", survey.getS10PowerOutput());
-			s60PowerOutput = lookupTable.getScore("AbsolutePowerMen60Metric", survey.getS60PowerOutput());
+			int output=survey.getS10PowerOutput();
+			s10PowerOutput = lookupTable.getScore("AbsolutePowerMen10", output);
+			s60PowerOutput = lookupTable.getScore("AbsolutePowerMen60", survey.getS60PowerOutput());
 			s10RelativePower = survey.getS10PowerOutput() / (survey.getWeight() / 2.2);
 			s60RelativePower = survey.getS60PowerOutput() / (survey.getWeight() / 2.2);
-			s10RelativePowerResult = lookupRelative.getScore("s10RelativePowerMenMetric", s10RelativePower);
-			s60RelativePowerResult = lookupRelative.getScore("s60RelativePowerMenMetric", s60RelativePower);
+			s10RelativePowerResult = lookupRelative.getScore("s10RelativePowerMen", s10RelativePower);
+			s60RelativePowerResult = lookupRelative.getScore("s60RelativePowerMen", s60RelativePower);
 		}}
 		else {
 			
@@ -233,8 +231,8 @@ public class CalculateServiceImpl implements CalculateService {
 				s10RelativePowerResult = lookupRelative.getScore("s10RelativePowerWomenMetric", s10RelativePower);
 				s60RelativePowerResult = lookupRelative.getScore("s60RelativePowerWomenMetric", s60RelativePower);
 			} else {
-				s10PowerOutput = lookupTable.getScore("AbsolutePowerMen10Metric", survey.getS10PowerOutput());
-				s60PowerOutput = lookupTable.getScore("AbsolutePowerMen60Metric", survey.getS60PowerOutput());
+				s10PowerOutput = lookupTable.getScore("AbsolutePowerMen10", survey.getS10PowerOutput());
+				s60PowerOutput = lookupTable.getScore("AbsolutePowerMen60", survey.getS60PowerOutput());
 				s10RelativePower = survey.getS10PowerOutput() / (survey.getWeightKg());
 				s60RelativePower = survey.getS60PowerOutput() / (survey.getWeightKg());
 				s10RelativePowerResult = lookupRelative.getScore("s10RelativePowerMenMetric", s10RelativePower);
@@ -267,45 +265,57 @@ public class CalculateServiceImpl implements CalculateService {
 	public void CalculateEndurance(Long id) {
 		double vo2Max, min4RelativePower;
 		int scoremin4Relative, vo2Score, vo2Result, min4PowerOutput;
-
+		double calories,seconds,weight;
 		SurveyData survey = surveyDataRepository.findOne(id);
 		if(survey.getUnit()=='I') {
 		if (survey.getClient().getGender() == 'F') {
-			vo2Max = (((survey.getCalories() / (1)) / 5) * 1000) / (survey.getWeight() / (2.2));
+			 calories=survey.getCalories() ;
+			 seconds=survey.getKmRow() ;
+			 weight=survey.getWeight();
+			vo2Max = (((calories / (seconds / 60)) / 5) * 1000) / (weight / (2.2));
 			vo2Result = (int) Math.round(vo2Max);
 			vo2Score = lookupTable.getScore("VO2", vo2Result);
-			min4PowerOutput = lookupTable.getScore("PowerOutput4minWomenMetric", survey.getMin4PowerOutput());
+			min4PowerOutput = lookupTable.getScore("PowerOutput4minWomen", survey.getMin4PowerOutput());
 			min4RelativePower = (survey.getMin4PowerOutput()) / (survey.getWeight()/2.2);
-			scoremin4Relative = lookupRelative.getScore("min4RelativeWomenMetric", min4RelativePower);
+			scoremin4Relative = lookupRelative.getScore("PeakRelative", min4RelativePower);
 
 		}
 
 		else {
-			vo2Max = ((survey.getCalories() / (survey.getKmRow() / 60) / 5) * 1000) / survey.getWeight() / (2.2);
+			 calories=survey.getCalories() ;
+			 seconds=survey.getKmRow() ;
+			 weight=survey.getWeight();
+			vo2Max = (((calories / (seconds / 60)) / 5) * 1000) / (weight / (2.2));
 			vo2Result = (int) Math.round(vo2Max);
 			vo2Score = lookupTable.getScore("VO2", vo2Result);
-			min4PowerOutput = lookupTable.getScore("AbsolutePower4MinMetric", survey.getMin4PowerOutput());
+			min4PowerOutput = lookupTable.getScore("AbsolutePower4Min", survey.getMin4PowerOutput());
 			min4RelativePower = (survey.getMin4PowerOutput()) / (survey.getWeight()/2.2);
-			scoremin4Relative = lookupRelative.getScore("min4RelativeMenMetric", min4RelativePower);
+			scoremin4Relative = lookupRelative.getScore("PeakRelative", min4RelativePower);
 		}}
 		else {
 			if (survey.getClient().getGender() == 'F') {
-				vo2Max = (((survey.getCalories() / (survey.getKmRow() / 60)) / 5) * 1000) / (survey.getWeightKg());
+				 calories=survey.getCalories() ;
+				 seconds=survey.getKmRow() ;
+				 weight=survey.getWeightKg();
+				vo2Max = (((calories / (seconds / 60)) / 5) * 1000) / (weight);
 				vo2Result = (int) Math.round(vo2Max);
 				vo2Score = lookupTable.getScore("VO2", vo2Result);
-				min4PowerOutput = lookupTable.getScore("PowerOutput4minWomenMetric", survey.getMin4PowerOutput());
+				min4PowerOutput = lookupTable.getScore("PowerOutput4minWomen", survey.getMin4PowerOutput());
 				min4RelativePower = (survey.getMin4PowerOutput()) / (survey.getWeight()/2.2);
-				scoremin4Relative = lookupRelative.getScore("min4RelativeWomenMetric", min4RelativePower);
+				scoremin4Relative = lookupRelative.getScore("PeakRelative", min4RelativePower);
 
 			}
 
 			else {
-				vo2Max = ((survey.getCalories() / (survey.getKmRow() / 60) / 5) * 1000) / survey.getWeightKg();
+				 calories=survey.getCalories() ;
+				 seconds=survey.getKmRow() ;
+				 weight=survey.getWeightKg();
+				vo2Max = (((calories / (seconds / 60)) / 5) * 1000) / (weight);
 				vo2Result = (int) Math.round(vo2Max);
 				vo2Score = lookupTable.getScore("VO2", vo2Result);
-				min4PowerOutput = lookupTable.getScore("AbsolutePower4MinMetric", survey.getMin4PowerOutput());
+				min4PowerOutput = lookupTable.getScore("AbsolutePower4Min", survey.getMin4PowerOutput());
 				min4RelativePower = (survey.getMin4PowerOutput()) / (survey.getWeightKg());
-				scoremin4Relative = lookupRelative.getScore("min4RelativeMenMetric", min4RelativePower);
+				scoremin4Relative = lookupRelative.getScore("min4RelativeMen", min4RelativePower);
 			}
 		}
 
@@ -336,39 +346,38 @@ public class CalculateServiceImpl implements CalculateService {
 	@Override
 	public void CalculateNutrition(Long id) {
 		
-
 		SurveyData survey = surveyDataRepository.findOne(id);
 		char gender;
 		double BMI,restingMetabolicRate, totalEnergyIntake, protein = 0, carbohydrates = 0, totalFat = 0, goalCoefficient = 0;
 		final Calendar now = Calendar.getInstance();
 		final Calendar then = Calendar.getInstance();
-
-		Date birthdate=survey.client.getBirthDate();
+		double weight,height;
+		Date birthdate=survey.getClient().getBirthDate();
 		then.setTime(birthdate);
 		double age = (now.get(Calendar.YEAR) - then.get(Calendar.YEAR));
 		if(survey.getUnit()=='I') {
-		 BMI = (survey.getWeight() / (2.2)) / (((survey.getHeightFeet() * 12 + survey.getHeightInches()) * 0.0254)
-			* ((survey.getHeightFeet() * 12 + survey.getHeightInches()) * 0.0254));
-		 gender=survey.client.getGender();
+			weight=survey.getWeight() ;
+			height=(survey.getHeightFeet() * 12 + survey.getHeightInches());
+			BMI=(weight/2.2)/((height*0.0254)*(height*0.0254));
+		 
+		 gender=survey.getClient().getGender();
 			if (gender == 'F') {
-				restingMetabolicRate = (survey.getWeight() / 2.2) * 10
-						+ ((survey.getHeightFeet() * 12 + survey.getHeightInches()) * 6.25) - (age * 5) - 161;
+				restingMetabolicRate = ((weight / 2.2) * 10) + (( height * 2.54)*6.25) - (age * 5) - 161;
 			} else {
-				restingMetabolicRate = (survey.getWeight() / 2.2) * 10
-						+ ((survey.getHeightFeet() * 12 + survey.getHeightInches()) * 6.25) - (age * 5) + 5;
+				restingMetabolicRate = ((weight / 2.2) * 10) + (( height * 2.54)*6.25) - (age * 5) +5;
+
 			}
 		}
 		
-		
 		else {
-			BMI=(survey.getWeightKg()/(survey.getHeightCm()*survey.getHeightCm()));
-			 gender=survey.client.getGender();
+			weight=survey.getWeightKg();
+			height=survey.getHeightCm();
+			BMI=(weight)/(height*height);
+			 gender=survey.getClient().getGender();
 			if (gender == 'F') {
-				restingMetabolicRate = (survey.getWeightKg() * 10)
-						+ (survey.getHeightCm() * 6.25)-(age*5)-161;
+				restingMetabolicRate =(weight*10)+(height*6.25)-(age*5)-161;
 			} else {
-				restingMetabolicRate = (survey.getWeightKg() * 10)
-						+ (survey.getHeightCm() * 6.25)-(age*5)+5;
+				restingMetabolicRate = (weight*10)+(height*6.25)-(age*5)+5;
 			}
 			
 		}
@@ -390,11 +399,11 @@ public class CalculateServiceImpl implements CalculateService {
 		double activityCoefficient = restingMetabolicRate *activityScore;
 
 		if (survey.getNutritionalGoal().equals("maintain")) {
-			goalCoefficient += 0;
+			goalCoefficient = 0;
 		} else if (survey.getNutritionalGoal().equals("gain")) {
-			goalCoefficient += 750;
+			goalCoefficient = 750;
 		} else if (survey.getNutritionalGoal().equals("lose")) {
-			goalCoefficient += -500;
+			goalCoefficient = -500;
 		}
 
 		totalEnergyIntake = activityCoefficient + goalCoefficient;

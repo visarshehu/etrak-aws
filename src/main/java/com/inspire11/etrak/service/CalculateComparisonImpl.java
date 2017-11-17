@@ -80,17 +80,22 @@ public class CalculateComparisonImpl implements CalculateComparison {
 		double firstPistolSquatR = (firstClient.getSurveyDataResults().getPistolSquatRScore());
 		double secondPistolSquatR = (secondClient.getSurveyDataResults().getPistolSquatRScore());
 		double pistolSquatR;
-		if (firstPistolSquatR == 0) {
+		if (firstPistolSquatR == 0 && secondPistolSquatR !=0) {
 			pistolSquatR = 100;
-		} else {
+		} else if((firstPistolSquatR == 0 && secondPistolSquatR ==0)){
+			pistolSquatR=0;
+		}
+		else{
 			pistolSquatR = ((secondPistolSquatR - firstPistolSquatR) / firstPistolSquatR) * 100;
 		}
 
 		double firstproneLH_RF = (firstClient.getSurveyDataResults().getProneLH_RFScore());
 		double secondproneLH_RF = (secondClient.getSurveyDataResults().getProneLH_RFScore());
 		double proneLH_RF;
-		if (firstproneLH_RF == 0) {
+		if (firstproneLH_RF == 0 && secondproneLH_RF != 0){
 			proneLH_RF = 100;
+		} else if(firstproneLH_RF == 0 && secondproneLH_RF == 0) {
+			proneLH_RF = 0;
 		} else {
 			proneLH_RF = ((secondproneLH_RF - firstproneLH_RF) / firstproneLH_RF) * 100;
 		}
@@ -98,18 +103,22 @@ public class CalculateComparisonImpl implements CalculateComparison {
 		double firstproneRH_LF = (firstClient.getSurveyDataResults().getProneRH_LFScore());
 		double secondproneRH_LF = (secondClient.getSurveyDataResults().getProneRH_LFScore());
 		double proneRH_LF;
-		if (firstproneRH_LF == 0) {
+		if (firstproneRH_LF == 0 && secondproneRH_LF != 0) {
 			proneRH_LF = 100;
-		} else {
+		} else if (firstproneRH_LF == 0 && secondproneRH_LF == 0){
+			proneRH_LF = 0;
+		}else {
 			proneRH_LF = ((secondproneRH_LF - firstproneRH_LF) / firstproneRH_LF) * 100;
 		}
 
 		double firstVsit = (firstClient.getSurveyDataResults().getvSitScore());
 		double secondVsit = (secondClient.getSurveyDataResults().getvSitScore());
 		double v_sit;
-		if (firstVsit == 0) {
+		if (firstVsit == 0 && secondVsit !=0) {
 			v_sit = 100;
-		} else {
+		} else if(firstVsit == 0 && secondVsit ==0){
+			v_sit = 0;
+		} else{
 			v_sit = ((secondVsit - firstVsit) / firstVsit) * 100;
 		}
 
@@ -137,34 +146,81 @@ public class CalculateComparisonImpl implements CalculateComparison {
 
 		double firstLowerAbs = (firstClient.getSurveyDataResults().getLowerAbsoluteForce());
 		double secondLowerAbs = (secondClient.getSurveyDataResults().getLowerAbsoluteForce());
-
-		double lowerAbsForce = ((secondLowerAbs - firstLowerAbs) / firstLowerAbs) * 100;
-
+		double lowerAbsForce;
+		if(firstLowerAbs==0 && secondLowerAbs != 0) {
+			lowerAbsForce=100;
+		}
+		else if(firstLowerAbs==0 && secondLowerAbs == 0) {
+			lowerAbsForce=0;
+		}
+		else {
+		lowerAbsForce= ((secondLowerAbs - firstLowerAbs) / firstLowerAbs) * 100;
+		}
+		
 		double firstPushAbs = (firstClient.getSurveyDataResults().getPushAbsoluteForce());
 		double secondPushAbs = (secondClient.getSurveyDataResults().getPushAbsoluteForce());
-
-		double pushAbsForce = ((secondPushAbs - firstPushAbs) / firstPushAbs) * 100;
-
+		double pushAbsForce;
+		if(firstPushAbs==0 && secondPushAbs!= 0) {
+			pushAbsForce=100;
+		}
+		else if(firstPushAbs==0 && secondPushAbs== 0) {
+			pushAbsForce=0;
+		}
+		else {
+			pushAbsForce= ((secondPushAbs - firstPushAbs) / firstPushAbs) * 100;
+		}
+		
 		double firstPullAbs = (firstClient.getSurveyDataResults().getPullAbsoluteForce());
 		double secondPullAbs = (secondClient.getSurveyDataResults().getPullAbsoluteForce());
-
-		double pullAbsForce = ((secondPullAbs - firstPullAbs) / firstPullAbs) * 100;
-
+		double pullAbsForce;
+		if(firstPullAbs==0 && secondPullAbs !=0) {
+			pullAbsForce=100;
+		}
+		else if(firstPullAbs==0 && secondPullAbs ==0) {
+			pullAbsForce=0;
+		}
+		else {
+			pullAbsForce= ((secondPullAbs - firstPullAbs) / firstPullAbs) * 100;
+		}
 		double firstLowerRel = (firstClient.getSurveyDataResults().getLowerRelativeForce());
 		double secondLowerRel = (secondClient.getSurveyDataResults().getLowerRelativeForce());
-
-		double lowerRelForce = ((secondLowerRel - firstLowerRel) / firstLowerRel) * 100;
-
+		double lowerRelForce;
+		if(firstLowerRel==0 && secondLowerRel !=0 ) {
+			lowerRelForce=100;
+		}
+		else if(firstLowerRel==0 && secondLowerRel ==0 ) {
+			lowerRelForce=0;
+		}
+		else {
+		
+			lowerRelForce= ((secondLowerRel - firstLowerRel) / firstLowerRel) * 100;
+		}
 		double firstPushRel = (firstClient.getSurveyDataResults().getPushRelativeForce());
 		double secondPushRel = (secondClient.getSurveyDataResults().getPushRelativeForce());
 
-		double pushRelForce = ((secondPushRel - firstPushRel) / firstPushRel) * 100;
-
+		double pushRelForce;
+		if(firstPushRel==0 && secondPushRel != 0) {
+			pushRelForce=100;
+		}
+		else if(firstPushRel==0 && secondPushRel == 0) {
+			pushRelForce=0;
+		}
+		else {
+			pushRelForce= ((secondPushRel - firstPushRel) / firstPushRel) * 100;
+		}
 		double firstPullRel = (firstClient.getSurveyDataResults().getPullRelativeForce());
 		double secondPullRel = (secondClient.getSurveyDataResults().getPullRelativeForce());
 
-		double pullRelForce = ((secondPullRel - firstPullRel) / firstPullRel) * 100;
-
+		double pullRelForce;
+		if(firstPullRel==0 && secondPullRel != 0) {
+			pullRelForce=100;
+		}
+		else if(firstPullRel==0 && secondPullRel == 0) {
+			pullRelForce=0;
+		}
+		else {
+			pullRelForce= ((secondPullRel - firstPullRel) / firstPullRel) * 100;
+		}
 		strengthComparison = (lowerAbsForce + pushAbsForce + pullAbsForce + lowerRelForce + pushRelForce
 				+ pullRelForce);
 		SurveyComparison surveyCompare=surveyComparisonService.findByFirstSurveyIdAndSecondSurveyId(id1, id2);
@@ -186,23 +242,55 @@ public class CalculateComparisonImpl implements CalculateComparison {
 		double firsts10Power = (firstClient.getSurveyDataResults().getS10PowerOutputResults());
 		double seconds10Power = (secondClient.getSurveyDataResults().getS10PowerOutputResults());
 
-		double s10Power = ((seconds10Power - firsts10Power) / firsts10Power) * 100;
-
+		double s10Power;
+		
+		if(firsts10Power==0 && seconds10Power != 0) {
+			s10Power=100;
+		}
+		else if(firsts10Power==0 && seconds10Power == 0) {
+			s10Power=0;
+		}
+		else {
+			s10Power= ((seconds10Power - firsts10Power) / firsts10Power) * 100;
+		}
 		double firsts60Power = (firstClient.getSurveyDataResults().getS60PowerOutputResults());
 		double seconds60Power = (secondClient.getSurveyDataResults().getS60PowerOutputResults());
 
-		double s60Power = ((seconds60Power - firsts60Power) / firsts60Power) * 100;
-
+		double s60Power;
+		if(firsts60Power==0 && seconds60Power != 0) {
+			s60Power=100;
+		}
+		else if(firsts60Power==0 && seconds60Power == 0) {
+			s60Power=0;
+		} else {			
+			s60Power= ((seconds60Power - firsts60Power) / firsts60Power) * 100;
+		}
 		double firsts10Rel = (firstClient.getSurveyDataResults().getS10RelativePowerResults());
 		double seconds10Rel = (secondClient.getSurveyDataResults().getS10RelativePowerResults());
 
-		double s10RelativePower = ((seconds10Rel - firsts10Rel) / firsts10Rel) * 100;
-
+		double s10RelativePower;
+		if(firsts10Rel==0 && seconds10Rel !=0) {
+			s10RelativePower=100;
+		}
+		else if(firsts10Rel==0 && seconds10Rel ==0) {
+			s10RelativePower=0;
+		}
+		else {
+			s10RelativePower= ((seconds10Rel - firsts10Rel) / firsts10Rel) * 100;
+		}
 		double firsts60Rel = (firstClient.getSurveyDataResults().getS60RelativePower());
 		double seconds60Rel = (secondClient.getSurveyDataResults().getS60RelativePower());
 
-		double s60RelativePower = ((seconds60Rel - firsts60Rel) / firsts60Rel) * 100;
-
+		double s60RelativePower;
+		if(firsts60Rel==0 && seconds60Rel !=0) {
+			s60RelativePower=100;
+		}
+		else if(firsts60Rel==0 && seconds60Rel ==0) {
+			s60RelativePower=0;
+		}
+		else {
+			s60RelativePower= ((seconds60Rel - firsts60Rel) / firsts60Rel) * 100;
+		}
 		powerComparison = (s10Power + s60Power + s10RelativePower + s60RelativePower);
 		SurveyComparison surveyCompare=surveyComparisonService.findByFirstSurveyIdAndSecondSurveyId(id1, id2);
 		if(surveyCompare==null) {
@@ -224,18 +312,44 @@ public class CalculateComparisonImpl implements CalculateComparison {
 		double firstVo2 = (firstClient.getSurveyDataResults().getVo2Score());
 		double secondVo2 = (secondClient.getSurveyDataResults().getVo2Score());
 
-		double vo2Max = ((secondVo2 - firstVo2) / firstVo2) * 100;
+		double vo2Max;
+		if(firstVo2==0 && secondVo2 !=0) {
+			vo2Max=100;
+		}
+		else if(firstVo2==0 && secondVo2 ==0) {
+			vo2Max=0;
+		}
+		else {
+			vo2Max= ((secondVo2 - firstVo2) / firstVo2) * 100;
+			}
 
 		double firstMin4 = (firstClient.getSurveyDataResults().getMin4powerOutput());
 		double secondMin4 = (secondClient.getSurveyDataResults().getMin4powerOutput());
 
-		double min4Power = ((secondMin4 - firstMin4) / firstMin4) * 100;
-
+		double min4Power;
+		if(firstMin4==0 && secondMin4 != 0 ) {
+			min4Power=100;
+		}
+		else if(firstMin4==0 && secondMin4 == 0 ) {
+			min4Power=0;
+		}
+		else {
+			min4Power= ((secondMin4 - firstMin4) / firstMin4) * 100;
+		}
 		double firstMin4Rel = (firstClient.getSurveyDataResults().getMin4RelativePower());
 		double secondMin4Rel = (secondClient.getSurveyDataResults().getMin4RelativePower());
 
-		double min4RelativePower = ((secondMin4Rel - firstMin4Rel) / firstMin4Rel) * 100;
-
+		double min4RelativePower;
+		if(firstMin4Rel==0 && secondMin4Rel != 0) 
+		{
+			min4RelativePower=100;
+		}
+		else if(firstMin4Rel==0 && secondMin4Rel == 0) {
+			min4RelativePower=0;
+		}
+		else {
+			min4RelativePower= ((secondMin4Rel - firstMin4Rel) / firstMin4Rel) * 100;
+		}
 		enduranceComparison = (vo2Max + min4Power + min4RelativePower);
 		SurveyComparison surveyCompare=surveyComparisonService.findByFirstSurveyIdAndSecondSurveyId(id1, id2);
 		if(surveyCompare==null) {
@@ -315,9 +429,12 @@ public class CalculateComparisonImpl implements CalculateComparison {
 		Double secondSquat = (double)secondClient.getDeepSquatHipFlexion();
 
 		Double squat;
-		if (firstSquat == 0) {
+		if (firstSquat == 0 && secondSquat != 0) {
 			squat = 100.0;
-		} else {
+		} else if (firstSquat == 0 && secondSquat == 0){
+			squat=0.0;
+		}
+		else{
 			squat = (double) (((secondSquat - firstSquat) / firstSquat) * 100);
 		}
 		;
@@ -325,9 +442,12 @@ public class CalculateComparisonImpl implements CalculateComparison {
 		Double shoulderFlexionComparisonL =(double) firstClient.getShoulderFlexionL();
 		Double secondshoulderFlexionComparisonL =(double) secondClient.getShoulderFlexionL();
 		Double shoulderFlexion;
-		if (shoulderFlexionComparisonL == 0) {
+		if (shoulderFlexionComparisonL == 0 && secondshoulderFlexionComparisonL !=0 ) {
 			shoulderFlexion = 100.0;
-		} else {
+		} else if (shoulderFlexionComparisonL == 0 && secondshoulderFlexionComparisonL ==0 )
+			{shoulderFlexion=0.0;}
+		else
+		{
 			shoulderFlexion = (double) (((secondshoulderFlexionComparisonL - shoulderFlexionComparisonL)
 					/ shoulderFlexionComparisonL) * 100);
 		}
@@ -335,9 +455,13 @@ public class CalculateComparisonImpl implements CalculateComparison {
 		Double shoulderFlexionComparisonR =(double) firstClient.getShoulderFlexionR();
 		Double secondshoulderFlexionComparisonR =(double) secondClient.getShoulderFlexionR();
 		Double shoulderFlexionR;
-		if (shoulderFlexionComparisonR == 0) {
+		if (shoulderFlexionComparisonR == 0 && secondshoulderFlexionComparisonR !=0) {
 			shoulderFlexionR = 100.0;
-		} else {
+		} else if (shoulderFlexionComparisonR == 0 && secondshoulderFlexionComparisonR ==0) {
+			shoulderFlexionR = 0.0;
+		}
+		
+		else{
 			shoulderFlexionR = (double) (((secondshoulderFlexionComparisonR - shoulderFlexionComparisonR)
 					/ shoulderFlexionComparisonR) * 100);
 		}
@@ -345,9 +469,13 @@ public class CalculateComparisonImpl implements CalculateComparison {
 		Double shoulderExensionComparisonR =(double) firstClient.getShoulderExtensionR();
 		Double secondshoulderExensionComparisonR =(double) secondClient.getShoulderExtensionR();
 		Double shoulderExtension;
-		if (shoulderExensionComparisonR == 0) {
+		if (shoulderExensionComparisonR == 0 && secondshoulderExensionComparisonR !=0) {
 			shoulderExtension = 100.0;
-		} else {
+		} else if(shoulderExensionComparisonR == 0 && secondshoulderExensionComparisonR ==0) {
+			shoulderExtension = 0.0;
+		}
+		
+		else {
 			shoulderExtension = (double) (((secondshoulderExensionComparisonR - shoulderExensionComparisonR)
 					/ shoulderExensionComparisonR) * 100);
 		}
@@ -356,9 +484,12 @@ public class CalculateComparisonImpl implements CalculateComparison {
 		Double secondshoulderExtensionComparison =(double) secondClient.getShoulderExtensionL();
 
 		Double shoulderExtensionL;
-		if (shoulderExtensionComparisonL == 0) {
+		if (shoulderExtensionComparisonL == 0 && secondshoulderExtensionComparison != 0) {
 			shoulderExtensionL = 100.0;
-		} else {
+		} else if (shoulderExtensionComparisonL == 0 && secondshoulderExtensionComparison == 0) {
+			shoulderExtensionL = 0.0;
+		}		
+		else {
 			shoulderExtensionL = (double) (((secondshoulderExtensionComparison - shoulderExtensionComparisonL)
 					/ shoulderExtensionComparisonL) * 100);
 		}
@@ -366,9 +497,13 @@ public class CalculateComparisonImpl implements CalculateComparison {
 		Double trunkRotationComparisonR = (double)firstClient.getTrunkRotationR();
 		Double secondtrunkRotationComparisonR = (double)secondClient.getTrunkRotationR();
 		Double trunkRotation;
-		if (trunkRotationComparisonR == 0) {
+		if (trunkRotationComparisonR == 0 && secondtrunkRotationComparisonR !=0) {
 			trunkRotation = 100.0;
-		} else {
+		} else if (trunkRotationComparisonR == 0 && secondtrunkRotationComparisonR ==0) {
+			trunkRotation = 0.0;
+		}
+		
+		else {
 			trunkRotation = (double) (((secondtrunkRotationComparisonR - trunkRotationComparisonR)
 					/ trunkRotationComparisonR) * 100);
 		}
@@ -376,9 +511,11 @@ public class CalculateComparisonImpl implements CalculateComparison {
 		Double trunkRotationComparisonL =(double) firstClient.getTrunkRotationL();
 		Double secondtrunkRotationComparisonL = (double)secondClient.getTrunkRotationL();
 		Double trunkRotationL;
-		if (trunkRotationComparisonL == 0) {
+		if (trunkRotationComparisonL == 0 && secondtrunkRotationComparisonL !=0) {
 			trunkRotationL = 100.0;
-		} else {
+		} else  if (trunkRotationComparisonL == 0 && secondtrunkRotationComparisonL ==0) {
+			trunkRotationL = 0.0;
+		}else{
 			trunkRotationL = (double) (((secondtrunkRotationComparisonL - trunkRotationComparisonL)
 					/ trunkRotationComparisonL) * 100);
 		}
@@ -386,9 +523,12 @@ public class CalculateComparisonImpl implements CalculateComparison {
 		Double pistolSquatComparisonR = firstClient.getPistolR();
 		Double secondpistolSquatComparisonR = secondClient.getPistolR();
 		Double pistolSquat;
-		if (pistolSquatComparisonR == 0) {
+		if (pistolSquatComparisonR == 0 && secondpistolSquatComparisonR !=0) {
 			pistolSquat = 100.0;
-		} else {
+		}else if(pistolSquatComparisonR == 0 && secondpistolSquatComparisonR ==0) {
+			pistolSquat = 0.0;
+		}
+		else {
 			pistolSquat = (double) (((secondpistolSquatComparisonR - pistolSquatComparisonR) / pistolSquatComparisonR)
 					* 100);
 		}
@@ -396,8 +536,10 @@ public class CalculateComparisonImpl implements CalculateComparison {
 		Double pistolSquatComparisonL = firstClient.getPistolL();
 		Double secondpistolSquatComparisonL = secondClient.getPistolL();
 		Double pistolSquatL;
-		if (pistolSquatComparisonL == 0) {
+		if (pistolSquatComparisonL == 0 && secondpistolSquatComparisonL !=0 ) {
 			pistolSquatL = 100.0;
+		} else if (pistolSquatComparisonL == 0 && secondpistolSquatComparisonL ==0 ) {
+			pistolSquatL = 0.0;
 		} else {
 			pistolSquatL = (double) (((secondpistolSquatComparisonL - pistolSquatComparisonL) / pistolSquatComparisonL)
 					* 100);
@@ -406,9 +548,12 @@ public class CalculateComparisonImpl implements CalculateComparison {
 		Double proneRHComparison = firstClient.getProneRH_LF();
 		Double secondproneRHComparison = secondClient.getProneRH_LF();
 		Double proneRH;
-		if (proneRHComparison == 0) {
+		if (proneRHComparison == 0 && secondproneRHComparison != 0) {
 			proneRH = 100.0;
-		} else {
+		} else if (proneRHComparison == 0 && secondproneRHComparison == 0) {
+			proneRH = 0.0;
+		} 
+		else{
 			proneRH = (double) (((secondproneRHComparison - proneRHComparison) / proneRHComparison) * 100);
 		}
 
@@ -416,35 +561,45 @@ public class CalculateComparisonImpl implements CalculateComparison {
 		Double secondproneLHComparison = secondClient.getProneRF_RH();
 
 		Double proneLH;
-		if (proneLHComparison == 0) {
+		if (proneLHComparison == 0 && secondproneLHComparison !=0) {
 			proneLH = 100.0;
-		} else {
+		} else if(proneLHComparison == 0 && secondproneLHComparison ==0) {
+			proneLH = 0.0;
+		}
+		else		
+		{
 			proneLH = (double) (((secondproneLHComparison - proneLHComparison) / proneLHComparison) * 100);
 		}
 
 		Double VSitComparison = firstClient.getVsit();
 		Double secondVSitComparison = secondClient.getVsit();
 		Double vSit;
-		if (VSitComparison == 0) {
+		if (VSitComparison == 0 && secondVSitComparison !=0 ) {
 			vSit = 100.0;
-		} else {
+		} else if (VSitComparison == 0 && secondVSitComparison ==0 ) {
+			vSit = 0.0;
+		}else{
 			vSit = (double) (((secondVSitComparison - VSitComparison) / VSitComparison) * 100);
 		}
 
 		Double lowerAbsComparison = (double) (firstClient.getSurveyDataResults().getLowerAbs());
 		Double secondlowerAbsComparison = (double) (secondClient.getSurveyDataResults().getLowerAbs());
 		Double lowerAbs;
-		if (lowerAbsComparison == 0) {
+		if (lowerAbsComparison == 0 && secondlowerAbsComparison !=0 ) {
 			lowerAbs = 100.0;
-		} else {
+		} else if (lowerAbsComparison == 0 && secondlowerAbsComparison ==0 ) {
+			lowerAbs = 0.0;
+		}else {
 			lowerAbs = (double) (((secondlowerAbsComparison - lowerAbsComparison) / lowerAbsComparison) * 100);
 		}
 
 		Double lowerRelComparison = firstClient.getSurveyDataResults().getLowerRel();
 		Double secondlowerRelComparison = secondClient.getSurveyDataResults().getLowerRel();
 		Double lowerRel;
-		if (lowerRelComparison == 0) {
+		if (lowerRelComparison == 0 && secondlowerRelComparison !=0) {
 			lowerRel = 100.0;
+		} else if (lowerRelComparison == 0 && secondlowerRelComparison ==0) {
+			lowerRel = 0.0;
 		} else {
 			lowerRel = (double) (((secondlowerRelComparison - lowerRelComparison) / lowerRelComparison) * 100);
 		}
@@ -452,17 +607,21 @@ public class CalculateComparisonImpl implements CalculateComparison {
 		Double pushAbsComparison = (double) firstClient.getSurveyDataResults().getPushAbs();
 		Double secondpushAbsComparison = (double) secondClient.getSurveyDataResults().getPushAbs();
 		Double pushAbs;
-		if (pushAbsComparison == 0) {
+		if (pushAbsComparison == 0 && secondpushAbsComparison !=0) {
 			pushAbs = 100.0;
-		} else {
+		} else if (pushAbsComparison == 0 && secondpushAbsComparison ==0) {
+			pushAbs = 0.0;
+		}else{
 			pushAbs = (double) (((secondpushAbsComparison - pushAbsComparison) / pushAbsComparison) * 100);
 		}
 
 		Double pushRelComparison = firstClient.getSurveyDataResults().getPushRel();
 		Double secondpushRelComparison = firstClient.getSurveyDataResults().getPushRel();
 		Double pushRel;
-		if (pushRelComparison == 0) {
+		if (pushRelComparison == 0 && secondpushRelComparison !=0) {
 			pushRel = 100.0;
+		} else if (pushRelComparison == 0 && secondpushRelComparison ==0) {
+			pushRel = 0.0;
 		} else {
 			pushRel = (double) (((secondpushRelComparison - pushRelComparison) / pushRelComparison) * 100);
 		}
@@ -470,18 +629,22 @@ public class CalculateComparisonImpl implements CalculateComparison {
 		Double pullAbsComparison = (double) firstClient.getSurveyDataResults().getPullAbs();
 		Double secondpullAbsComparison = (double) secondClient.getSurveyDataResults().getPullAbs();
 		Double pullAbs;
-		if (pullAbsComparison == 0) {
+		if (pullAbsComparison == 0 && secondpullAbsComparison !=0) {
 			pullAbs = 100.0;
-		} else {
+		} else if (pullAbsComparison == 0 && secondpullAbsComparison ==0) {
+			pullAbs = 0.0;
+		}else {
 			pullAbs = (double) (((secondpullAbsComparison - pullAbsComparison) / pullAbsComparison) * 100);
 		}
 
 		Double pullRelComparison = firstClient.getSurveyDataResults().getPullRel();
 		Double secondpullRelComparison = secondClient.getSurveyDataResults().getPullRel();
 		Double pullRel;
-		if (pullRelComparison == 0) {
+		if (pullRelComparison == 0 && secondpullRelComparison !=0) {
 			pullRel = 100.0;
-		} else {
+		} else if(pullRelComparison == 0 && secondpullRelComparison ==0) {
+			pullRel = 0.0;
+		}else {
 			pullRel = (double) (((secondpullRelComparison - pullRelComparison) / pullRelComparison) * 100);
 		}
 
@@ -489,8 +652,10 @@ public class CalculateComparisonImpl implements CalculateComparison {
 		Double seconds10PowerComparison = (double) secondClient.getS10PowerOutput();
 
 		Double s10;
-		if (s10PowerComparison == 0) {
+		if (s10PowerComparison == 0 && seconds10PowerComparison != 0 ) {
 			s10 = 100.0;
+		} else if (s10PowerComparison == 0 && seconds10PowerComparison == 0 ) {
+			s10 = 0.0;
 		} else {
 			s10 = (double) (((seconds10PowerComparison - s10PowerComparison) / s10PowerComparison) * 100);
 		}
@@ -498,45 +663,55 @@ public class CalculateComparisonImpl implements CalculateComparison {
 		Double s10RelComparison = firstClient.getSurveyDataResults().getS10RelativePower();
 		Double seconds10RelComparison = secondClient.getSurveyDataResults().getS10RelativePower();
 		Double s10Rel;
-		if (s10RelComparison == 0) {
+		if (s10RelComparison == 0 && seconds10RelComparison != 0) {
 			s10Rel = 100.0;
-		} else {
+		} else if (s10RelComparison == 0 && seconds10RelComparison == 0) {
+			s10Rel = 0.0;
+		}else {
 			s10Rel = (double) (((seconds10RelComparison - s10RelComparison) / s10RelComparison) * 100);
 		}
 
 		Double s60PowerComparison = (double) firstClient.getS60PowerOutput();
 		Double seconds60PowerComparison = (double) secondClient.getS60PowerOutput();
 		Double s60;
-		if (s60PowerComparison == 0) {
+		if (s60PowerComparison == 0 && seconds60PowerComparison !=0) {
 			s60 = 100.0;
-		} else {
+		} else if(s60PowerComparison == 0 && seconds60PowerComparison ==0) {
+			s60 = 0.0;
+		}else{
 			s60 = (double) (((seconds60PowerComparison - s60PowerComparison) / s60PowerComparison) * 100);
 		}
 
 		Double s60RelComparison = firstClient.getSurveyDataResults().getS60RelativePowerCalc();
 		Double seconds60RelComparison = secondClient.getSurveyDataResults().getS60RelativePowerCalc();
 		Double s60Rel;
-		if (s60RelComparison == 0) {
+		if (s60RelComparison == 0 && seconds60RelComparison !=0) {
 			s60Rel = 100.0;
-		} else {
+		} else if (s60RelComparison == 0 && seconds60RelComparison ==0) {
+			s60Rel = 0.0;
+		} else{
 			s60Rel = (double) (((seconds60RelComparison - s60RelComparison) / s60RelComparison) * 100);
 		}
 
 		Double vo2Max = firstClient.getSurveyDataResults().getVo2Max();
 		Double secondvo2Max = secondClient.getSurveyDataResults().getVo2Max();
 		Double vo2;
-		if (vo2Max == 0) {
+		if (vo2Max == 0 && secondvo2Max !=0) {
 			vo2 = 100.0;
-		} else {
+		} else if (vo2Max == 0 && secondvo2Max ==0) {
+			vo2 = 0.0;
+		}else{
 			vo2 = (double) (((secondvo2Max - vo2Max) / vo2Max) * 100);
 		}
 
 		Double min4RelPower = firstClient.getSurveyDataResults().getMin4RelativePowerScored();
 		Double secondmin4RelPower = secondClient.getSurveyDataResults().getMin4RelativePowerScored();
 		Double min4Rel;
-		if (min4RelPower == 0) {
+		if (min4RelPower == 0 && secondmin4RelPower  !=0) {
 			min4Rel = 100.0;
-		} else {
+		} else if (min4RelPower == 0 && secondmin4RelPower  ==0) {
+			min4Rel = 0.0;
+		}else{
 			min4Rel = (double) (((secondmin4RelPower - min4RelPower) / min4RelPower) * 100);
 		}
 		SurveyComparison surveyCompare=surveyComparisonService.findByFirstSurveyIdAndSecondSurveyId(id1, id2);

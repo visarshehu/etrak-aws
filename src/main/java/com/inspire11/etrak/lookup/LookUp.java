@@ -289,32 +289,8 @@ public class LookUp {
 		scoresAbsoluteWomen60.put(450, 10);
 		tm.put("AbsolutePowerWomen60", scoresAbsoluteWomen60);
 		
-		TreeMap<Integer,Integer> scoresAbsolutePowerMetric=new TreeMap<Integer,Integer>();
-		scoresAbsolutePower.put(0, 1);
-		scoresAbsolutePower.put(300, 2);
-		scoresAbsolutePower.put(400, 3);
-		scoresAbsolutePower.put(500, 4);
-		scoresAbsolutePower.put(600, 5);
-		scoresAbsolutePower.put(700, 6);
-		scoresAbsolutePower.put(800, 7);
-		scoresAbsolutePower.put(900, 8);
-		scoresAbsolutePower.put(1000, 9);
-		scoresAbsolutePower.put(1100, 10);
-		tm.put("AbsolutePowerMen10Metric", scoresAbsolutePowerMetric);
-		
-		TreeMap<Integer,Integer> scoresAbsolutePowerWomenMetric=new TreeMap<Integer,Integer>();
-		scoresAbsolutePowerWomen.put(0, 1);
-		scoresAbsolutePowerWomen.put(150, 2);
-		scoresAbsolutePowerWomen.put(225, 3);
-		scoresAbsolutePowerWomen.put(300, 4);
-		scoresAbsolutePowerWomen.put(375, 5);
-		scoresAbsolutePowerWomen.put(450, 6);
-		scoresAbsolutePowerWomen.put(525, 7);
-		scoresAbsolutePowerWomen.put(600, 8);
-		scoresAbsolutePowerWomen.put(675, 9);
-		scoresAbsolutePowerWomen.put(750, 10);
-		tm.put("AbsolutePowerWomen10Metric", scoresAbsolutePowerWomenMetric);
-		
+
+	
 		TreeMap<Integer,Integer> scoresAbsolute60Metric=new TreeMap<Integer,Integer>();
 		scoresAbsolute60.put(0, 1);
 		scoresAbsolute60.put(165, 2);

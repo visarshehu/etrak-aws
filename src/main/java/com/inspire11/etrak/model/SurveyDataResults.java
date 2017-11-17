@@ -9,110 +9,161 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonView;
 
 @Entity
 @Table(name = "surveydataresults")
+
 public class SurveyDataResults {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "SURVEYRESULT_ID")
+	@JsonView({View.SurveyWithClients.class,View.ClientsWithSurvey.class})
 	private Long Id;
 
+	@JsonView({View.SurveyWithClients.class,View.ClientsWithSurvey.class})
 	private Integer deepSquatScore;
 
+	@JsonView({View.SurveyWithClients.class,View.ClientsWithSurvey.class})
 	private Integer shoulderFlexionLScore;
 
+	@JsonView({View.SurveyWithClients.class,View.ClientsWithSurvey.class})
 	private Integer shoulderFlexionRScore;
 
+	@JsonView({View.SurveyWithClients.class,View.ClientsWithSurvey.class})
 	private Integer shoulderExtensionRScore;
 
+	@JsonView({View.SurveyWithClients.class,View.ClientsWithSurvey.class})
 	private Integer shoulderExtensionLScore;
 
+	@JsonView({View.SurveyWithClients.class,View.ClientsWithSurvey.class})
 	private Integer trunkRotationRScore;
 
+	@JsonView({View.SurveyWithClients.class,View.ClientsWithSurvey.class})
 	private Integer trunkRotationLScore;
 
+	@JsonView({View.SurveyWithClients.class,View.ClientsWithSurvey.class})
 	private Double pistolSquatRScore;
 
+	@JsonView({View.SurveyWithClients.class,View.ClientsWithSurvey.class})
 	private Double pistolSquatLScore;
 
+	@JsonView({View.SurveyWithClients.class,View.ClientsWithSurvey.class})
 	private Double proneRH_LFScore;
 
+	@JsonView({View.SurveyWithClients.class,View.ClientsWithSurvey.class})
 	private Double proneLH_RFScore;
 
+	@JsonView({View.SurveyWithClients.class,View.ClientsWithSurvey.class})
 	private Double vSitScore;
 
+	@JsonView({View.SurveyWithClients.class,View.ClientsWithSurvey.class})
 	private Double etrakScore;
 
+	@JsonView({View.SurveyWithClients.class,View.ClientsWithSurvey.class})
 	private Integer movement;
 
+	@JsonView({View.SurveyWithClients.class,View.ClientsWithSurvey.class})
 	private Integer rangeScore;
 
+	@JsonView({View.SurveyWithClients.class,View.ClientsWithSurvey.class})
 	private Integer controlScore;
 
+	@JsonView({View.SurveyWithClients.class,View.ClientsWithSurvey.class})
 	private Integer strength;
 
+	@JsonView({View.SurveyWithClients.class,View.ClientsWithSurvey.class})
 	private Integer power;
 
+	@JsonView({View.SurveyWithClients.class,View.ClientsWithSurvey.class})
 	private Integer endurance;
 
+	@JsonView({View.SurveyWithClients.class,View.ClientsWithSurvey.class})
 	private Integer lowerAbsoluteForce;
 
+	@JsonView({View.SurveyWithClients.class,View.ClientsWithSurvey.class})
 	private Integer lowerRelativeForce;
 
+	@JsonView({View.SurveyWithClients.class,View.ClientsWithSurvey.class})
 	private Integer pushAbsoluteForce;
 
+	@JsonView({View.SurveyWithClients.class,View.ClientsWithSurvey.class})
 	private Integer pushRelativeForce;
 
+	@JsonView({View.SurveyWithClients.class,View.ClientsWithSurvey.class})
 	private Integer pullAbsoluteForce;
 
+	@JsonView({View.SurveyWithClients.class,View.ClientsWithSurvey.class})
 	private Integer pullRelativeForce;
 
+	@JsonView({View.SurveyWithClients.class,View.ClientsWithSurvey.class})
 	private Double s10RelativePower;
 
+	@JsonView({View.SurveyWithClients.class,View.ClientsWithSurvey.class})
 	private Integer s60RelativePower;
 
+	@JsonView({View.SurveyWithClients.class,View.ClientsWithSurvey.class})
 	private Double vo2Max;
 
+	@JsonView({View.SurveyWithClients.class,View.ClientsWithSurvey.class})
 	private Integer min4RelativePower;
 	
+	@JsonView({View.SurveyWithClients.class,View.ClientsWithSurvey.class})
 	private Integer absoluteStrength;
 	
+	@JsonView({View.SurveyWithClients.class,View.ClientsWithSurvey.class})
 	private Integer relativeStrength;
 	
+	@JsonView({View.SurveyWithClients.class,View.ClientsWithSurvey.class})
 	private Integer absolutePower;
 	
+	@JsonView({View.SurveyWithClients.class,View.ClientsWithSurvey.class})
 	private Integer relativePower;
 	
+	@JsonView({View.SurveyWithClients.class,View.ClientsWithSurvey.class})
 	private Integer relativeEndurance;
 	
+	@JsonView({View.SurveyWithClients.class,View.ClientsWithSurvey.class})
 	private Integer absoluteEndurance;
 	
+	@JsonView({View.SurveyWithClients.class,View.ClientsWithSurvey.class})
 	private Integer min4powerOutput;
 	
+	@JsonView({View.SurveyWithClients.class,View.ClientsWithSurvey.class})
 	private Integer lowerAbs;
 	
+	@JsonView({View.SurveyWithClients.class,View.ClientsWithSurvey.class})
 	private Double lowerRel;
 	
+	@JsonView({View.SurveyWithClients.class,View.ClientsWithSurvey.class})
 	private Integer pushAbs;
 	
+	@JsonView({View.SurveyWithClients.class,View.ClientsWithSurvey.class})
 	private Double pushRel;
 	
+	@JsonView({View.SurveyWithClients.class,View.ClientsWithSurvey.class})
 	private Integer pullAbs;
 	
+	@JsonView({View.SurveyWithClients.class,View.ClientsWithSurvey.class})
 	private Double pullRel;
 	
+	@JsonView({View.SurveyWithClients.class,View.ClientsWithSurvey.class})
 	private Integer s10RelativePowerResults;
 	
+	@JsonView({View.SurveyWithClients.class,View.ClientsWithSurvey.class})
 	private Integer s60PowerOutputResults;
 	
+	@JsonView({View.SurveyWithClients.class,View.ClientsWithSurvey.class})
 	private Double s60RelativePowerCalc;
 	
+	@JsonView({View.SurveyWithClients.class,View.ClientsWithSurvey.class})
 	private Integer s10PowerOutputResults;
 	
+	@JsonView({View.SurveyWithClients.class,View.ClientsWithSurvey.class})
 	private Integer vo2Score;
 	
+	@JsonView({View.SurveyWithClients.class,View.ClientsWithSurvey.class})
 	private Double min4RelativePowerScored;
 
 	public Integer getS10RelativePowerResults() {

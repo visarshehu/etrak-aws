@@ -100,7 +100,7 @@ public class LookUpRelative {
 		peakrelative.put(3.85, 8);
 		peakrelative.put(4.30, 9);
 		peakrelative.put(4.75, 10);
-		relative.put("min4RelativeMenMetric", min4RelativeMen);
+		relative.put("min4RelativeMen", min4RelativeMen);
 		
 		TreeMap<Double, Integer> min4RelativeWomen = new TreeMap<Double, Integer>();
 		peakrelative.put(0.00, 1);
@@ -113,7 +113,7 @@ public class LookUpRelative {
 		peakrelative.put(3.39, 8);
 		peakrelative.put(3.78, 9);
 		peakrelative.put(4.18, 10);
-		relative.put("min4RelativeWomenMetric", min4RelativeWomen);
+		relative.put("min4RelativeWomen", min4RelativeWomen);
 
 		TreeMap<Double, Integer> peakrelativeMen = new TreeMap<Double, Integer>();
 		peakrelativeMen.put(0.00, 1);

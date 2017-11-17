@@ -1,6 +1,8 @@
 package com.inspire11.etrak.model;
 
+
 import java.util.Date;
+
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -10,136 +12,195 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
+
 import javax.persistence.OneToOne;
-import javax.persistence.PrePersist;
+
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+
 import org.hibernate.annotations.CreationTimestamp;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
+//import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.JsonView;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 @Entity
-public class SurveyData {
+//@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
+public class SurveyData{
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "SURVEY_ID")
+	@JsonView({View.SurveyWithClients.class,View.ClientsWithSurvey.class})
 	private Long Id;
 
 	@ManyToOne
-	@JsonBackReference
+	//@JsonBackReference
+	//@JsonManagedReference
 	@JoinColumn(name = "client_id")
-	public Client client;
-
+	@JsonView(View.SurveyWithClients.class)
+	private Client client;
+	
+	@JsonView({View.SurveyWithClients.class,View.ClientsWithSurvey.class})
 	private String activityLevel_id;
 
+	@JsonView({View.SurveyWithClients.class,View.ClientsWithSurvey.class})
 	private String nutritionalGoal;
 
 	@OneToOne(cascade=CascadeType.ALL)
 	@JsonManagedReference
 	@JoinColumn(name = "surveyresult_id")
+	@JsonView({View.SurveyWithClients.class,View.ClientsWithSurvey.class})
 	private SurveyDataResults surveyDataResults;
 	
+	@JsonView({View.SurveyWithClients.class,View.ClientsWithSurvey.class})
 	private Character unit;
 
+	@JsonView({View.SurveyWithClients.class,View.ClientsWithSurvey.class})
 	private Double weight;
 
+	@JsonView({View.SurveyWithClients.class,View.ClientsWithSurvey.class})
 	private Double weightKg;
 
+	@JsonView({View.SurveyWithClients.class,View.ClientsWithSurvey.class})
 	private Double heightFeet;
 
+	@JsonView({View.SurveyWithClients.class,View.ClientsWithSurvey.class})
 	private Double heightInches;
 
+	@JsonView({View.SurveyWithClients.class,View.ClientsWithSurvey.class})
 	private Double heightCm;
 
+	@JsonView({View.SurveyWithClients.class,View.ClientsWithSurvey.class})
 	private Double bodyFat;
 
+	@JsonView({View.SurveyWithClients.class,View.ClientsWithSurvey.class})
 	private Integer SBP;
 
+	@JsonView({View.SurveyWithClients.class,View.ClientsWithSurvey.class})
 	private Integer DBP;
 
+	@JsonView({View.SurveyWithClients.class,View.ClientsWithSurvey.class})
 	private Integer RHR;
 
+	@JsonView({View.SurveyWithClients.class,View.ClientsWithSurvey.class})
 	private Integer deepSquatHipFlexion;
 
+	@JsonView({View.SurveyWithClients.class,View.ClientsWithSurvey.class})
 	private Integer shoulderFlexionR;
 
+	@JsonView({View.SurveyWithClients.class,View.ClientsWithSurvey.class})
 	private Integer shoulderFlexionL;
 
+	@JsonView({View.SurveyWithClients.class,View.ClientsWithSurvey.class})
 	private Integer shoulderExtensionR;
 
+	@JsonView({View.SurveyWithClients.class,View.ClientsWithSurvey.class})
 	private Integer shoulderExtensionL;
 
+	@JsonView({View.SurveyWithClients.class,View.ClientsWithSurvey.class})
 	private Integer trunkRotationR;
 
+	@JsonView({View.SurveyWithClients.class,View.ClientsWithSurvey.class})
 	private Integer trunkRotationL;
 
+	@JsonView({View.SurveyWithClients.class,View.ClientsWithSurvey.class})
 	private Double pistolR;
 
+	@JsonView({View.SurveyWithClients.class,View.ClientsWithSurvey.class})
 	private Double pistolL;
 
+	@JsonView({View.SurveyWithClients.class,View.ClientsWithSurvey.class})
 	private Double proneRH_LF;
 
+	@JsonView({View.SurveyWithClients.class,View.ClientsWithSurvey.class})
 	private Double proneRF_RH;
 
+	@JsonView({View.SurveyWithClients.class,View.ClientsWithSurvey.class})
 	private Double vsit;
 
+	@JsonView({View.SurveyWithClients.class,View.ClientsWithSurvey.class})
 	private Double lowerMaxR;
 
+	@JsonView({View.SurveyWithClients.class,View.ClientsWithSurvey.class})
 	private Double lowerMaxRKg;
 
+	@JsonView({View.SurveyWithClients.class,View.ClientsWithSurvey.class})
 	private Double lowerMaxL;
 
+	@JsonView({View.SurveyWithClients.class,View.ClientsWithSurvey.class})
 	private Double lowerMaxLKg;
 
+	@JsonView({View.SurveyWithClients.class,View.ClientsWithSurvey.class})
 	private Double pushMaxR;
 
+	@JsonView({View.SurveyWithClients.class,View.ClientsWithSurvey.class})
 	private Double pushMaxRKg;
 
+	@JsonView({View.SurveyWithClients.class,View.ClientsWithSurvey.class})
 	private Double pushMaxL;
 
+	@JsonView({View.SurveyWithClients.class,View.ClientsWithSurvey.class})
 	private Double pushMaxLKg;
 
+	@JsonView({View.SurveyWithClients.class,View.ClientsWithSurvey.class})
 	private Double pullMaxL;
 
+	@JsonView({View.SurveyWithClients.class,View.ClientsWithSurvey.class})
 	private Double pullMaxR;
 
+	@JsonView({View.SurveyWithClients.class,View.ClientsWithSurvey.class})
 	private Double pullMaxKg;
 
+	@JsonView({View.SurveyWithClients.class,View.ClientsWithSurvey.class})
 	private Integer s10PowerOutput;
 
+	@JsonView({View.SurveyWithClients.class,View.ClientsWithSurvey.class})
 	private Integer s60PowerOutput;
 
+	@JsonView({View.SurveyWithClients.class,View.ClientsWithSurvey.class})
 	private Integer mileRun;
 
+	@JsonView({View.SurveyWithClients.class,View.ClientsWithSurvey.class})
 	private Integer kmRow;
 
+	@JsonView({View.SurveyWithClients.class,View.ClientsWithSurvey.class})
 	private Integer m1600Run;
 
+	@JsonView({View.SurveyWithClients.class,View.ClientsWithSurvey.class})
 	private Integer min4PowerOutput;
 
+	@JsonView({View.SurveyWithClients.class,View.ClientsWithSurvey.class})
 	private Double Calories;
 
+	@JsonView({View.SurveyWithClients.class,View.ClientsWithSurvey.class})
 	private String notes;
 
+	@JsonView({View.SurveyWithClients.class,View.ClientsWithSurvey.class})
 	private Double restingMetabolicRateNutrition;
 
+	@JsonView({View.SurveyWithClients.class,View.ClientsWithSurvey.class})
 	private Double totalEnergyIntakeNutrition;
 
+	@JsonView({View.SurveyWithClients.class,View.ClientsWithSurvey.class})
 	private Double proteinNutrition;
 
+	@JsonView({View.SurveyWithClients.class,View.ClientsWithSurvey.class})
 	private Double carbohydratesNutrition;
 
+	@JsonView({View.SurveyWithClients.class,View.ClientsWithSurvey.class})
 	private Double totalFatNutrition;
 
+	@JsonView({View.SurveyWithClients.class,View.ClientsWithSurvey.class})
 	private Double BMI;
 
 	@CreationTimestamp
 	@Column(name = "submitedTime",nullable=false)
 	@Temporal(TemporalType.TIMESTAMP)
+	@JsonView({View.SurveyWithClients.class,View.ClientsWithSurvey.class})
 	private Date submittedDate;
 
 	/*@PrePersist

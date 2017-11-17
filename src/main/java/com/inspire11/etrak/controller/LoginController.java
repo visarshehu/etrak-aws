@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -82,7 +83,7 @@ public class LoginController {
 
 	@RequestMapping(value = "user/comparison", method = RequestMethod.GET, params = { "firstId", "secondId" })
 	public ModelAndView comparison(@RequestParam(value = "firstId", required = true) String firstId,
-	@RequestParam(value = "secondId", required = true) String secondId,@ModelAttribute("surveyInfo") SurveyInfoSession info) {
+	@RequestParam(value = "secondId", required = true) String secondId,@ModelAttribute("surveyInfo") SurveyInfoSession info,SessionStatus status) {
 		ModelAndView modelAndView = new ModelAndView();
 		modelAndView.addObject("firstClient", firstId);
 		modelAndView.addObject("secondClient", secondId);
@@ -98,7 +99,9 @@ public class LoginController {
 		modelAndView.addObject("userName", user.getName() + " " + user.getLastName());
 		modelAndView.addObject("userId", user.getId());
 		modelAndView.setViewName("user/comparison");
+		status.setComplete();
 		return modelAndView;
+		
 	}
 
 	@RequestMapping(value = "user/clients", method = RequestMethod.GET)
@@ -128,7 +131,7 @@ public class LoginController {
 	@RequestMapping(value = "/user/assessment", method = RequestMethod.POST)
 	public ModelAndView createNewSurvey(@Valid SurveyData survey_data, BindingResult bindingResult) {
 		
-		long clientId = survey_data.client.getId();
+		long clientId = survey_data.getClient().getId();
 		SurveyData newSurvey = surveyService.saveSurvey(survey_data);
 		Long surveyId = newSurvey.getId();
 		calculateService.CalculateMovement(surveyId);
@@ -264,6 +267,7 @@ public class LoginController {
 		clientId = Long.parseLong(getId);
 		Client client = clientService.getClientById(clientId);
 		ModelAndView modelAndView = new ModelAndView();
+		
 		modelAndView.addObject("userName", user.getName() + " " + user.getLastName());
 		modelAndView.addObject("userId", user.getId());
 		modelAndView.addObject("clientId", getId);

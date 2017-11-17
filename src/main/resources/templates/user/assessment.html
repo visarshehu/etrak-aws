@@ -127,10 +127,7 @@
 
                     <div class="stepwizard" style="padding-bottom: 15%">
                         <div class="stepwizard-row setup-panel">
-                            <!--  <div class="stepwizard-step">
-                            <a class="btn btn-primary btn-circle" href="#step-1" type="button">1</a>
-                            <p style="font-size: 2vh">Client Data</p>
-                        </div>-->
+                         
                             <div class="stepwizard-step">
                                 <a class="btn btn-primary btn-circle" href="#step-1" type="button">1</a>
                                 <p style="font-size: 2vh">Demographics</p>
@@ -148,68 +145,7 @@
                     </div>
  
                     <form th:action="@{/user/assessment}" autocomplete="off" method="POST" name="assessment1" role="form" th:object="${survey_data}"  >
-                        <!--    <div class="row setup-content" id="step-1">
-                     
-                            <div class="col-md-12">
-                               
-                
-
-                 <div class="btn-group btn-group-justified" data-toggle="buttons" >
-                <label class="btn btn-primary" >
-                 <input type="radio" name="options" id="option1"  value="Existing" > Existing User
-                </label>
-                 <label class="btn btn-primary active">
-                 <input type="radio" name="options" id="option2"  value="New" > New User
-                 </label>
-           
-                </div>
-                             <div id="newUser" >
-                                <br /> 
-
-
-                                <div class="form-group">
-                                    <label class="control-label" for="name">First Name</label> <input class="form-control  input-lg" id="name" name="name" placeholder="" required="required" type="text" value=""  autofocus/>
-                                </div>
-                                 <div class="form-group">
-                                    <label class="control-label" for="lastname">Last Name</label> <input class="form-control  input-lg" id="name" name="name" placeholder="" required="required" type="text" value="" />
-                                </div>
-                                <div class="form-group">
-                                    <label class="control-label">Gender </label> <br/>
-                                    <label class="radio-inline">
-                                    <input type="radio" name="gender" value="F" checked="checked"/> Female  </label>
-                                     <label class="radio-inline">
-                                    <input type="radio" name="gender" value="M" checked="checked"/> Male </label>
-
-                                </div>
-                              
-                               
-
-                                <div class="form-group">
-                                <label for="address" class=" control-label">Address</label>
-                        
-                            <input type="text" name="address" value=""
-                                class="form-control  input-lg" />
-                       
-                                </div>
-
-                                <div class="form-group">
-                                 <label for="email" class="control-label">Email</label>
-                                    
-                            <input type="email" name="email" value=""
-                                class="form-control  input-lg" required="required" /> 
-                                   
-                             </div>
-
-                          
-                         
-
-                                <button class="btn btn-primary nextBtn btn-lg pull-right" id="first_next" type="button">Next</button>
-                            </div>
-                        </div>
-                    </div>
-              
--->
-
+                    
                         <div class="row setup-content" id="step-1">
 
                             <div class="col-md-12">
@@ -271,11 +207,11 @@
                                 </div>
                                 <div class="row" style="display:none" id="metric">
                                     <div class="col-md-6 nopadding">
-                                        <div class="form-group"><label class="control-label" for="heightCm">Height (cm)</label> <input class="form-control  input-lg" id="heightCm" name="heightCm" placeholder="" type="text" value="" />
+                                        <div class="form-group"><label class="control-label" for="heightCm">Height (cm)</label> <input class="form-control  input-lg" id="heightCm" name="heightCm" placeholder="" type="number" value="" />
                                         </div>
                                     </div>
                                     <div class="col-md-6 nopadding">
-                                        <div class="form-group"><label class="control-label" for="weightKg">Weight (kg)</label> <input class="form-control  input-lg" id="weightKg" name="weightKg" placeholder="" type="text" value="" />
+                                        <div class="form-group"><label class="control-label" for="weightKg">Weight (kg)</label> <input class="form-control  input-lg" id="weightKg" name="weightKg" placeholder="" type="number" value="" />
                                         </div>
                                     </div>
                                 </div>
@@ -294,7 +230,7 @@
                                     <label class="control-label">Activity Level</label> <select class="form-control  input-lg" id="activityLevel_id" name="activityLevel_id">
                                         <option value="none"> &nbsp; </option>
                                         <option value="1"> Sedentary (No physical activity)</option>
-                                        <option value="2"> Lightly active (< 30 minutes of activity per day)</option>
+                                        <option value="2"> Lightly active ( 30 minutes of activity per day)</option>
                                         <option value="3">Moderately active (60-120min of exercise per week)</option>
                                         <option value="4">Very active (30 to 60min of exercise per day)</option>
                                         <option value="5">Athlete (>60 minutes of exercise per day)</option>
@@ -319,11 +255,11 @@
                                     <div class="row">
 
                                         <div class="col-md-6 nopadding">
-                                            <label class="control-label" for="bodyFat">BodyFat %</label> <input class="form-control  input-lg" id="bodyFat" name="bodyFat" type="text" />
+                                            <label class="control-label" for="bodyFat">BodyFat %</label> <input class="form-control  input-lg" id="bodyFat" name="bodyFat" type="number" />
                                         </div>
 
                                         <div class="col-md-6 nopadding">
-                                            <label class="control-label" for="RHR">Resting Heart Rate (bpm)</label> <input class="form-control  input-lg" id="RHR" name="RHR" type="text" />
+                                            <label class="control-label" for="RHR">Resting Heart Rate (bpm)</label> <input class="form-control  input-lg" id="RHR" name="RHR" type="number" />
                                         </div>
                                     </div>
                                 </div>
@@ -333,11 +269,11 @@
                                     <div class="row">
 
                                         <div class="col-md-6 nopadding">
-                                            <label class="control-label" for="SBP">Systolic Blood Pressure (mmHG)</label> <input class="form-control  input-lg" id="SBP" name="SBP" type="text" />
+                                            <label class="control-label" for="SBP">Systolic Blood Pressure (mmHG)</label> <input class="form-control  input-lg" id="SBP" name="SBP" type="number" />
                                         </div>
 
                                         <div class="col-md-6 nopadding">
-                                            <label class="control-label" for="DBP">Diastolic Blood Pressure (mmHG)</label> <input class="form-control  input-lg" id="DBP" name="DBP" type="text" />
+                                            <label class="control-label" for="DBP">Diastolic Blood Pressure (mmHG)</label> <input class="form-control  input-lg" id="DBP" name="DBP" type="number" />
                                         </div>
                                     </div>
 
@@ -349,129 +285,8 @@
 
 
                         <div class="row setup-content" id="step-2">
-                            <!-- <div id="performanceRange">
-                          
-                                <div class="col-md-12" >
-                                    <h3>Mobility</h3>
-                                    <br /> 
-                                    <div class="form-group">
-                                        <div class="row">
+ 
 
-                                            <div class="col-md-4 nopadding">
-                                                <label class="control-label" for="deepSquat">Deep Squat (degrees)</label> <input class="form-control  input-lg" id="deepSquat" name="deepSquat" type="text" />
-                                            </div>
-
-                                            <div class="col-md-4 nopadding">
-                                                <label class="control-label" for="flexR">Shoulder Flexion Right (degrees)</label> <input class="form-control  input-lg" id="flexR" name="flexR" type="text" />
-                                            </div>
-                                            <div class="col-md-4 nopadding">
-                                                <label class="control-label" for="flexL">Shoulder Flexion Left  (degrees)</label> <input class="form-control  input-lg" id="flexL" name="flexL" type="text" />
-                                            </div>
-                                        </div>
-
-                                    </div>
-                                    <div class="form-group">
-                                        <div class="row">
-                                            <div class="col-md-4 nopadding">
-                                                <label class="control-label" for="ExtR">Shoulder Extension Right (degrees)</label> <input class="form-control  input-lg" id="ExtR" name="ExtR" type="text" />
-                                            </div>
-                                            <div class="col-md-4 nopadding">
-                                                <label class="control-label" for="ExtL">Shoulder Extension Left (degrees)</label> <input class="form-control  input-lg" id="ExtL" name="ExtL" type="text" />
-                                            </div>
-
-                                            <div class="col-md-4 nopadding">
-                                                <label class="control-label" for="trunkRotR">Trunk Rotation Right (degrees)</label> <input class="form-control  input-lg" id="trunkRotR" name="trunkRotR" type="text" />
-                                            </div>
-
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-
-                                        <div class="row">
-                                            <div class="col-md-4 nopadding"></div>
-                                            <div class="col-md-4 nopadding">
-                                                <label class="control-label" for="trunkRotL">Trunk Rotation Left (degrees)</label> <input class="form-control  input-lg" id="trunkRotL" name="trunkRotL" type="text" />
-                                            </div>
-
-                                            <div class="col-md-4 nopadding"></div>
-
-                                        </div>
-
-                                    </div>
-
-
-                                    <br />
-                                    <div class="form-group table-responsive">
-                                        <h3>Stability</h3>
-                                        
-                                        <table class="table table-striped table-bordered table-condensed  table-responsive" >
-                                            <thead>
-                                                <tr>
-                                                    <th class="col-md-4"></th>
-                                                    <th class="col-md-1 text-center">x</th>
-                                                    <th class="col-md-1 text-center">-x</th>
-                                                    <th class="col-md-1 text-center">y</th>
-                                                    <th class="col-md-1 text-center">-y</th>
-                                                    <th class="col-md-1 text-center">-z</th>
-                                                    <th class="col-md-1 text-center">-y</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                <tr>
-                                                    <td>Pistol Squat R (g's)</td>
-
-                                                    <td><input placeholder="" type="text" /></td>
-                                                    <td><input placeholder="" type="text" /></td>
-                                                    <td><input placeholder="" type="text" /></td>
-                                                    <td><input placeholder="" type="text" /></td>
-                                                    <td><input placeholder="" type="text" /></td>
-                                                    <td><input placeholder="" type="text" /></td>
-                                                </tr>
-                                                <tr>
-                                                    <td>Pistol Squat L (g's)</td>
-                                                    <td><input placeholder="" type="text" /></td>
-                                                    <td><input placeholder="" type="text" /></td>
-                                                    <td><input placeholder="" type="text" /></td>
-                                                    <td><input placeholder="" type="text" /></td>
-                                                    <td><input placeholder="" type="text" /></td>
-                                                    <td><input placeholder="" type="text" /></td>
-                                                </tr>
-                                                <tr>
-                                                    <td>Prone RH/LF (g's)</td>
-                                                    <td><input placeholder="" type="text" /></td>
-                                                    <td><input placeholder="" type="text" /></td>
-                                                    <td><input placeholder="" type="text" /></td>
-                                                    <td><input placeholder="" type="text" /></td>
-                                                    <td><input placeholder="" type="text" /></td>
-                                                    <td><input placeholder="" type="text" /></td>
-                                                </tr>
-                                                <tr>
-                                                    <td>Prone LF/RH (g's)</td>
-                                                    <td><input placeholder="" type="text" /></td>
-                                                    <td><input placeholder="" type="text" /></td>
-                                                    <td><input placeholder="" type="text" /></td>
-                                                    <td><input placeholder="" type="text" /></td>
-                                                    <td><input placeholder="" type="text" /></td>
-                                                    <td><input placeholder="" type="text" /></td>
-                                                </tr>
-                                                <tr>
-                                                    <td>V Sit (g's)</td>
-                                                    <td><input placeholder="" type="text" /></td>
-                                                    <td><input placeholder="" type="text" /></td>
-                                                    <td><input placeholder="" type="text" /></td>
-                                                    <td><input placeholder="" type="text" /></td>
-                                                    <td><input placeholder="" type="text" /></td>
-                                                    <td><input placeholder="" type="text" /></td>
-                                                </tr>
-                                            </tbody>
-                                        </table>
-                                    </div>
-
-                                    <button class="btn btn-primary nextBtn btn-lg pull-right" type="button">Next</button>
-                                </div>
-                           
-                        </div>
--->
                             <div id="fitnessRange">
 
                                 <div class="col-md-12">
@@ -481,14 +296,14 @@
                                         <div class="row">
 
                                             <div class="col-md-4 nopadding">
-                                                <label class="control-label">Deep Squat (degrees)</label> <input class="form-control  input-lg" name="deepSquatHipFlexion" type="text" />
+                                                <label class="control-label">Deep Squat (degrees)</label> <input class="form-control  input-lg" name="deepSquatHipFlexion" type="number" />
                                             </div>
 
                                             <div class="col-md-4 nopadding">
-                                                <label class="control-label">Shoulder Flexion Right (degrees)</label> <input class="form-control  input-lg" name="shoulderFlexionR" type="text" />
+                                                <label class="control-label">Shoulder Flexion Right (degrees)</label> <input class="form-control  input-lg" name="shoulderFlexionR" type="number" />
                                             </div>
                                             <div class="col-md-4 nopadding">
-                                                <label class="control-label">Shoulder Flexion Left  (degrees)</label> <input class="form-control  input-lg" name="shoulderFlexionL" type="text" />
+                                                <label class="control-label">Shoulder Flexion Left  (degrees)</label> <input class="form-control  input-lg" name="shoulderFlexionL" type="number" />
                                             </div>
 
 
@@ -497,14 +312,14 @@
                                     <div class="form-group">
                                         <div class="row">
                                             <div class="col-md-4 nopadding">
-                                                <label class="control-label">Shoulder Extension Right (degrees)</label> <input class="form-control  input-lg" name="shoulderExtensionR" type="text" />
+                                                <label class="control-label">Shoulder Extension Right (degrees)</label> <input class="form-control  input-lg" name="shoulderExtensionR" type="number" />
                                             </div>
                                             <div class="col-md-4 nopadding">
-                                                <label class="control-label">Shoulder Extension Left (degrees)</label> <input class="form-control  input-lg" name="shoulderExtensionL" type="text" />
+                                                <label class="control-label">Shoulder Extension Left (degrees)</label> <input class="form-control  input-lg" name="shoulderExtensionL" type="number" />
                                             </div>
 
                                             <div class="col-md-4 nopadding">
-                                                <label class="control-label">Trunk Rotation Right (degrees)</label> <input class="form-control  input-lg" name="trunkRotationR" type="text" />
+                                                <label class="control-label">Trunk Rotation Right (degrees)</label> <input class="form-control  input-lg" name="trunkRotationR" type="number" />
                                             </div>
 
                                         </div>
@@ -514,7 +329,7 @@
                                         <div class="row">
                                             <div class="col-md-4 nopadding"></div>
                                             <div class="col-md-4 nopadding">
-                                                <label class="control-label">Trunk Rotation Left (degrees)</label> <input class="form-control  input-lg" name="trunkRotationL" type="text" />
+                                                <label class="control-label">Trunk Rotation Left (degrees)</label> <input class="form-control  input-lg" name="trunkRotationL" type="number" />
                                             </div>
 
                                             <div class="col-md-4 nopadding"></div>
@@ -601,113 +416,7 @@
 
 
                         <div class="row setup-content" id="step-3">
-                            <!--  
-                        <div id="performanceOutput" >
-                        
-                                <div class="col-md-12">
-                                    <h3>Strength</h3>
-                                    <br />
-                                    <div class="form-group">
-                                        <div class="row">
-                                            <div class="col-md-4 nopadding">
-                                                <label class="control-label">Broad Jump (ft)</label> <input class="form-control  input-lg" name="broadJump" type="text" />
-                                            </div>
-                                            <div class="col-md-4 nopadding">
-                                                <label class="control-label">LowerForce R (lbs)</label> <input class="form-control  input-lg" name="lowerForceR" type="text" />
-                                            </div>
-
-                                            <div class="col-md-4 nopadding">
-                                                <label class="control-label">Lower Force L (lbs)</label> <input class="form-control  input-lg" name="lowerForceL" type="text" />
-                                            </div>
-
-                                        </div>
-                                    </div>
-                                     <h3>Power</h3>
-                                    <br />
-                                    <div class="form-group">
-                                        <div class="row">
-                                            <div class="col-md-4 nopadding">
-                                                <label class="control-label">Push Force R (lbs)</label> <input class="form-control  input-lg" name="pushForceR" type="text" />
-                                            </div>
-                                            <div class="col-md-4 nopadding">
-                                                <label class="control-label">Push Force L (lbs)</label> <input class="form-control  input-lg" name="pushForceL" type="text" />
-                                            </div>
-
-                                            <div class="col-md-4 nopadding">
-                                                <label class="control-label">Pull Max (lbs)</label> <input class="form-control  input-lg" name="pullMax" type="text" />
-                                            </div>
-
-                                        </div>
-                                    </div>
-
-                                    <br />
-                                    <h3>Endurance</h3>
-                                    <br />
-
-                                    <div class="form-group">
-                                        <div class="row">
-                                            <div class="col-md-3 nopadding">
-                                                <label class="control-label">10s Watts</label>
-                                                  <input class="form-control  input-lg" name="10sWatts" type="text" />
-
-                                            </div>
-                                            <div class="col-md-3 nopadding">
-                                                <div class="row">
-                                                <label class="control-label">60s Row Watts</label></div>
-                                                <input class="form-control  input-lg" name="60sRowWatts" type="text" />
-
-                                            </div>
-
-                                            <div class="col-md-3 nopadding">
-                                                <label class="control-label">4min watts</label>
-                                                 <input class="form-control  input-lg" name="4minWatts" type="text" />
-
-                                            </div>
-
-                                            <div class="col-md-3 nopadding">
-                                                <div class="row">
-                                                <label class="control-label">1000m Row Time</label></div>
-                                                 <input class="form-control  input-lg" name="1000mRow" type="text" />
-
-                                            </div>
-
-                                        </div>
-
-
-                                    </div>
-                                    <div class="form-group">
-                                        <div class="row">
-                                            <div class="col-md-3 nopadding col-md-offset-3">
-                                                <label class="control-label">Calories</label>
-                                                <input class="form-control  input-lg" name="calories" type="text" />
-
-                                            </div>
-               
-
-
-                                            <div class="col-md-3 nopadding">
-                                               
-                                                <label class="control-label">1 Mile Time</label>
-                                                <input class="form-control  input-lg" name="MileTime" type="text" />
-
-                                            </div>
-
-                                        </div>
-                                   
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="notes1">Notes:</label>
-                                        <textarea class="form-control" id="notes1" rows="5"></textarea>
-                                    </div>
-
-                                </div>
-
-                                <br />
-
-                                <button class="btn btn-success btn-lg pull-right" type="submit">Submit</button>
-                       
-                        </div>
-                        -->
+                           
                             <div id="fitnessOutput">
 
                                 <div class="col-md-12">
@@ -717,14 +426,14 @@
                                         <div class="form-group">
                                             <div class="row">
                                                 <div class="col-md-4 nopadding">
-                                                    <label class="control-label">Lower Max Right (lbs)</label> <input class="form-control  input-lg" name="lowerMaxR" type="text" />
+                                                    <label class="control-label">Lower Max Right (lbs)</label> <input class="form-control  input-lg" name="lowerMaxR" type="number" />
                                                 </div>
                                                 <div class="col-md-4 nopadding">
-                                                    <label class="control-label">Lower Max Left (lbs)</label> <input class="form-control  input-lg" name="lowerMaxL" type="text" />
+                                                    <label class="control-label">Lower Max Left (lbs)</label> <input class="form-control  input-lg" name="lowerMaxL" type="number" />
                                                 </div>
 
                                                 <div class="col-md-4 nopadding">
-                                                    <label class="control-label">Push Max Right (lbs)</label> <input class="form-control  input-lg" name="pushMaxR" type="text" />
+                                                    <label class="control-label">Push Max Right (lbs)</label> <input class="form-control  input-lg" name="pushMaxR" type="number" />
                                                 </div>
 
                                             </div>
@@ -734,13 +443,13 @@
                                         <div class="form-group">
                                             <div class="row">
                                                 <div class="col-md-4 nopadding">
-                                                    <label class="control-label">Push Max Left (lbs)</label> <input class="form-control  input-lg" name="pushMaxL" type="text" />
+                                                    <label class="control-label">Push Max Left (lbs)</label> <input class="form-control  input-lg" name="pushMaxL" type="number" />
                                                 </div>
                                                 <div class="col-md-4 nopadding">
-                                                    <label class="control-label">Pull Max Right(lbs)</label> <input class="form-control  input-lg" name="pullMaxR" type="text" />
+                                                    <label class="control-label">Pull Max Right(lbs)</label> <input class="form-control  input-lg" name="pullMaxR" type="number" />
                                                 </div>
                                                 <div class="col-md-4 nopadding">
-                                                    <label class="control-label">Pull Max Left(lbs)</label> <input class="form-control  input-lg" name="pullMaxL" type="text" />
+                                                    <label class="control-label">Pull Max Left(lbs)</label> <input class="form-control  input-lg" name="pullMaxL" type="number" />
                                                 </div>
                                             </div>
                                         </div>
@@ -750,14 +459,14 @@
                                         <div class="form-group">
                                             <div class="row">
                                                 <div class="col-md-4 nopadding">
-                                                    <label class="control-label">Lower Max Right (kg)</label> <input class="form-control  input-lg" name="lowerMaxRKg" type="text" />
+                                                    <label class="control-label">Lower Max Right (kg)</label> <input class="form-control  input-lg" name="lowerMaxRKg" type="number" />
                                                 </div>
                                                 <div class="col-md-4 nopadding">
-                                                    <label class="control-label">Lower Max Left <span style="display:inline-block"></span> (kg)</label> <input class="form-control  input-lg" name="lowerMaxLKg" type="text" />
+                                                    <label class="control-label">Lower Max Left <span style="display:inline-block"></span> (kg)</label> <input class="form-control  input-lg" name="lowerMaxLKg" type="number" />
                                                 </div>
 
                                                 <div class="col-md-4 nopadding">
-                                                    <label class="control-label">Push Max Right <span style="display:inline-block;padding-left:1px"> </span>(kg)</label> <input class="form-control  input-lg" name="pushMaxRKg" type="text" />
+                                                    <label class="control-label">Push Max Right <span style="display:inline-block;padding-left:1px"> </span>(kg)</label> <input class="form-control  input-lg" name="pushMaxRKg" type="number" />
                                                 </div>
 
                                             </div>
@@ -767,10 +476,10 @@
                                         <div class="form-group">
                                             <div class="row">
                                                 <div class="col-md-4 nopadding col-md-offset-2">
-                                                    <label class="control-label">Push Max Left (kg)</label> <input class="form-control  input-lg" name="pushMaxLKg" type="text" />
+                                                    <label class="control-label">Push Max Left (kg)</label> <input class="form-control  input-lg" name="pushMaxLKg" type="number" />
                                                 </div>
                                                 <div class="col-md-4 nopadding">
-                                                    <label class="control-label">Pull Max (kg)</label> <input class="form-control  input-lg" name="pullMaxKg" type="text" />
+                                                    <label class="control-label">Pull Max (kg)</label> <input class="form-control  input-lg" name="pullMaxKg" type="number" />
                                                 </div>
                                             </div>
                                         </div>
@@ -785,12 +494,12 @@
                                         <div class="row">
                                             <div class="col-md-6 nopadding">
                                                 <label class="control-label">10s Power Output</label>
-                                                <input class="form-control  input-lg" name="s10PowerOutput" type="text" />
+                                                <input class="form-control  input-lg" name="s10PowerOutput" type="number" />
 
                                             </div>
                                             <div class="col-md-6 nopadding">
                                                 <label class="control-label">60s Power Output</label>
-                                                <input class="form-control  input-lg" name="s60PowerOutput" type="text" />
+                                                <input class="form-control  input-lg" name="s60PowerOutput" type="number" />
 
                                             </div>
 
@@ -825,13 +534,13 @@
                                         <div class="row">
                                             <div class="col-md-6 nopadding">
                                                 <label class="control-label">4min Power Output</label>
-                                                <input class="form-control  input-lg" name="min4PowerOutput" type="text" />
+                                                <input class="form-control  input-lg" name="min4PowerOutput" type="number" />
 
                                             </div>
 
                                             <div class="col-md-6 nopadding">
                                                 <label class="control-label">Calories</label>
-                                                <input class="form-control  input-lg" name="Calories" type="text" />
+                                                <input class="form-control  input-lg" name="Calories" type="number" />
 
                                             </div>
                                         </div>

@@ -12,4 +12,6 @@ public interface CalculateService {
 	
 	public void CalculateNutrition(Long id);
 	
+	
+	
 }

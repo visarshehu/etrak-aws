@@ -22,7 +22,7 @@ $(document).ready(function() {
                                              
                            
                             value.survey.forEach(function(surveyData){
-                            	  $('#sel1').append(new Option(new Date(surveyData.submittedDate).toDateString(), surveyData.id));
+                            	  $('#sel1').append(new Option(new Date(surveyData.submittedDate).toDateString(), surveyData.Id));
                             })
 
 
@@ -65,7 +65,7 @@ $(document).ready(function() {
                                              
                            
                             value.survey.forEach(function(surveyData){
-                            	  $('#sel2').append(new Option(new Date(surveyData.submittedDate).toDateString(), surveyData.id));
+                            	  $('#sel2').append(new Option(new Date(surveyData.submittedDate).toDateString(), surveyData.Id));
                             })
 
 
@@ -84,3 +84,4 @@ $(document).ready(function() {
 
 
 });
+

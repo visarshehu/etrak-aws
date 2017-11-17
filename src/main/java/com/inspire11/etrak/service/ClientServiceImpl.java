@@ -38,4 +38,16 @@ public class ClientServiceImpl implements ClientService {
 		return clientRepository.findByNameContainsOrLastNameContainsAllIgnoreCase(query,query1);
 		
 	}
+
+	@Override
+	public List<Client> findTop5ByGenderOrderBySurvey_SurveyDataResults_EtrakScoreDesc(char gender) {
+		// TODO Auto-generated method stub
+		return clientRepository.findTop5ByGenderOrderBySurvey_SurveyDataResults_EtrakScoreDesc(gender);
+	}
+
+
+	
+	
+
+
 }

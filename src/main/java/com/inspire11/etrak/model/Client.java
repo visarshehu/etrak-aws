@@ -1,8 +1,6 @@
 
 package com.inspire11.etrak.model;
 
-
-
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -18,43 +16,57 @@ import javax.persistence.TemporalType;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonView;
+
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 @Entity
+//@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 public class Client {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "client_id")
-	private Long id;	
-	
+	@JsonView({View.SurveyWithClients.class,View.ClientsWithSurvey.class})
+	private Long id;
+
 	@Column(name = "name")
+	@JsonView({View.SurveyWithClients.class,View.ClientsWithSurvey.class})
 	private String name;
-	
+
 	@Column(name = "last_name")
+	@JsonView({View.SurveyWithClients.class,View.ClientsWithSurvey.class})
 	private String lastName;
-	
+
 	@Column(name = "birthday")
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	@Temporal(TemporalType.DATE)
+	@JsonView({View.SurveyWithClients.class,View.ClientsWithSurvey.class})
 	private Date birthDate;
-	
+
 	@Column(name = "email")
+	@JsonView({View.SurveyWithClients.class,View.ClientsWithSurvey.class})
 	private String email;
-	
+
 	@Column(name = "gender")
-	private Character gender;
-		
+	@JsonView({View.SurveyWithClients.class,View.ClientsWithSurvey.class})
+	private char gender;
+
 	@Column(name = "address")
+	@JsonView({View.SurveyWithClients.class,View.ClientsWithSurvey.class})
 	private String address;
-	
+
 	@Column(name = "phone_Number")
+	@JsonView({View.SurveyWithClients.class,View.ClientsWithSurvey.class})
 	private String phoneNumber;
-	
+
 	@OneToMany(mappedBy = "client", cascade = CascadeType.ALL)
-	@JsonManagedReference  
-	private List<SurveyData> survey= new ArrayList<SurveyData>();
+	@JsonView(View.ClientsWithSurvey.class)
+	//@JsonManagedReference
+	//@JsonBackReference
+	private List<SurveyData> survey = new ArrayList<SurveyData>();
 
-
+	
 	public Long getId() {
 		return id;
 	}
@@ -95,7 +107,6 @@ public class Client {
 		this.gender = gender;
 	}
 
-
 	public String getAddress() {
 		return address;
 	}
@@ -103,8 +114,6 @@ public class Client {
 	public void setAddress(String address) {
 		this.address = address;
 	}
-
-	
 
 	public List<SurveyData> getSurvey() {
 		return survey;
@@ -129,6 +138,5 @@ public class Client {
 	public void setPhoneNumber(String phoneNumber) {
 		this.phoneNumber = phoneNumber;
 	}
-
 
 }

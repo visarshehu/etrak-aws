@@ -17,6 +17,12 @@
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/responsive/2.2.0/css/responsive.bootstrap.min.css">
     <link href="https://fonts.googleapis.com/css?family=Orbitron" rel="stylesheet" />
 
+
+<style>
+.input-lg{
+padding:10px;
+}
+</style>
 </head>
 
 
@@ -207,7 +213,7 @@
                                 <label for="birthDate" class="control-label ">Date
                             of Birth</label>
                                 <div class='input-group date ' id='datetimepicker1'>
-                                    <input type='text' class="form-control input-lg" name="birthDate" /> <span class="input-group-addon"> <span
+                                    <input type='text' class="form-control input-lg" name="birthDate" placeholder="(YYYY-MM-DD)"/> <span class="input-group-addon"> <span
                                     class="glyphicon glyphicon-calendar"></span>
                                     </span>
                                 </div>
@@ -264,7 +270,7 @@
                             <div class="col-md-6">
                                 <div class="row">
                                     <div class="form-group col-md-12">
-                                        <label for="client1" class=" control-label">First Client</label> <input type="text" name="firstName" value="" class="form-control  input-lg " id="basics" />
+                                        <label for="client1" class=" control-label">First Client</label> <input type="text" name="firstName" value="" class="form-control  input-lg " id="basics" style="outline:none; box-shadow:none;"/>
                                         <div id="suggestionBox"></div>
                                     </div>
                                 </div>
@@ -281,7 +287,7 @@
                             <div class="col-md-6">
                                 <div class="row">
                                     <div class="form-group col-md-12 col-md-offset-1">
-                                        <label for="client2" class=" control-label">Second Client</label> <input type="text" name="secondName" value="" class="form-control  input-lg " id="secondClient" />
+                                        <label for="client2" class=" control-label">Second Client</label> <input type="text" name="secondName" value="" class="form-control  input-lg " id="secondClient"  style="outline:none; box-shadow:none;"/>
 
                                     </div>
                                 </div>
@@ -413,6 +419,7 @@
                                 },
                                 {
                                     "mData": "survey.length"
+                                    
                                 },
                                 {
                                     "mData": "email"

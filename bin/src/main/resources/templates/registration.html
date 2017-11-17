@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>SignUp</title>
+<link rel="stylesheet" type="text/css" th:href="@{/css/bootstrap.css}" />
+</head>
+
+<body>
+	<div class="container">
+		<div class="col-sm-10"
+			style="width: 600px; margin-left: 250px; top: 50px;">
+			<div style="background: transparent !important" class="jumbotron">
+				<div class="form-group">
+					<img th:src="@{/images/logo.png}" class="img-rounded" alt="Logo" />
+				</div>
+				<br /> <br />
+				<form autocomplete="off" method="POST" th:action="@{/registration}"
+					class="form-horizontal" th:object="${user}" role="form">
+					<div class="form-group">
+
+						<label for="firstName" class="col-sm-3 control-label">First
+							Name</label>
+						<div class="col-sm-9">
+							 <input type="text"
+								th:field="*{name}" class="form-control  input-lg" placeholder="" />
+						</div>
+					</div>
+
+					<div class="form-group">
+						<label for="lastName" class="col-sm-3 control-label">Last
+							Name</label>
+						<div class="col-sm-9">
+							 <input type="text" th:field="*{lastName}"
+								class="form-control  input-lg" placeholder="" />
+						</div>
+					</div>
+
+					<div class="form-group">
+						<label class="control-label col-sm-3">Gender</label>
+						<div class="col-sm-6">
+							<div class="row">
+								<div class="col-sm-4">
+									<label class="radio-inline"> <input type="radio"
+										name="gender" value="F" />Female
+									</label>
+								</div>
+								<div class="col-sm-4">
+									<label class="radio-inline"> <input type="radio"
+									name="gender" value="M" />Male
+									</label>
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<div class="form-group">
+						<label for="birthDate" class="col-sm-3 control-label ">Date
+							of Birth</label>
+						<div class="col-sm-9">
+							<input type="date" id="birthDate" class="form-control  input-lg" />
+						</div>
+					</div>
+					<div class="form-group">
+						<label for="address" class="col-sm-3 control-label">Address</label>
+						<div class="col-sm-9">
+							<input type="text" name="address" value=""
+								class="form-control  input-lg" placeholder="" />
+						</div>
+					</div>
+					<div class="form-group">
+						<label for="email" class="col-sm-3 control-label">Email</label>
+						<div class="col-sm-9">
+							<input type="email" name="email" value=""
+								class="form-control  input-lg" placeholder="" />
+						</div>
+					</div>
+					<div class="form-group">
+						<label for="username" class="col-sm-3 control-label">Username</label>
+						<div class="col-sm-9">
+							<input type="text" name="username" value=""
+								class="form-control  input-lg" placeholder="" />
+						</div>
+					</div>
+
+					<div class="form-group">
+						<label for="password" class="col-sm-3 control-label">Password</label>
+						<div class="col-sm-9">
+							<input type="password" th:field="*{password}" value=""
+								class="form-control  input-lg" placeholder="" />
+						</div>
+					</div>
+					<div class="form-group">
+						<label for="re-password" class="col-sm-3 conrol-label">Confirm
+							Password</label>
+						<div class="col-sm-9">
+							<input type="password" th:field="*{confirmPassword}" value=""
+								class="form-control  input-lg" placeholder="" />
+								 
+						</div>
+					</div>
+					<div class="form-group">
+						<label for="username" class="col-sm-3 control-label">Phone Number</label>
+						<div class="col-sm-9">
+							<input type="text" name="phoneNumber" value=""
+								class="form-control  input-lg" placeholder="" />
+						</div>
+					</div>
+					<div class="form-group">
+						<label for="nutritionGoal" class="col-sm-3 control-label">Nutrition
+							Goal</label>
+						<div class="col-sm-9">
+							<select class="form-control  input-lg" th:field="*{nutritionalGoal}">
+								<option value="" selected disabled>Please select your nutrition goal</option>
+								<option th:value="gain"> Gain </option>
+								<option th:value="lose"> Lose </option>
+								<option th:value="maintain">Maintain</option>
+							</select>
+						</div>
+					</div>
+
+					<br />
+
+					<div class="form-group col-sm-12">
+						<button type="submit" class="btn btn-primary btn-lg" name="submit"
+							style="width: 450px;">SignUp</button>
+						<br />
+						<br />
+						<br />
+					</div>
+					<span th:utext="${successMessage}"></span>
+					<div class="form-group text-center">
+						Already have an account? Click <a href="login.html">here </a> to
+						login.
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+
+
+	<script th:src="@{/js/bootstrap.min.js}" type="text/javascript"></script>
+	<script th:src="@{/js/jquery-3.2.1.min.js}" type="text/javascript"></script>
+</body>
+</html>

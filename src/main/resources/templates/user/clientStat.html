@@ -1,304 +1,260 @@
-
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 
 <head>
 
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Client Stats</title>
-<!-- Bootstrap Core CSS -->
-<link th:href="@{/css/bootstrap.min.css}" rel="stylesheet">
-<link th:href="@{/css/easy-autocomplete.css}" rel="stylesheet">
-<link th:href="@{/css/easy-autocomplete.min.css}" rel="stylesheet">
-<link th:href="@{/css/easy-autocomplete.themes.min.css}"
-	rel="stylesheet">
-<link th:href="@{/css/chart.css}" rel="stylesheet">
-<link th:href="@{/css/clientStat.css}" rel="stylesheet">
-<link href='https://fonts.googleapis.com/css?family=Orbitron'
-	rel='stylesheet'>
-<link href='https://fonts.googleapis.com/css?family=Montserrat'
-	rel='stylesheet'>
-<script th:src="@{/js/jquery-3.2.1.min.js}" type="text/javascript"></script>
-
-
-
-<style>
-a:focus, a:hover {
-	text-decoration: none;
-}
-
-.avatar {
-	float: left;
-	overflow: hidden;
-	border-radius: 100%;
-	border: 6px solid #B3C9CB;
-	background-size: cover;
-	background-position: 50% 25%;
-	-webkit-transition: border 0.5s linear;
-	transition: border 0.5s linear;
-}
-
-.avatar img {
-	border-radius: inherit;
-	width: 10vw;
-	height: 10vw;
-	display: block;
-	position: relative;
-}
-
-.src {
-	font-family: raleway;
-	position: absolute;
-	display: inline-block;
-	right: 0;
-	bottom: 0;
-	padding: 0px;
-}
-
-.table-striped>tbody>tr:nth-child(2n+1)>td, .table-striped>tbody>tr:nth-child(2n+1)>th
-	{
-	background-color: #FFFFFF;
-}
-
-.arrowDown, .arrowDown:before {
-	position: absolute;
-	left: 100%;
-}
-
-.arrowDown {
-	width: 30px;
-	height: 30px;
-	top: 96%;
-	left: 96.5%;
-	margin: -20px 0 0 -20px;
-	-webkit-transform: rotate(45deg);
-	border-left: none;
-	border-top: none;
-	border-right: 2px #262626 solid;
-	border-bottom: 2px #262626 solid;
-}
-
-.arrowDown:before {
-	content: "";
-	width: 20px;
-	height: 20px;
-	top: 50%;
-	left: 50%;
-	margin: -10px 0 0 -10px;
-	border-left: none;
-	border-top: none;
-	border-right: 1px #262626 solid;
-	border-bottom: 1px #262626 solid;
-	animation-duration: 2s;
-	animation-iteration-count: infinite;
-	animation-name: arrow;
-}
-
-@
-keyframes arrowDown { 0% {
-	opacity: 1;
-}
-
-100%
-{
-opacity
-
-
-
-
-:
-
-
- 
-
-
-0;
-transform
-
-
-
-
-:
-
-
- 
-
-
-translate
-
-
-
-
-(-10
-px
-,
--10
-px
-
-
-
-
-);
-}
-}
-.arrowUp, .arrowUp:before {
-	position: absolute;
-	left: 100%;
-}
-
-.arrowUp {
-	width: 30px;
-	height: 30px;
-	top: 96%;
-	left: 96.5%;
-	margin: -20px 0 0 -20px;
-	-webkit-transform: rotate(-135deg);
-	border-left: none;
-	border-top: none;
-	border-right: 2px #262626 solid;
-	border-bottom: 2px #262626 solid;
-}
-
-.arrowUp:before {
-	content: "";
-	width: 20px;
-	height: 20px;
-	top: 50%;
-	left: 50%;
-	margin: -10px 0 0 -10px;
-	border-left: none;
-	border-top: none;
-	border-right: 1px #262626 solid;
-	border-bottom: 1px #262626 solid;
-	animation-duration: 2s;
-	animation-iteration-count: infinite;
-	animation-name: arrow;
-}
-
-@
-keyframes arrowUp { 0% {
-	opacity: 1;
-}
-
-100%
-{
-opacity
-
-
-
-
-:
-
-
- 
-
-
-0;
-transform
-
-
-
-
-:
-
-
- 
-
-
-translate
-
-
-
-
-(-10
-px
-,
--10
-px
-
-
-
-
-);
-}
-}
-.sastable #head th {
-	background-color: #D5D5D5;
-	font-size: 16px;
-	font-family: 'Arial'
-}
-</style>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Client Stats</title>
+    <!-- Bootstrap Core CSS -->
+    <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet">
+    <link th:href="@{/css/easy-autocomplete.css}" rel="stylesheet">
+    <link th:href="@{/css/easy-autocomplete.min.css}" rel="stylesheet">
+    <link th:href="@{/css/easy-autocomplete.themes.min.css}" rel="stylesheet">
+    <link th:href="@{/css/chart.css}" rel="stylesheet">
+    <link th:href="@{/css/clientStat.css}" rel="stylesheet">
+    <link href='https://fonts.googleapis.com/css?family=Orbitron' rel='stylesheet'>
+    <link href='https://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet'>
+    <script th:src="@{/js/jquery-3.2.1.min.js}" type="text/javascript"></script>
+
+
+
+    <style>
+        a:focus,
+        a:hover {
+            text-decoration: none;
+        }
+        
+        #below {
+            background-color: #A5D6A7;
+        }
+
+        #average {
+            background-color: #81C784;
+        }
+       #above {
+            background-color: #4CAF50;
+        }
+
+        #verygood {
+            background-color: #388E3C;
+        }
+        #excellent {
+            background-color:#2E7D32;
+        }
+
+      .box {
+            width: 20px;
+            height: 20px;
+            display: inline-block;
+            vertical-align: middle;
+        }
+        
+
+        .avatar {
+            float: left;
+            overflow: hidden;
+            border-radius: 100%;
+            border: 6px solid #B3C9CB;
+            background-size: cover;
+            background-position: 50% 25%;
+            -webkit-transition: border 0.5s linear;
+            transition: border 0.5s linear;
+        }
+
+        .avatar img {
+            border-radius: inherit;
+            width: 10vw;
+            height: 10vw;
+            display: block;
+            position: relative;
+        }
+
+	  .explanation {
+            margin-left: 5px;
+            vertical-align: middle;
+            font-family: 'Montserrat';
+        }
+	
+        .src {
+            font-family: raleway;
+            position: absolute;
+            display: inline-block;
+            right: 0;
+            bottom: 0;
+            padding: 0px;
+        }
+
+        .table-striped>tbody>tr:nth-child(2n+1)>td,
+        .table-striped>tbody>tr:nth-child(2n+1)>th {
+            background-color: #FFFFFF;
+        }
+
+        .arrowDown,
+        .arrowDown:before {
+            position: absolute;
+            left: 100%;
+        }
+
+        .arrowDown {
+            width: 30px;
+            height: 30px;
+            top: 96%;
+            left: 96.5%;
+            margin: -20px 0 0 -20px;
+            -webkit-transform: rotate(45deg);
+            border-left: none;
+            border-top: none;
+            border-right: 2px #262626 solid;
+            border-bottom: 2px #262626 solid;
+        }
+
+        .arrowDown:before {
+            content: "";
+            width: 20px;
+            height: 20px;
+            top: 50%;
+            left: 50%;
+            margin: -10px 0 0 -10px;
+            border-left: none;
+            border-top: none;
+            border-right: 1px #262626 solid;
+            border-bottom: 1px #262626 solid;
+            animation-duration: 2s;
+            animation-iteration-count: infinite;
+            animation-name: arrow;
+        }
+
+        @ keyframes arrowDown {
+            0% {
+                opacity: 1;
+            }
+
+            100% {
+                opacity: 0;
+                transform: translate (-10 px,
+                -10 px);
+            }
+        }
+
+        .arrowUp,
+        .arrowUp:before {
+            position: absolute;
+            left: 100%;
+        }
+
+        .arrowUp {
+            width: 30px;
+            height: 30px;
+            top: 96%;
+            left: 96.5%;
+            margin: -20px 0 0 -20px;
+            -webkit-transform: rotate(-135deg);
+            border-left: none;
+            border-top: none;
+            border-right: 2px #262626 solid;
+            border-bottom: 2px #262626 solid;
+        }
+
+        .arrowUp:before {
+            content: "";
+            width: 20px;
+            height: 20px;
+            top: 50%;
+            left: 50%;
+            margin: -10px 0 0 -10px;
+            border-left: none;
+            border-top: none;
+            border-right: 1px #262626 solid;
+            border-bottom: 1px #262626 solid;
+            animation-duration: 2s;
+            animation-iteration-count: infinite;
+            animation-name: arrow;
+        }
+
+        @ keyframes arrowUp {
+            0% {
+                opacity: 1;
+            }
+
+            100% {
+                opacity: 0;
+                transform: translate (-10 px,
+                -10 px);
+            }
+        }
+
+        .sastable #head th {
+            background-color: #D5D5D5;
+            font-size: 16px;
+            font-family: 'Arial'
+        }
+    </style>
 
 </head>
 
 <body>
-	<!-- Navigation -->
-	<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
-		<div class="container" id="navContainer">
-			<!-- Brand and toggle get grouped for better mobile display -->
-			<div class="navbar-header">
-				<button type="button" class="navbar-toggle" data-toggle="collapse"
-					data-target="#bs-navbar-collapse-1">
+    <!-- Navigation -->
+    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+        <div class="container" id="navContainer">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-navbar-collapse-1">
 					<span class="sr-only">Toggle navigation</span> <span
 						class="icon-bar"></span> <span class="icon-bar"></span> <span
 						class="icon-bar"></span>
 				</button>
-				<a href="#" class="pull-left"><img th:src="@{/images/logo2.png}"
+                <a href="#" class="pull-left"><img th:src="@{/images/logo2.png}"
 					style="height: 70px; width: 230px; padding-top: 10px !important;"
 					class="img-responsive"></a>
-			</div>
-			<div class="collapse navbar-collapse" id="bs-navbar-collapse-1">
-				<ul class="nav navbar-nav navbar-right">
-					<li>
-						<form class="navbar-form navbar-right" role="search" id="form-nav">
-							<div class="input-group">
-								<input type="text" class="form-control" placeholder="Search"
-									id="search"> <span class="input-group-btn">
+            </div>
+            <div class="collapse navbar-collapse" id="bs-navbar-collapse-1">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <form class="navbar-form navbar-right" role="search" id="form-nav">
+                            <div class="input-group">
+                                <input type="text" class="form-control" placeholder="Search" id="search"> <span class="input-group-btn">
 									<button type="submit" class="btn btn-default" id="submitButton">
 										<span class="glyphicon glyphicon-search"></span>
-									</button>
-								</span>
-							</div>
-						</form>
-					</li>
-					<li><a th:href="@{dashboard.html}">Home</a></li>
-					<li><a th:href="@{clients.html}">Clients</a></li>
-					<li><a href="">Traks</a></li>
-					<li><a href="">Reports</a></li>
-					<li>
-						<div class="inset">
-							<img th:src="@{/images/user.png}" />
-						</div>
-					</li>
-					<li>
-						<div style="padding-left: 3px; padding-right: 30px">
-							<label th:utext="${userName}"
-								style="padding-top: 20px; color: white"></label><br /> <a
-								th:href="@{/login?logout}"
-								style="display: inline; height: 15px !important; padding-top: 2px; color: #2085B8">Sign
+                                </button>
+                                </span>
+                            </div>
+                        </form>
+                    </li>
+                    <li><a th:href="@{dashboard.html}">Home</a></li>
+                    <li><a th:href="@{clients.html}">Clients</a></li>
+                    <li><a href="">Traks</a></li>
+                    <li><a href="">Reports</a></li>
+                    <li>
+                        <div class="inset">
+                            <img th:src="@{/images/user.png}" />
+                        </div>
+                    </li>
+                    <li>
+                        <div style="padding-left: 3px; padding-right: 30px">
+                            <label th:utext="${userName}" style="padding-top: 20px; color: white"></label><br /> <a th:href="@{/login?logout}" style="display: inline; height: 15px !important; padding-top: 2px; color: #2085B8">Sign
 								Out</a>
-						</div>
-					</li>
+                        </div>
+                    </li>
 
-				</ul>
-			</div>
-			<!-- /.navbar-collapse -->
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
 
-		</div>
-		<!-- /.container -->
-	</nav>
+        </div>
+        <!-- /.container -->
+    </nav>
 
-	<div class="page-header">
-		<div class="clearfix">
-			<div class="row col-md-12">
+    <div class="page-header">
+        <div class="clearfix">
+            <div class="row col-md-12">
 
 
 
-				<div class="col-sm-7 ">
-					<div class="col-sm-2">
-						<div class="avatar">
-							<!--  <form method="POST" th:action="@{/user/clientStat}"
+                <div class="col-sm-7 ">
+                    <div class="col-sm-2">
+                        <div class="avatar">
+                            <!--  <form method="POST" th:action="@{/user/clientStat}"
 enctype="multipart/form-data" role="form" >
 <input id="fileUpload" type="file"  name="file" onchange="this.form.submit();"  />
 <img th:src="@{/user/clientStat/{userId}(userId=${userId})}"/> 
@@ -307,408 +263,410 @@ enctype="multipart/form-data" role="form" >
 </div>
 </form>
 -->
-							<img th:src="@{/images/user.png}" />
-						</div>
-					</div>
-					<div class="col-sm-10"
-						style="padding-left: 50px; font-family: Orbitron">
-						<div class="row">
-							<div class="col-sm-12">
-								<div class="col-sm-12">
-									<h4 th:utext="${id}" style=""></h4>
-								</div>
-							</div>
-						</div>
-						<div class="row"
-							style="padding-left: 14px; font-family: Montserrat">
-							<div class="col-sm-5">
-								<div class="row">
-									<div class="col-sm-12">
-										<p id="date">Date:</p>
-									</div>
-								</div>
-								<div class="row">
+                            <img th:src="@{/images/user.png}" />
+                        </div>
+                    </div>
+                    <div class="col-sm-10" style="padding-left: 50px;">
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <div class="col-sm-12">
+                                    <h4 th:utext="${id}" style="font-family:Montserrat"></h4>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row" style="padding-left: 14px; font-family: Montserrat">
+                            <div class="col-sm-5">
+                                <div class="row">
+                                    <div class="col-sm-12">
+                                        <p id="date">Date:</p>
+                                    </div>
+                                </div>
+                                <div class="row">
 
-									<div class="col-sm-9">
-										<select class="form-control input-sm">
+                                    <div class="col-sm-9">
+                                        <select class="form-control input-sm" id="surveys">
 											<option th:disabled="disabled" th:selected="selected"
-												value="">Select a Survey</option>
+												value="" >Select a Survey</option>
 
 
 										</select>
-									</div>
-								</div>
+                                    </div>
+                                </div>
 
-							</div>
-							<div class="col-sm-7">
-								<div class="row" style="font-family: Montserrat">
-									<p id="trakscore"></p>
-								</div>
-								<div class="row">
-									<p id="rank" style="padding-top: 5px">Rank:</p>
-								</div>
+                            </div>
+                            <div class="col-sm-7">
+                                <div class="row" style="font-family: Montserrat">
+                                    <p id="trakscore"></p>
+                                </div>
+                                <div class="row">
+                                    <p id="rank" style="padding-top: 5px">Rank:</p>
+                                </div>
 
-							</div>
-						</div>
-					</div>
+                            </div>
+                        </div>
+                    </div>
 
-				</div>
-				<div class="col-sm-5">
+                </div>
+                <div class="col-sm-5">
 
-					<div class="row">
-						<br />&nbsp;
-					</div>
-					<div class="row-fluid">
-						<div id="buttons" style="float: right">
-							<a th:href="@{/user/assessment/{clientId}(clientId=${clientId})}"><button
+                    <div class="row">
+                        <br />&nbsp;
+                    </div>
+                    <div class="row-fluid">
+                    <input type="hidden" value="${clientId}"/>
+                        <div id="buttons" style="float: right">
+                            <a th:href="@{/user/assessment/{clientId}(clientId=${clientId})}"><button
 									type="button" class="btn btn-primary "
 									style="background: #2085B8">New Evaluation</button> </a>
 
-							<button type="button" class="btn btn-primary"
-								style="background: #2085B8" data-title="CompareClients"
-								data-toggle="modal" data-target="#compare">Comparison</button>
+                            <button type="button" class="btn btn-primary" style="background: #2085B8" data-title="CompareClients" data-toggle="modal" data-target="#compare">Comparison</button>
 
-							<button type="button" class="btn btn-primary"
-								style="background: #2085B8">New Group</button>
-							<button type="button" class="btn btn-default"
-								style="background: #F9F9F9">Share</button>
-						</div>
-					</div>
-				</div>
+                            <button type="button" class="btn btn-primary" style="background: #2085B8">New Group</button>
+                            <button type="button" class="btn btn-default" style="background: #F9F9F9">Share</button>
+                        </div>
+                    </div>
+                </div>
 
 
-			</div>
+            </div>
 
 
-		</div>
-	</div>
-	<div class="container-fluid">
-		<input type="hidden" id="yourId" th:value="${clientId}" />
-		<div id="button" style="padding-right: 40px;">
-			<a href="#aboutModal" data-toggle="modal" data-target="#myModal"
-				class="btn btn-circle-micro btn-primary" style="float: right;"><span
-				class="glyphicon glyphicon-info-sign"></span> </a>
-		</div>
-		<div class="row col-md-12 center-block" id="firstRow">
+        </div>
+    </div>
+    <div class="container-fluid">
+        <input type="hidden" id="yourId" th:value="${clientId}" />
+         <div class="row">
+            <div class="col-md-5 col-md-offset-7">
+            <div class="col-md-5 col-md-offset-7 pull-right">
+                <div class="col-md-2 " style="text-align:center">
+                    <div id="below" class="box" title="Below Average"></div>
+                    <br></div>
+                <div class="col-md-2" style="text-align:center">
+                    <div id="average" class="box" title="Average"></div>
+                    <br></div>
+                <div class="col-md-2" style="text-align:center">
+                    <div id="above" class="box" title="Above Average"></div>
+                    <br></div>
+                    <div class="col-md-2 " style="text-align:center">
+                    <div id="verygood" class="box" title="Very Good"></div>
+                    <br></div>
+                    <div class="col-md-2" style="text-align:center">
+                    <div id="excellent" class="box" title="Excellent"></div>
+                    <br></div>
+                    </div>
+            </div>
+        </div>
+        <div id="button" style="padding-right: 40px;">
+         <!--   <a href="#aboutModal" data-toggle="modal" data-target="#myModal" class="btn btn-circle-micro btn-primary" style="float: right;"><span
+				class="glyphicon glyphicon-info-sign"></span> </a> --> 
+        </div>
+        <div class="row col-md-12 center-block" id="firstRow">
 
-			<div class="col-sm-6 col-md-3  ">
-				<div class="chart-wrapper">
-					<div class="chart-title"></div>
-					<div class="chart-stage">
-						<div id="movement"></div>
-					</div>
-					<div class="chart-notes"></div>
-				</div>
-			</div>
-			<div class="col-sm-6 col-md-3 ">
-				<div class="chart-wrapper">
-					<div class="chart-title"></div>
-					<div class="chart-stage">
-						<div id="strength"></div>
-					</div>
-					<div class="chart-notes"></div>
-				</div>
-			</div>
-			<div class="col-sm-6 col-md-3 ">
-				<div class="chart-wrapper">
-					<div class="chart-title"></div>
-					<div class="chart-stage">
-						<div id="power"></div>
-					</div>
-					<div class="chart-notes"></div>
-				</div>
-			</div>
+            <div class="col-sm-6 col-md-3  ">
+                <div class="chart-wrapper">
+                    <div class="chart-title"></div>
+                    <div class="chart-stage">
+                        <div id="movement"></div>
+                    </div>
+                    <div class="chart-notes"></div>
+                </div>
+            </div>
+            <div class="col-sm-6 col-md-3 ">
+                <div class="chart-wrapper">
+                    <div class="chart-title"></div>
+                    <div class="chart-stage">
+                        <div id="strength"></div>
+                    </div>
+                    <div class="chart-notes"></div>
+                </div>
+            </div>
+            <div class="col-sm-6 col-md-3 ">
+                <div class="chart-wrapper">
+                    <div class="chart-title"></div>
+                    <div class="chart-stage">
+                        <div id="power"></div>
+                    </div>
+                    <div class="chart-notes"></div>
+                </div>
+            </div>
 
-			<div class="col-sm-6 col-md-3">
-				<div class="chart-wrapper">
-					<div class="chart-title"></div>
+            <div class="col-sm-6 col-md-3">
+                <div class="chart-wrapper">
+                    <div class="chart-title"></div>
 
-					<div class="chart-stage">
+                    <div class="chart-stage">
 
-						<div id="endurance"></div>
+                        <div id="endurance"></div>
 
-					</div>
+                    </div>
 
-					<div class="chart-notes"></div>
+                    <div class="chart-notes"></div>
 
-				</div>
+                </div>
 
-			</div>
+            </div>
 
-		</div>
-		<div class="row col-md-12 center-block" id="secondRow">
-			<div class="col-sm-6 col-md-3  ">
-				<div class="chart-wrapper">
-					<div class="chart-title"></div>
-					<div class="chart-stage">
-						<div id="linechart"></div>
-					</div>
-					<div class="chart-notes"></div>
-				</div>
-			</div>
-			<div class="col-sm-6  col-md-3 ">
-				<div class="chart-wrapper">
-					<div class="chart-title"></div>
-					<div class="chart-stage">
-						<div id="lower"></div>
-					</div>
+        </div>
+        <div class="row col-md-12 center-block" id="secondRow">
+            <div class="col-sm-6 col-md-3  ">
+                <div class="chart-wrapper">
+                    <div class="chart-title"></div>
+                    <div class="chart-stage">
+                        <div id="linechart"></div>
+                    </div>
+                    <div class="chart-notes"></div>
+                </div>
+            </div>
+            <div class="col-sm-6  col-md-3 ">
+                <div class="chart-wrapper">
+                    <div class="chart-title"></div>
+                    <div class="chart-stage">
+                        <div id="lower"></div>
+                    </div>
 
 
-				</div>
-			</div>
-			<div class="col-sm-6 col-md-3 ">
-				<div class="chart-wrapper">
-					<div class="chart-title"></div>
-					<div class="chart-stage">
-						<div id="absolute"></div>
-					</div>
-					<div class="chart-notes"></div>
-				</div>
-			</div>
-			<div class="col-sm-6 col-md-3 ">
-				<div class="chart-wrapper">
-					<div class="chart-title"></div>
-					<div class="chart-stage">
-						<div id="absolute1"></div>
-					</div>
-					<div class="chart-notes"></div>
-				</div>
-			</div>
-		</div>
-		<div class="row col-md-12 center-block" id="secondRow">
-			<div class="col-sm-6 col-md-3">
-				<div class="chart-wrapper">
-					<div class="chart-title"></div>
-					<div class="chart-stage">
-						<div id="stability"></div>
-					</div>
-					<div class="chart-notes"></div>
-				</div>
-			</div>
-			<div class="col-sm-6 col-md-3 ">
-				<div class="chart-wrapper">
-					<div class="chart-title"></div>
-					<div class="chart-stage">
-						<div id="push"></div>
-					</div>
-					<div class="chart-notes"></div>
-				</div>
-			</div>
-			<div class="col-sm-6 col-md-3 ">
-				<div class="chart-wrapper">
-					<div class="chart-title"></div>
-					<div class="chart-stage">
-						<div id="relative"></div>
-					</div>
-					<div class="chart-notes"></div>
-				</div>
-			</div>
-			<div class="col-sm-6 col-md-3 ">
-				<div class="chart-wrapper">
-					<div class="chart-title"></div>
-					<div class="chart-stage">
-						<div id="relative1"></div>
-					</div>
-					<div class="chart-notes"></div>
-				</div>
-			</div>
-		</div>
+                </div>
+            </div>
+            <div class="col-sm-6 col-md-3 ">
+                <div class="chart-wrapper">
+                    <div class="chart-title"></div>
+                    <div class="chart-stage">
+                        <div id="absolute"></div>
+                    </div>
+                    <div class="chart-notes"></div>
+                </div>
+            </div>
+            <div class="col-sm-6 col-md-3 ">
+                <div class="chart-wrapper">
+                    <div class="chart-title"></div>
+                    <div class="chart-stage">
+                        <div id="absolute1"></div>
+                    </div>
+                    <div class="chart-notes"></div>
+                </div>
+            </div>
+        </div>
+        <div class="row col-md-12 center-block" id="secondRow">
+            <div class="col-sm-6 col-md-3">
+                <div class="chart-wrapper">
+                    <div class="chart-title"></div>
+                    <div class="chart-stage">
+                        <div id="stability"></div>
+                    </div>
+                    <div class="chart-notes"></div>
+                </div>
+            </div>
+            <div class="col-sm-6 col-md-3 ">
+                <div class="chart-wrapper">
+                    <div class="chart-title"></div>
+                    <div class="chart-stage">
+                        <div id="push"></div>
+                    </div>
+                    <div class="chart-notes"></div>
+                </div>
+            </div>
+            <div class="col-sm-6 col-md-3 ">
+                <div class="chart-wrapper">
+                    <div class="chart-title"></div>
+                    <div class="chart-stage">
+                        <div id="relative"></div>
+                    </div>
+                    <div class="chart-notes"></div>
+                </div>
+            </div>
+            <div class="col-sm-6 col-md-3 ">
+                <div class="chart-wrapper">
+                    <div class="chart-title"></div>
+                    <div class="chart-stage">
+                        <div id="relative1"></div>
+                    </div>
+                    <div class="chart-notes"></div>
+                </div>
+            </div>
+        </div>
 
-	</div>
+    </div>
 
-	<br />
-	<br />
-	<div class="modal fade" id="myModal" tabindex="-1" role="dialog"
-		aria-labelledby="myModalLabel" aria-hidden="true">
-		<div class="modal-dialog">
-			<div class="modal-content">
-				<div class="modal-header">
-					<button type="button" class="close" data-dismiss="modal"
-						aria-hidden="true">X</button>
-					<h4 class="modal-title" id="myModalLabel">Information!</h4>
-				</div>
-				<div class="modal-body">
+    <br />
+    <br />
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">X</button>
+                    <h4 class="modal-title" id="myModalLabel">Information!</h4>
+                </div>
+                <div class="modal-body">
 
-					<br>
+                    <br>
 
-				</div>
-				<div class="modal-footer">
+                </div>
+                <div class="modal-footer">
 
-					<button type="button" class="btn btn-circle btn-default"
-						data-dismiss="modal">
+                    <button type="button" class="btn btn-circle btn-default" data-dismiss="modal">
 						<span class="glyphicon glyphicon-remove"></span>
 					</button>
 
-				</div>
-			</div>
-		</div>
-	</div>
+                </div>
+            </div>
+        </div>
+    </div>
 
-	<br />
-	<br />
-	<div class="modal fade" id="myModal" tabindex="-1" role="dialog"
-		aria-labelledby="myModalLabel" aria-hidden="true">
-		<div class="modal-dialog">
-			<div class="modal-content">
-				<div class="modal-header">
-					<button type="button" class="close" data-dismiss="modal"
-						aria-hidden="true">X</button>
-					<h4 class="modal-title" id="myModalLabel">Information!</h4>
-				</div>
-				<div class="modal-body">
+    <br />
+    <br />
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">X</button>
+                    <h4 class="modal-title" id="myModalLabel">Information!</h4>
+                </div>
+                <div class="modal-body">
 
-					<br>
+                    <br>
 
 
-				</div>
-				<div class="modal-footer">
-					<button type="button" class="btn btn-circle btn-default"
-						data-dismiss="modal">
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-circle btn-default" data-dismiss="modal">
 						<span class="glyphicon glyphicon-remove"></span>
 					</button>
 
-				</div>
-			</div>
-		</div>
-	</div>
-	<div class="wrapper"
-		style="margin-left: 0px; margin-right: 0x; background-color: #F9F9F9;">
-		<div class="container-fluid" style="margin-left: 2%">
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="wrapper" style="margin-left: 0px; margin-right: 0x; background-color: #F9F9F9;">
+        <div class="container-fluid" style="margin-left: 2%;">
 
 
 
 
-			<div class="row col-md-12 center-block">
+            <div class="row col-md-12 center-block">
 
-				<h2 style="font-family: 'Orbitron';">ANALYTICS</h2>
+                <h2>ANALYTICS</h2>
 
-				<div class="col-sm-6 col-md-6  table-responsive">
+                <div class="col-sm-6 col-md-6  table-responsive">
 
-					<h4 style="color: #2085B8; font-family: 'Orbitron';">DEMOGRAPHICS</h4>
-					<table class="table table-striped "
-						style="font-family: 'Montserrat'; font-size: 12px">
-						<thead>
-							<tr>
-								<th class="col-xs-6">Test</th>
+                    <h4>DEMOGRAPHICS</h4>
+                    <table class="table table-striped " style="font-family: 'Montserrat'; font-size: 12px">
+                        <thead>
+                            <tr>
+                                <th class="col-xs-6">Test</th>
 
-								<th class="col-xs-5">Score</th>
-							</tr>
-						</thead>
-						<tbody>
-							<tr>
-								<td>Height(in)</td>
+                                <th class="col-xs-5">Score</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Height(in)</td>
 
-								<td id="height"></td>
-							</tr>
-							<tr>
-								<td>Weight (lbs)</td>
+                                <td id="height"></td>
+                            </tr>
+                            <tr>
+                                <td>Weight (lbs)</td>
 
-								<td id="weight"></td>
-							</tr>
-							<tr>
-								<td>Systolic Blood Pressure</td>
+                                <td id="weight"></td>
+                            </tr>
+                            <tr>
+                                <td>Systolic Blood Pressure</td>
 
-								<td id="sbp"></td>
-							</tr>
-							<tr>
-								<td>Diastolic Blood Pressure</td>
+                                <td id="sbp"></td>
+                            </tr>
+                            <tr>
+                                <td>Diastolic Blood Pressure</td>
 
-								<td id="dbp"></td>
-							</tr>
-							<tr>
-								<td>Resting Heart Rate</td>
+                                <td id="dbp"></td>
+                            </tr>
+                            <tr>
+                                <td>Resting Heart Rate</td>
 
-								<td id="rhr"></td>
-							</tr>
-							<tr>
-								<td>Bodyfat %</td>
+                                <td id="rhr"></td>
+                            </tr>
+                            <tr>
+                                <td>Bodyfat %</td>
 
-								<td id="bodyfat"></td>
-							</tr>
-							<tr>
-								<td>Body Mass Index(BMI)</td>
+                                <td id="bodyfat"></td>
+                            </tr>
+                            <tr>
+                                <td>Body Mass Index(BMI)</td>
 
-								<td id="bmi"></td>
-							</tr>
+                                <td id="bmi"></td>
+                            </tr>
 
-						</tbody>
-					</table>
+                        </tbody>
+                    </table>
 
-				</div>
-				<div class="col-sm-6 col-md-6  table-responsive">
+                </div>
+                <div class="col-sm-6 col-md-6  table-responsive">
 
-					<h4 style="color: #2085B8; font-family: 'Orbitron';">NUTRITION</h4>
-					<table class="table table-striped "
-						style="font-family: 'Montserrat'; font-size: 12px">
-						<thead>
-							<tr>
-								<th class="col-xs-6">Test</th>
+                    <h4 >NUTRITION</h4>
+                    <table class="table table-striped " style="font-family: 'Montserrat'; font-size: 12px">
+                        <thead>
+                            <tr>
+                                <th class="col-xs-6">Test</th>
 
-								<th class="col-xs-5">Score</th>
-							</tr>
-						</thead>
-						<tbody>
-							<tr>
-								<td>Resting Metabolic Rate</td>
+                                <th class="col-xs-5">Score</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Resting Metabolic Rate</td>
 
-								<td id="rmr"></td>
-							</tr>
-							<tr>
-								<td>Total Daily Energy Intake (Cals)</td>
+                                <td id="rmr"></td>
+                            </tr>
+                            <tr>
+                                <td>Total Daily Energy Intake (Cals)</td>
 
-								<td id="totalDailyEnergy"></td>
-							</tr>
-							<tr>
-								<td>Protein (g)/ Day</td>
+                                <td id="totalDailyEnergy"></td>
+                            </tr>
+                            <tr>
+                                <td>Protein (g)/ Day</td>
 
-								<td id="protein"></td>
-							</tr>
-							<tr>
-								<td>Carbohydrates(g)/ Day</td>
+                                <td id="protein"></td>
+                            </tr>
+                            <tr>
+                                <td>Carbohydrates(g)/ Day</td>
 
-								<td id="carbohydrate"></td>
-							</tr>
-							<tr>
-								<td>Total Fat(g) /Day</td>
+                                <td id="carbohydrate"></td>
+                            </tr>
+                            <tr>
+                                <td>Total Fat(g) /Day</td>
 
-								<td id="totalFat"></td>
-							</tr>
-							<tr>
-								<td>&nbsp;</td>
+                                <td id="totalFat"></td>
+                            </tr>
+                            <tr>
+                                <td>&nbsp;</td>
 
-								<td></td>
-							</tr>
-							<tr>
-								<td style="background-color: #F9F9F9">&nbsp;</td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td style="background-color: #F9F9F9">&nbsp;</td>
 
-								<td style="background-color: #F9F9F9"></td>
-							</tr>
+                                <td style="background-color: #F9F9F9"></td>
+                            </tr>
 
 
-						</tbody>
-					</table>
+                        </tbody>
+                    </table>
 
-				</div>
-				<div class="col-sm-6 col-md-6  table-responsive">
+                </div>
+                <div class="col-sm-6 col-md-6  table-responsive">
 
-					<h4 style="color: #2085B8; font-family: 'Orbitron';">MOVEMENT
-						/ MOBILITY</h4>
-					<table class="table table-striped "
-						style="font-family: 'Montserrat'; font-size: 12px">
-						<thead>
-							<tr>
-								<th class="col-xs-6">Exercise Type</th>
-								<th class="col-xs-1" id="name"></th>
-								<th class="col-xs-5">TRAK Score</th>
-							</tr>
-						</thead>
-						<tbody>
-							<tr>
-								<td>Deep Squat</td>
-								<td id="squat">90</td>
-								<td id="deepSquat" data-trigger='hover' data-container="body"
-									data-toggle="popover"
-									data-content=" 
+                    <h4>MOVEMENT / MOBILITY</h4>
+                    <table class="table table-striped " style="font-family: 'Montserrat'; font-size: 12px">
+                        <thead>
+                            <tr>
+                                <th class="col-xs-6">Exercise Type</th>
+                                <th class="col-xs-1" id="name"></th>
+                                <th class="col-xs-5">TRAK Score</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Deep Squat</td>
+                                <td id="squat">90</td>
+                                <td id="deepSquat" data-trigger='hover' data-container="body" data-toggle="popover" data-content=" 
                                                                                                  <div class='table-responsive'>
                 <table class='sastable table-striped table-bordered' data-toggle='table' data-height='150' data-classes='table  table-striped table-bordered'>
                     <thead id='head'>
@@ -760,15 +718,12 @@ enctype="multipart/form-data" role="form" >
                         </tr>
                     </tbody>
                 </table>
-            </div>"
-									data-html="true"></td>
-							</tr>
-							<tr>
-								<td>Shoulder Flexion -L-(deg)</td>
-								<td id="shoulder">160</td>
-								<td id="shoulderL" data-trigger='hover' data-container="body"
-									data-toggle="popover"
-									data-content=" 
+            </div>" data-html="true"></td>
+                            </tr>
+                            <tr>
+                                <td>Shoulder Flexion -L-(deg)</td>
+                                <td id="shoulder">160</td>
+                                <td id="shoulderL" data-trigger='hover' data-container="body" data-toggle="popover" data-content=" 
                                                                                                  <div class='table-responsive'>
                 <table class='sastable table-striped table-bordered' data-toggle='table' data-height='150' data-classes='table  table-striped table-bordered'>
                     <thead id='head'>
@@ -820,15 +775,12 @@ enctype="multipart/form-data" role="form" >
                         </tr>
                     </tbody>
                 </table>
-            </div>"
-									data-html="true"></td>
-							</tr>
-							<tr>
-								<td>Shoulder Flexion -R-(deg)</td>
-								<td id="rshoulder">160</td>
-								<td id="shoulderR" data-trigger='hover' data-container="body"
-									data-toggle="popover"
-									data-content=" 
+            </div>" data-html="true"></td>
+                            </tr>
+                            <tr>
+                                <td>Shoulder Flexion -R-(deg)</td>
+                                <td id="rshoulder">160</td>
+                                <td id="shoulderR" data-trigger='hover' data-container="body" data-toggle="popover" data-content=" 
                                                                                                  <div class='table-responsive'>
                 <table class='sastable table-striped table-bordered' data-toggle='table' data-height='150' data-classes='table  table-striped table-bordered'>
                      <thead id='head'>
@@ -879,15 +831,12 @@ enctype="multipart/form-data" role="form" >
                         </tr>
                     </tbody>
                 </table>
-            </div>"
-									data-html="true"></td>
-							</tr>
-							<tr>
-								<td>Shoulder Extension -R-</td>
-								<td id="extension">115</td>
-								<td id="externalShoulderR" data-trigger='hover'
-									data-container="body" data-toggle="popover"
-									data-content=" 
+            </div>" data-html="true"></td>
+                            </tr>
+                            <tr>
+                                <td>Shoulder Extension -R-</td>
+                                <td id="extension">115</td>
+                                <td id="externalShoulderR" data-trigger='hover' data-container="body" data-toggle="popover" data-content=" 
                                                                                                  <div class='table-responsive'>
                 <table class='sastable table-striped table-bordered' data-toggle='table' data-height='150' data-classes='table  table-striped table-bordered'>
                     <thead id='head'>
@@ -939,15 +888,12 @@ enctype="multipart/form-data" role="form" >
                         </tr>
                     </tbody>
                 </table>
-            </div>"
-									data-html="true"></td>
-							</tr>
-							<tr>
-								<td>Shoulder Extension -L-</td>
-								<td id="Lextension">67</td>
-								<td id="externalShoulderL" data-trigger='hover'
-									data-container="body" data-toggle="popover"
-									data-content=" 
+            </div>" data-html="true"></td>
+                            </tr>
+                            <tr>
+                                <td>Shoulder Extension -L-</td>
+                                <td id="Lextension">67</td>
+                                <td id="externalShoulderL" data-trigger='hover' data-container="body" data-toggle="popover" data-content=" 
                                                                                                  <div class='table-responsive'>
                 <table class='sastable table-striped table-bordered' data-toggle='table' data-height='150' data-classes='table  table-striped table-bordered'>
                     <thead id='head'>
@@ -999,15 +945,12 @@ enctype="multipart/form-data" role="form" >
                         </tr>
                     </tbody>
                 </table>
-            </div>"
-									data-html="true"></td>
-							</tr>
-							<tr>
-								<td>Trunk Rotation -R-</td>
-								<td id="trunkr">128</td>
-								<td id="trunkRotationR" data-trigger='hover'
-									data-container="body" data-toggle="popover"
-									data-content=" 
+            </div>" data-html="true"></td>
+                            </tr>
+                            <tr>
+                                <td>Trunk Rotation -R-</td>
+                                <td id="trunkr">128</td>
+                                <td id="trunkRotationR" data-trigger='hover' data-container="body" data-toggle="popover" data-content=" 
                                                                                                  <div class='table-responsive'>
                 <table class='sastable table-striped table-bordered' data-toggle='table' data-height='150' data-classes='table  table-striped table-bordered'>
                     <thead id='head'>
@@ -1059,15 +1002,12 @@ enctype="multipart/form-data" role="form" >
                         </tr>
                     </tbody>
                 </table>
-            </div>"
-									data-html="true"></td>
-							</tr>
-							<tr>
-								<td>Trunk Rotation -L-</td>
-								<td id="trunkl">73</td>
-								<td id="trunkRotationL" data-trigger='hover'
-									data-container="body" data-toggle="popover"
-									data-content=" 
+            </div>" data-html="true"></td>
+                            </tr>
+                            <tr>
+                                <td>Trunk Rotation -L-</td>
+                                <td id="trunkl">73</td>
+                                <td id="trunkRotationL" data-trigger='hover' data-container="body" data-toggle="popover" data-content=" 
                                                                                                  <div class='table-responsive'>
                 <table class='sastable table-striped table-bordered' data-toggle='table' data-height='150' data-classes='table  table-striped table-bordered'>
                     <thead id='head'>
@@ -1119,33 +1059,29 @@ enctype="multipart/form-data" role="form" >
                         </tr>
                     </tbody>
                 </table>
-            </div>"
-									data-html="true"></td>
-							</tr>
+            </div>" data-html="true"></td>
+                            </tr>
 
-						</tbody>
-					</table>
+                        </tbody>
+                    </table>
 
-				</div>
+                </div>
 
-				<div class="col-sm-6 col-md-6  table-responsive">
-					<h4 style="color: #2085B8; font-family: 'Orbitron'">STABILITY</h4>
-					<table class="table table-striped"
-						style="font-family: 'Montserrat'; font-size: 12px">
-						<thead>
-							<tr>
-								<th class="col-xs-5">Exercise Type</th>
-								<th class="col-xs-2" id="name1"></th>
-								<th class="col-xs-5">TRAK Score</th>
-							</tr>
-						</thead>
-						<tbody>
-							<tr>
-								<td>Pistol Squat -R-</td>
-								<td id="pistol">Pass</td>
-								<td id="hipBridgeR" data-trigger='hover' data-container="body"
-									data-toggle="popover" data-placement="top"
-									data-content=" 
+                <div class="col-sm-6 col-md-6  table-responsive">
+                    <h4>STABILITY</h4>
+                    <table class="table table-striped" style="font-family: 'Montserrat'; font-size: 12px">
+                        <thead>
+                            <tr>
+                                <th class="col-xs-5">Exercise Type</th>
+                                <th class="col-xs-2" id="name1"></th>
+                                <th class="col-xs-5">TRAK Score</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Pistol Squat -R-</td>
+                                <td id="pistol">Pass</td>
+                                <td id="hipBridgeR" data-trigger='hover' data-container="body" data-toggle="popover" data-placement="top" data-content=" 
                                                                                                  <div class='table-responsive'>
                 <table class='sastable table-striped table-bordered' data-toggle='table' data-height='150' data-classes='table  table-striped table-bordered'>
                     <thead id='head'>
@@ -1197,15 +1133,12 @@ enctype="multipart/form-data" role="form" >
                         </tr>
                     </tbody>
                 </table>
-            </div>"
-									data-html="true"></td>
-							</tr>
-							<tr>
-								<td>Pistol Squat -L-</td>
-								<td id="pistolL">Pass</td>
-								<td id="hipBridgeL" data-trigger='hover' data-container="body"
-									data-toggle="popover" data-placement="top"
-									data-content=" 
+            </div>" data-html="true"></td>
+                            </tr>
+                            <tr>
+                                <td>Pistol Squat -L-</td>
+                                <td id="pistolL">Pass</td>
+                                <td id="hipBridgeL" data-trigger='hover' data-container="body" data-toggle="popover" data-placement="top" data-content=" 
                                                                                                  <div class='table-responsive'>
                 <table class='sastable table-striped table-bordered' data-toggle='table' data-height='150' data-classes='table  table-striped table-bordered'>
                     <thead id='head'>
@@ -1257,15 +1190,12 @@ enctype="multipart/form-data" role="form" >
                         </tr>
                     </tbody>
                 </table>
-            </div>"
-									data-html="true"></td>
-							</tr>
-							<tr>
-								<td>Prone RH/LF</td>
-								<td id="prone">Pass</td>
-								<td id="plank" data-trigger='hover' data-container="body"
-									data-toggle="popover" data-placement="top"
-									data-content=" 
+            </div>" data-html="true"></td>
+                            </tr>
+                            <tr>
+                                <td>Prone RH/LF</td>
+                                <td id="prone">Pass</td>
+                                <td id="plank" data-trigger='hover' data-container="body" data-toggle="popover" data-placement="top" data-content=" 
                                                                                                  <div class='table-responsive'>
                 <table class='sastable table-striped table-bordered' data-toggle='table' data-height='150' data-classes='table  table-striped table-bordered'>
                     <thead id='head'>
@@ -1317,15 +1247,12 @@ enctype="multipart/form-data" role="form" >
                         </tr>
                     </tbody>
                 </table>
-            </div>"
-									data-html="true"></td>
-							</tr>
-							<tr>
-								<td>Prone LH/RF</td>
-								<td id="pronel">Pass</td>
-								<td id="plankL" data-trigger='hover' data-container="body"
-									data-toggle="popover" data-placement="top"
-									data-content=" 
+            </div>" data-html="true"></td>
+                            </tr>
+                            <tr>
+                                <td>Prone LH/RF</td>
+                                <td id="pronel">Pass</td>
+                                <td id="plankL" data-trigger='hover' data-container="body" data-toggle="popover" data-placement="top" data-content=" 
                                                                                                  <div class='table-responsive'>
                 <table class='sastable table-striped table-bordered' data-toggle='table' data-height='150' data-classes='table  table-striped table-bordered'>
                     <thead id='head'>
@@ -1377,15 +1304,12 @@ enctype="multipart/form-data" role="form" >
                         </tr>
                     </tbody>
                 </table>
-            </div>"
-									data-html="true"></td>
-							</tr>
-							<tr>
-								<td>V Sit</td>
-								<td id="sit">Pass</td>
-								<td id="trunk" data-trigger='hover' data-container="body"
-									data-toggle="popover" data-placement="top"
-									data-content=" 
+            </div>" data-html="true"></td>
+                            </tr>
+                            <tr>
+                                <td>V Sit</td>
+                                <td id="sit">Pass</td>
+                                <td id="trunk" data-trigger='hover' data-container="body" data-toggle="popover" data-placement="top" data-content=" 
                                                                                                  <div class='table-responsive'>
                 <table class='sastable table-striped table-bordered' data-toggle='table' data-height='150' data-classes='table  table-striped table-bordered'>
                     <thead id='head'>
@@ -1437,39 +1361,34 @@ enctype="multipart/form-data" role="form" >
                         </tr>
                     </tbody>
                 </table>
-            </div>"
-									data-html="true"></td>
-							</tr>
+            </div>" data-html="true"></td>
+                            </tr>
 
-						</tbody>
-					</table>
-				</div>
-				<div class="arrowDown" id="arrowDown"></div>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="arrowDown" id="arrowDown"></div>
 
-			</div>
+            </div>
 
 
-			<div id="myContent" class="col-md-12 center-block"
-				style="display: none;">
+            <div id="myContent" class="col-md-12 center-block" style="display: none;">
 
-				<div class="col-sm-6 col-md-6 table-responsive">
-					<h4 style="color: #2085B8; font-family: 'Orbitron';">STRENGTH</h4>
-					<table class="table table-striped table-responsive"
-						style="font-family: 'Montserrat'; font-size: 12px">
-						<thead>
-							<tr>
-								<th class="col-xs-5">Exercise Type</th>
-								<th class="col-xs-2" id="name2"></th>
-								<th class="col-xs-5">TRAK Score</th>
-							</tr>
-						</thead>
-						<tbody>
-							<tr>
-								<td>Lower Absolute Force</td>
-								<td id="lowerA">90</td>
-								<td id="absolutepower" data-trigger='hover'
-									data-container="body" data-toggle="popover"
-									data-content=" 
+                <div class="col-sm-6 col-md-6 table-responsive">
+                    <h4>STRENGTH</h4>
+                    <table class="table table-striped table-responsive" style="font-family: 'Montserrat'; font-size: 12px">
+                        <thead>
+                            <tr>
+                                <th class="col-xs-5">Exercise Type</th>
+                                <th class="col-xs-2" id="name2"></th>
+                                <th class="col-xs-5">TRAK Score</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Lower Absolute Force</td>
+                                <td id="lowerA">90</td>
+                                <td id="absolutepower" data-trigger='hover' data-container="body" data-toggle="popover" data-content=" 
                                                                                                  <div class='table-responsive'>
                 <table class='sastable table-striped table-bordered' data-toggle='table' data-height='150' data-classes='table  table-striped table-bordered'>
                     <thead id='head'>
@@ -1521,16 +1440,13 @@ enctype="multipart/form-data" role="form" >
                         </tr>
                     </tbody>
                 </table>
-            </div>"
-									data-html="true"></td>
-							</tr>
+            </div>" data-html="true"></td>
+                            </tr>
 
-							<tr>
-								<td>Lower Relative Force</td>
-								<td id="lowerR">160</td>
-								<td id="poweroutput" data-trigger='hover' data-container="body"
-									data-toggle="popover"
-									data-content=" 
+                            <tr>
+                                <td>Lower Relative Force</td>
+                                <td id="lowerR">160</td>
+                                <td id="poweroutput" data-trigger='hover' data-container="body" data-toggle="popover" data-content=" 
                                                                                                  <div class='table-responsive'>
                 <table class='sastable table-striped table-bordered' data-toggle='table' data-height='150' data-classes='table  table-striped table-bordered'>
                     <thead id='head'>
@@ -1582,16 +1498,13 @@ enctype="multipart/form-data" role="form" >
                         </tr>
                     </tbody>
                 </table>
-            </div>"
-									data-html="true"></td>
-							</tr>
+            </div>" data-html="true"></td>
+                            </tr>
 
-							<tr>
-								<td>Push Absolute Force</td>
-								<td id="pushA">67</td>
-								<td id="peakpower" data-trigger='hover' data-container="body"
-									data-toggle="popover"
-									data-content=" 
+                            <tr>
+                                <td>Push Absolute Force</td>
+                                <td id="pushA">67</td>
+                                <td id="peakpower" data-trigger='hover' data-container="body" data-toggle="popover" data-content=" 
                                                                                                  <div class='table-responsive'>
                 <table class='sastable table-striped table-bordered' data-toggle='table' data-height='150' data-classes='table  table-striped table-bordered'>
                     <thead id='head'>
@@ -1643,15 +1556,12 @@ enctype="multipart/form-data" role="form" >
                         </tr>
                     </tbody>
                 </table>
-            </div>"
-									data-html="true"></td>
-							</tr>
-							<tr>
-								<td>Push Relative Force</td>
-								<td id="pushL">128</td>
-								<td id="powerratio1" data-trigger='hover' data-container="body"
-									data-toggle="popover"
-									data-content=" 
+            </div>" data-html="true"></td>
+                            </tr>
+                            <tr>
+                                <td>Push Relative Force</td>
+                                <td id="pushL">128</td>
+                                <td id="powerratio1" data-trigger='hover' data-container="body" data-toggle="popover" data-content=" 
                                                                                                  <div class='table-responsive'>
                 <table class='sastable table-striped table-bordered' data-toggle='table' data-height='150' data-classes='table  table-striped table-bordered'>
                     <thead id='head'>
@@ -1703,15 +1613,12 @@ enctype="multipart/form-data" role="form" >
                         </tr>
                     </tbody>
                 </table>
-            </div>"
-									data-html="true"></td>
-							</tr>
-							<tr>
-								<td>Pull Absolute Force</td>
-								<td id="pullA">73</td>
-								<td id="powerratio6" data-trigger='hover' data-container="body"
-									data-toggle="popover"
-									data-content=" 
+            </div>" data-html="true"></td>
+                            </tr>
+                            <tr>
+                                <td>Pull Absolute Force</td>
+                                <td id="pullA">73</td>
+                                <td id="powerratio6" data-trigger='hover' data-container="body" data-toggle="popover" data-content=" 
                                                                                                  <div class='table-responsive'>
                 <table class='sastable table-striped table-bordered' data-toggle='table' data-height='150' data-classes='table  table-striped table-bordered'>
                     <thead id='head'>
@@ -1763,16 +1670,13 @@ enctype="multipart/form-data" role="form" >
                         </tr>
                     </tbody>
                 </table>
-            </div>"
-									data-html="true"></td>
-							</tr>
+            </div>" data-html="true"></td>
+                            </tr>
 
-							<tr>
-								<td>Pull Relative Force</td>
-								<td id="pullR">73</td>
-								<td id="powerratio7" data-trigger='hover' data-container="body"
-									data-toggle="popover"
-									data-content=" 
+                            <tr>
+                                <td>Pull Relative Force</td>
+                                <td id="pullR">73</td>
+                                <td id="powerratio7" data-trigger='hover' data-container="body" data-toggle="popover" data-content=" 
                                                                                                  <div class='table-responsive'>
                 <table class='sastable table-striped table-bordered' data-toggle='table' data-height='150' data-classes='table  table-striped table-bordered'>
                     <thead id='head'>
@@ -1824,33 +1728,29 @@ enctype="multipart/form-data" role="form" >
                         </tr>
                     </tbody>
                 </table>
-            </div>"
-									data-html="true"></td>
-							</tr>
+            </div>" data-html="true"></td>
+                            </tr>
 
-						</tbody>
-					</table>
+                        </tbody>
+                    </table>
 
-				</div>
+                </div>
 
-				<div class="col-sm-6 col-md-6  table-responsive">
-					<h4 style="color: #2085B8; font-family: 'Orbitron'">POWER</h4>
-					<table class="table table-striped"
-						style="font-family: 'Montserrat'; font-size: 12px">
-						<thead>
-							<tr>
-								<th class="col-xs-5">Exercise Type</th>
-								<th class="col-xs-2" id="name3"></th>
-								<th class="col-xs-5">TRAK Score</th>
-							</tr>
-						</thead>
-						<tbody>
-							<tr>
-								<td>10s Power Output</td>
-								<td id="power10">50</td>
-								<td id="vo2max" data-trigger='hover' data-container="body"
-									data-toggle="popover" data-placement="top"
-									data-content=" 
+                <div class="col-sm-6 col-md-6  table-responsive">
+                    <h4>POWER</h4>
+                    <table class="table table-striped" style="font-family: 'Montserrat'; font-size: 12px">
+                        <thead>
+                            <tr>
+                                <th class="col-xs-5">Exercise Type</th>
+                                <th class="col-xs-2" id="name3"></th>
+                                <th class="col-xs-5">TRAK Score</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>10s Power Output</td>
+                                <td id="power10">50</td>
+                                <td id="vo2max" data-trigger='hover' data-container="body" data-toggle="popover" data-placement="top" data-content=" 
                                                                                                  <div class='table-responsive'>
                 <table class='sastable table-striped table-bordered' data-toggle='table' data-height='150' data-classes='table  table-striped table-bordered'>
                     <thead id='head'>
@@ -1902,15 +1802,12 @@ enctype="multipart/form-data" role="form" >
                         </tr>
                     </tbody>
                 </table>
-            </div>"
-									data-html="true"></td>
-							</tr>
-							<tr>
-								<td>10s Relative Power</td>
-								<td id="s10Rel"></td>
-								<td id="s10Relative" data-trigger='hover' data-container="body"
-									data-toggle="popover" data-placement="top"
-									data-content=" 
+            </div>" data-html="true"></td>
+                            </tr>
+                            <tr>
+                                <td>10s Relative Power</td>
+                                <td id="s10Rel"></td>
+                                <td id="s10Relative" data-trigger='hover' data-container="body" data-toggle="popover" data-placement="top" data-content=" 
                                                                                                  <div class='table-responsive'>
                 <table class='sastable table-striped table-bordered' data-toggle='table' data-height='150' data-classes='table  table-striped table-bordered'>
                     <thead id='head'>
@@ -1962,16 +1859,12 @@ enctype="multipart/form-data" role="form" >
                         </tr>
                     </tbody>
                 </table>
-            </div>"
-									data-html="true"></td>
-							</tr>
-							<tr>
-								<td>60s Power Output</td>
-								<td id="power60Out"></td>
-								<td id="power60Output" data-trigger='hover'
-									data-container="body" data-toggle="popover"
-									data-placement="top"
-									data-content=" 
+            </div>" data-html="true"></td>
+                            </tr>
+                            <tr>
+                                <td>60s Power Output</td>
+                                <td id="power60Out"></td>
+                                <td id="power60Output" data-trigger='hover' data-container="body" data-toggle="popover" data-placement="top" data-content=" 
                                                                                                  <div class='table-responsive'>
                 <table class='sastable table-striped table-bordered' data-toggle='table' data-height='150' data-classes='table  table-striped table-bordered'>
                     <thead id='head'>
@@ -2023,16 +1916,13 @@ enctype="multipart/form-data" role="form" >
                         </tr>
                     </tbody>
                 </table>
-            </div>"
-									data-html="true"></td>
-							</tr>
-							<tr>
+            </div>" data-html="true"></td>
+                            </tr>
+                            <tr>
 
-								<td>60s Relative Power</td>
-								<td id="power60">73</td>
-								<td id="4poweroutput" data-trigger='hover' data-container="body"
-									data-toggle="popover" data-placement="top"
-									data-content=" 
+                                <td>60s Relative Power</td>
+                                <td id="power60">73</td>
+                                <td id="4poweroutput" data-trigger='hover' data-container="body" data-toggle="popover" data-placement="top" data-content=" 
                                                                                                  <div class='table-responsive'>
                 <table class='sastable table-striped table-bordered' data-toggle='table' data-height='150' data-classes='table  table-striped table-bordered'>
                     <thead id='head'>
@@ -2084,37 +1974,33 @@ enctype="multipart/form-data" role="form" >
                         </tr>
                     </tbody>
                 </table>
-            </div>"
-									data-html="true"></td>
-							</tr>
+            </div>" data-html="true"></td>
+                            </tr>
 
 
 
-						</tbody>
-					</table>
+                        </tbody>
+                    </table>
 
-				</div>
+                </div>
 
 
-				<div class="row col-md-12">
-					<div class="col-sm-6 col-md-6  table-responsive">
-						<h4 style="color: #2085B8; font-family: 'Orbitron'">ENDURANCE</h4>
-						<table class="table table-striped"
-							style="font-family: 'Montserrat'; font-size: 12px">
-							<thead>
-								<tr>
-									<th class="col-xs-5">Exercise Type</th>
-									<th class="col-xs-2" id="name4"></th>
-									<th class="col-xs-5">TRAK Score</th>
-								</tr>
-							</thead>
-							<tbody>
-								<tr>
-									<td>Vo2 Max</td>
-									<td id="vmax">50</td>
-									<td id="4powerratio" data-trigger='hover' data-container="body"
-										data-toggle="popover" data-placement="top"
-										data-content=" 
+                <div class="row col-md-12">
+                    <div class="col-sm-6 col-md-6  table-responsive">
+                        <h4>ENDURANCE</h4>
+                        <table class="table table-striped" style="font-family: 'Montserrat'; font-size: 12px">
+                            <thead>
+                                <tr>
+                                    <th class="col-xs-5">Exercise Type</th>
+                                    <th class="col-xs-2" id="name4"></th>
+                                    <th class="col-xs-5">TRAK Score</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Vo2 Max</td>
+                                    <td id="vmax">50</td>
+                                    <td id="4powerratio" data-trigger='hover' data-container="body" data-toggle="popover" data-placement="top" data-content=" 
                                                                                                  <div class='table-responsive'>
                 <table class='sastable table-striped table-bordered' data-toggle='table' data-height='150' data-classes='table  table-striped table-bordered'>
                     <thead id='head'>
@@ -2166,16 +2052,12 @@ enctype="multipart/form-data" role="form" >
                         </tr>
                     </tbody>
                 </table>
-            </div>"
-										data-html="true"></td>
-								</tr>
-								<tr>
-									<td>4min Relative Power</td>
-									<td id="rel4">73</td>
-									<td id="5poweroutput" data-trigger='hover'
-										data-container="body" data-toggle="popover"
-										data-placement="top"
-										data-content=" 
+            </div>" data-html="true"></td>
+                                </tr>
+                                <tr>
+                                    <td>4min Relative Power</td>
+                                    <td id="rel4">73</td>
+                                    <td id="5poweroutput" data-trigger='hover' data-container="body" data-toggle="popover" data-placement="top" data-content=" 
                                                                                                  <div class='table-responsive'>
                 <table class='sastable table-striped table-bordered' data-toggle='table' data-height='150' data-classes='table  table-striped table-bordered'>
                     <thead id='head'>
@@ -2227,157 +2109,149 @@ enctype="multipart/form-data" role="form" >
                         </tr>
                     </tbody>
                 </table>
-            </div>"
-										data-html="true"></td>
-								</tr>
+            </div>" data-html="true"></td>
+                                </tr>
 
 
 
-							</tbody>
-						</table>
-					</div>
+                            </tbody>
+                        </table>
+                    </div>
 
-					<div class="col-sm-6 col-md-6  table-responsive">
-						<div class="col-sm-12">
-							<h4 style="color: #2085B8; font-family: 'Orbitron'">NOTES</h4>
+                    <div class="col-sm-6 col-md-6  table-responsive">
+                        <div class="col-sm-12">
+                            <h4>NOTES</h4>
 
 
-							<table class="table table-striped"
-								style="font-family: 'Montserrat'; font-size: 12px">
+                            <table class="table table-striped" style="font-family: 'Montserrat'; font-size: 12px">
 
-								<tbody>
-									<tr>
-										<td id="notes"></td>
+                                <tbody>
+                                    <tr>
+                                        <td id="notes"></td>
 
-									</tr>
+                                    </tr>
 
 
 
 
-								</tbody>
-							</table>
-						</div>
-					</div>
-				</div>
-				<div class="row col-md-12">
-					<h1>&nbsp;</h1>
-				</div>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <div class="row col-md-12">
+                    <h1>&nbsp;</h1>
+                </div>
 
-				<div class="arrowUp" id="arrowUp" style="display: none;"></div>
-			</div>
+                <div class="arrowUp" id="arrowUp" style="display: none;"></div>
+            </div>
 
 
 
-		</div>
-	</div>
-	<div class="modal fade" id="compare" tabindex="-1" role="dialog"
-		aria-labelledby="myModalLabel" aria-hidden="true">
-		<div class="modal-dialog">
-			<div class="modal-content"></div>
-		</div>
-		<div class="modal-dialog">
-			<div class="modal-content"></div>
-		</div>
-		<div class="modal-dialog">
-			<div class="modal-content">
-				<form method="POST" autocomplete="off"
-					th:action="@{/user/comparison}" th:object="${compare}">
-					<div class="modal-header">
-						<button type="button" class="close" data-dismiss="modal">
+        </div>
+    </div>
+    <div class="modal fade" id="compare" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content"></div>
+        </div>
+        <div class="modal-dialog">
+            <div class="modal-content"></div>
+        </div>
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <form method="POST" autocomplete="off" th:action="@{/user/comparison}" th:object="${compare}">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">
 							<span aria-hidden="true" class="">× </span><span class="sr-only">Close</span>
 
 						</button>
 
-						<h4 class="modal-title" id="myModalLabel"  style="font-family:Montserrat">Compare two clients</h4>
-						<div class="col-md-10 col-md-offset-1">
-							<br />
-							<div class="col-md-6">
-								<div class="row">
-									<div class="form-group col-md-12">
-										<label for="client1" class=" control-label">First
-											Client</label> <input type="text" name="firstName" value=""
-											class="form-control  input-lg " id="basics" />
-										<div id="suggestionBox"></div>
-									</div>
-								</div>
-								<div class="row">
-									<div class="form-group col-md-12   ">
-										<label for="sel1">Select survey:</label> <select
-											class="form-control input-lg" id="sel1" name="FirstSurvey">
+                        <h4 class="modal-title" id="myModalLabel" style="font-family:Montserrat">Compare two clients</h4>
+                        <div class="col-md-10 col-md-offset-1">
+                            <br />
+                            <div class="col-md-6">
+                                <div class="row">
+                                    <div class="form-group col-md-12">
+                                        <label for="client1" class=" control-label">First
+											Client</label> <input type="text" name="firstName" value="" class="form-control  input-lg " id="basics" />
+                                        <div id="suggestionBox"></div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="form-group col-md-12   ">
+                                        <label for="sel1">Select survey:</label> <select class="form-control input-lg" id="sel1" name="FirstSurvey">
 											<option></option>
 
 										</select>
-									</div>
-								</div>
-							</div>
-							<div class="col-md-6">
-								<div class="row">
-									<div class="form-group col-md-12 col-md-offset-1">
-										<label for="client2" class=" control-label">Second
-											Client</label> <input type="text" name="secondName" value=""
-											class="form-control  input-lg " id="secondClient" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="row">
+                                    <div class="form-group col-md-12 col-md-offset-1">
+                                        <label for="client2" class=" control-label">Second
+											Client</label> <input type="text" name="secondName" value="" class="form-control  input-lg " id="secondClient" />
 
-									</div>
-								</div>
-								<div class="row">
-									<div class="form-group col-md-12 col-md-offset-1 ">
-										<label for="sel1">Select survey:</label> <select
-											class="form-control input-lg" id="sel2" name="SecondSurvey">
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="form-group col-md-12 col-md-offset-1 ">
+                                        <label for="sel1">Select survey:</label> <select class="form-control input-lg" id="sel2" name="SecondSurvey">
 											<option></option>
 
 										</select>
-									</div>
-								</div>
+                                    </div>
+                                </div>
 
-							</div>
-						</div>
+                            </div>
+                        </div>
 
 
-					</div>
+                    </div>
 
-					<div class="modal-footer">
-						<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-						<button type="submit" class="btn btn-primary">Compare</button>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary">Compare</button>
 
-					</div>
-				</form>
-			</div>
-		</div>
-	</div>
-	<script>
-		$(function() {
-			$(
-					'#deepSquat,#shoulderL,#shoulderR,#externalShoulderR,#externalShoulderL,#trunkRotationR,#trunkRotationL,#hipBridgeR,#hipBridgeL,#plank,#plankL,#trunk,#absolutepower,#poweroutput,#peakpower,#powerratio1,#powerratio6,#powerratio7,#vo2max,#4poweroutput,#4powerratio,#5poweroutput')
-					.popover({
-						container : 'body'
-					});
-		});
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <script>
+        $(function() {
+            $(
+                    '#deepSquat,#shoulderL,#shoulderR,#externalShoulderR,#externalShoulderL,#trunkRotationR,#trunkRotationL,#hipBridgeR,#hipBridgeL,#plank,#plankL,#trunk,#absolutepower,#poweroutput,#peakpower,#powerratio1,#powerratio6,#powerratio7,#vo2max,#4poweroutput,#4powerratio,#5poweroutput')
+                .popover({
+                    container: 'body'
+                });
+        });
 
-		$(document).ready(function() {
-			document.getElementById('arrowDown').style.cursor = "pointer";
-			document.getElementById('arrowUp').style.cursor = "pointer";
-			$(".arrowDown").click(function() {
-				$("#myContent").slideToggle();
-				document.getElementById('arrowDown').style.display = 'none';
-				document.getElementById('arrowUp').style.display = 'block';
+        $(document).ready(function() {
+            document.getElementById('arrowDown').style.cursor = "pointer";
+            document.getElementById('arrowUp').style.cursor = "pointer";
+            $(".arrowDown").click(function() {
+                $("#myContent").slideToggle();
+                document.getElementById('arrowDown').style.display = 'none';
+                document.getElementById('arrowUp').style.display = 'block';
 
-			});
+            });
 
-			$(".arrowUp").click(function() {
-				$("#myContent").slideToggle();
-				document.getElementById('arrowDown').style.display = 'block';
-				document.getElementById('arrowUp').style.display = 'none';
-			});
-		});
-	</script>
-	<script th:src="@{/js/progressbar.min.js}" type="text/javascript"></script>
-	<script th:src="@{/js/chart.js}" type="text/javascript"></script>
-	<script th:src="@{/js/bootstrap.min.js}" type="text/javascript"></script>
-	<script th:src="@{/js/comparison.js}" type="text/javascript"></script>
-	<script th:src="@{/js/jquery.easy-autocomplete.js}"
-		type="text/javascript"></script>
-	<script th:src="@{/js/jquery.easy-autocomplete.min.js}"
-		type="text/javascript"></script>
+            $(".arrowUp").click(function() {
+                $("#myContent").slideToggle();
+                document.getElementById('arrowDown').style.display = 'block';
+                document.getElementById('arrowUp').style.display = 'none';
+            });
+            
+           
+        });
+    </script>
+    <script th:src="@{/js/progressbar.min.js}" type="text/javascript"></script>
+    <script th:src="@{/js/chart.js}" type="text/javascript"></script>
+    <script th:src="@{/js/bootstrap.min.js}" type="text/javascript"></script>
+    <script th:src="@{/js/comparison.js}" type="text/javascript"></script>
+    <script th:src="@{/js/jquery.easy-autocomplete.js}" type="text/javascript"></script>
+    <script th:src="@{/js/jquery.easy-autocomplete.min.js}" type="text/javascript"></script>
 
 </body>
 
