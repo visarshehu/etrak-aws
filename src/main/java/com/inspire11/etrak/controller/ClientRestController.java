@@ -23,6 +23,7 @@ import com.inspire11.etrak.model.SurveyDataResults;
 import com.inspire11.etrak.model.View;
 import com.inspire11.etrak.repository.SurveyDataRepository;
 import com.inspire11.etrak.repository.SurveyDataResultsRepository;
+import com.inspire11.etrak.service.CalculateStatisticsService;
 import com.inspire11.etrak.service.ClientService;
 import com.inspire11.etrak.service.LookUpService;
 import com.inspire11.etrak.service.SurveyComparisonService;
@@ -39,6 +40,9 @@ public class ClientRestController {
 	
 	@Autowired
 	private SurveyService surveyService;
+	
+	@Autowired
+	private CalculateStatisticsService statisticsSurvey;
 	
 	@Autowired
 	private SurveyComparisonService comparisonService;
@@ -126,6 +130,17 @@ public class ClientRestController {
     public @ResponseBody List<SurveyData> getLatestActivity() {
     	return surveyService.findTop5ByOrderBySubmittedDateDesc();
     	
+    }
+    
+    
+    @RequestMapping(value="SurveyNumbers", method=RequestMethod.GET)
+    public @ResponseBody long getNumberSurveys() {
+    	return statisticsSurvey.CalculateStatistics();
+    }
+    
+    @RequestMapping(value="CalculateImprovement", method=RequestMethod.GET)
+    public @ResponseBody Double getImprovementScore() {
+    	return statisticsSurvey.CalculateImprovement();
     }
 
  

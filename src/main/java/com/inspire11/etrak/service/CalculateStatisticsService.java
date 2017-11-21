@@ -4,5 +4,6 @@ import java.util.Date;
 
 public interface CalculateStatisticsService {
 
-	public void CalculateStatistics(Date submittedDate);
+	public long CalculateStatistics();
+	public Double CalculateImprovement();
 }
