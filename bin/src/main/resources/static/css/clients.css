@@ -30,18 +30,3 @@
 .table>tbody>tr {
 	cursor: pointer;
 }
-
-
-.buttonsAlign{
-		display:flex;
-	align-items:center;
-	justify-content:flex-end;
-	padding-right:0;
-	padding-top:34px;
-}
-
-.container1{
-	width:95%;
-	margin: 0 auto;
-	padding-right:0;
-}

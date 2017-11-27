@@ -4,7 +4,7 @@
 
 
 #bs-navbar-collapse-1{
-	width:1280px;
+	width:100%;
 }
 
 
@@ -28,7 +28,6 @@
 
 .page-header{
 	 padding-top:70px;
-	 padding-left:40px;
 }
 
 
@@ -55,7 +54,7 @@
 }
 
 #navContainer{
-	margin-left:2%;
+	width:100%;
 }
 
 

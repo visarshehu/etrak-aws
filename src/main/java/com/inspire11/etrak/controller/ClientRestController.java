@@ -1,12 +1,13 @@
 package com.inspire11.etrak.controller;
 
+import java.io.ByteArrayOutputStream;
 import java.util.HashSet;
 import java.util.List;
 
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
-
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -23,7 +24,6 @@ import com.inspire11.etrak.model.SurveyDataResults;
 import com.inspire11.etrak.model.View;
 import com.inspire11.etrak.repository.SurveyDataRepository;
 import com.inspire11.etrak.repository.SurveyDataResultsRepository;
-import com.inspire11.etrak.service.CalculateStatisticsService;
 import com.inspire11.etrak.service.ClientService;
 import com.inspire11.etrak.service.LookUpService;
 import com.inspire11.etrak.service.SurveyComparisonService;
@@ -40,9 +40,6 @@ public class ClientRestController {
 	
 	@Autowired
 	private SurveyService surveyService;
-	
-	@Autowired
-	private CalculateStatisticsService statisticsSurvey;
 	
 	@Autowired
 	private SurveyComparisonService comparisonService;
@@ -79,13 +76,6 @@ public class ClientRestController {
    			
    	}
     
-    /*@RequestMapping(value = "surveyInfo/{gender}", method = RequestMethod.GET)
-   	public List<SurveyData> getSurveyInfo(@PathVariable("gender") char gender,final HttpServletResponse response){
-    	response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate");
-    	return surveyService.findTopClients(gender);
-  
-   			
-   	}*/
     
     @RequestMapping(value = "comparisonResults/{id}", method = RequestMethod.GET)
    	public SurveyComparison getComparisonResultById(@PathVariable("id") long id, final HttpServletResponse response){
@@ -132,16 +122,7 @@ public class ClientRestController {
     	
     }
     
-    
-    @RequestMapping(value="SurveyNumbers", method=RequestMethod.GET)
-    public @ResponseBody long getNumberSurveys() {
-    	return statisticsSurvey.CalculateStatistics();
-    }
-    
-    @RequestMapping(value="CalculateImprovement", method=RequestMethod.GET)
-    public @ResponseBody Double getImprovementScore() {
-    	return statisticsSurvey.CalculateImprovement();
-    }
+ 
 
  
 }

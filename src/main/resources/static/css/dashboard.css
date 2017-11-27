@@ -1,0 +1,66 @@
+body{
+	font-family:Montserrat;
+}
+
+.container-fluid{
+	width:95%;
+	padding-top:25px;
+	padding-right:0;
+}
+
+#secondContainer{
+	padding-right:0px;
+}
+
+#activityFeed{
+	padding-right:0px; 
+}
+
+.activity, .order{
+	display:flex;
+	align-items:center;
+}
+
+.dashboardLogo{
+	padding-left:0px;
+}
+
+.buttonAlign{
+	display:flex;
+	align-items:center;
+	justify-content:flex-end;
+	padding-right:0;
+	padding-top:34px;
+}
+
+.centerAlign{
+	display:flex;
+	justify-content:center;
+}
+
+.avgAge{
+	display:flex;
+	justify-content:space-around;
+}
+
+.header{
+	padding-right:0;
+}
+
+.genderDashboard{
+	display:flex;
+	justify-content:center;
+}
+
+.firstRow, .statistics{
+	padding-top:20px;
+}
+
+.lastRow{
+	padding-bottom:20px;
+}
+
+
+.firstContainer{
+	padding-top:0px !important;
+}

@@ -9,6 +9,7 @@
     <!-- Bootstrap Core CSS -->
     <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet">
     <link th:href="@{/css/clientStat.css}" rel="stylesheet">
+    <link th:href="@{/css/dashboard.css}" rel="stylesheet">
     <link href='https://fonts.googleapis.com/css?family=Orbitron' rel='stylesheet'>
     <script th:src="@{/js/jquery-3.2.1.min.js}" type="text/javascript"></script>
     <link href='https://fonts.googleapis.com/css?family=Orbitron' rel='stylesheet'>
@@ -88,628 +89,674 @@
         </div>
         <!-- /.container -->
     </nav>
-    <div class="page-header">
-        <div class="container-fluid" style="width: 100%; margin: 0 auto;">
-            <div class="row col-md-12">
+   
+		<div class="page-header">
+			<div class="container-fluid firstContainer">
+				<div class="row col-md-12 header">
 
-                <div class="col-md-4 ">
+					<div class="col-md-8 dashboardLogo">
 
-                    <div class="row col-sm-7" style="padding-bottom: 0px">
-                        <img th:src="@{/images/ufclogo.png}" alt="User" width="150" height="50 ">
-                    </div>
-                    <div class="row col-sm-8">
-                        <h2 style="color: black; margin-top: 0px; font-family: 'Orbitron'">
-                            <b>&nbsp;DASHBOARD</b>
-                        </h2>
-                    </div>
-
-
-
-                </div>
-                <div class="col-md-4"></div>
-
-                 <div class="col-md-4 ">
-                    <div class="row">&nbsp;</div>
-                    <div class="row">
-                    <div class="col-md-4 col-md-offset-3">
-                        <div id="buttons" style="margin-left:85%;" >
-                            <button type="button" class="btn btn-primary " style="background: #2085B8;" >New Evaluation</button>
-                        </div>
-                        </div>
-                        <div class="col-md-4">
-                       
-                        </div>
-                    </div>
-
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="container-fluid" style="width: 95%; margin: 0 auto; font-family: 'Montserrat'">
-        <div class="row col-md-12">
-            
-           
-            <div class="row col-md-12">
-                <div class="col-md-8">
-
-                    <div class="col-md-6 ">
-                     
-                <h4>LEADERBOARD</h4>
-            
-                        <div class="col-sm-12">
-                      
-                            <div class="row" style="margin-bottom: 2px; background-color: #F4F4F4;">
-                                <h4 style="font-family:'Orbitron';color: black; text-align: center">
-                                    <b>MALE</b>
-                                </h4>
-                            </div>
-                        </div>
-                        <div class="col-md-12" style="background-color: #F4F4F4;">
-                            <div class="row">
-                                <div class="col-sm-2">
-                                    <h3>#1</h3>
-                                </div>
-                                <div class="col-sm-3">
-                                    <img th:src="@{/images/user.png}" class="img-circle" alt="User" width="70" height="70">
-                                </div>
-                                <div class="col-sm-7" id="male1">
-                                    <h4 style="color: black;">
-                                        <b></b>
-                                    </h4>
-                                    
-                                    <p style="font-size: 11px;" >
-                                        TRAKscore: <b></b>
-                                    </p>
-                                </div>
-                            </div>
-                            <br />
-                            <div class="row ">
-                                <div class="col-sm-2">
-                                    <h3>#2</h3>
-                                </div>
-                                <div class="col-sm-3">
-                                    <img th:src="@{/images/user.png}" class="img-circle" alt="User" width="70" height="70">
-                                </div>
-                                <div class="col-sm-7"  id="male2">
-                                    <h4 style="color: black;">
-                                        <b></b>
-                                    </h4>
-                               
-                                    <p style="font-size: 11px;">
-                                        TRAKscore: <b></b>
-                                    </p>
-                                </div>
-                            </div>
-                            <br />
-                            <div class="row " >
-                                <div class="col-sm-2" >
-                                    <h3>#3</h3>
-                                </div>
-                                <div class="col-sm-3">
-                                    <img th:src="@{/images/user.png}" class="img-circle" alt="User" width="70" height="70">
-                                </div>
-                                <div class="col-sm-7" id="male3">
-                                    <h4 style="color: black;">
-                                        <b></b>
-                                    </h4>
-                                   
-                                    <p style="font-size: 11px;">
-                                        TRAKscore: <b></b>
-                                    </p>
-                                </div>
-                            </div>
-                            <br />
-                            <div class="row">
-                                <div class="col-sm-2" >
-                                    <h3>#4</h3>
-                                </div>
-                                <div class="col-sm-3">
-                                    <img th:src="@{/images/user.png}" class="img-circle" alt="User" width="70" height="70">
-                                </div>
-                                <div class="col-sm-7" id="male4">
-                                    <h4 style="color: black;">
-                                        <b></b>
-                                    </h4>
-                                  
-                                    <p style="font-size: 11px;">
-                                        TRAKscore: <b></b>
-                                    </p>
-                                </div>
-                            </div>
-                            <br />
-                            <div class="row">
-                                <div class="col-sm-2">
-                                    <h3>#5</h3>
-                                </div>
-                                <div class="col-sm-3">
-                                    <img th:src="@{/images/user.png}" class="img-circle" alt="User" width="70" height="70">
-                                </div>
-                                <div class="col-sm-7" id="male5">
-                                    <h4 style="color: black;">
-                                        <b></b>
-                                    </h4>
-                                  
-                                    <p style="font-size: 11px;">
-                                        TRAKscore: <b></b>
-                                    </p>
-                                </div>
-                            </div>
-
-                        </div>
-
-                    </div>
-
-
-                    <div class="col-md-6 ">
-                    <h4>&nbsp;</h4>
-                        <div class="col-sm-12">
-                            <div class="row" style="margin-bottom: 2px; background-color: #F4F4F4;">
-                                <h4 style="font-family:'Orbitron';color: black; text-align: center">
-                                    <b>FEMALE</b>
-                                </h4>
-                            </div>
-                        </div>
-                        <div class="col-md-12" style="background-color: #F4F4F4;">
-                            <div class="row">
-                                <div class="col-sm-2">
-                                    <h3>#1</h3>
-                                </div>
-                                <div class="col-sm-3">
-                                    <img th:src="@{/images/user.png}" class="img-circle" alt="User" width="70" height="70">
-                                </div>
-                                <div class="col-sm-7" id="female1">
-                                    <h4 style="color: black;">
-                                        <b></b>
-                                    </h4>
-                                  
-                                    <p style="font-size: 11px;">
-                                        TRAKscore: <b></b>
-                                    </p>
-                                </div>
-                            </div>
-                            <br />
-                            <div class="row">
-                                <div class="col-sm-2">
-                                    <h3>#2</h3>
-                                </div>
-                                <div class="col-sm-3">
-                                    <img th:src="@{/images/user.png}" class="img-circle" alt="User" width="70" height="70">
-                                </div>
-                                <div class="col-sm-7"  id="female2">
-                                    <h4 style="color: black;">
-                                        <b></b>
-                                    </h4>
-                                  
-                                    <p style="font-size: 11px;">
-                                        TRAKscore: <b></b>
-                                    </p>
-                                </div>
-                            </div>
-                            <br />
-                            <div class="row">
-                                <div class="col-sm-2">
-                                    <h3>#3</h3>
-                                </div>
-                                <div class="col-sm-3">
-                                    <img th:src="@{/images/user.png}" class="img-circle" alt="User" width="70" height="70">
-                                </div>
-                                <div class="col-sm-7" id="female3">
-                                    <h4 style="color: black;">
-                                        <b></b>
-                                    </h4>
-                                  
-                                    <p style="font-size: 11px;">
-                                        TRAKscore: <b></b>
-                                    </p>
-                                </div>
-                            </div>
-                            <br />
-                            <div class="row">
-                                <div class="col-sm-2">
-                                    <h3>#4</h3>
-                                </div>
-                                <div class="col-sm-3">
-                                    <img th:src="@{/images/user.png}" class="img-circle" alt="User" width="70" height="70">
-                                </div>
-                                <div class="col-sm-7" id="female4">
-                                    <h4 style="color: black;">
-                                        <b></b>
-                                    </h4>
-                                   
-                                    <p style="font-size: 11px;">
-                                        TRAKscore: <b></b>
-                                    </p>
-                                </div>
-                            </div>
-                            <br />
-                            <div class="row">
-                                <div class="col-sm-2">
-                                    <h3>#5</h3>
-                                </div>
-                                <div class="col-sm-3">
-                                    <img th:src="@{/images/user.png}" class="img-circle" alt="User" width="70" height="70">
-                                </div>
-                                <div class="col-sm-7" id="female5">
-                                    <h4 style="color: black;">
-                                        <b></b>
-                                    </h4>
-                               
-                                    <p style="font-size: 11px;">
-                                        TRAKscore: <b></b>
-                                    </p>
-                                </div>
-                            </div>
-
-
-                        </div>
-                    </div>
-
-                   
-                    <div class="col-md-12">
-                    <h4 style="padding-top: 15px">STATISTICS</h4>
-                        <div class="row">
-                            <div class="col-md-4">
-                                <div class="col-md-12" style="background-color: #F4F4F4">
-                                    <div class="row">
-                                        <h5 style="text-align: center;">ACTIVE USERS</h5>
-                                    </div>
-                                    <div class="row">
-                                        <h1 style="text-align: center; color: #2085B8; margin-top: 0px; font-size: 4em">
-                                            <strong>231</strong>
-                                        </h1>
-                                    </div>
-
-                                </div>
-                                <div class="col-md-12" style="background-color: #F4F4F4; margin-top: 3px">
-
-                                    <div class="row" id="month">
-                                        <div style="width: 60%; margin: 0 auto">
-                                            <a href="" style="float: right;"> Month </a> <a href="" style="float: left;">Year</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="col-md-4">
-                                <div class="col-md-12" style="background-color: #F4F4F4">
-                                    <div class="row">
-                                        <h5 style="text-align: center;" title="AVERAGE ACTIVE SCORE">ACTIVE SCORE</h5>
-                                    </div>
-                                    <div class="row">
-                                        <h1 style="text-align: center; color: #2085B8; margin-top: 0px; font-size: 4em">
-                                            <strong>43</strong>
-                                        </h1>
-                                    </div>
-
-                                </div>
-                                <div class="col-md-12" style="background-color: #F4F4F4; margin-top: 3px">
-                                    <div class="row" id="month">
-                                        <div style="width: 60%; margin: 0 auto">
-                                            <a href="" style="float: right;"> Average </a> <a href="" style="float: left;">Range</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="col-md-12" style="background-color: #F4F4F4">
-                                    <div class="row">
-                                        <h5 style="text-align: center;" title="AVERAGE RATE OF IMPROVEMENT">IMPROVEMENT</h5>
-                                    </div>
-                                    <div class="row">
-                                        <h1 style="text-align: center; color: #2085B8; margin-top: 0px; font-size: 4em">
-                                            <strong>132</strong>
-                                        </h1>
-                                    </div>
-
-
-                                </div>
-                                <div class="col-md-12" style="background-color: #F4F4F4; margin-top: 3px">
-                                    <div class="row" id="month">
-                                        <div style="width: 65%; margin: 0 auto">
-                                            <a href="" style="float: right;"> Male </a> <a href="" style="float: left;">Female</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                        </div>
-                        <br />
-                        <div class="row ">
-                            <div class="col-md-4">
-                                <div class="col-md-12" style="background-color: #F4F4F4">
-                                    <div class="row">
-                                        <h5 style="text-align: center;">GENDER RATIO</h5>
-                                    </div>
-                                    <div class="row">
-                                        <h1 style="text-align: center; color: #2085B8; margin-top: 0px; font-size: 4em">
-                                            <strong>24%</strong>
-                                        </h1>
-                                    </div>
-
-                                </div>
-                                <div class="col-md-12" style="background-color: #F4F4F4; margin-top: 3px">
-                                    <div class="row" id="female">
-                                        <div style="width: 60%; margin: 0 auto">
-                                            <a href="" style="float: right;"> Female </a> <a href="" style="float: left;">Male</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="col-md-12" style="background-color: #F4F4F4">
-                                    <div class="row">
-                                        <h5 style="text-align: center;">AVG.AGE</h5>
-                                    </div>
-                                    <div class="row">
-                                        <h1 style="text-align: center; color: #2085B8; margin-top: 0px; font-size: 4em">
-                                            <strong>24</strong>
-                                        </h1>
-                                    </div>
-
-                                </div>
-                                <div class="col-md-12" style="background-color: #F4F4F4; margin-top: 3px">
-                                    <div class="row" id="female">
-                                        <div style="width: 65%; margin: 0 auto">
-                                            <div style="display:inline-block"><a href=""> 18- </a> </div>
-                                            <div style="display:inline-block;padding-left:20px"><a href="">19-39</a></div>
-                                            <div style="display:inline-block;padding-left:20px"> <a href="">40+</a></div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                            </div>
-                            <div class="col-md-4">
-                                <div class="col-md-12" style="background-color: #F4F4F4">
-                                    <div class="row">
-                                        <h5 style="text-align: center;">TOP 10%</h5>
-                                    </div>
-                                    <div class="row">
-                                        <h1 style="text-align: center; color: #2085B8; margin-top: 0px; font-size: 4em">
-                                            <strong>23</strong>
-                                        </h1>
-                                    </div>
-
-
-                                </div>
-                                <div class="col-md-12" style="background-color: #F4F4F4; margin-top: 3px">
-                                    <div class="row" id="female">
-                                        <div style="width: 65%; margin: 0 auto">
-                                            <a href="" style="float: right;"> Male </a> <a href="" style="float: left;">Female</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+						<div class="row col-sm-7" style="padding-bottom: 0px">
+							<img th:src="@{/images/ufclogo.png}" alt="User" width="150"
+								height="50">
+						</div>
+						<div class="row col-sm-8">
+							<h2
+								style="color: black; margin-top: 0px; font-family: 'Orbitron'">
+								<b>DASHBOARD</b>
+							</h2>
+						</div>
 
 
 
+					</div>
 
-                <div class="col-md-4">
-			 <h4>ACTIVITY FEED</h4>
-			 
-                    <div class="col-md-12">
-                        <div class="row" style="background-color: #F4F4F4" >
-                            <div class="col-sm-3" style="padding-top: 15px;">
-                                <img th:src="@{/images/user.png}" class="img-circle" alt="User" width="70" height="70">
-                            </div>
-                            <div class="col-sm-5">
-                                <h4 style="color: black;" id="firstName">
-                                    <b></b>
-                                </h4>
-                               
-                                <p style="font-size: 11px;" id="firstScore">
-                                    TRAKscore: <b></b>
-                                </p>
-                            </div>
-                            <div class="col-sm-4">
-                                <p style="font-size: 11px;" id="firstMovement">
-                                    Movement: <b></b>
-                                </p>
-                                <p style="font-size: 11px;" id="firstPower">
-                                    Power: <b></b>
-                                </p>
-                                <p style="font-size: 11px;" id="firstStrength">
-                                    Strength: <b></b>
-                                </p>
-                                <p style="font-size: 11px;" id="firstEndurance">
-                                    Endurance: <b></b>
-                                </p>
-                          
-                             
-                        </div>
-                        </div>
-                       <p style="font-size: 12px; font-family: Calibri; margin-top: 0px" id="firstDate">4/20/2017 , 8:35PM</p>
-                        <br />
-                        
-                       
-                        <div class="row" style="background-color: #F4F4F4">
-                            <div class="col-sm-3" style="padding-top: 15px">
-                                <img th:src="@{/images/user.png}" class="img-circle" alt="User" width="70" height="70">
-                            </div>
-                            <div class="col-sm-5">
-                                <h4 style="color: black;" id="secondName">
-                                    <b></b>
-                                </h4>
-                            
-                                <p style="font-size: 11px;" id="secondScore">
-                                    TRAKscore: <b></b>
-                                </p>
-                            </div>
-                            <div class="col-sm-4">
-                                <p style="font-size: 11px;" id="secondMovement">
-                                    Movement: <b></b>
-                                </p>
-                                <p style="font-size: 11px;" id="secondPower">
-                                    Power: <b></b>
-                                </p>
-                                <p style="font-size: 11px;" id="secondStrength">
-                                    Strength: <b></b>
-                                </p>
-                                <p style="font-size: 11px;" id="secondEndurance">
-                                    Endurance: <b></b>
-                                </p>
-                            </div>
-                        </div>
-                        <p style="font-size: 12px; font-family: Calibri; margin-top: 0px" id="secondDate"></p>
-                        <br />
-                        <div class="row" style="background-color: #F4F4F4">
-                            <div class="col-sm-3" style="padding-top: 15px">
-                                <img th:src="@{/images/user.png}" class="img-circle" alt="User" width="70" height="70">
-                            </div>
-                            <div class="col-sm-5">
-                                <h4 style="color: black;" id="thirdName">
-                                    <b></b>
-                                </h4>
-                                
-                                <p style="font-size: 11px;" id="thirdScore">
-                                    TRAKscore: <b></b>
-                                </p>
-                            </div>
-                            <div class="col-sm-4">
-                                <p style="font-size: 11px;" id="thirdMovement">
-                                    Movement: <b></b>
-                                </p>
-                                <p style="font-size: 11px;" id="thirdPower">
-                                    Power: <b></b>
-                                </p>
-                                <p style="font-size: 11px;" id="thirdStrength">
-                                    Strength: <b></b>
-                                </p>
-                                <p style="font-size: 11px;" id="thirdEndurance">
-                                    Endurance: <b></b>
-                                </p>
-                            </div>
-                        </div>
-                        <p style="font-size: 12px; font-family: Calibri; margin-top: 0px" id="thirdDate"></p>
-                        <br />
-                        <div class="row" style="background-color: #F4F4F4">
-                            <div class="col-sm-3" style="padding-top: 15px">
-                                <img th:src="@{/images/user.png}" class="img-circle" alt="User" width="70" height="70">
-                            </div>
-                            <div class="col-sm-5">
-                                <h4 style="color: black;" id="fourthName">
-                                    <b></b>
-                                </h4>
-                       
-                                <p style="font-size: 11px;" id="fourthScore">
-                                    TRAKscore: <b></b>
-                                </p>
-                            </div>
-                            <div class="col-sm-4" style="background-color: #F4F4F4">
-                                <p style="font-size: 11px;" id="fourthMovement">
-                                    Movement: <b></b>
-                                </p>
-                                <p style="font-size: 11px;" id="fourthPower">
-                                    Power: <b></b>
-                                </p>
-                                <p style="font-size: 11px;" id="fourthStrength">
-                                    Strength: <b></b>
-                                </p>
-                                <p style="font-size: 11px;" id="fourthEndurance">
-                                    Endurance: <b></b>
-                                </p>
-                            </div>
-                        </div>
-                        <p style="font-size: 12px; font-family: Calibri; margin-top: 0px" id="fourthDate"></p>
-                        <br />
-                        <div class="row" style="background-color: #F4F4F4">
-                            <div class="col-sm-3" style="padding-top: 15px">
-                                <img th:src="@{/images/user.png}" class="img-circle" alt="User" width="70" height="70">
-                            </div>
-                            <div class="col-sm-5">
-                                <h4 style="color: black;" id="fifthName">
-                                    <b></b>
-                                </h4>
-                             
-                                <p style="font-size: 11px;" id="fifthScore">
-                                    TRAKscore: <b></b>
-                                </p>
-                            </div>
-                            <div class="col-sm-4">
-                                <p style="font-size: 11px;" id="fifthMovement">
-                                    Movement: <b></b>
-                                </p>
-                                <p style="font-size: 11px;" id="fifthPower">
-                                    Power: <b></b>
-                                </p>
-                                <p style="font-size: 11px;" id="fifthStrength">
-                                    Strength: <b></b>
-                                </p>
-                                <p style="font-size: 11px;" id="fifthEndurance">
-                                    Endurance: <b></b>
-                                </p>
-                            </div>
-                        </div>
-                        <p style="font-size: 12px; font-family: Calibri; margin-top: 0px" id="fifthDate"></p>
-                        <br />
-                        <div class="row" style="background-color: #F4F4F4">
-                            <div class="col-sm-3" style="padding-top: 15px">
-                                <img th:src="@{/images/user.png}" class="img-circle" alt="User" width="70" height="70">
-                            </div>
-                            <div class="col-sm-5">
-                                <h4 style="color: black;" id="sixthName">
-                                    <b></b>
-                                </h4>
-                            
-                                <p style="font-size: 11px;" id="sixthScore">
-                                    TRAKscore: <b></b>
-                                </p>
-                            </div>
-                            <div class="col-sm-4">
-                                <p style="font-size: 11px;" id="sixthMovement">
-                                    Movement: <b></b>
-                                </p>
-                                <p style="font-size: 11px;" id="sixthPower">
-                                    Power: <b></b>
-                                </p>
-                                <p style="font-size: 11px;" id="sixthStrength">
-                                    Strength: <b></b>
-                                </p>
-                                <p style="font-size: 11px;" id="sixthEndurance">
-                                    Endurance: <b></b>
-                                </p>
-                            </div>
-                        </div>
-                        <p style="font-size: 12px; font-family: Calibri; margin-top: 0px" id="sixthDate"></p>
-                        <br />
-                        <div class="row" style="background-color: #F4F4F4">
-                            <div class="col-sm-3" style="padding-top: 15px">
-                                <img th:src="@{/images/user.png}" class="img-circle" alt="User" width="70" height="70">
-                            </div>
-                            <div class="col-sm-5">
-                                <h4 style="color: black;" id="seventhName">
-                                    <b></b>
-                                </h4>
-                              
-                                <p style="font-size: 11px;" id="seventhScore">
-                                    TRAKscore: <b></b>
-                                </p>
-                            </div>
-                            <div class="col-sm-4">
-                                <p style="font-size: 11px;" id="seventhMovement">
-                                    Movement: <b></b>
-                                </p>
-                                <p style="font-size: 11px;" id="seventhPower">
-                                    Power: <b></b>
-                                </p>
-                                <p style="font-size: 11px;" id="seventhStrength">
-                                    Strength: <b></b>
-                                </p>
-                                <p style="font-size: 11px;" id="seventhEndurance">
-                                    Endurance: <b></b>
-                                </p>
-                            </div>
-                        </div>
-                        <p style="font-size: 12px; font-family: Calibri; margin-top: 0px" id="seventhDate"></p>
-                        <br />
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+					<div class="col-md-4 buttonAlign">
+						<div id="buttons">
+							<button type="button" class="btn btn-primary "
+								style="background: #2085B8;">New Evaluation</button>
+						</div>
+						
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="container-fluid" id="secondContainer">
+			<div class="row">
+
+
+				<div class="row col-md-12">
+					<div class="col-md-8">
+						<div class="row">
+							<div class="col-md-6 ">
+
+								<h4>LEADERBOARD</h4>
+
+								<div class="col-sm-12">
+
+									<div class="row genderDashboard"
+										style="margin-bottom: 2px; background-color: #F4F4F4;">
+										<h4 style="color: black;">
+											<b>MALE</b>
+										</h4>
+									</div>
+								</div>
+								<div class="col-md-12" style="background-color: #F4F4F4;">
+									<div class="row firstRow">
+										<div class="col-sm-2 order">
+											<h3>#1</h3>
+										</div>
+										<div class="col-sm-3">
+											<img th:src="@{/images/user.png}" class="img-circle"
+												alt="User" width="70" height="70">
+										</div>
+										<div class="col-sm-7" id="male1">
+											<h5 style="color: black;">
+												<b></b>
+											</h5>
+
+											<p style="font-size: 11px;">
+												TRAKscore: <b></b>
+											</p>
+										</div>
+									</div>
+									<br />
+									<div class="row ">
+										<div class="col-sm-2 order" >
+											<h3>#2</h3>
+										</div>
+										<div class="col-sm-3">
+											<img th:src="@{/images/user.png}" class="img-circle"
+												alt="User" width="70" height="70">
+										</div>
+										<div class="col-sm-7" id="male2">
+											<h5 style="color: black;">
+												<b></b>
+											</h5>
+
+											<p style="font-size: 11px;">
+												TRAKscore: <b></b>
+											</p>
+										</div>
+									</div>
+									<br />
+									<div class="row ">
+										<div class="col-sm-2 order">
+											<h3>#3</h3>
+										</div>
+										<div class="col-sm-3">
+											<img th:src="@{/images/user.png}" class="img-circle"
+												alt="User" width="70" height="70">
+										</div>
+										<div class="col-sm-7" id="male3">
+											<h5 style="color: black;">
+												<b></b>
+											</h5>
+
+											<p style="font-size: 11px;">
+												TRAKscore: <b></b>
+											</p>
+										</div>
+									</div>
+									<br />
+									<div class="row">
+										<div class="col-sm-2 order">
+											<h3>#4</h3>
+										</div>
+										<div class="col-sm-3">
+											<img th:src="@{/images/user.png}" class="img-circle"
+												alt="User" width="70" height="70">
+										</div>
+										<div class="col-sm-7" id="male4">
+											<h5 style="color: black;">
+												<b></b>
+											</h5>
+
+											<p style="font-size: 11px;">
+												TRAKscore: <b></b>
+											</p>
+										</div>
+									</div>
+									<br />
+									<div class="row lastRow" >
+										<div class="col-sm-2 order">
+											<h3>#5</h3>
+										</div>
+										<div class="col-sm-3">
+											<img th:src="@{/images/user.png}" class="img-circle"
+												alt="User" width="70" height="70">
+										</div>
+										<div class="col-sm-7" id="male5">
+											<h5 style="color: black;">
+												<b></b>
+											</h5>
+
+											<p style="font-size: 11px;">
+												TRAKscore: <b></b>
+											</p>
+										</div>
+									</div>
+
+								</div>
+
+							</div>
+
+
+							<div class="col-md-6 ">
+								<h4>&nbsp;</h4>
+								<div class="col-sm-12">
+									<div class="row genderDashboard"  
+										style="margin-bottom: 2px; background-color: #F4F4F4;">
+										<h4
+											style=" color: black;">
+											<b>FEMALE</b>
+										</h4>
+									</div>
+								</div>
+								<div class="col-md-12" style="background-color: #F4F4F4;">
+									<div class="row firstRow">
+										<div class="col-sm-2 order">
+											<h3>#1</h3>
+										</div>
+										<div class="col-sm-3">
+											<img th:src="@{/images/user.png}" class="img-circle"
+												alt="User" width="70" height="70">
+										</div>
+										<div class="col-sm-7" id="female1">
+											<h4 style="color: black;">
+												<b></b>
+											</h4>
+
+											<p style="font-size: 11px;">
+												TRAKscore: <b></b>
+											</p>
+										</div>
+									</div>
+									<br />
+									<div class="row">
+										<div class="col-sm-2 order">
+											<h3>#2</h3>
+										</div>
+										<div class="col-sm-3">
+											<img th:src="@{/images/user.png}" class="img-circle"
+												alt="User" width="70" height="70">
+										</div>
+										<div class="col-sm-7" id="female2">
+											<h4 style="color: black;">
+												<b></b>
+											</h4>
+
+											<p style="font-size: 11px;">
+												TRAKscore: <b></b>
+											</p>
+										</div>
+									</div>
+									<br />
+									<div class="row">
+										<div class="col-sm-2 order">
+											<h3>#3</h3>
+										</div>
+										<div class="col-sm-3">
+											<img th:src="@{/images/user.png}" class="img-circle"
+												alt="User" width="70" height="70">
+										</div>
+										<div class="col-sm-7" id="female3">
+											<h4 style="color: black;">
+												<b></b>
+											</h4>
+
+											<p style="font-size: 11px;">
+												TRAKscore: <b></b>
+											</p>
+										</div>
+									</div>
+									<br />
+									<div class="row">
+										<div class="col-sm-2 order">
+											<h3>#4</h3>
+										</div>
+										<div class="col-sm-3">
+											<img th:src="@{/images/user.png}" class="img-circle"
+												alt="User" width="70" height="70">
+										</div>
+										<div class="col-sm-7" id="female4">
+											<h4 style="color: black;">
+												<b></b>
+											</h4>
+
+											<p style="font-size: 11px;">
+												TRAKscore: <b></b>
+											</p>
+										</div>
+									</div>
+									<br />
+									<div class="row lastRow">
+										<div class="col-sm-2 order">
+											<h3>#5</h3>
+										</div>
+										<div class="col-sm-3">
+											<img th:src="@{/images/user.png}" class="img-circle"
+												alt="User" width="70" height="70">
+										</div>
+										<div class="col-sm-7" id="female5">
+											<h4 style="color: black;">
+												<b></b>
+											</h4>
+
+											<p style="font-size: 11px;">
+												TRAKscore: <b></b>
+											</p>
+										</div>
+									</div>
+
+
+								</div>
+							</div>
+						</div>
+
+						<div class="statistics">
+							<h4 style="padding-top: 15px">STATISTICS</h4>
+							<div class="row">
+								<div class="col-md-4">
+									<div class="col-md-12" style="background-color: #F4F4F4">
+										<div class="row centerAlign">
+											<h5>ACTIVE USERS</h5>
+										</div>
+										<div class="row centerAlign">
+											<h1 style="color: #2085B8; margin-top: 0px; font-size: 4em">
+												<strong>231</strong>
+											</h1>
+										</div>
+
+									</div>
+									<div class="col-md-12"
+										style="background-color: #F4F4F4; margin-top: 3px">
+
+										<div class="row centerAlign" id="month">
+											<div style="width: 60%; margin: 0 auto">
+												<a href="" style="float: right;"> Month </a> <a href=""
+													style="float: left;">Year</a>
+											</div>
+										</div>
+									</div>
+								</div>
+
+								<div class="col-md-4">
+									<div class="col-md-12" style="background-color: #F4F4F4">
+										<div class="row centerAlign">
+											<h5 style="text-align: center;" title="AVERAGE ACTIVE SCORE">ACTIVE
+												SCORE</h5>
+										</div>
+										<div class="row centerAlign">
+											<h1
+												style="text-align: center; color: #2085B8; margin-top: 0px; font-size: 4em">
+												<strong>43</strong>
+											</h1>
+										</div>
+
+									</div>
+									<div class="col-md-12"
+										style="background-color: #F4F4F4; margin-top: 3px">
+										<div class="row centerAlign" id="month">
+											<div style="width: 60%; margin: 0 auto">
+												<a href="" style="float: right;"> Average </a> <a href=""
+													style="float: left;">Range</a>
+											</div>
+										</div>
+									</div>
+								</div>
+								<div class="col-md-4">
+									<div class="col-md-12" style="background-color: #F4F4F4">
+										<div class="row centerAlign">
+											<h5 style="text-align: center;"
+												title="AVERAGE RATE OF IMPROVEMENT">IMPROVEMENT</h5>
+										</div>
+										<div class="row centerAlign">
+											<h1
+												style="text-align: center; color: #2085B8; margin-top: 0px; font-size: 4em">
+												<strong>132</strong>
+											</h1>
+										</div>
+
+
+									</div>
+									<div class="col-md-12"
+										style="background-color: #F4F4F4; margin-top: 3px">
+										<div class="row centerAlign" id="month">
+											<div style="width: 65%; margin: 0 auto">
+												<a href="" style="float: right;"> Male </a> <a href=""
+													style="float: left;">Female</a>
+											</div>
+										</div>
+									</div>
+								</div>
+
+							</div>
+							<br />
+							<div class="row ">
+								<div class="col-md-4">
+									<div class="col-md-12" style="background-color: #F4F4F4">
+										<div class="row centerAlign">
+											<h5 style="text-align: center;">GENDER RATIO</h5>
+										</div>
+										<div class="row centerAlign">
+											<h1
+												style="text-align: center; color: #2085B8; margin-top: 0px; font-size: 4em">
+												<strong>24%</strong>
+											</h1>
+										</div>
+
+									</div>
+									<div class="col-md-12"
+										style="background-color: #F4F4F4; margin-top: 3px">
+										<div class="row centerAlign" id="female">
+											<div style="width: 60%; margin: 0 auto">
+												<a href="" style="float: right;"> Female </a> <a href=""
+													style="float: left;">Male</a>
+											</div>
+										</div>
+									</div>
+								</div>
+								<div class="col-md-4">
+									<div class="col-md-12" style="background-color: #F4F4F4">
+										<div class="row centerAlign">
+											<h5 style="text-align: center;">AVG.AGE</h5>
+										</div>
+										<div class="row centerAlign">
+											<h1
+												style="text-align: center; color: #2085B8; margin-top: 0px; font-size: 4em">
+												<strong>24</strong>
+											</h1>
+										</div>
+
+									</div>
+									<div class="col-md-12"
+										style="background-color: #F4F4F4; margin-top: 3px">
+										<div class="row centerAlign" id="female">
+											<div style="width: 65%; margin: 0 auto" class="avgAge">
+												<div>
+													<a href=""> 18- </a>
+												</div>
+												<div>
+													<a href="">19-39</a>
+												</div>
+												<div>
+													<a href="">40+</a>
+												</div>
+											</div>
+										</div>
+									</div>
+
+								</div>
+								<div class="col-md-4">
+									<div class="col-md-12" style="background-color: #F4F4F4">
+										<div class="row centerAlign">
+											<h5>TOP 10%</h5>
+										</div>
+										<div class="row centerAlign">
+											<h1 style="color: #2085B8; margin-top: 0px; font-size: 4em">
+												<strong>23</strong>
+											</h1>
+										</div>
+
+
+									</div>
+									<div class="col-md-12"
+										style="background-color: #F4F4F4; margin-top: 3px">
+										<div class="row" id="female">
+											<div style="width: 65%; margin: 0 auto">
+												<a href="" style="float: right;"> Male </a> <a href=""
+													style="float: left;">Female</a>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+
+
+
+
+					<div class="col-md-4" id="activityFeed">
+						<h4>ACTIVITY FEED</h4>
+
+						<div class="col-md-12">
+							<div class="row" style="background-color: #F4F4F4">
+								<div class="col-sm-3 activity">
+									<img th:src="@{/images/user.png}" class="img-circle"
+										alt="User" width="70" height="70">
+								</div>
+								<div class="col-sm-5">
+									<h4 style="color: black;" id="firstName">
+										<b></b>
+									</h4>
+
+									<p style="font-size: 11px;" id="firstScore">
+										TRAKscore: <b></b>
+									</p>
+								</div>
+								<div class="col-sm-4">
+									<p style="font-size: 11px;" id="firstMovement">
+										Movement: <b></b>
+									</p>
+									<p style="font-size: 11px;" id="firstPower">
+										Power: <b></b>
+									</p>
+									<p style="font-size: 11px;" id="firstStrength">
+										Strength: <b></b>
+									</p>
+									<p style="font-size: 11px;" id="firstEndurance">
+										Endurance: <b></b>
+									</p>
+
+
+								</div>
+							</div>
+							<p style="font-size: 12px; font-family: Calibri; margin-top: 0px"
+								id="firstDate">4/20/2017 , 8:35PM</p>
+							<br />
+
+
+							<div class="row" style="background-color: #F4F4F4">
+								<div class="col-sm-3 activity">
+									<img th:src="@{/images/user.png}" class="img-circle"
+										alt="User" width="70" height="70">
+								</div>
+								<div class="col-sm-5">
+									<h4 style="color: black;" id="secondName">
+										<b></b>
+									</h4>
+
+									<p style="font-size: 11px;" id="secondScore">
+										TRAKscore: <b></b>
+									</p>
+								</div>
+								<div class="col-sm-4">
+									<p style="font-size: 11px;" id="secondMovement">
+										Movement: <b></b>
+									</p>
+									<p style="font-size: 11px;" id="secondPower">
+										Power: <b></b>
+									</p>
+									<p style="font-size: 11px;" id="secondStrength">
+										Strength: <b></b>
+									</p>
+									<p style="font-size: 11px;" id="secondEndurance">
+										Endurance: <b></b>
+									</p>
+								</div>
+							</div>
+							<p style="font-size: 12px; font-family: Calibri; margin-top: 0px"
+								id="secondDate"></p>
+							<br />
+							<div class="row" style="background-color: #F4F4F4">
+								<div class="col-sm-3 activity">
+									<img th:src="@{/images/user.png}" class="img-circle"
+										alt="User" width="70" height="70">
+								</div>
+								<div class="col-sm-5">
+									<h4 style="color: black;" id="thirdName">
+										<b></b>
+									</h4>
+
+									<p style="font-size: 11px;" id="thirdScore">
+										TRAKscore: <b></b>
+									</p>
+								</div>
+								<div class="col-sm-4">
+									<p style="font-size: 11px;" id="thirdMovement">
+										Movement: <b></b>
+									</p>
+									<p style="font-size: 11px;" id="thirdPower">
+										Power: <b></b>
+									</p>
+									<p style="font-size: 11px;" id="thirdStrength">
+										Strength: <b></b>
+									</p>
+									<p style="font-size: 11px;" id="thirdEndurance">
+										Endurance: <b></b>
+									</p>
+								</div>
+							</div>
+							<p style="font-size: 12px; font-family: Calibri; margin-top: 0px"
+								id="thirdDate"></p>
+							<br />
+							<div class="row" style="background-color: #F4F4F4">
+								<div class="col-sm-3 activity">
+									<img th:src="@{/images/user.png}" class="img-circle"
+										alt="User" width="70" height="70">
+								</div>
+								<div class="col-sm-5">
+									<h4 style="color: black;" id="fourthName">
+										<b></b>
+									</h4>
+
+									<p style="font-size: 11px;" id="fourthScore">
+										TRAKscore: <b></b>
+									</p>
+								</div>
+								<div class="col-sm-4" style="background-color: #F4F4F4">
+									<p style="font-size: 11px;" id="fourthMovement">
+										Movement: <b></b>
+									</p>
+									<p style="font-size: 11px;" id="fourthPower">
+										Power: <b></b>
+									</p>
+									<p style="font-size: 11px;" id="fourthStrength">
+										Strength: <b></b>
+									</p>
+									<p style="font-size: 11px;" id="fourthEndurance">
+										Endurance: <b></b>
+									</p>
+								</div>
+							</div>
+							<p style="font-size: 12px; font-family: Calibri; margin-top: 0px"
+								id="fourthDate"></p>
+							<br />
+							<div class="row" style="background-color: #F4F4F4">
+								<div class="col-sm-3 activity">
+									<img th:src="@{/images/user.png}" class="img-circle"
+										alt="User" width="70" height="70">
+								</div>
+								<div class="col-sm-5">
+									<h4 style="color: black;" id="fifthName">
+										<b></b>
+									</h4>
+
+									<p style="font-size: 11px;" id="fifthScore">
+										TRAKscore: <b></b>
+									</p>
+								</div>
+								<div class="col-sm-4">
+									<p style="font-size: 11px;" id="fifthMovement">
+										Movement: <b></b>
+									</p>
+									<p style="font-size: 11px;" id="fifthPower">
+										Power: <b></b>
+									</p>
+									<p style="font-size: 11px;" id="fifthStrength">
+										Strength: <b></b>
+									</p>
+									<p style="font-size: 11px;" id="fifthEndurance">
+										Endurance: <b></b>
+									</p>
+								</div>
+							</div>
+							<p style="font-size: 12px; font-family: Calibri; margin-top: 0px"
+								id="fifthDate"></p>
+							<br />
+							<div class="row" style="background-color: #F4F4F4">
+								<div class="col-sm-3 activity">
+									<img th:src="@{/images/user.png}" class="img-circle"
+										alt="User" width="70" height="70">
+								</div>
+								<div class="col-sm-5">
+									<h4 style="color: black;" id="sixthName">
+										<b></b>
+									</h4>
+
+									<p style="font-size: 11px;" id="sixthScore">
+										TRAKscore: <b></b>
+									</p>
+								</div>
+								<div class="col-sm-4">
+									<p style="font-size: 11px;" id="sixthMovement">
+										Movement: <b></b>
+									</p>
+									<p style="font-size: 11px;" id="sixthPower">
+										Power: <b></b>
+									</p>
+									<p style="font-size: 11px;" id="sixthStrength">
+										Strength: <b></b>
+									</p>
+									<p style="font-size: 11px;" id="sixthEndurance">
+										Endurance: <b></b>
+									</p>
+								</div>
+							</div>
+							<p style="font-size: 12px; font-family: Calibri; margin-top: 0px"
+								id="sixthDate"></p>
+							<br />
+							<div class="row" style="background-color: #F4F4F4">
+								<div class="col-sm-3 activity">
+									<img th:src="@{/images/user.png}" class="img-circle"
+										alt="User" width="70" height="70">
+								</div>
+								<div class="col-sm-5">
+									<h4 style="color: black;" id="seventhName">
+										<b></b>
+									</h4>
+
+									<p style="font-size: 11px;" id="seventhScore">
+										TRAKscore: <b></b>
+									</p>
+								</div>
+								<div class="col-sm-4">
+									<p style="font-size: 11px;" id="seventhMovement">
+										Movement: <b></b>
+									</p>
+									<p style="font-size: 11px;" id="seventhPower">
+										Power: <b></b>
+									</p>
+									<p style="font-size: 11px;" id="seventhStrength">
+										Strength: <b></b>
+									</p>
+									<p style="font-size: 11px;" id="seventhEndurance">
+										Endurance: <b></b>
+									</p>
+								</div>
+							</div>
+							<p style="font-size: 12px; font-family: Calibri; margin-top: 0px"
+								id="seventhDate"></p>
+							<br />
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
     <script th:src="@{/js/bootstrap.min.js}" type="text/javascript"></script>
 	<script th:src="@{/js/dashboard.js}" type="text/javascript"></script>
 	

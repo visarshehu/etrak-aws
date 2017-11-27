@@ -25,8 +25,13 @@ public interface SurveyDataRepository extends JpaRepository<SurveyData, Long> {
   List<SurveyData> findTop5ByClient_GenderOrderBySurveyDataResults_EtrakScoreDesc(char gender);
   List<SurveyData> findTop5ByOrderBySubmittedDateDesc();
   
-  @Query("SELECT COUNT(s) FROM SurveyData s WHERE (s.submittedDate BETWEEN :yearStart AND :yearEnd)")
+  @Query("SELECT COUNT(s) FROM SurveyData s Where (s.submittedDate BETWEEN :yearStart AND :yearEnd)")
   Long yearAverage(@Param("yearStart") Date yearStart, @Param("yearEnd") Date yearEnd);
   
-   
+  List<SurveyData> findByClient_GenderOrderBySurveyDataResults_EtrakScoreDesc(char gender);
+  
+  long countByClient_Gender(char gender);
+  
+  List<SurveyData> findBySubmittedDateBetween(Date firstDayLastMonth, Date lastDayLastMonth);
+  
 }
