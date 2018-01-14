@@ -33,6 +33,7 @@ import com.inspire11.etrak.model.SurveyInfoSession;
 import com.inspire11.etrak.model.User;
 import com.inspire11.etrak.service.CalculateComparison;
 import com.inspire11.etrak.service.CalculateService;
+import com.inspire11.etrak.service.CalculateStatisticsService;
 import com.inspire11.etrak.service.ClientService;
 
 import com.inspire11.etrak.service.SurveyService;
@@ -56,6 +57,9 @@ public class LoginController {
 
 	@Autowired
 	private CalculateService calculateService;
+	
+	@Autowired
+	private CalculateStatisticsService calculateStatistics;
 	
 
 	@Autowired
@@ -203,8 +207,17 @@ public class LoginController {
 		ModelAndView modelAndView = new ModelAndView();
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		User user = userService.findUserByEmail(auth.getName());
+		double activeScore=calculateStatistics.activeScore();
+		int[] ageUnder=calculateStatistics.AverageAge();
+		double improvementMale=calculateStatistics.CalculateImprovement('M');
+		double improvementFemale=calculateStatistics.CalculateImprovement('F');
+		double[] calculateActiveRatio=calculateStatistics.CalculateStatistics();
+		double top10F=calculateStatistics.top10('F');
+		double top10M=calculateStatistics.top10('M');
 		modelAndView.addObject("userName", user.getName() + " " + user.getLastName());
 		modelAndView.addObject("userId", user.getId());
+		modelAndView.addObject("activeScore",activeScore);
+		modelAndView.addObject("improvementFemale",improvementFemale);
 		modelAndView.setViewName("user/dashboard");
 		return modelAndView;
 	}
@@ -275,5 +288,8 @@ public class LoginController {
 		modelAndView.setViewName("user/clientStat");
 		return modelAndView;
 	}
+	
+	
+	
 
 }

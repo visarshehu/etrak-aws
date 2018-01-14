@@ -1,11 +1,13 @@
 package com.inspire11.etrak.service;
 
+import java.util.Collection;
 
 public interface CalculateStatisticsService {
 
-	public long CalculateStatistics();
+	public double[] CalculateStatistics();
 	public Double CalculateImprovement(char gender);
-	public Double AverageAge();
+	public int[] AverageAge();
 	public Double top10(char gender);
+	public double activeScore();
 	
 }

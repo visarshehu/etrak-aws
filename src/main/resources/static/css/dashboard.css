@@ -1,15 +1,15 @@
-body{
-	font-family:Montserrat;
-}
+
 
 .container-fluid{
 	width:95%;
 	padding-top:25px;
 	padding-right:0;
+	font-family:Montserrat;
 }
 
 #secondContainer{
 	padding-right:0px;
+	font-family:Montserrat;
 }
 
 #activityFeed{
@@ -21,6 +21,9 @@ body{
 	align-items:center;
 }
 
+.activity{
+	padding-top:3%;
+}
 .dashboardLogo{
 	padding-left:0px;
 }

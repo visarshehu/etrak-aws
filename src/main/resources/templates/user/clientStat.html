@@ -17,6 +17,8 @@
     <link href='https://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet'>
     <script th:src="@{/js/jquery-3.2.1.min.js}" type="text/javascript"></script>
 
+  <script th:src="@{/js/html2canvas.js}" type="text/javascript"></script>
+      <script th:src="@{/js/html2canvas.min.js}" type="text/javascript"></script>
 
 
     <style>
@@ -322,7 +324,7 @@ enctype="multipart/form-data" role="form" >
                             <button type="button" class="btn btn-primary" style="background: #2085B8" data-title="CompareClients" data-toggle="modal" data-target="#compare">Comparison</button>
 
                             <button type="button" class="btn btn-primary" style="background: #2085B8">New Group</button>
-                            <button type="button" class="btn btn-default" style="background: #F9F9F9">Share</button>
+                            <button type="button" class="btn btn-default" style="background: #F9F9F9" id="export">Share</button>
                         </div>
                     </div>
                 </div>
@@ -2219,6 +2221,23 @@ enctype="multipart/form-data" role="form" >
         </div>
     </div>
     <script>
+ /*    function takeSnapshot(){
+    	html2canvas(document.body, {
+    		  onrendered: function(canvas) {
+    		    document.body.appendChild(canvas);
+    		  }
+    		});
+    }
+     */
+     $(document).ready(function(){
+ 		$('#export').on('click', function() {		
+ 			html2canvas(document.body, {
+ 				onrendered: function(canvas) {
+ 					document.body.appendChild(canvas);
+ 				},
+ 			});
+ 		});
+ });
         $(function() {
             $(
                     '#deepSquat,#shoulderL,#shoulderR,#externalShoulderR,#externalShoulderL,#trunkRotationR,#trunkRotationL,#hipBridgeR,#hipBridgeL,#plank,#plankL,#trunk,#absolutepower,#poweroutput,#peakpower,#powerratio1,#powerratio6,#powerratio7,#vo2max,#4poweroutput,#4powerratio,#5poweroutput')
@@ -2245,6 +2264,8 @@ enctype="multipart/form-data" role="form" >
             
            
         });
+        
+      
     </script>
     <script th:src="@{/js/progressbar.min.js}" type="text/javascript"></script>
     <script th:src="@{/js/chart.js}" type="text/javascript"></script>
@@ -2252,7 +2273,7 @@ enctype="multipart/form-data" role="form" >
     <script th:src="@{/js/comparison.js}" type="text/javascript"></script>
     <script th:src="@{/js/jquery.easy-autocomplete.js}" type="text/javascript"></script>
     <script th:src="@{/js/jquery.easy-autocomplete.min.js}" type="text/javascript"></script>
-
+   
 </body>
 
 </html>

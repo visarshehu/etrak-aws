@@ -1,13 +1,11 @@
 package com.inspire11.etrak.controller;
 
-import java.io.ByteArrayOutputStream;
-import java.util.HashSet;
 import java.util.List;
 
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
+
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -24,6 +22,7 @@ import com.inspire11.etrak.model.SurveyDataResults;
 import com.inspire11.etrak.model.View;
 import com.inspire11.etrak.repository.SurveyDataRepository;
 import com.inspire11.etrak.repository.SurveyDataResultsRepository;
+import com.inspire11.etrak.service.CalculateStatisticsService;
 import com.inspire11.etrak.service.ClientService;
 import com.inspire11.etrak.service.LookUpService;
 import com.inspire11.etrak.service.SurveyComparisonService;
@@ -47,7 +46,43 @@ public class ClientRestController {
 	@Autowired
 	private SurveyDataResultsRepository surveydataRepo;
 	
-
+	@Autowired
+	private CalculateStatisticsService statisticsService;
+	
+	
+	@RequestMapping(path="statistics", method=RequestMethod.GET)
+	public double[] getStat(){
+		return statisticsService.CalculateStatistics();
+	}
+	
+	@RequestMapping(path="statistics1", method=RequestMethod.GET)
+	public Double getStat1(){
+		return statisticsService.CalculateImprovement('M');
+	}
+	
+	@RequestMapping(path="statisticsF", method=RequestMethod.GET)
+	public Double getStatF(){
+		return statisticsService.CalculateImprovement('F');
+	}
+	
+	@RequestMapping(path="statistics2", method=RequestMethod.GET)
+	public int[] getStat2(){
+		return statisticsService.AverageAge();
+	}
+	
+	@RequestMapping(path="statistics3", method=RequestMethod.GET)
+	public Double getStat3(){
+		return statisticsService.top10('M');
+	}
+	
+	@RequestMapping(path="statistics4", method=RequestMethod.GET)
+	public Double getStat4(){
+		return statisticsService.activeScore();
+	}
+	
+	
+	
+	
 	@JsonView(View.ClientsWithSurvey.class)
 	@RequestMapping(path="clients", method=RequestMethod.GET)
 	public List<Client> getAllClients(){
@@ -72,11 +107,9 @@ public class ClientRestController {
     @RequestMapping(value = "surveytop", method = RequestMethod.GET)
    	public List<SurveyDataResults> getSurveyTop(final HttpServletResponse response){
     	response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate");
-    	return surveydataRepo.findTop5ByOrderByEtrakScoreDesc();
-   			
-   	}
-    
-    
+    	return surveydataRepo.findTop5ByOrderByEtrakScoreDesc();   			
+   	}   
+      
     @RequestMapping(value = "comparisonResults/{id}", method = RequestMethod.GET)
    	public SurveyComparison getComparisonResultById(@PathVariable("id") long id, final HttpServletResponse response){
     	response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate");
@@ -122,7 +155,8 @@ public class ClientRestController {
     	
     }
     
- 
-
- 
+    
+    
+  
+    
 }

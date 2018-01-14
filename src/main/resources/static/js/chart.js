@@ -180,7 +180,7 @@ function getClientResults(id) {
         getSurveyRank(surveyId);
         
         data.survey.forEach(function(surveyData){
-      	  $('#surveys').append(new Option(new Date(surveyData.submittedDate).toDateString(), surveyData.id));
+      	  $('#surveys').append(new Option(new Date(surveyData.submittedDate).toDateString(), surveyData.Id));
       
 
       	
@@ -369,7 +369,6 @@ function TrakScore(container_id, animatePercentage) {
 
 $('#surveys').change(function(){
 		var vid=$('#surveys').val();
-
 		getSurveyResults(vid);
 		getSurveyRank(vid);
 		
