@@ -8,9 +8,13 @@ function getTopClientsMale(){
 		  	document.getElementById("male4").innerHTML=  "<h4 style='color: black;'><b>"+data[3].client["name"]+" "+data[3].client["lastName"]+"</b></h4><p style='font-size: 11px;'>TRAKscore: <b>"+data[3].surveyDataResults["etrakScore"]+"</b></p>";
 		  	document.getElementById("male5").innerHTML=  "<h4 style='color: black;'><b>"+data[4].client["name"]+" "+data[4].client["lastName"]+"</b></h4><p style='font-size: 11px;'>TRAKscore: <b>"+data[4].surveyDataResults["etrakScore"]+"</b></p>";
 
-	  });
-	
-}
+	  }).then(function() {
+		    setTimeout(getTopClientsMale, 10000);
+	  });     
+	  return false;    
+	}
+
+getTopClientsMale();
 
 
 function getTopClientsFemale(){
@@ -22,10 +26,11 @@ function getTopClientsFemale(){
 		  	document.getElementById("female4").innerHTML=  "<h4 style='color: black;'><b>"+data[3].client["name"]+" "+data[3].client["lastName"]+"</b></h4><p style='font-size: 11px;'>TRAKscore: <b>"+data[3].surveyDataResults["etrakScore"]+"</b></p>";
 		  	document.getElementById("female5").innerHTML=  "<h4 style='color: black;'><b>"+data[4].client["name"]+" "+data[4].client["lastName"]+"</b></h4><p style='font-size: 11px;'>TRAKscore: <b>"+data[4].surveyDataResults["etrakScore"]+"</b></p>";
 
-	  });
-	
+					  }).then(function() {
+				setTimeout(getTopClientsFemale, 10000);
+			});
+	return false;
 }
-
 
 function getActivityFeed(){
 	 var url = "/getActivityFeed";
@@ -93,10 +98,12 @@ function getActivityFeed(){
 		  	var date=new Date(data[6].submittedDate).toUTCString();
 		  	document.getElementById("seventhDate").innerHTML="<p style='font-size: 12px; font-family: Calibri; margin-top: 0px'>"+date+"</b></p>";
 
-	  });
-	
-}
+	  })  }).then(function() {
+		    setTimeout(getActivityFeed, 10000);
+	  });     
+	  return false;    
+	}
 
-getTopClientsMale();
+//getTopClientsMale();
 getTopClientsFemale();
 getActivityFeed();
